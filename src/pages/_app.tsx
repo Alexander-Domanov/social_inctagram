@@ -1,5 +1,6 @@
 import { ReactElement, ReactNode, useState } from 'react'
 
+import { ApolloProvider } from '@apollo/client'
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import '@/styles/globals.scss'
 import 'react-toastify/dist/ReactToastify.css'
@@ -10,8 +11,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import { ToastContainer } from 'react-toastify'
-
 import 'react-advanced-cropper/dist/style.css'
+
+import client from '@/apolloClient'
 import '../../src/styles/nprogress.css'
 import { useLoader } from '@/common/hooks/useLoader/useLoader'
 import AuthProtection from '@/components/auth-components/auth-protection/AuthProtection'
@@ -32,23 +34,25 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page)
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <AuthProtection>{getLayout(<Component {...pageProps} />)}</AuthProtection>
-        <ToastContainer
-          position="bottom-left"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
-      </Hydrate>
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+    <ApolloProvider client={client}>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <AuthProtection>{getLayout(<Component {...pageProps} />)}</AuthProtection>
+          <ToastContainer
+            position="bottom-left"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
+        </Hydrate>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </ApolloProvider>
   )
 }
