@@ -1,12 +1,12 @@
-import { Inter } from 'next/font/google'
+import React from 'react'
+
 import Head from 'next/head'
 
-import { Header } from '@/components/header/Header'
-import { Register } from '@/pages/auth/register'
+import { getGlobalLayout } from '@/components/layout'
+import { ProfilePage } from '@/modules/profile-modules/profile-module'
+import { NextPageWithLayout } from '@/pages/_app'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
+const Home: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -15,8 +15,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
-      <Register />
+      <ProfilePage />
     </>
   )
 }
+
+Home.getLayout = getGlobalLayout
+export default Home
