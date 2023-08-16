@@ -1,8 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
-
 import { useTranslation } from '@/components/translation'
-import { UserFound, useSearch } from '@/modules/search-modules'
-import { authInstance } from '@/services'
+import { UserFound, userGetSearchData, useSearch } from '@/modules/search-modules'
 import { InputSearch } from '@/ui'
 export interface GetUserFoundInterface {
   avatars: null
@@ -14,21 +11,10 @@ export interface GetUserFoundInterface {
 }
 
 export const SearchUsers = () => {
-  const { search, setSearchInput, searchInput } = useSearch()
+  const { search, searchInput, setSearchInput } = useSearch()
   const { t } = useTranslation()
 
-  console.log(search)
-  const { data } = useQuery({
-    // @ts-ignore
-    queryKey: ['getUserFound'],
-    queryFn: () =>
-      authInstance.get(`users`, {
-        params: {
-          search: search,
-        },
-      }),
-    forceFetch: true,
-  })
+  const { data } = userGetSearchData(search)
 
   return (
     <div className="w-full flex pr-16">
@@ -40,7 +26,7 @@ export const SearchUsers = () => {
           value={searchInput}
           callBackSearch={setSearchInput}
         />
-        {data ? <UserFound userInfoFound={data.data.data} /> : 'notFound'}
+        {data ? <UserFound userInfoFound={data.data} /> : 'notFound'}
       </div>
     </div>
   )

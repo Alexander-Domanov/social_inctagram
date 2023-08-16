@@ -21,28 +21,35 @@ import trending from '@/assets/icons/sidebar/trending-up.svg'
 import { useTranslation } from '@/components/translation'
 import { LogoutButton } from '@/modules/auth-modules/login-module/logout'
 import { CreatePost } from '@/modules/post-modules/create-post-module'
+import { routes } from '@/routing/router'
 
 export const Sidebar: FC = () => {
   const { pathname } = useRouter()
   const { t } = useTranslation()
   // CSS Styles
   const className = {
-    home: clsx(pathname === '/' ? 'text-accent-500' : '', 'flex gap-[15px] items-center'),
+    home: clsx(
+      pathname === routes.sideBar.home ? 'text-accent-500' : '',
+      'flex gap-[15px] items-center'
+    ),
     myProfile: clsx(
-      pathname === '/profile' ? 'text-accent-500' : '',
+      pathname === routes.sideBar.profile ? 'text-accent-500' : '',
       'flex gap-[15px] items-center'
     ),
     messenger: clsx(
-      pathname === '/messenger' ? 'text-accent-500' : '',
+      pathname === routes.sideBar.messenger ? 'text-accent-500' : '',
       'flex gap-[15px] items-center'
     ),
-    search: clsx(pathname === '/search' ? 'text-accent-500' : '', 'flex gap-[15px] items-center'),
+    search: clsx(
+      pathname === routes.sideBar.search ? 'text-accent-500' : '',
+      'flex gap-[15px] items-center'
+    ),
     statistics: clsx(
-      pathname === '/statistics' ? 'text-accent-500' : '',
+      pathname === routes.sideBar.statistics ? 'text-accent-500' : '',
       'flex gap-[15px] items-center mt-14'
     ),
     favorites: clsx(
-      pathname === '/favorites' ? 'text-accent-500' : '',
+      pathname === routes.sideBar.favorites ? 'text-accent-500' : '',
       'flex gap-[15px] items-center'
     ),
     hidden: 'lg:hidden',
