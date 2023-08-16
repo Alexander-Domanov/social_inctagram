@@ -1,5 +1,5 @@
 import { getGlobalLayout } from '@/components/layout'
-import { SearchUsers } from '@/modules/search-modules'
+import { SearchUsers } from 'src/modules/search-module'
 
 const Search = () => {
   return (

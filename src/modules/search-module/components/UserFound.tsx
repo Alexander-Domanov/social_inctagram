@@ -1,8 +1,14 @@
 import { useTranslation } from '@/components/translation'
-import { GetUserFoundInterface } from '@/modules/search-modules'
 import { Placeholder } from '@/ui'
+import { GetUserFoundInterface } from 'src/modules/search-module'
 
-export const UserFound = ({ userInfoFound }: { userInfoFound: any[] }) => {
+export const UserFound = ({
+  userInfoFound,
+  redirectToUserProfilePage,
+}: {
+  userInfoFound: any[]
+  redirectToUserProfilePage: (value: string | null) => void
+}) => {
   const { t } = useTranslation()
 
   return (
@@ -22,7 +28,10 @@ export const UserFound = ({ userInfoFound }: { userInfoFound: any[] }) => {
                 src={user.avatars || ''}
               />
               <div className="flex flex-col text-light-100 text-sm leading-6 font-normal">
-                <span className="underline hover:text-accent-500 transition-colors outline-none">
+                <span
+                  onClick={() => redirectToUserProfilePage(user.userName)}
+                  className="underline hover:text-accent-500 transition-colors outline-none"
+                >
                   {user.userName}
                 </span>
                 <span className="text-light-900">{`${

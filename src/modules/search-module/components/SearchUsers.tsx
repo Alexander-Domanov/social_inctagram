@@ -1,6 +1,11 @@
 import { useTranslation } from '@/components/translation'
-import { UserFound, userGetSearchData, useSearch } from '@/modules/search-modules'
 import { InputSearch } from '@/ui'
+import {
+  useRedirectToUserProfilePage,
+  UserFound,
+  userGetSearchData,
+  useSearch,
+} from 'src/modules/search-module'
 export interface GetUserFoundInterface {
   avatars: null
   createdAt: Date
@@ -12,6 +17,7 @@ export interface GetUserFoundInterface {
 
 export const SearchUsers = () => {
   const { search, searchInput, setSearchInput } = useSearch()
+  const redirectToUserProfilePage = useRedirectToUserProfilePage()
   const { t } = useTranslation()
 
   const { data } = userGetSearchData(search)
@@ -26,7 +32,14 @@ export const SearchUsers = () => {
           value={searchInput}
           callBackSearch={setSearchInput}
         />
-        {data ? <UserFound userInfoFound={data.data} /> : 'notFound'}
+        {data ? (
+          <UserFound
+            redirectToUserProfilePage={redirectToUserProfilePage}
+            userInfoFound={data.data}
+          />
+        ) : (
+          'notFound'
+        )}
       </div>
     </div>
   )
