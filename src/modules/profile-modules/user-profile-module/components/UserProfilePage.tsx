@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 import settings from '@/assets/icons/settings.svg'
 import { useTranslation } from '@/components/translation'
+import { LatestPosts } from '@/modules/post-modules/latest-posts'
 import {
   useGetUserProfileData,
   userNameQueryType,
@@ -75,7 +76,7 @@ export const UserProfilePage = () => {
           )}
         </div>
 
-        {/*<LatestPosts />*/}
+        <LatestPosts userProfileId={userProfileData.id} />
       </main>
     </div>
   )

@@ -10,10 +10,10 @@ import { useMeQuery } from '@/services/hookMe'
 import { useUserStore } from '@/store'
 import { SkeletonPost } from '@/ui'
 
-export const LatestPosts: FC = () => {
+export const LatestPosts: FC<{ userProfileId?: number | undefined }> = ({ userProfileId }) => {
   const { data: me } = useMeQuery()
   const { setPostId } = useUserStore()
-  const userId = me?.data?.userId
+  const userId = userProfileId ? userProfileId : me?.data?.userId
   const { isLoading, isSuccess, data, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useGetLatestPosts(userId)
   const [isOpenPostModal, setIsOpenPostModal] = useState(false)

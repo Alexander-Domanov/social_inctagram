@@ -14,6 +14,7 @@ export const useGetUserProfileData = (userNameQuery: userNameQueryType) => {
   })
 
   const initialUserProfileData = {
+    id: userProfileData?.id,
     userName: userProfileData?.userName || '',
     firstName: userProfileData?.firstName || '',
     lastName: userProfileData?.lastName || '',
