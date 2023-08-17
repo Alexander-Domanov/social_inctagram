@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { usersFoundApi } from 'src/modules/search-module'
+import { SearchDataInterface, getUserFoundData } from 'src/modules/search-module'
 
-export const userGetSearchData = (search: string) => {
+export const usersGetSearchData = (search: string) => {
   const { data, isLoading, isSuccess, error } = useQuery({
     queryKey: ['getUserFound', search],
-    queryFn: () => usersFoundApi(search),
+    queryFn: () => getUserFoundData(search),
     staleTime: 0,
     enabled: Boolean(search),
+    select: (data: any): SearchDataInterface => data?.data,
   })
 
   return {

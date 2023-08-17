@@ -1,12 +1,12 @@
 import { useTranslation } from '@/components/translation'
 import { Placeholder } from '@/ui'
-import { GetUserFoundInterface } from 'src/modules/search-module'
+import { UserItemInterface } from 'src/modules/search-module'
 
 export const UserFound = ({
-  userInfoFound,
+  userItems,
   redirectToUserProfilePage,
 }: {
-  userInfoFound: any[]
+  userItems: UserItemInterface[]
   redirectToUserProfilePage: (value: string | null) => void
 }) => {
   const { t } = useTranslation()
@@ -16,8 +16,8 @@ export const UserFound = ({
       <span className="text-base font-bold leading-6 text-light-100">
         {t.search.recentRequests}
       </span>
-      {userInfoFound &&
-        userInfoFound.map((user: GetUserFoundInterface, index) => {
+      {userItems &&
+        userItems.map((user: UserItemInterface, index) => {
           return (
             <div key={index} className="flex gap-3">
               <Placeholder

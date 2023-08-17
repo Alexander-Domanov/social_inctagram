@@ -3,24 +3,16 @@ import { InputSearch } from '@/ui'
 import {
   useRedirectToUserProfilePage,
   UserFound,
-  userGetSearchData,
+  usersGetSearchData,
   useSearch,
 } from 'src/modules/search-module'
-export interface GetUserFoundInterface {
-  avatars: null
-  createdAt: Date
-  firstName: string | null
-  id: number
-  lastName: string | null
-  userName: string | null
-}
 
 export const SearchUsers = () => {
   const { search, searchInput, setSearchInput } = useSearch()
   const redirectToUserProfilePage = useRedirectToUserProfilePage()
   const { t } = useTranslation()
 
-  const { data } = userGetSearchData(search)
+  const { data: searchData } = usersGetSearchData(search)
 
   return (
     <div className="w-full flex pr-16">
@@ -32,10 +24,10 @@ export const SearchUsers = () => {
           value={searchInput}
           callBackSearch={setSearchInput}
         />
-        {data ? (
+        {searchData ? (
           <UserFound
             redirectToUserProfilePage={redirectToUserProfilePage}
-            userInfoFound={data.data}
+            userItems={searchData.items}
           />
         ) : (
           'notFound'

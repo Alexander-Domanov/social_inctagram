@@ -21,7 +21,7 @@ const meta: Meta<typeof GlobalButton> = {
     },
     type: {
       type: { required: true, name: 'other', value: 'string' },
-      description: 'How type should the button be?',
+      description: 'How types should the button be?',
       options: ['button', 'submit', 'reset'],
       control: { type: 'inline-radio' },
       defaultValue: { summary: 'button' },
@@ -32,7 +32,7 @@ const meta: Meta<typeof GlobalButton> = {
     children: {
       description: 'Button contents',
       defaultValue: { summary: 'button' },
-      //  type: { required: true, name: 'other', value: 'string' },
+      //  types: { required: true, name: 'other', value: 'string' },
       table: {
         type: { summary: 'string | any' },
       },
