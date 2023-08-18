@@ -43,5 +43,10 @@ export const uk: LocaleType = {
       devices: {},
     },
   },
+  userProfile: {
+    buttonMessage: 'Надіслати повідомлення',
+    buttonFollow: 'Підписатися',
+    buttonUnfollow: 'Відписатися',
+  },
   search: { searchTitle: 'Пошук', searchInput: 'Пошук', recentRequests: 'Останні запити' },
 }

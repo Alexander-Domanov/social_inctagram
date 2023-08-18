@@ -1,7 +1,6 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 
-import { useInView } from 'react-intersection-observer'
-
+import { useInViewScrollEffect } from '@/common'
 import { useStoreIsLoadingPublication } from '@/modules/post-modules/create-post-module'
 import { LatestPost } from '@/modules/post-modules/latest-posts/components/LatestPost'
 import { PostModal } from '@/modules/post-modules/latest-posts/components/PostModal'
@@ -10,10 +9,10 @@ import { useMeQuery } from '@/services/hookMe'
 import { useUserStore } from '@/store'
 import { SkeletonPost } from '@/ui'
 
-export const LatestPosts: FC = () => {
+export const LatestPosts: FC<{ userProfileId?: number | undefined }> = ({ userProfileId }) => {
   const { data: me } = useMeQuery()
   const { setPostId } = useUserStore()
-  const userId = me?.data?.userId
+  const userId = userProfileId ? userProfileId : me?.data?.userId
   const { isLoading, isSuccess, data, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useGetLatestPosts(userId)
   const [isOpenPostModal, setIsOpenPostModal] = useState(false)
@@ -33,13 +32,7 @@ export const LatestPosts: FC = () => {
     setIsOpenPostModal(true)
   }
 
-  const { ref, inView } = useInView()
-
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage()
-    }
-  }, [inView, hasNextPage])
+  const { ref } = useInViewScrollEffect({ hasNextPage, fetchNextPage })
 
   return (
     <div className="mt-14">

@@ -26,3 +26,6 @@ export * from './inputs/inputWithEye/InputWithEye'
 
 //placeholder
 export * from './placeholder/Placeholder'
+
+//spinner
+export * from './spinner/Spinner'
