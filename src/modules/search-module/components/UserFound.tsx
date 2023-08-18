@@ -13,7 +13,7 @@ export const UserFound = ({
       {userItems &&
         userItems.map((user: UserItemInterface, index) => {
           return (
-            <div key={index} className="flex gap-3">
+            <div key={index} className="flex items-center gap-3">
               <Placeholder
                 className={'cursor-default object-cover rounded-full'}
                 height={48}
