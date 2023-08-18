@@ -1,6 +1,6 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 
-import { SearchDataInterface, getUserFoundData } from 'src/modules/search-module'
+import { getUserFoundData } from 'src/modules/search-module'
 
 export const usersGetSearchData = (search: string) => {
   const { data, isLoading, isSuccess, error, fetchNextPage, hasNextPage, isFetchingNextPage } =

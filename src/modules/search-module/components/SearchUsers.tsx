@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-
-import { useInView } from 'react-intersection-observer'
+import React from 'react'
 
 import { useInViewScrollEffect } from '@/common'
 import { useTranslation } from '@/components/translation'

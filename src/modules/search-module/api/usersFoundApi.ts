@@ -1,4 +1,3 @@
-import { POSTS_PER_PAGE } from '@/modules/post-modules/latest-posts/contastants/latest-posts-constants'
 import { SearchDataInterface } from '@/modules/search-module'
 import { authInstance } from '@/services'
 

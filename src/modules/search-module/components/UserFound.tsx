@@ -1,4 +1,3 @@
-import { useTranslation } from '@/components/translation'
 import { Placeholder } from '@/ui'
 import { UserItemInterface } from 'src/modules/search-module'
 
