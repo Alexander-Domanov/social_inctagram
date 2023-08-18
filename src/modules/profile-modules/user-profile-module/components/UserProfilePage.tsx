@@ -47,7 +47,7 @@ export const UserProfilePage = () => {
                       }
                       disabled={isLoadingButton}
                     >
-                      {isLoadingButton && isLoading ? (
+                      {isLoadingButton ? (
                         <Spinner />
                       ) : (
                         <span>
