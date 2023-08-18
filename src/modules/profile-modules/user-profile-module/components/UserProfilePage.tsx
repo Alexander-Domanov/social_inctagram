@@ -1,26 +1,27 @@
 import React from 'react'
 
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-
-import settings from '@/assets/icons/settings.svg'
 import { useTranslation } from '@/components/translation'
 import { LatestPosts } from '@/modules/post-modules/latest-posts'
 import {
+  useFollowUnfollow,
+  useGetQueryParamsUser,
   useGetUserProfileData,
-  userNameQueryType,
 } from '@/modules/profile-modules/user-profile-module'
+import { handleToggleSubscriptionCallBack } from '@/modules/profile-modules/user-profile-module/custom/utils/handleToggleSubscriptionCallBack'
+import { routes } from '@/routing/router'
 import { Avatar, GlobalButton, Spinner } from '@/ui'
 
 export const UserProfilePage = () => {
-  const { push, query } = useRouter()
+  const { push, userIdQuery, userNameQuery } = useGetQueryParamsUser()
+  const { userProfileData, userProfileAvatar, isLoading, refetch, isFetching } =
+    useGetUserProfileData(userNameQuery)
+  const { followUnfollowUser, isLoading: isLoadingButton } = useFollowUnfollow(userIdQuery)
 
-  const userNameQuery: userNameQueryType = query.userName || ''
-
-  const { userProfileData, userProfileAvatar, isLoading } = useGetUserProfileData(userNameQuery)
   const { t } = useTranslation()
 
-  const onRedirectToSetting = () => push('/profile/settings/edit')
+  const onRedirectToSetting = () => push(routes.sideBar.messenger)
+
+  const followOrUnfollow = userProfileData.isFollowing
 
   return (
     <div className="flex w-full">
@@ -36,23 +37,35 @@ export const UserProfilePage = () => {
               <div className="flex w-full flex-col gap-5">
                 <div className="flex flex-wrap justify-between">
                   <div className="font-bold">{userProfileData.userName}</div>
-                  <GlobalButton
-                    className={'md:px-3 text-base bg-dark-300 font-semibold'}
-                    type={'button'}
-                    variant={'grey'}
-                    callback={onRedirectToSetting}
-                  >
-                    <span className={'md:hidden'}>
-                      {t.profile.profilePage.buttonProfileSettings}
-                    </span>
-                    <Image
-                      className={'md:visible invisible'}
-                      src={settings}
-                      alt={'settings'}
-                      height={24}
-                      width={24}
-                    />
-                  </GlobalButton>
+                  <div className="flex gap-3">
+                    <GlobalButton
+                      className={'text-base bg-dark-300 font-semibold'}
+                      type={'button'}
+                      variant={followOrUnfollow ? 'transparent' : 'default'}
+                      callback={() =>
+                        handleToggleSubscriptionCallBack({ followUnfollowUser, refetch })
+                      }
+                      disabled={isLoadingButton}
+                    >
+                      {isLoadingButton && isFetching ? (
+                        <Spinner />
+                      ) : (
+                        <span>
+                          {!isLoadingButton && !isLoading && followOrUnfollow
+                            ? t.userProfile.buttonUnfollow
+                            : t.userProfile.buttonFollow}
+                        </span>
+                      )}
+                    </GlobalButton>
+                    <GlobalButton
+                      className={'text-base bg-dark-300 font-semibold'}
+                      type={'button'}
+                      variant={'grey'}
+                      callback={onRedirectToSetting}
+                    >
+                      <span>{t.userProfile.buttonMessage}</span>
+                    </GlobalButton>
+                  </div>
                 </div>
                 <div className="flex gap-[72px] md:gap-[20px] flex-wrap">
                   <div className="text-sm">

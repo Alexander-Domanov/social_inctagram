@@ -29,4 +29,4 @@ export interface userProfileAvatars {
   }
 }
 
-export type userNameQueryType = string | string[]
+export type userQueryType = string | string[]

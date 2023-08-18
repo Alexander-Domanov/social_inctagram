@@ -2,12 +2,17 @@ import { useQuery } from '@tanstack/react-query'
 
 import {
   getUserProfile,
-  userNameQueryType,
   userProfilePageData,
+  userQueryType,
 } from '@/modules/profile-modules/user-profile-module'
 
-export const useGetUserProfileData = (userNameQuery: userNameQueryType) => {
-  const { data: userProfileData, isLoading } = useQuery({
+export const useGetUserProfileData = (userNameQuery: userQueryType) => {
+  const {
+    data: userProfileData,
+    isLoading,
+    refetch,
+    isFetching,
+  } = useQuery({
     queryKey: ['get-user-profile-page', userNameQuery],
     queryFn: () => getUserProfile(userNameQuery),
     select: (data: any): userProfilePageData => data?.data,
@@ -24,6 +29,8 @@ export const useGetUserProfileData = (userNameQuery: userNameQueryType) => {
     followingCount: userProfileData?.followingCount || 0,
     followersCount: userProfileData?.followersCount || 0,
     publicationsCount: userProfileData?.publicationsCount || 0,
+    isFollowing: userProfileData?.isFollowing || false,
+    isFollowingBy: userProfileData?.isFollowedBy || false,
   }
 
   const userProfileAvatar = userProfileData?.avatars?.medium.url || ''
@@ -32,5 +39,7 @@ export const useGetUserProfileData = (userNameQuery: userNameQueryType) => {
     userProfileData: initialUserProfileData,
     userProfileAvatar,
     isLoading,
+    refetch,
+    isFetching,
   }
 }

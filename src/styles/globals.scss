@@ -39,7 +39,7 @@ body {
 }
 
 .mainBtn {
-  @apply font-semibold leading-6 px-[24px] py-[6px] rounded-sm flex justify-center align-middle transition-all duration-300;
+  @apply font-semibold leading-6 items-center px-[24px] py-[6px] rounded-sm flex justify-center align-middle transition-all duration-300;
 }
 
 .default {

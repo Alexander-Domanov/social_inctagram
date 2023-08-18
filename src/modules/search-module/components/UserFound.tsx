@@ -7,7 +7,7 @@ export const UserFound = ({
   redirectToUserProfilePage,
 }: {
   userItems: UserItemInterface[]
-  redirectToUserProfilePage: (value: string | null) => void
+  redirectToUserProfilePage: (value: string | null, userId: string | null) => void
 }) => {
   const { t } = useTranslation()
 
@@ -29,7 +29,7 @@ export const UserFound = ({
               />
               <div className="flex flex-col text-light-100 text-sm leading-6 font-normal">
                 <span
-                  onClick={() => redirectToUserProfilePage(user.userName)}
+                  onClick={() => redirectToUserProfilePage(user.userName, user.id.toString())}
                   className="underline hover:text-accent-500 transition-colors outline-none"
                 >
                   {user.userName}
