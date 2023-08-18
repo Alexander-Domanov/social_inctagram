@@ -7,9 +7,6 @@ export const useFollowUnfollow = (userIdQuery: userQueryType) => {
   const { mutate: followUnfollowUser, isLoading } = useMutation(
     ['following'],
     () => postUserFollowingUnfollowing(userIdQuery),
-    {
-      onSuccess: () => console.log('Success'),
-    }
   )
 
   return {
