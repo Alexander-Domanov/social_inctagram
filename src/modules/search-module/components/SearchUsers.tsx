@@ -1,5 +1,10 @@
+import React, { useEffect, useState } from 'react'
+
+import { useInView } from 'react-intersection-observer'
+
+import { useInViewScrollEffect } from '@/common'
 import { useTranslation } from '@/components/translation'
-import { InputSearch } from '@/ui'
+import { InputSearch, Spinner } from '@/ui'
 import {
   useRedirectToUserProfilePage,
   UserFound,
@@ -11,8 +16,15 @@ export const SearchUsers = () => {
   const { search, searchInput, setSearchInput } = useSearch()
   const redirectToUserProfilePage = useRedirectToUserProfilePage()
   const { t } = useTranslation()
+  const {
+    data: searchData,
+    fetchNextPage,
+    hasNextPage,
+    isSuccess,
+    isFetchingNextPage,
+  } = usersGetSearchData(search)
 
-  const { data: searchData } = usersGetSearchData(search)
+  const { ref } = useInViewScrollEffect({ hasNextPage, fetchNextPage })
 
   return (
     <div className="w-full flex pr-16">
@@ -24,13 +36,29 @@ export const SearchUsers = () => {
           value={searchInput}
           callBackSearch={setSearchInput}
         />
-        {searchData ? (
-          <UserFound
-            redirectToUserProfilePage={redirectToUserProfilePage}
-            userItems={searchData.items}
-          />
-        ) : (
-          'notFound'
+        <>
+          <span className="pt-7 text-base font-bold leading-6 text-light-100">
+            {t.search.recentRequests}
+          </span>
+          {searchData
+            ? searchData.pages.map((page, index) => (
+                <UserFound
+                  key={index}
+                  redirectToUserProfilePage={redirectToUserProfilePage}
+                  userItems={page.items}
+                />
+              ))
+            : 'notFound'}
+        </>
+
+        {isSuccess && (
+          <div className="pt-4 flex w-full justify-center pb-4" ref={ref}>
+            {isFetchingNextPage && (
+              <div>
+                <Spinner />
+              </div>
+            )}
+          </div>
         )}
       </div>
     </div>

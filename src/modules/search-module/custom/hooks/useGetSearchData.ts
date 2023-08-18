@@ -1,20 +1,28 @@
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
 import { SearchDataInterface, getUserFoundData } from 'src/modules/search-module'
 
 export const usersGetSearchData = (search: string) => {
-  const { data, isLoading, isSuccess, error } = useQuery({
-    queryKey: ['getUserFound', search],
-    queryFn: () => getUserFoundData(search),
-    staleTime: 0,
-    enabled: Boolean(search),
-    select: (data: any): SearchDataInterface => data?.data,
-  })
+  const { data, isLoading, isSuccess, error, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQuery({
+      queryKey: ['getUserFound', search],
+      queryFn: ({ pageParam = 0 }) => getUserFoundData({ search, pageParam }),
+      getNextPageParam: (lastPage, _allPages) => {
+        if (lastPage.nextCursor) {
+          return lastPage.nextCursor
+        } else {
+          return null
+        }
+      },
+    })
 
   return {
     data,
     isLoading,
     isSuccess,
     error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
   }
 }

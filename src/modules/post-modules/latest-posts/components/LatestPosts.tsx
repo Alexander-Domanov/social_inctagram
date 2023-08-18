@@ -1,7 +1,6 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 
-import { useInView } from 'react-intersection-observer'
-
+import { useInViewScrollEffect } from '@/common'
 import { useStoreIsLoadingPublication } from '@/modules/post-modules/create-post-module'
 import { LatestPost } from '@/modules/post-modules/latest-posts/components/LatestPost'
 import { PostModal } from '@/modules/post-modules/latest-posts/components/PostModal'
@@ -33,13 +32,7 @@ export const LatestPosts: FC<{ userProfileId?: number | undefined }> = ({ userPr
     setIsOpenPostModal(true)
   }
 
-  const { ref, inView } = useInView()
-
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage()
-    }
-  }, [inView, hasNextPage])
+  const { ref } = useInViewScrollEffect({ hasNextPage, fetchNextPage })
 
   return (
     <div className="mt-14">

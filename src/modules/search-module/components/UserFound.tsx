@@ -9,13 +9,8 @@ export const UserFound = ({
   userItems: UserItemInterface[]
   redirectToUserProfilePage: (value: string | null, userId: string | null) => void
 }) => {
-  const { t } = useTranslation()
-
   return (
-    <div className="flex flex-col pt-7 gap-4">
-      <span className="text-base font-bold leading-6 text-light-100">
-        {t.search.recentRequests}
-      </span>
+    <div className="flex pt-4 flex-col gap-4">
       {userItems &&
         userItems.map((user: UserItemInterface, index) => {
           return (
@@ -25,7 +20,7 @@ export const UserFound = ({
                 height={48}
                 width={48}
                 alt={'alt'}
-                src={user.avatars || ''}
+                src={user.avatars?.thumbnail.url || null}
               />
               <div className="flex flex-col text-light-100 text-sm leading-6 font-normal">
                 <span
