@@ -6,7 +6,7 @@ import { useWindowSize } from '@/common'
 import { AccountLayout } from '@/components/account'
 import { NavigateToProfile } from '@/components/account/navigate-to-profile/NavigateToProfile'
 import { getGlobalLayout, getLayoutWithHeader } from '@/components/layout'
-import { SettingsProfile } from '@/modules/profile-modules/settings-edit-profile-module'
+import { SettingsProfile } from '@/modules/my-profile-modules/settings-edit-profile-module'
 import { NextPageWithLayout } from '@/pages/_app'
 
 const editProfilePage: NextPageWithLayout = () => {

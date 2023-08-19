@@ -44,7 +44,7 @@ export const useGlobalForm = (schema: any) => {
 //   useEffect(() => {
 //     if (accessToken) {
 //       if (redirectIfFound) {
-//         router.push('/profile')
+//         router.push('/profile-page')
 //       }
 //     } else if (redirectIfNotFound) {
 //       router.push('/auth/login')

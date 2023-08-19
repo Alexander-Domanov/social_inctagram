@@ -17,7 +17,7 @@ export const NavigateToProfile = () => {
         width={24}
         priority={true}
         className="cursor-pointer"
-        onClick={() => replace('/profile', undefined, { shallow: true })}
+        onClick={() => replace('/profile-page', undefined, { shallow: true })}
       />
       <p className="text-base text-light-100 font-bold text-center w-full ">Profile Settings</p>
     </div>

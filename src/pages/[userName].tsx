@@ -3,8 +3,8 @@ import React from 'react'
 import Head from 'next/head'
 
 import { getGlobalLayout } from '@/components/layout'
-import { UserProfilePage } from '@/modules/profile-modules/user-profile-module'
 import { NextPageWithLayout } from '@/pages/_app'
+import { UserProfilePage } from 'src/modules/user-profile-module'
 
 const UserProfile: NextPageWithLayout = () => {
   return (

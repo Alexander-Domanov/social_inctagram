@@ -1,4 +1,4 @@
-import { userProfileAvatars } from '@/modules/profile-modules/user-profile-module'
+import { userProfileAvatars } from 'src/modules/user-profile-module'
 
 export interface UserItemInterface {
   avatars: userProfileAvatars | null
