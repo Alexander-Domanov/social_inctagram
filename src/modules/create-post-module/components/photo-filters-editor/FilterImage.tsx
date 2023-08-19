@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react'
 
-import { IPhoto, useImageSelector } from '@/store/storeSelectorPhoto'
+import { IPhoto } from '@/store/storeSelectorPhoto'
 
 interface IFiltersEditor {
   srs: IPhoto
