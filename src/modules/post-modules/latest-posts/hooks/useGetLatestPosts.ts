@@ -22,7 +22,7 @@ export const useGetLatestPosts = ({
   } = useInfiniteQuery({
     queryKey: ['posts', `${userName}_${userId}`],
     queryFn: ({ pageParam = 1 }) => getPosts({ userId, page: pageParam }),
-    getNextPageParam: (lastPage, allPages) => {
+    getNextPageParam: (lastPage, _allPages) => {
       return lastPage.page * lastPage.pageSize < lastPage.totalCount ? lastPage.page + 1 : undefined
     },
     enabled: !!userId,
