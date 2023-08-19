@@ -6,8 +6,8 @@ export const settingsSchema = yup.object({
       ? yup.string().required('Username is required').min(6).max(30).trim()
       : yup.string().min(6).max(30).trim()
   ),
-  firstName: yup.string().trim(),
-  lastName: yup.string().trim(),
+  firstName: yup.string().max(30, 'maximum number of characters 30').trim(),
+  lastName: yup.string().max(30, 'maximum number of characters 30').trim(),
   dateOfBirth: yup
     .date()
     .max(new Date(), 'Date of birth cannot be in the future')
