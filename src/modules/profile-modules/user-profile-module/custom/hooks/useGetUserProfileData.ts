@@ -12,10 +12,12 @@ export const useGetUserProfileData = (userNameQuery: userQueryType) => {
     isLoading,
     refetch,
     isFetching,
+    isRefetching,
   } = useQuery({
     queryKey: ['get-user-profile-page', userNameQuery],
     queryFn: () => getUserProfile(userNameQuery),
     select: (data: any): userProfilePageData => data?.data,
+    staleTime: 0,
   })
 
   const initialUserProfileData = {
@@ -41,5 +43,6 @@ export const useGetUserProfileData = (userNameQuery: userQueryType) => {
     isLoading,
     refetch,
     isFetching,
+    isRefetching,
   }
 }
