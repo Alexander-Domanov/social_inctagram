@@ -10,7 +10,7 @@ export const registrationSchema = yup.object({
     .max(30, 'maximum number of characters 30')
     .trim(),
   email: yup.string().required('Email is required filed').email().trim(),
-  password: yup.string().required().min(6).max(20).trim(),
+  password: yup.string().required().min(6).max(20, 'password must be at most 20 characters').trim(),
   confirmPassword: yup
     .string()
     .required()
