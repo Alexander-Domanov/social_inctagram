@@ -26,7 +26,7 @@ export const CreateNewPasswordForm = ({ onSubmitHandler }: PropsType) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <InputWithEye
-        label="Password"
+        label="New password"
         id="password"
         placeholder=""
         error={errors?.password?.message}
@@ -34,11 +34,14 @@ export const CreateNewPasswordForm = ({ onSubmitHandler }: PropsType) => {
       />
       <InputWithEye
         placeholder=""
-        label="Password"
+        label="Password confirmation"
         id="confirmPassword"
         error={errors?.confirmPassword?.message}
         {...register('confirmPassword')}
       />
+      <div className="leading-6 pb-5 text-sm font-normal text-light-900">
+        Your password must be between 6 and 20 characters
+      </div>
       <GlobalButton variant="default" type="submit">
         Create new password
       </GlobalButton>
