@@ -15,7 +15,7 @@ export const registrationSchema = yup.object({
     .string()
     .required()
     .min(6, 'minimum number of characters 6')
-    .max(20, 'maximum number of characters 30')
+    .max(20, 'password must be at most 20 characters')
     .oneOf([yup.ref('password')!], 'passwords do not match')
     .trim(),
 })
