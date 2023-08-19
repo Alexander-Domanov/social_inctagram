@@ -54,11 +54,11 @@ export const ProfilePage = () => {
               </div>
               <div className="text-sm">
                 <div className="font-bold">2 764</div>
-                <span>{t.profile.profilePage.Publications}</span>
+                <span className="break-words">{t.profile.profilePage.Publications}</span>
               </div>
             </div>
-            <div>
-              <p className="text-base">{aboutMe}</p>
+            <div className="w-full">
+              <p className="text-base break-all">{aboutMe}</p>
             </div>
           </div>
         </div>
