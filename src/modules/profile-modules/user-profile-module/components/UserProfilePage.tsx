@@ -13,9 +13,12 @@ import { Avatar, GlobalButton, Spinner } from '@/ui'
 
 export const UserProfilePage = () => {
   const { push, userIdQuery, userNameQuery } = useGetQueryParamsUser()
-  const { userProfileData, userProfileAvatar, isLoading, refetch, isFetching } =
+  const { userProfileData, userProfileAvatar, isLoading, refetch, isRefetching } =
     useGetUserProfileData(userNameQuery)
-  const { followUnfollowUser, isLoading: isLoadingButton } = useFollowUnfollow(userIdQuery)
+  const { followUnfollowUser, isLoading: isLoadingButton } = useFollowUnfollow({
+    userIdQuery,
+    refetch,
+  })
 
   const { t } = useTranslation()
 
@@ -42,16 +45,14 @@ export const UserProfilePage = () => {
                       className={'text-base bg-dark-300 font-semibold'}
                       type={'button'}
                       variant={followOrUnfollow ? 'transparent' : 'default'}
-                      callback={() =>
-                        handleToggleSubscriptionCallBack({ followUnfollowUser, refetch })
-                      }
+                      callback={() => handleToggleSubscriptionCallBack({ followUnfollowUser })}
                       disabled={isLoadingButton}
                     >
-                      {isLoadingButton ? (
+                      {isRefetching ? (
                         <Spinner />
                       ) : (
                         <span>
-                          {!isLoadingButton && !isLoading && followOrUnfollow
+                          {followOrUnfollow
                             ? t.userProfile.buttonUnfollow
                             : t.userProfile.buttonFollow}
                         </span>

@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react'
 
+import { useRouter } from 'next/router'
+
 import { useInViewScrollEffect } from '@/common'
 import { useStoreIsLoadingPublication } from '@/modules/post-modules/create-post-module'
 import { LatestPost } from '@/modules/post-modules/latest-posts/components/LatestPost'
@@ -12,9 +14,14 @@ import { SkeletonPost } from '@/ui'
 export const LatestPosts: FC<{ userProfileId?: number | undefined }> = ({ userProfileId }) => {
   const { data: me } = useMeQuery()
   const { setPostId } = useUserStore()
+  const { query } = useRouter()
   const userId = userProfileId ? userProfileId : me?.data?.userId
+  const userName = query.userName ? query.userName : 'user'
   const { isLoading, isSuccess, data, fetchNextPage, isFetchingNextPage, hasNextPage } =
-    useGetLatestPosts(userId)
+    useGetLatestPosts({
+      userId,
+      userName,
+    })
   const [isOpenPostModal, setIsOpenPostModal] = useState(false)
 
   const skeletonIsPublication = useStoreIsLoadingPublication(state => state.isLoadingPublication)
