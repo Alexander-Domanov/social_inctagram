@@ -28,7 +28,7 @@ export const UserFound = ({
                 >
                   {user.userName}
                 </span>
-                <span className="text-light-900">{`${
+                <span className="text-light-900 break-all">{`${
                   user.firstName ? user.firstName : 'Not first name'
                 } ${user.lastName ? user.lastName : 'Not last name'}`}</span>
               </div>
