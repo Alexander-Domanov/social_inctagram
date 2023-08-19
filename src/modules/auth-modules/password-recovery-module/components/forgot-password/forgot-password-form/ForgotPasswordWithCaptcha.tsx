@@ -54,7 +54,7 @@ export const ForgotPasswordWithCaptcha = () => {
   return (
     <div className={'relative flex flex-col place-content-center w-4/5'}>
       <form
-        className="flex flex-col grow gap-[10px] pt-[22px]  pb-[18px] w-full"
+        className="flex flex-col grow gap-3 pt-6  pb-5 w-full"
         onSubmit={handleSubmit(onSubmit)}
       >
         <GlobalInput
@@ -67,9 +67,7 @@ export const ForgotPasswordWithCaptcha = () => {
           {...register('email')}
         />
 
-        <div
-          className={'pt-[25px] pb-[12px] text-[16px] leading-[24px] text-light-900 font-normal'}
-        >
+        <div className={'pt-11 pb-3 text-base leading-6 text-light-900 font-normal'}>
           Enter your email address and we will send you further instructions
         </div>
         <GlobalButton variant="default" type="submit" disabled={!captcha}>

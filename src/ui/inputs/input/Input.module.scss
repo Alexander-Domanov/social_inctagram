@@ -101,7 +101,7 @@
 
 .error {
   @include textInput(14px, 18px, #cc1439, $weight);
-
+  word-wrap: break-word;
   position: absolute;
   top: 38px;
 }
