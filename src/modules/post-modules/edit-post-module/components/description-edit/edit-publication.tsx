@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
-import { RightDescription } from '@/modules/post-modules/create-post-module/components/description-add/rightDescription'
-import { PostImagesSlider } from '@/modules/post-modules/latest-posts/components/PostImagesSlider'
+import { RightDescription } from '@/modules/create-post-module/components/description-add/rightDescription'
+import { PostImagesSlider } from '@/modules/post-modules/latest-posts-module/components/PostImagesSlider'
 
 type AddPublicationType = {
   imageUrl: string

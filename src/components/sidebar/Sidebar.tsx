@@ -20,8 +20,8 @@ import trendingOutline from '@/assets/icons/sidebar/trending-up-outline.svg'
 import trending from '@/assets/icons/sidebar/trending-up.svg'
 import { useTranslation } from '@/components/translation'
 import { LogoutButton } from '@/modules/auth-modules/login-module/logout'
-import { CreatePost } from '@/modules/post-modules/create-post-module'
 import { routes } from '@/routing/router'
+import { CreatePost } from 'src/modules/create-post-module'
 
 export const Sidebar: FC = () => {
   const { pathname } = useRouter()
@@ -52,11 +52,11 @@ export const Sidebar: FC = () => {
       pathname === routes.sideBar.favorites ? 'text-accent-500' : '',
       'flex gap-[15px] items-center'
     ),
-    hidden: 'lg:hidden',
+    // hidden: 'lg:hidden',
   }
 
   return (
-    <aside className="h-screen sticky top-0 max-w-[320px] w-full border-r-[1px] border-r-bgLogBorder lg:max-w-[100px]">
+    <aside className="h-screen sticky top-0 max-w-[320px] w-full border-r-[1px] border-r-bgLogBorder ">
       <div className="text-light-100 font-medium flex flex-col items-center justify-between py-[72px] h-full">
         <ul className="list-none flex gap-6 flex-col">
           <li>
@@ -67,21 +67,21 @@ export const Sidebar: FC = () => {
                 height={24}
                 width={24}
               />
-              <span className={className.hidden}>{t.navBar.home}</span>
+              <span>{t.navBar.home}</span>
             </Link>
           </li>
           <li>
             <CreatePost />
           </li>
           <li className="">
-            <Link href={'/profile'} className={className.myProfile}>
+            <Link href={'/profile-page'} className={className.myProfile}>
               <Image
-                src={pathname === '/profile' ? person : personOutline}
+                src={pathname === '/profile-page' ? person : personOutline}
                 alt={t.navBar.myProfile}
                 height={24}
                 width={24}
               />
-              <span className={className.hidden}>{t.navBar.myProfile}</span>
+              <span>{t.navBar.myProfile}</span>
             </Link>
           </li>
           <li className="">
@@ -92,7 +92,7 @@ export const Sidebar: FC = () => {
                 height={24}
                 width={24}
               />
-              <span className={className.hidden}>{t.navBar.messenger}</span>
+              <span>{t.navBar.messenger}</span>
             </Link>
           </li>
           <li className="">
@@ -103,7 +103,7 @@ export const Sidebar: FC = () => {
                 height={24}
                 width={24}
               />
-              <span className={className.hidden}>{t.navBar.search}</span>
+              <span>{t.navBar.search}</span>
             </Link>
           </li>
           <li className="">
@@ -114,7 +114,7 @@ export const Sidebar: FC = () => {
                 height={24}
                 width={24}
               />
-              <span className={className.hidden}>{t.navBar.statistics}</span>
+              <span>{t.navBar.statistics}</span>
             </Link>
           </li>
           <li className="">
@@ -125,7 +125,7 @@ export const Sidebar: FC = () => {
                 height={24}
                 width={24}
               />
-              <span className={className.hidden}>{t.navBar.favorites}</span>
+              <span>{t.navBar.favorites}</span>
             </Link>
           </li>
         </ul>
