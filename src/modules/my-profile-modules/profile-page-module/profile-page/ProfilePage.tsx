@@ -54,7 +54,7 @@ export const ProfilePage = () => {
             </div>
           </div>
         </div>
-        <div className="sm:hidden md:hidden lg:hidden xl:hidden exl:hidden mt-2 flex flex-col text-light-100 w-full">
+        <div className="hidingElementMoreMobile mt-2 flex flex-col text-light-100 w-full">
           <div className="font-bold text-base ">{userName}</div>
           <div className="w-full mt-3">
             <p className="text-sm leading-6 font-normal break-all">{aboutMe}</p>

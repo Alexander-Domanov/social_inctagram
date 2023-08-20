@@ -9,4 +9,7 @@ export const routes = {
     search: '/search',
     favorites: 'favorites',
   },
+  myProfilePage: {
+    settings: '/profile/settings/edit',
+  },
 }
