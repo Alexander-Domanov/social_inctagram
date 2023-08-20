@@ -37,10 +37,10 @@ export const LogoutButton: FC = () => {
   if (isLoading || isError || !data) return null
 
   return (
-    <div className="xsm:hidden">
+    <div className="">
       <button onClick={() => setIsModalOpen(true)} className="flex items-center">
-        <FaSignOutAlt className="mr-4" />
-        <span className="xsm:hidden">{t.navBar.logout}</span>
+        <FaSignOutAlt className="ml-1 mr-4 xsm:w-[24px] xsm:mr-[12px] xsm:h-[24px]" />
+        <span className="">{t.navBar.logout}</span>
       </button>
 
       <Confirm

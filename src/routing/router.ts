@@ -3,10 +3,13 @@ export const routes = {
   sideBar: {
     home: '/',
     userHomePage: '/',
-    profile: '/profile-page',
+    profile: '/profile',
     messenger: '/messenger',
     statistics: '/statistics',
     search: '/search',
     favorites: 'favorites',
+  },
+  myProfilePage: {
+    settings: '/profile/settings/edit',
   },
 }
