@@ -64,9 +64,9 @@ export const Sidebar: FC = () => {
       <div className="xsm:bottom-0 xsm:bg-dark-700 xsm:w-full xsm:border-dark-300 xsm:border-t-[1px] xsm:justify-center xsm:h-[60px] xsm:py-0  xsm:fixed text-light-100 font-medium flex flex-col items-center justify-between py-[72px] h-full">
         <ul className="xsm:flex-row list-none flex gap-6 flex-col">
           <li>
-            <Link href={'/'} className={className.home}>
+            <Link href={routes.sideBar.home} className={className.home}>
               <Image
-                src={pathname === '/' ? home : homeOutline}
+                src={pathname === routes.sideBar.home ? home : homeOutline}
                 alt={t.navBar.home}
                 height={24}
                 width={24}
@@ -78,9 +78,9 @@ export const Sidebar: FC = () => {
             <CreatePost />
           </li>
           <li className="xsm:order-4">
-            <Link href={'/profile-page'} className={className.myProfile}>
+            <Link href={routes.sideBar.profile} className={className.myProfile}>
               <Image
-                src={pathname === '/profile-page' ? person : personOutline}
+                src={pathname === routes.sideBar.profile ? person : personOutline}
                 alt={t.navBar.myProfile}
                 height={24}
                 width={24}
@@ -89,9 +89,9 @@ export const Sidebar: FC = () => {
             </Link>
           </li>
           <li className="xsm:order-1">
-            <Link href={'/messenger'} className={className.messenger}>
+            <Link href={routes.sideBar.messenger} className={className.messenger}>
               <Image
-                src={pathname === '/messenger' ? messenger : messengerOutline}
+                src={pathname === routes.sideBar.messenger ? messenger : messengerOutline}
                 alt={t.navBar.messenger}
                 height={24}
                 width={24}
@@ -100,9 +100,9 @@ export const Sidebar: FC = () => {
             </Link>
           </li>
           <li className="xsm:order-2">
-            <Link href={'/search'} className={className.search}>
+            <Link href={routes.sideBar.search} className={className.search}>
               <Image
-                src={pathname === '/search' ? search : searchOutline}
+                src={pathname === routes.sideBar.search ? search : searchOutline}
                 alt={t.navBar.search}
                 height={24}
                 width={24}
@@ -111,9 +111,9 @@ export const Sidebar: FC = () => {
             </Link>
           </li>
           <li className="xsm:hidden">
-            <Link href={'/statistics'} className={className.statistics}>
+            <Link href={routes.sideBar.statistics} className={className.statistics}>
               <Image
-                src={pathname === '/statistics' ? trending : trendingOutline}
+                src={pathname === routes.sideBar.statistics ? trending : trendingOutline}
                 alt={t.navBar.statistics}
                 height={24}
                 width={24}
@@ -122,9 +122,9 @@ export const Sidebar: FC = () => {
             </Link>
           </li>
           <li className="xsm:hidden">
-            <Link href={'/favorites'} className={className.favorites}>
+            <Link href={routes.sideBar.favorites} className={className.favorites}>
               <Image
-                src={pathname === '/favorites' ? bookmark : bookmarkOutline}
+                src={pathname === routes.sideBar.favorites ? bookmark : bookmarkOutline}
                 alt={t.navBar.favorites}
                 height={24}
                 width={24}

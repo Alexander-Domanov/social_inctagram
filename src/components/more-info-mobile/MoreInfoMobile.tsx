@@ -40,8 +40,13 @@ export const MoreInfoMobile = () => {
     setIsOpen(open)
   }
 
-  const onSelectLanguage = (router: string) => {
-    push(router)
+  const onSelectMoreInfo = (router: string) => {
+    router ? push(router) : null
+  }
+  const [isLogoutOpen, setIsLogoutOpen] = useState(false)
+
+  const handleLogoutClick = () => {
+    setIsLogoutOpen(!isLogoutOpen)
   }
 
   return (
@@ -69,7 +74,7 @@ export const MoreInfoMobile = () => {
             {moreInfo.map(more => (
               <DropdownMenu.Item
                 className={styles.DropDownMenuItem}
-                onSelect={() => onSelectLanguage(more.router)}
+                onSelect={() => onSelectMoreInfo(more.router)}
                 key={more.router}
               >
                 <div className={styles.DropDownMenuFlag}>
@@ -78,12 +83,8 @@ export const MoreInfoMobile = () => {
                 <span className="">{more.name}</span>
               </DropdownMenu.Item>
             ))}
-            <DropdownMenu.Item
-              className={styles.DropDownMenuItem}
-              onSelect={() => onSelectLanguage(more.router)}
-              key={more.router}
-            >
-              <div className="w-full flex">
+            <DropdownMenu.Item className={styles.DropDownMenuItem} key={more.router}>
+              <div className="w-full flex" onClick={e => e.stopPropagation()}>
                 <LogoutButton />
               </div>
             </DropdownMenu.Item>

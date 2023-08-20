@@ -39,7 +39,7 @@ export const LogoutButton: FC = () => {
   return (
     <div className="">
       <button onClick={() => setIsModalOpen(true)} className="flex items-center">
-        <FaSignOutAlt className="ml-1 mr-4" />
+        <FaSignOutAlt className="ml-1 mr-4 xsm:w-[24px] xsm:mr-[12px] xsm:h-[24px]" />
         <span className="">{t.navBar.logout}</span>
       </button>
 
