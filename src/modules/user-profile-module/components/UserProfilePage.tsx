@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { InfoAboutProfilePage } from '@/components/info-about-profile-page'
 import { useTranslation } from '@/components/translation'
 import {
   useFollowUnfollow,
@@ -68,23 +69,7 @@ export const UserProfilePage = () => {
                     </GlobalButton>
                   </div>
                 </div>
-                <div className="flex gap-[72px] md:gap-[20px] flex-wrap">
-                  <div className="text-sm">
-                    <div className="font-bold">{userProfileData?.followingCount || 0}</div>
-                    <span>{t.profile.profilePage.following}</span>
-                  </div>
-                  <div className="text-sm">
-                    <div className="font-bold">{userProfileData?.followersCount || 0}</div>
-                    <span>{t.profile.profilePage.followers}</span>
-                  </div>
-                  <div className="text-sm">
-                    <div className="font-bold">{userProfileData?.publicationsCount || 0}</div>
-                    <span>{t.profile.profilePage.Publications}</span>
-                  </div>
-                </div>
-                <div>
-                  <p className="text-base">{userProfileData?.aboutMe || 'No Description'}</p>
-                </div>
+                <InfoAboutProfilePage t={t} aboutMe={userProfileData.aboutMe} />
               </div>
             </>
           )}

@@ -62,7 +62,7 @@ export const MoreInfoMobile = () => {
         <DropdownMenu.Portal>
           <DropdownMenu.Content
             side={'bottom'}
-            align={'start'}
+            align={'end'}
             sideOffset={-1}
             className={styles.DropDownMenuContent}
           >

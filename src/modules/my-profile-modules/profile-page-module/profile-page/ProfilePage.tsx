@@ -2,6 +2,7 @@ import React from 'react'
 
 import { useRouter } from 'next/router'
 
+import { InfoAboutProfilePage } from '@/components/info-about-profile-page'
 import { useTranslation } from '@/components/translation'
 import { useGetProfile } from '@/modules/my-profile-modules/settings-edit-profile-module'
 import { Avatar, GlobalButton } from '@/ui'
@@ -35,23 +36,7 @@ export const ProfilePage = () => {
                 </span>
               </GlobalButton>
             </div>
-            <div className="flex xsm:gap-3 gap-[72px] flex-wrap">
-              <div className="text-sm leading-6 font-normal">
-                <div className="font-bold">2 218</div>
-                <span>{t.profile.profilePage.following}</span>
-              </div>
-              <div className="text-sm leading-6 font-normal">
-                <div className="font-bold">2 358</div>
-                <span>{t.profile.profilePage.followers}</span>
-              </div>
-              <div className="text-sm leading-6 font-normal">
-                <div className="font-bold">2 764</div>
-                <span className="break-words">{t.profile.profilePage.Publications}</span>
-              </div>
-            </div>
-            <div className="w-full xsm:hidden">
-              <p className="text-sm leading-6 font-normal break-all">{aboutMe}</p>
-            </div>
+            <InfoAboutProfilePage t={t} aboutMe={aboutMe} />
           </div>
         </div>
         <div className="hidingElementMoreMobile mt-2 flex flex-col text-light-100 w-full">
