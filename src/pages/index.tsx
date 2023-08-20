@@ -5,7 +5,6 @@ import Head from 'next/head'
 import { getGlobalLayout } from '@/components/layout'
 import { HomePage } from '@/modules/home-module'
 import { NextPageWithLayout } from '@/pages/_app'
-import { ProfilePage } from 'src/modules/my-profile-modules/profile-page-module'
 
 const Home: NextPageWithLayout = () => {
   return (

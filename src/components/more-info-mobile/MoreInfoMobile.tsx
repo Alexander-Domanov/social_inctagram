@@ -43,11 +43,6 @@ export const MoreInfoMobile = () => {
   const onSelectMoreInfo = (router: string) => {
     router ? push(router) : null
   }
-  const [isLogoutOpen, setIsLogoutOpen] = useState(false)
-
-  const handleLogoutClick = () => {
-    setIsLogoutOpen(!isLogoutOpen)
-  }
 
   return (
     <>
