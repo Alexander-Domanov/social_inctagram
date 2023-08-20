@@ -25,7 +25,7 @@ export const SearchUsers = () => {
   const { ref } = useInViewScrollEffect({ hasNextPage, fetchNextPage })
 
   return (
-    <div className="w-full flex pr-16">
+    <div className="w-full flex">
       <div className="flex flex-col w-full">
         <h1 className={'text-light-100 font-bold pb-3'}>{t.search.searchTitle}</h1>
         <InputSearch

@@ -42,8 +42,8 @@ export const LatestPosts: FC<{ userProfileId?: number | undefined }> = ({ userPr
   const { ref } = useInViewScrollEffect({ hasNextPage, fetchNextPage })
 
   return (
-    <div className="mt-14">
-      <div className="grid grid-cols-4 gap-3">
+    <div className="xsm:mt-7 mt-14">
+      <div className="xsm:grid-cols-3 xsm:gap-0.5 grid grid-cols-4 gap-3">
         {skeletonIsPublication && <SkeletonPost />}
         {isLoading
           ? usedToDrawArraysOfSkeletons(32)

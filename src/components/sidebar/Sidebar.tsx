@@ -52,13 +52,16 @@ export const Sidebar: FC = () => {
       pathname === routes.sideBar.favorites ? 'text-accent-500' : '',
       'flex gap-[15px] items-center'
     ),
-    // hidden: 'lg:hidden',
+    hidden: 'xsm:hidden',
   }
+  // <aside className="xsm:fixed xsm:bottom-0 xsm:max-w-full h-screen top-0 max-w-[320px] w-full border-r-[1px] border-r-bgLogBorder ">
+  //   <div className="xsm:w-full xsm:border-dark-300 xsm:border-t-[1px] xsm:justify-center xsm:h-[60px] xsm:py-0  xsm:fixed bottom-0  text-light-100 font-medium flex flex-col items-center justify-between py-[72px] h-full">
+  //     <ul className="xsm:flex-row ist-none flex gap-6 flex-col">
 
   return (
-    <aside className="h-screen sticky top-0 max-w-[320px] w-full border-r-[1px] border-r-bgLogBorder ">
-      <div className="text-light-100 font-medium flex flex-col items-center justify-between py-[72px] h-full">
-        <ul className="list-none flex gap-6 flex-col">
+    <aside className="xsm:fixed xsm:bottom-0 xsm:max-w-full h-screen sticky top-0 max-w-[320px] w-full border-r-[1px] border-r-bgLogBorder">
+      <div className="xsm:bottom-0 xsm:w-full xsm:border-dark-300 xsm:border-t-[1px] xsm:justify-center xsm:h-[60px] xsm:py-0  xsm:fixed text-light-100 font-medium flex flex-col items-center justify-between py-[72px] h-full">
+        <ul className="xsm:flex-row list-none flex gap-6 flex-col">
           <li>
             <Link href={'/'} className={className.home}>
               <Image
@@ -67,7 +70,7 @@ export const Sidebar: FC = () => {
                 height={24}
                 width={24}
               />
-              <span>{t.navBar.home}</span>
+              <span className={className.hidden}>{t.navBar.home}</span>
             </Link>
           </li>
           <li>
@@ -81,7 +84,7 @@ export const Sidebar: FC = () => {
                 height={24}
                 width={24}
               />
-              <span>{t.navBar.myProfile}</span>
+              <span className={className.hidden}>{t.navBar.myProfile}</span>
             </Link>
           </li>
           <li className="">
@@ -92,7 +95,7 @@ export const Sidebar: FC = () => {
                 height={24}
                 width={24}
               />
-              <span>{t.navBar.messenger}</span>
+              <span className={className.hidden}>{t.navBar.messenger}</span>
             </Link>
           </li>
           <li className="">
@@ -103,10 +106,10 @@ export const Sidebar: FC = () => {
                 height={24}
                 width={24}
               />
-              <span>{t.navBar.search}</span>
+              <span className={className.hidden}>{t.navBar.search}</span>
             </Link>
           </li>
-          <li className="">
+          <li className="xsm:hidden">
             <Link href={'/statistics'} className={className.statistics}>
               <Image
                 src={pathname === '/statistics' ? trending : trendingOutline}
@@ -114,10 +117,10 @@ export const Sidebar: FC = () => {
                 height={24}
                 width={24}
               />
-              <span>{t.navBar.statistics}</span>
+              <span className={className.hidden}>{t.navBar.statistics}</span>
             </Link>
           </li>
-          <li className="">
+          <li className="xsm:hidden">
             <Link href={'/favorites'} className={className.favorites}>
               <Image
                 src={pathname === '/favorites' ? bookmark : bookmarkOutline}
@@ -125,7 +128,7 @@ export const Sidebar: FC = () => {
                 height={24}
                 width={24}
               />
-              <span>{t.navBar.favorites}</span>
+              <span className={className.hidden}>{t.navBar.favorites}</span>
             </Link>
           </li>
         </ul>

@@ -46,12 +46,12 @@ export const LanguageSwitcher: FC = () => {
               <Image src={currentLanguage!.flag} alt={currentLanguage!.name} />
             </div>
 
-            {currentLanguage!.name}
+            <span className="xsm:hidden">{currentLanguage!.name}</span>
 
             <FaChevronDown
               color="#fff"
               size={16}
-              className={clsx('ml-auto', { 'rotate-180': isOpen })}
+              className={clsx('xsm:ml-0.5 ml-auto', { 'rotate-180': isOpen })}
             />
           </button>
         </DropdownMenu.Trigger>
@@ -71,7 +71,7 @@ export const LanguageSwitcher: FC = () => {
                 <div className={styles.DropDownMenuFlag}>
                   <Image src={lang.flag} alt={lang.name} />
                 </div>
-                {lang.name}
+                <span className="xsm:hidden">{lang.name}</span>
               </DropdownMenu.Item>
             ))}
           </DropdownMenu.Content>

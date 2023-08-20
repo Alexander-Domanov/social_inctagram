@@ -8,9 +8,11 @@ import { Sidebar } from '@/components/sidebar/Sidebar'
 export const GlobalLayout: NextPage<PropsWithChildren> = ({ children }) => {
   return (
     <LayoutWithHeader>
-      <div className="flex">
+      <div className="flex h-screen">
         <Sidebar />
-        <div className="pt-9 w-full pl-6">{children}</div>
+        <div className="xsm:pl-4 xsm:pr-4 pr-16 xsm:pt-6 pt-9 w-full flex-1 pl-6 xsm:flex-1">
+          {children}
+        </div>
       </div>
     </LayoutWithHeader>
   )
