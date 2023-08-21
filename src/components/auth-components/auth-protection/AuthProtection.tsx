@@ -7,16 +7,6 @@ import { useMeQuery } from '@/services/hookMe'
 import { useUserStore } from '@/store'
 import { Preloader } from '@/ui'
 
-const unProtectedPaths = [
-  '/auth/forgot-password',
-  '/auth/login',
-  '/auth/recovery',
-  '/auth/recovery/resend-form',
-  '/auth/registration',
-  '/auth/registration/external-account',
-  '/auth/registration/resend-form',
-  '/auth/registration-confirmation',
-]
 const AuthProtection: FC<PropsWithChildren> = memo(({ children }) => {
   const { pathname, replace } = useRouter()
   const { setUserId, setHasBusinessAccount } = useUserStore()
@@ -31,11 +21,11 @@ const AuthProtection: FC<PropsWithChildren> = memo(({ children }) => {
   )
 
   useEffect(() => {
-    if (isSuccess && unProtectedPaths.includes(pathname)) {
+    if (isSuccess && routes.auth.unProtectedPaths.includes(pathname)) {
       replace(routes.sideBar.profile, undefined, { shallow: true })
     }
-    if (isError && !unProtectedPaths.includes(pathname)) {
-      replace('/auth/login', undefined, { shallow: true })
+    if (isError && !routes.auth.unProtectedPaths.includes(pathname)) {
+      replace(routes.auth.login, undefined, { shallow: true })
     }
   }, [isSuccess, isError])
 

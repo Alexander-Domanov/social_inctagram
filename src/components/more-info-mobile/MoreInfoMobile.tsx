@@ -5,6 +5,7 @@ import { clsx } from 'clsx'
 import Image, { StaticImageData } from 'next/image'
 import { useRouter } from 'next/router'
 import { FaChevronDown } from 'react-icons/fa6'
+import { twMerge } from 'tailwind-merge'
 
 import styles from './MoreInfoMobile.module.scss'
 
