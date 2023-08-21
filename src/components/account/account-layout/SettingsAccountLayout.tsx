@@ -5,9 +5,9 @@ type PropsType = {
 
 export const SettingsAccountLayout: FC<PropsType> = ({ children }) => {
   return (
-    <div className="flex gap-[40px] w-full pt-[22px] sm:flex-col">
+    <div className="flex gap-10 w-full pt-5 sm:flex-col">
       {children}
-      <div className="w-[100%] bg-bgLogBorder h-[1px] absolute bottom-[72px] sm:hidden"></div>
+      <div className="w-full bg-bgLogBorder h-[1px] absolute bottom-[72px] sm:hidden"></div>
     </div>
   )
 }

@@ -56,7 +56,7 @@ export const Sidebar: FC = () => {
       pathname === routes.sideBar.favorites ? 'text-accent-500' : '',
       'flex mt-[180px] items-center'
     ),
-    hidden: 'xsm:hidden',
+    hidden: 'xsm:hidden sm:hidden',
     hiddenSettings: clsx(pathname === routes.myProfilePage.settings && 'xsm:hidden'),
   }
 
