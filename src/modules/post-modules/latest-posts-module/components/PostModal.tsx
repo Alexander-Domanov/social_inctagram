@@ -4,7 +4,6 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/uk'
 import 'dayjs/locale/ru'
-import Image from 'next/image'
 import { FaPen, FaTimes, FaTrash } from 'react-icons/fa'
 import Modal from 'react-modal'
 
