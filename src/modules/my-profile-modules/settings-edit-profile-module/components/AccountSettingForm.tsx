@@ -88,7 +88,7 @@ export const AccountSettingForm: FC<Partial<PropsType>> = ({ initialProfileData,
       <GlobalButton
         type="submit"
         variant="default"
-        className="ml-auto mt-[30px] text-[16px] sm:w-full sm:mt-0 sm:h-12 sm:items-center"
+        className="xsm:ml-0 ml-auto mt-[30px] text-[16px]"
       >
         {t.profile.settingsProfile.generalInformation.buttonSaveChanges}
       </GlobalButton>

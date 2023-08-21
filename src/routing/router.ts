@@ -1,5 +1,17 @@
 export const routes = {
-  auth: {},
+  auth: {
+    login: '/auth/login',
+    unProtectedPaths: [
+      '/auth/forgot-password',
+      '/auth/login',
+      '/auth/recovery',
+      '/auth/recovery/resend-form',
+      '/auth/registration',
+      '/auth/registration/external-account',
+      '/auth/registration/resend-form',
+      '/auth/registration-confirmation',
+    ],
+  },
   sideBar: {
     home: '/',
     userHomePage: '/',

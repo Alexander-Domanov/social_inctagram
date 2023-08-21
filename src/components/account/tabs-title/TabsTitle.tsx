@@ -26,10 +26,10 @@ export const TabsTitle: FC<PropsTabType> = ({ tabs, setActiveTab, activeTab }) =
 
   return (
     <>
-      <div className="flex xsm:overflow-x-scroll border-b border-gray-200  border-none h-[96] gap-[2px] sm:w-[750px]">
+      <div className="flex w-full md:min xsm:overflow-x-scroll xsm:no-scrollbar sm:overflow-x-scroll sm:no-scrollbar  border-b border-gray-200  border-none h-[96] gap-[2px]">
         {tabsLayout}
       </div>
-      <div className="divide-y-[100%] bg-bgLogBorder h-[1px] sm:w-[750px]"></div>
+      <div className="divide-y-[100%] bg-bgLogBorder h-[1px]"></div>
     </>
   )
 }

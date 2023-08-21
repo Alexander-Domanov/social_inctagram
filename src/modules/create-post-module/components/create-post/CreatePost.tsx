@@ -32,7 +32,9 @@ export const CreatePost = () => {
         }}
       >
         <Image src={modalOpen ? plus : plusOutline} alt={t.navBar.create} height={24} width={24} />
-        <div className={clsx('cursor-pointer xsm:hidden', modalOpen && 'text-accent-500')}>
+        <div
+          className={clsx('cursor-pointer xsm:hidden sm:hidden', modalOpen && 'text-accent-500')}
+        >
           {t.navBar.create}
         </div>
       </Link>

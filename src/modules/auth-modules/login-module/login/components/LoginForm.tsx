@@ -6,6 +6,7 @@ import { FieldValues } from 'react-hook-form'
 
 import { useGlobalForm } from '@/common'
 import { schemaLogin, useLoginMutation } from '@/modules/auth-modules/login-module'
+import { routes } from '@/routing/router'
 import { GlobalButton, GlobalInput, InputWithEye, Preloader } from '@/ui'
 
 export const LoginForm = () => {
@@ -15,7 +16,7 @@ export const LoginForm = () => {
 
   const { sendLoginData, isLoading } = useLoginMutation(
     () => {
-      push('/profile-page')
+      push(routes.sideBar.profile)
     },
     () =>
       setCustomError(

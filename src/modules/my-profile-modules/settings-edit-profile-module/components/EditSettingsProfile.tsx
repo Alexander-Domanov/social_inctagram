@@ -46,12 +46,12 @@ export const EditSettingProfile = () => {
       {isProfileLoading || isEditProfileLoading ? (
         <SkeletonEditSettingsProfile />
       ) : (
-        <>
-          <div className="sm:flex sm:justify-center">
+        <div className="w-full xsm:flex xsm:flex-col sm:flex-col flex gap-10">
+          <div className="w-full xsm:flex justify-center sm:flex sm:justify-center sm:items-center  ">
             <UploadAvatarBlock avatarUrl={profileAvatar} />
           </div>
           <AccountSettingForm onSubmit={editProfileData} initialProfileData={profileData} />
-        </>
+        </div>
       )}
     </SettingsAccountLayout>
   )
