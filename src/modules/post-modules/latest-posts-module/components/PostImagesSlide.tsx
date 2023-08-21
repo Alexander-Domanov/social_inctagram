@@ -47,12 +47,7 @@ export const PostImagesSlide: FC<Props> = ({
 
   return (
     <>
-      <Image
-        src={image.versions.huge.url}
-        fill
-        alt={description || ''}
-        className="object-cover max-w-[480px]"
-      />
+      <Image src={image.versions.huge.url} fill alt={description || ''} className="object-cover" />
 
       {isCanDeleteImage && showIconDelete && (
         <button
