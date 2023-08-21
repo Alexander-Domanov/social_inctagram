@@ -135,7 +135,7 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
               <div className="grid grid-cols-[36px_1fr] gap-3">
                 <div className="w-9 h-9 shrink-0">
                   <Avatar
-                    src={post?.avatars.thumbnail.url}
+                    src={post?.avatars?.thumbnail.url}
                     width={36}
                     height={36}
                     alt={post?.userName || ''}
