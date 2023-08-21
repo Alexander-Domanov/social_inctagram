@@ -2,10 +2,10 @@ import React, { FC, memo, PropsWithChildren, useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
+import { routes } from '@/routing/router'
 import { useMeQuery } from '@/services/hookMe'
 import { useUserStore } from '@/store'
 import { Preloader } from '@/ui'
-import {routes} from "@/routing/router";
 
 const unProtectedPaths = [
   '/auth/forgot-password',

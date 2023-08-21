@@ -6,8 +6,8 @@ import { FieldValues } from 'react-hook-form'
 
 import { useGlobalForm } from '@/common'
 import { schemaLogin, useLoginMutation } from '@/modules/auth-modules/login-module'
+import { routes } from '@/routing/router'
 import { GlobalButton, GlobalInput, InputWithEye, Preloader } from '@/ui'
-import {routes} from "@/routing/router";
 
 export const LoginForm = () => {
   const { setCustomError, handleSubmit, register, errors, reset } = useGlobalForm(schemaLogin)
