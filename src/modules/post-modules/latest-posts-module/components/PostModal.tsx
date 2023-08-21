@@ -97,11 +97,11 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
           <div className="h-[60px] px-6 flex items-center justify-between border-dark-100 border-b">
             <div className="flex items-center">
               <div className="w-9 h-9 mr-3 relative rounded-full overflow-hidden">
-                <Image
-                  src={post?.avatars?.thumbnail.url || ''}
-                  fill
+                <Avatar
+                  src={post?.avatars?.thumbnail.url}
+                  width={36}
+                  height={36}
                   alt={post?.userName || ''}
-                  className="block"
                 />
               </div>
 
