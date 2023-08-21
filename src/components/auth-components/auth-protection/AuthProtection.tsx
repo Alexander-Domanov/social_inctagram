@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { useMeQuery } from '@/services/hookMe'
 import { useUserStore } from '@/store'
 import { Preloader } from '@/ui'
+import {routes} from "@/routing/router";
 
 const unProtectedPaths = [
   '/auth/forgot-password',
@@ -31,7 +32,7 @@ const AuthProtection: FC<PropsWithChildren> = memo(({ children }) => {
 
   useEffect(() => {
     if (isSuccess && unProtectedPaths.includes(pathname)) {
-      replace('/profile-page', undefined, { shallow: true })
+      replace(routes.sideBar.profile, undefined, { shallow: true })
     }
     if (isError && !unProtectedPaths.includes(pathname)) {
       replace('/auth/login', undefined, { shallow: true })
