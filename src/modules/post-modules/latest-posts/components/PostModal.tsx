@@ -1,14 +1,23 @@
 import { FC, useState } from 'react'
 
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import 'dayjs/locale/uk'
+import 'dayjs/locale/ru'
 import Image from 'next/image'
 import { FaPen, FaTimes, FaTrash } from 'react-icons/fa'
 import Modal from 'react-modal'
 
+// eslint-disable-next-line import/no-named-as-default-member
+dayjs.extend(relativeTime)
+
 import { DeletePost } from '@/modules/post-modules/edit-post-module/components/DeletePost'
 import { EditPost } from '@/modules/post-modules/edit-post-module/components/description-edit/AllEditPost'
+import { AddCommentForm } from '@/modules/post-modules/latest-posts/components/AddCommentForm'
+import { PostComments } from '@/modules/post-modules/latest-posts/components/PostComments'
+import { PostFooter } from '@/modules/post-modules/latest-posts/components/PostFooter'
 import { PostImagesSlider } from '@/modules/post-modules/latest-posts/components/PostImagesSlider'
 import { useGetPost } from '@/modules/post-modules/latest-posts/hooks/useGetPost'
-import { useGetProfile } from '@/modules/profile-modules/settings-edit-profile-module'
 import { useSaveDescription, useUserStore } from '@/store'
 import { Avatar } from '@/ui'
 import { Dropdown } from '@/ui/dropdown/Dropdown'
@@ -18,12 +27,14 @@ interface Props {
   onClose: () => void
 }
 
+const mockDescription =
+  'URLProfiele Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+
 export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
   const { postId, setDescriptionLocal } = useUserStore()
   const { setDescription } = useSaveDescription()
-  const { profileAvatar, profileData } = useGetProfile()
 
-  const { post, isLoading } = useGetPost(postId, description => {
+  const { post } = useGetPost(postId, description => {
     setDescription(description)
     setDescriptionLocal(description)
   })
@@ -82,14 +93,19 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
           <PostImagesSlider />
         </div>
 
-        <div>
-          <div className="px-6 py-3 flex items-center justify-between border-dark-100 border-b">
+        <div className="flex flex-col">
+          <div className="h-[60px] px-6 flex items-center justify-between border-dark-100 border-b">
             <div className="flex items-center">
               <div className="w-9 h-9 mr-3 relative rounded-full overflow-hidden">
-                <Image src={profileAvatar} fill alt={profileData.userName} />
+                <Image
+                  src={post?.avatars?.thumbnail.url || ''}
+                  fill
+                  alt={post?.userName || ''}
+                  className="block"
+                />
               </div>
 
-              <div className="text-white font-medium">{profileData.userName}</div>
+              <div className="text-white font-semibold">{post?.userName}</div>
             </div>
 
             <Dropdown isOpen={isOpenDropdown} setIsOpen={setIsOpenDropdown}>
@@ -107,26 +123,49 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
               </div>
             </Dropdown>
           </div>
+
           <DeletePost
             isDeleteModalOpen={isDeletePostShown}
             setIsDeleteModalOpen={setIsDeletePostShown}
             postId={postId}
             onPostModalClose={onClose}
           />
-          <div className="px-6 py-3 flex items-center justify-between">
-            <div className="flex">
-              <Avatar
-                src={profileAvatar && profileAvatar}
-                width={36}
-                height={36}
-                alt={profileData.userName}
-                className={'mb-[5rem]'}
-              />
-              <div className="text-white font-normal text-[14px] ml-3.5">
-                <span className="font-bold">{profileData.userName}</span> {post && post.description}
+
+          <div className="overflow-y-auto h-[calc(564px_-_228px)]">
+            <div className="px-6 py-3">
+              <div className="grid grid-cols-[36px_1fr] gap-3">
+                <div className="w-9 h-9 shrink-0">
+                  <Avatar
+                    src={post?.avatars.thumbnail.url}
+                    width={36}
+                    height={36}
+                    alt={post?.userName || ''}
+                  />
+                </div>
+
+                <div className="text-sm leading-6 text-white">
+                  <div>
+                    <span className="font-semibold">{post?.userName}</span> {mockDescription}
+                  </div>
+
+                  <div className="mt-1">
+                    <time
+                      dateTime={post?.createdAt}
+                      title={dayjs(post?.createdAt).format('DD.MM.YYYY HH:mm')}
+                      className="text-xs text-light-900"
+                    >
+                      {post?.createdAt && dayjs(post.createdAt).locale('ru').fromNow()}
+                    </time>
+                  </div>
+                </div>
               </div>
             </div>
+            <PostComments postId={postId} />
           </div>
+
+          <PostFooter />
+
+          <AddCommentForm postId={postId} />
         </div>
       </div>
     </Modal>
