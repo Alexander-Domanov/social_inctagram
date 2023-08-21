@@ -4,7 +4,6 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/uk'
 import 'dayjs/locale/ru'
-import Image from 'next/image'
 import { FaPen, FaTimes, FaTrash } from 'react-icons/fa'
 import Modal from 'react-modal'
 
@@ -97,11 +96,11 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
           <div className="h-[60px] px-6 flex items-center justify-between border-dark-100 border-b">
             <div className="flex items-center">
               <div className="w-9 h-9 mr-3 relative rounded-full overflow-hidden">
-                <Image
-                  src={post?.avatars?.thumbnail.url || ''}
-                  fill
+                <Avatar
+                  src={post?.avatars?.thumbnail.url}
+                  width={36}
+                  height={36}
                   alt={post?.userName || ''}
-                  className="block"
                 />
               </div>
 
@@ -135,7 +134,7 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
               <div className="grid grid-cols-[36px_1fr] gap-3">
                 <div className="w-9 h-9 shrink-0">
                   <Avatar
-                    src={post?.avatars.thumbnail.url}
+                    src={post?.avatars?.thumbnail.url}
                     width={36}
                     height={36}
                     alt={post?.userName || ''}
