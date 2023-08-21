@@ -2,10 +2,10 @@ import React from 'react'
 
 import { nanoid } from 'nanoid'
 
-import { Devices } from '@/modules/profile-modules/devices-module'
-import { MyPayments } from '@/modules/profile-modules/my-payments'
-import { EditSettingProfile } from '@/modules/profile-modules/settings-edit-profile-module'
+import { Devices } from '@/modules/my-profile-modules/devices-module'
+import { EditSettingProfile } from '@/modules/my-profile-modules/settings-edit-profile-module'
 import AccountManagementPage from '@/pages/profile/settings/account-management'
+import { MyPayments } from 'src/modules/my-profile-modules/payments-table-module'
 
 export const settings_profile_tabs = [
   { id: nanoid(), label: 'General information', content: <EditSettingProfile /> },

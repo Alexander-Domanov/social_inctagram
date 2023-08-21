@@ -43,5 +43,10 @@ export const ru: LocaleType = {
       devices: {},
     },
   },
+  userProfile: {
+    buttonMessage: 'Отправить сообщение',
+    buttonFollow: 'Подписаться',
+    buttonUnfollow: 'Отписаться',
+  },
   search: { searchTitle: 'Поиск', searchInput: 'Поиск', recentRequests: 'Недавние запросы' },
 }

@@ -3,7 +3,7 @@ import React from 'react'
 import Head from 'next/head'
 
 import { getGlobalLayout } from '@/components/layout'
-import { ProfilePage } from '@/modules/profile-modules/profile-module'
+import { HomePage } from '@/modules/home-module'
 import { NextPageWithLayout } from '@/pages/_app'
 
 const Home: NextPageWithLayout = () => {
@@ -15,7 +15,7 @@ const Home: NextPageWithLayout = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ProfilePage />
+      <HomePage />
     </>
   )
 }

@@ -15,7 +15,7 @@ export const LoginForm = () => {
 
   const { sendLoginData, isLoading } = useLoginMutation(
     () => {
-      push('/profile')
+      push('/profile-page')
     },
     () =>
       setCustomError(

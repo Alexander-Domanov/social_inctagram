@@ -41,6 +41,11 @@ export const en = {
       devices: {},
     },
   },
+  userProfile: {
+    buttonMessage: 'Send Message',
+    buttonFollow: 'Follow',
+    buttonUnfollow: 'Unfollow',
+  },
   search: {
     searchTitle: 'Search',
     searchInput: 'Search',

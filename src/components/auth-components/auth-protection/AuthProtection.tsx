@@ -31,7 +31,7 @@ const AuthProtection: FC<PropsWithChildren> = memo(({ children }) => {
 
   useEffect(() => {
     if (isSuccess && unProtectedPaths.includes(pathname)) {
-      replace('/profile', undefined, { shallow: true })
+      replace('/profile-page', undefined, { shallow: true })
     }
     if (isError && !unProtectedPaths.includes(pathname)) {
       replace('/auth/login', undefined, { shallow: true })
