@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useRouter } from 'next/router'
 
-import { InfoAboutProfilePage } from '@/components/info-about-profile-page'
+import {DuplicateUserNameDescription, InfoAboutProfilePage} from '@/components/info-about-profile-page'
 import { useTranslation } from '@/components/translation'
 import { useGetProfile } from '@/modules/my-profile-modules/settings-edit-profile-module'
 import { Avatar, GlobalButton } from '@/ui'
@@ -25,7 +25,7 @@ export const ProfilePage = () => {
             src={avatar}
             alt={'photo'}
             className={
-              'xsm:w-[72px] xsm:mr-7 xsm:h-[72px] sm:w-[120px] sm:h-[120px] md:w-[140px] md:h-[140px] '
+              'xsm:w-[72px] xsm:mr-7 xsm:h-[72px] sm:w-[120px] sm:h-[120px] md:w-[140px] md:h-[140px]'
             }
           />
           <div className="flex w-full flex-col gap-5">
@@ -45,12 +45,7 @@ export const ProfilePage = () => {
             <InfoAboutProfilePage t={t} aboutMe={aboutMe} />
           </div>
         </div>
-        <div className="sm:mt-4 xl:hidden lg:hidden exl:hidden mt-2 flex flex-col text-light-100 w-full">
-          <div className="font-bold text-base ">{userName}</div>
-          <div className="w-full mt-3">
-            <p className="text-sm leading-6 font-normal break-all">{aboutMe}</p>
-          </div>
-        </div>
+        <DuplicateUserNameDescription userName={userName} aboutMe={aboutMe} />
         <LatestPosts />
       </main>
     </div>

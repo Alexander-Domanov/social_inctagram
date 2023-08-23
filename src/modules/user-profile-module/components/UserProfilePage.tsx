@@ -1,6 +1,9 @@
 import React from 'react'
 
-import { InfoAboutProfilePage } from '@/components/info-about-profile-page'
+import {
+  DuplicateUserNameDescription,
+  InfoAboutProfilePage,
+} from '@/components/info-about-profile-page'
 import { useTranslation } from '@/components/translation'
 import {
   useFollowUnfollow,
@@ -30,7 +33,7 @@ export const UserProfilePage = () => {
   return (
     <div className="flex w-full">
       <main className="pr-16 grow">
-        <div className="flex text-light-100 gap-9">
+        <div className="flex w-full text-light-100 gap-9">
           {(isLoading && (
             <div className="flex justify-center h-full w-full align-middle">
               <Spinner />
@@ -68,9 +71,13 @@ export const UserProfilePage = () => {
                       <span>{t.userProfile.buttonMessage}</span>
                     </GlobalButton>
                   </div>
+                  <InfoAboutProfilePage t={t} aboutMe={userProfileData.aboutMe} />
                 </div>
-                <InfoAboutProfilePage t={t} aboutMe={userProfileData.aboutMe} />
               </div>
+              <DuplicateUserNameDescription
+                userName={userProfileData.userName}
+                aboutMe={userProfileData.aboutMe}
+              />
             </>
           )}
         </div>
