@@ -13,6 +13,7 @@ import {
 import { handleToggleSubscriptionCallBack } from '@/modules/user-profile-module/custom/utils/handleToggleSubscriptionCallBack'
 import { routes } from '@/routing/router'
 import { Avatar, GlobalButton, Spinner } from '@/ui'
+import { ScrollAreaDemo } from '@/modules/my-profile-modules/profile-page-module/components/ScrollAreaDemo'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const UserProfilePage = () => {
@@ -65,7 +66,7 @@ export const UserProfilePage = () => {
                     <GlobalButton
                       className={'text-base bg-dark-300 font-semibold'}
                       type={'button'}
-                      variant={'grey'}
+                      variant={'gray'}
                       callback={onRedirectToSetting}
                     >
                       <span>{t.userProfile.buttonMessage}</span>
@@ -81,7 +82,6 @@ export const UserProfilePage = () => {
             </>
           )}
         </div>
-
         <LatestPosts userProfileId={userProfileData.id} />
       </main>
     </div>

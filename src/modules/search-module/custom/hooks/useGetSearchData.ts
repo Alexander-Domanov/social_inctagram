@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 
 import { getUserFoundData } from 'src/modules/search-module'
 
-export const usersGetSearchData = (search: string) => {
+export const useUsersGetSearchData = (search: string) => {
   const { data, isLoading, isSuccess, error, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ['getUserFound', search],

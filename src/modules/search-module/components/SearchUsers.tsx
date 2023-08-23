@@ -2,13 +2,9 @@ import React from 'react'
 
 import { useInViewScrollEffect } from '@/common'
 import { useTranslation } from '@/components/translation'
+import { useUsersGetSearchData } from '@/modules/search-module/custom/hooks/useGetSearchData'
 import { InputSearch, Spinner } from '@/ui'
-import {
-  useRedirectToUserProfilePage,
-  UserFound,
-  usersGetSearchData,
-  useSearch,
-} from 'src/modules/search-module'
+import { useRedirectToUserProfilePage, UserFound, useSearch } from 'src/modules/search-module'
 
 export const SearchUsers = () => {
   const { search, searchInput, setSearchInput } = useSearch()
@@ -20,7 +16,7 @@ export const SearchUsers = () => {
     hasNextPage,
     isSuccess,
     isFetchingNextPage,
-  } = usersGetSearchData(search)
+  } = useUsersGetSearchData(search)
 
   const { ref } = useInViewScrollEffect({ hasNextPage, fetchNextPage })
 

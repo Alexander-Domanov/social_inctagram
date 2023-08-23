@@ -2,11 +2,15 @@ import React from 'react'
 
 import { useRouter } from 'next/router'
 
-import {DuplicateUserNameDescription, InfoAboutProfilePage} from '@/components/info-about-profile-page'
+import {
+  DuplicateUserNameDescription,
+  InfoAboutProfilePage,
+} from '@/components/info-about-profile-page'
 import { useTranslation } from '@/components/translation'
 import { useGetProfile } from '@/modules/my-profile-modules/settings-edit-profile-module'
 import { Avatar, GlobalButton } from '@/ui'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
+import { ScrollAreaDemo } from '@/modules/my-profile-modules/profile-page-module/components/ScrollAreaDemo'
 
 export const ProfilePage = () => {
   const { push } = useRouter()
@@ -34,7 +38,7 @@ export const ProfilePage = () => {
               <GlobalButton
                 className={'xsm:hidden text-base bg-dark-300 font-semibold'}
                 type={'button'}
-                variant={'grey'}
+                variant={'gray'}
                 callback={onRedirectToSetting}
               >
                 <span className="font-semibold text-light-100 text-base leading-6">
@@ -46,6 +50,7 @@ export const ProfilePage = () => {
           </div>
         </div>
         <DuplicateUserNameDescription userName={userName} aboutMe={aboutMe} />
+        <ScrollAreaDemo userName={userName} />
         <LatestPosts />
       </main>
     </div>
