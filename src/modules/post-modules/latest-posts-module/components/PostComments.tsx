@@ -58,6 +58,10 @@ export const PostComments: FC<Props> = ({ postId }) => {
                           {comment.content && dayjs(comment.createdAt).locale('ru').fromNow()}
                         </time>
                       </div>
+
+                      {comment.answerCount > 0 && (
+                        <div className="mt-2">Show answers {comment.answerCount}</div>
+                      )}
                     </div>
                   </div>
                 </div>
