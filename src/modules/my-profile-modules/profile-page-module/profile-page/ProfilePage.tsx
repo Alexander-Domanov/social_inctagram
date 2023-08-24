@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -16,7 +16,7 @@ import { Avatar, GlobalButton } from '@/ui'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const ProfilePage = () => {
-  const { push, replace, pathname, route } = useRouter()
+  const { push } = useRouter()
   const { profileData, profileAvatar } = useGetProfile()
   const { t } = useTranslation()
   const { onCloseClick, modalOpen, setModalOpen } =

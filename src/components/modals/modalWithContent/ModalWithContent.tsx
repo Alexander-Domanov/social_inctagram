@@ -37,10 +37,6 @@ export const ModalWithContent: FC<Props> = ({
   className,
   size = 'small',
 }) => {
-  const classNames = {
-    widthModal: clsx(size === 'small' && 'w-[444px]', size === 'medium' && 'w-[644px]'),
-  }
-
   return (
     <Modal
       isOpen={isOpen}

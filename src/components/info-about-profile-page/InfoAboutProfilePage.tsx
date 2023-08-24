@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react'
 
 import { LocaleType } from '@/components/translation'
-import { ModalManagerType, StateModalFollowingFollowersType } from '@/types'
+import { StateModalFollowingFollowersType } from '@/types'
 
 interface InfoAboutProfilePageInterface {
   t: LocaleType

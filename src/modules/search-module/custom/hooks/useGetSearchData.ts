@@ -1,7 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
-import search from '@/pages/search'
 import { getUserFoundData } from 'src/modules/search-module'
 
 export const useUsersGetSearchData = (search: string) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { FollowingsButtons, URLUsernameForModal } from '@/components/following-followers'
+import { URLUsernameForModal } from '@/components/following-followers'
 import { FollowersButtons } from '@/components/following-followers/followers/FollowersButtons'
 import { FollowingsFollowersType } from '@/types'
 
