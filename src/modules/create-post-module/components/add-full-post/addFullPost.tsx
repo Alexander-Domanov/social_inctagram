@@ -5,7 +5,7 @@ import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { PATH_ROUTE } from '@/common'
-import { modalType, useStoreIsLoadingPublication } from '@/modules/create-post-module'
+import { ModalCreatePostType, useStoreIsLoadingPublication } from '@/modules/create-post-module'
 import { CreatePostModal } from '@/modules/create-post-module/components/create-post-modal/CreatePostModal'
 import { AddPublication } from '@/modules/create-post-module/components/description-add/add-publication'
 import { RightDescription } from '@/modules/create-post-module/components/description-add/rightDescription'
@@ -17,7 +17,11 @@ interface IAddFullPost {
   location?: boolean
 }
 
-export const AddFullPost: FC<IAddFullPost & modalType> = ({ isModalOpen, setModal, onClose }) => {
+export const AddFullPost: FC<IAddFullPost & ModalCreatePostType> = ({
+  isModalOpen,
+  setModalOpen,
+  onClose,
+}) => {
   const { userId } = useUserStore()
   const { imagesSelector, setDescription, description } = useImageSelector()
   const { push } = useRouter()
@@ -38,11 +42,11 @@ export const AddFullPost: FC<IAddFullPost & modalType> = ({ isModalOpen, setModa
   )
   const onCloseClick = async () => {
     setDescription(postDescription)
-    await setModal('save-draft-post')
+    await setModalOpen('save-draft-post')
   }
 
   const onBackClick = () => {
-    setModal('filters-editor')
+    setModalOpen('filters-editor')
   }
 
   const addAllPost = async () => {
@@ -60,7 +64,7 @@ export const AddFullPost: FC<IAddFullPost & modalType> = ({ isModalOpen, setModa
 
     formData.append('description', postDescription)
     addPhotoToThePost(formData)
-    setModal('')
+    setModalOpen('')
   }
 
   useEffect(() => {

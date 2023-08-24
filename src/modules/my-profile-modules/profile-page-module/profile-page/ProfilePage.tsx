@@ -1,25 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
+import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
+import { ModalManagerFollowingFollowers } from '@/components/following-followers'
 import {
   DuplicateUserNameDescription,
   InfoAboutProfilePage,
 } from '@/components/info-about-profile-page'
 import { useTranslation } from '@/components/translation'
+import { useReplacePathnameQueryEffect } from '@/modules/my-profile-modules/profile-page-module'
 import { useGetProfile } from '@/modules/my-profile-modules/settings-edit-profile-module'
+import { StateModalFollowingFollowersType } from '@/types'
 import { Avatar, GlobalButton } from '@/ui'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
-import { ScrollAreaDemo } from '@/modules/my-profile-modules/profile-page-module/components/ScrollAreaDemo'
 
 export const ProfilePage = () => {
-  const { push } = useRouter()
+  const { push, replace, pathname, route } = useRouter()
   const { profileData, profileAvatar } = useGetProfile()
   const { t } = useTranslation()
+  const { onCloseClick, modalOpen, setModalOpen } =
+    useOpenCloseModal<StateModalFollowingFollowersType>({})
   const userName = profileData && profileData.userName
   const aboutMe = profileData && profileData.aboutMe
   const avatar = profileAvatar && profileAvatar
+  const followings = profileData && profileData.followings
+  const followers = profileData && profileData.followers
+  const publications = profileData && profileData.publications
   const onRedirectToSetting = () => push('/profile/settings/edit')
+
+  useReplacePathnameQueryEffect(userName)
 
   return (
     <div className="flex w-full">
@@ -46,11 +56,18 @@ export const ProfilePage = () => {
                 </span>
               </GlobalButton>
             </div>
-            <InfoAboutProfilePage t={t} aboutMe={aboutMe} />
+            <InfoAboutProfilePage
+              t={t}
+              aboutMe={aboutMe}
+              publications={publications}
+              followings={followings}
+              followers={followers}
+              setModalOpen={setModalOpen}
+            />
           </div>
         </div>
+        <ModalManagerFollowingFollowers isModalOpen={modalOpen} onClose={onCloseClick} />
         <DuplicateUserNameDescription userName={userName} aboutMe={aboutMe} />
-        <ScrollAreaDemo userName={userName} />
         <LatestPosts />
       </main>
     </div>

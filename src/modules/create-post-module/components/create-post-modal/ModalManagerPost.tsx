@@ -6,43 +6,41 @@ import {
   FiltersEditor,
   PhotoUploader,
   SaveDraftPost,
-  stateModalType,
 } from '@/modules/create-post-module'
+import { ModalManagerType, StateModalPostType } from '@/types'
 
-type ModalManagerPostType = {
-  onClose: () => void
-  isModalOpen: string
-  setModal: (value: stateModalType) => void
-}
-
-export const ModalManagerPost = ({ onClose, isModalOpen = '', setModal }: ModalManagerPostType) => {
+export const ModalManagerPost = ({
+  onClose,
+  isModalOpen = '',
+  setModalOpen,
+}: ModalManagerType<StateModalPostType>) => {
   return (
     <>
       <PhotoUploader
         isModalOpen={isModalOpen === 'photo-uploader'}
         onClose={onClose}
-        setModal={setModal}
+        setModalOpen={setModalOpen}
       />
       <CropEditor
         isModalOpen={isModalOpen === 'crop-editor'}
         onClose={onClose}
-        setModal={setModal}
+        setModalOpen={setModalOpen}
       />
       <FiltersEditor
         isModalOpen={isModalOpen === 'filters-editor'}
         onClose={onClose}
-        setModal={setModal}
+        setModalOpen={setModalOpen}
       />
       <AddFullPost
         isModalOpen={isModalOpen === 'add-full-post'}
         onClose={onClose}
-        setModal={setModal}
+        setModalOpen={setModalOpen}
         location={false}
       />
       <SaveDraftPost
         isModalOpen={isModalOpen === 'save-draft-post'}
         onClose={onClose}
-        setModal={setModal}
+        setModalOpen={setModalOpen}
       />
     </>
   )

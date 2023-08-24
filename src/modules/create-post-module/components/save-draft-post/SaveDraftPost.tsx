@@ -1,14 +1,12 @@
 import React from 'react'
 
 import { Confirm } from '@/components/modals'
-import { modalType } from '@/modules/create-post-module'
+import { ModalCreatePostType } from '@/modules/create-post-module'
 import { indexedDbPostDraft } from '@/modules/create-post-module/indexedDB/indexedDbPostDraft.repository'
 import { saveDraftPost } from '@/modules/create-post-module/indexedDB/saveDraftPost'
 import { useImageSelector } from '@/store/storeSelectorPhoto'
 
-type PropsType = modalType
-
-export const SaveDraftPost = ({ isModalOpen, onClose }: PropsType) => {
+export const SaveDraftPost = ({ isModalOpen, onClose }: ModalCreatePostType) => {
   const { imagesSelector, description, setDescription } = useImageSelector()
 
   const onConfirmClick = async () => {

@@ -10,6 +10,9 @@ export const useGetProfile = () => {
     city: profileData?.city || '',
     dateOfBirth: profileData?.dateOfBirth ? new Date(profileData?.dateOfBirth) : new Date(),
     aboutMe: profileData?.aboutMe || '',
+    followings: profileData?.followings || 0,
+    followers: profileData?.followers || 0,
+    publications: profileData?.publications || 0,
   }
   const profileAvatar = profileData?.avatars[0]?.url || ''
 

@@ -1,23 +1,22 @@
 import React from 'react'
 
+import { useGetQueryUserNameUserId } from '@/common/hooks/use-get-query-userName-userId/useGetQueryParamsUser'
 import {
   DuplicateUserNameDescription,
   InfoAboutProfilePage,
 } from '@/components/info-about-profile-page'
 import { useTranslation } from '@/components/translation'
 import {
+  handleToggleSubscriptionCallBack,
   useFollowUnfollow,
-  useGetQueryParamsUser,
   useGetUserProfileData,
 } from '@/modules/user-profile-module'
-import { handleToggleSubscriptionCallBack } from '@/modules/user-profile-module/custom/utils/handleToggleSubscriptionCallBack'
 import { routes } from '@/routing/router'
 import { Avatar, GlobalButton, Spinner } from '@/ui'
-import { ScrollAreaDemo } from '@/modules/my-profile-modules/profile-page-module/components/ScrollAreaDemo'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const UserProfilePage = () => {
-  const { push, userIdQuery, userNameQuery } = useGetQueryParamsUser()
+  const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
   const { userProfileData, userProfileAvatar, isLoading, refetch, isRefetching } =
     useGetUserProfileData(userNameQuery)
   const { followUnfollowUser, isLoading: isLoadingButton } = useFollowUnfollow({
@@ -72,7 +71,13 @@ export const UserProfilePage = () => {
                       <span>{t.userProfile.buttonMessage}</span>
                     </GlobalButton>
                   </div>
-                  <InfoAboutProfilePage t={t} aboutMe={userProfileData.aboutMe} />
+                  <InfoAboutProfilePage
+                    t={t}
+                    aboutMe={userProfileData.aboutMe}
+                    publications={userProfileData.publicationsCount}
+                    followers={userProfileData.followersCount}
+                    followings={userProfileData.followingCount}
+                  />
                 </div>
               </div>
               <DuplicateUserNameDescription

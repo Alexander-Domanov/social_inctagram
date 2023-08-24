@@ -1,6 +1,6 @@
 export * from './components/create-post-modal/CreatePostModal'
 export * from './components/create-post-modal/ModalManagerPost'
-export * from './components/create-post-modal/types/modals-types'
+export * from './types/ModalCreatePostType'
 export * from './components/create-post/custom/custom'
 
 export { PhotoUploader } from './components/photo-uploader/PhotoUploader'

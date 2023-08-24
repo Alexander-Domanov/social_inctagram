@@ -1,11 +1,8 @@
-'use client'
-
 import * as React from 'react'
 
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area'
-import { twMerge } from 'tailwind-merge'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/common/utils/utils'
 
 const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
@@ -13,7 +10,7 @@ const ScrollArea = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <ScrollAreaPrimitive.Root
     ref={ref}
-    className={twMerge('relative overflow-hidden', className)}
+    className={cn('relative overflow-hidden', className)}
     {...props}
   >
     <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
@@ -33,7 +30,7 @@ const ScrollBar = React.forwardRef<
   <ScrollAreaPrimitive.ScrollAreaScrollbar
     ref={ref}
     orientation={orientation}
-    className={twMerge(
+    className={cn(
       'flex touch-none select-none transition-colors',
       orientation === 'vertical' && 'h-full w-2.5 border-l border-l-transparent p-[1px]',
       orientation === 'horizontal' && 'h-2.5 border-t border-t-transparent p-[1px]',
@@ -41,7 +38,7 @@ const ScrollBar = React.forwardRef<
     )}
     {...props}
   >
-    <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-border" />
+    <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-accent-500 dark:bg-slate-800" />
   </ScrollAreaPrimitive.ScrollAreaScrollbar>
 ))
 

@@ -1,5 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
 
+import search from '@/pages/search'
 import { getUserFoundData } from 'src/modules/search-module'
 
 export const useUsersGetSearchData = (search: string) => {
@@ -14,6 +16,8 @@ export const useUsersGetSearchData = (search: string) => {
           return null
         }
       },
+      onError: (err: Error) => toast.error(err.message),
+      enabled: Boolean(search),
     })
 
   return {

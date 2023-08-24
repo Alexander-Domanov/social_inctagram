@@ -1,7 +1,7 @@
-import { userProfileAvatars } from 'src/modules/user-profile-module'
+import { UserProfileAvatarInterface } from '@/types'
 
 export interface UserItemInterface {
-  avatars: userProfileAvatars | null
+  avatars: UserProfileAvatarInterface | null
   createdAt: Date
   firstName: string | null
   id: number
