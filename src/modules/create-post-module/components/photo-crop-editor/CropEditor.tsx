@@ -9,7 +9,7 @@ import { Point } from 'react-easy-crop'
 import Slider from 'react-slick'
 
 import placeholder from '@/assets/images/img-placeholder.png'
-import { CreatePostModal, modalType } from '@/modules/create-post-module'
+import { CreatePostModal, ModalCreatePostType } from '@/modules/create-post-module'
 import { Crop } from '@/modules/create-post-module/components/crop'
 import { CropPopup } from '@/modules/create-post-module/components/photo-crop-editor/crop-popup'
 import getCroppedImg from '@/modules/create-post-module/components/photo-crop-editor/utils/canvasUtils'
@@ -17,9 +17,7 @@ import { ZoomPopup } from '@/modules/create-post-module/components/photo-crop-ed
 import { PhotoSelector } from '@/modules/my-profile-modules/avatar-module'
 import { IPhoto, useImageSelector } from '@/store/storeSelectorPhoto'
 
-type PropsType = modalType
-
-export const CropEditor = ({ setModal, isModalOpen, onClose }: PropsType) => {
+export const CropEditor = ({ setModalOpen, isModalOpen, onClose }: ModalCreatePostType) => {
   const settings = {
     customPaging: function (index: number) {
       const photo = imagesSelector[index]
@@ -107,13 +105,13 @@ export const CropEditor = ({ setModal, isModalOpen, onClose }: PropsType) => {
       )
 
       setImageSelector(updatedImages)
-      setModal('filters-editor')
+      setModalOpen('filters-editor')
     } catch (error) {
       console.error('Error updating images:', error)
     }
   }
   const onBackClick = () => {
-    setModal('photo-uploader')
+    setModalOpen('photo-uploader')
   }
 
   const onDeleteImage = (url: string | Blob) => {

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import { modalType } from '@/modules/create-post-module'
+import { ModalCreatePostType } from '@/modules/create-post-module'
 import { CreatePostModal } from '@/modules/create-post-module/components/create-post-modal/CreatePostModal'
 import getCroppedImg from '@/modules/create-post-module/components/photo-crop-editor/utils/canvasUtils'
 import { FilterImage } from '@/modules/create-post-module/components/photo-filters-editor/FilterImage'
@@ -11,9 +11,7 @@ import { PhotoFilters } from '@/modules/create-post-module/components/photo-filt
 import { usePostStore } from '@/store'
 import { useImageSelector } from '@/store/storeSelectorPhoto'
 
-type PropsType = modalType
-
-export const FiltersEditor = ({ isModalOpen, setModal }: PropsType) => {
+export const FiltersEditor = ({ isModalOpen, setModalOpen }: ModalCreatePostType) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0)
   const { isLoadedFromDB } = usePostStore()
   const { imagesSelector, setFilterStyleForImage, setImageSelector } = useImageSelector()
@@ -51,15 +49,15 @@ export const FiltersEditor = ({ isModalOpen, setModal }: PropsType) => {
   }
   const onNextClick = async () => {
     await setFilteredPhotos()
-    setModal('add-full-post')
+    setModalOpen('add-full-post')
   }
 
   const onBackClick = () => {
-    setModal('crop-editor')
+    setModalOpen('crop-editor')
   }
   const onCloseClick = async () => {
     await setFilteredPhotos()
-    await setModal('save-draft-post')
+    await setModalOpen('save-draft-post')
   }
 
   const handleSlideChange = (swiper: any) => {

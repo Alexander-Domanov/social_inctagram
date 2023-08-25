@@ -2,10 +2,10 @@ import { ParsedUrlQuery } from 'querystring'
 
 import { useEffect } from 'react'
 
-import { stateModalType } from '@/modules/create-post-module'
+import { StateModalPostType } from '@/types'
 
 export const createPostEffect = (
-  setModal: (modal: stateModalType) => void,
+  setModal: (modal: StateModalPostType) => void,
   query: ParsedUrlQuery
 ) => {
   return useEffect(() => {
