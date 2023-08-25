@@ -1,14 +1,15 @@
 import React from 'react'
 
-import { URLUsernameForModal } from '@/components/following-followers'
 import {
+  DeleteUserButton,
   FollowUnfollowButton,
-  FollowUnfollowButtonPropsInterface,
-} from '@/components/following-followers/follow-unfollow-button/FollowUnfollowButton'
-import { FollowingsFollowersType } from '@/types'
+  URLUsernameForModal,
+} from '@/components/following-followers'
+import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
 
-type FollowersUsersProps = {
+type FollowingUsersProps = {
   items: FollowingsFollowersType[]
+  deleteUserCallBack: (userId: number) => void
 } & Omit<FollowUnfollowButtonPropsInterface, 'followOrUnfollow'>
 
 export const FollowersUsers = ({
@@ -16,13 +17,13 @@ export const FollowersUsers = ({
   useFollowUnfollowUser,
   isRefetching,
   isLoadingButton,
-}: FollowersUsersProps) => {
+  deleteUserCallBack,
+}: FollowingUsersProps) => {
   return (
     <>
-      {items.map((item, index) => (
-        <div className="flex justify-between" key={index}>
+      {items.map((item: FollowingsFollowersType, index) => (
+        <div className="flex items-center align-middle justify-between" key={item.userId}>
           <URLUsernameForModal
-            key={item.userId}
             avatartSrc={item.avatars?.thumbnail.url || null}
             userName={item.userName}
           />
@@ -35,6 +36,7 @@ export const FollowersUsers = ({
             isLoadingButton={isLoadingButton}
             isRefetching={isRefetching}
           />
+          <DeleteUserButton userId={item.userId} deleteUserCallBack={deleteUserCallBack} />
         </div>
       ))}
     </>

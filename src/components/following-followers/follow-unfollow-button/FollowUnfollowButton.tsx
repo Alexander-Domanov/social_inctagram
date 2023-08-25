@@ -1,23 +1,9 @@
 import React from 'react'
 
-import { AxiosResponse } from 'axios'
-import { UseMutateFunction } from 'react-query'
-
 import { handleToggleSubscriptionCallBack } from '@/common'
 import { useTranslation } from '@/components/translation'
+import { FollowUnfollowButtonPropsInterface } from '@/types'
 import { GlobalButton, Spinner } from '@/ui'
-
-export interface FollowUnfollowButtonPropsInterface {
-  useFollowUnfollowUser: UseMutateFunction<
-    AxiosResponse<any, any>,
-    unknown,
-    string | undefined,
-    unknown
-  >
-  isLoadingButton: boolean
-  isRefetching: boolean
-  followOrUnfollow: boolean
-}
 
 export const FollowUnfollowButton = ({
   useFollowUnfollowUser,
@@ -29,7 +15,7 @@ export const FollowUnfollowButton = ({
 
   return (
     <GlobalButton
-      className={'text-base bg-dark-300 font-semibold'}
+      className={'text-base h-9 max-w-full bg-dark-300 font-semibold'}
       type={'button'}
       variant={followOrUnfollow ? 'transparent' : 'default'}
       callback={() => handleToggleSubscriptionCallBack({ useFollowUnfollowUser })}
@@ -38,7 +24,9 @@ export const FollowUnfollowButton = ({
       {isRefetching ? (
         <Spinner />
       ) : (
-        <span>{followOrUnfollow ? t.userProfile.buttonUnfollow : t.userProfile.buttonFollow}</span>
+        <span className="my-1.5 mx-6">
+          {followOrUnfollow ? t.userProfile.buttonUnfollow : t.userProfile.buttonFollow}
+        </span>
       )}
     </GlobalButton>
   )

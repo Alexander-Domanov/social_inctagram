@@ -2,10 +2,10 @@ import React from 'react'
 
 import { useGetQueryUserNameUserId } from '@/common'
 import { useSearch } from '@/common/hooks/useSearch'
-import { FollowersUsers } from '@/components/following-followers/followers/FollowersUsers'
+import { FollowersUsers } from '@/components/following-followers'
 import { ModalWithContent } from '@/components/modals'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { useFollowUnfollow, useGetFollowers } from '@/services'
+import { useDeleteFollower, useFollowingOrUnfollowingUser, useGetFollowers } from '@/services'
 import { FollowingFollowersComponentsType } from '@/types'
 import { InputSearch } from '@/ui'
 
@@ -16,11 +16,14 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
     userName: userNameQuery,
     search,
   })
-  const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowUnfollow({
+  const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     refetch: refetchFollowers,
   })
 
-  console.log(dataFollowersItems)
+  const { useDeleteFollowerUser, isLoading } = useDeleteFollower({ refetch: refetchFollowers })
+  const deleteUserCallBack = (userId: number) => {
+    useDeleteFollowerUser(userId)
+  }
 
   return (
     <ModalWithContent size="medium" isOpen={isModalOpen} onClose={onClose} title={'Followers'}>
@@ -39,6 +42,7 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
             isLoadingButton={isLoadingButton}
             useFollowUnfollowUser={useFollowUnfollowUser}
             items={dataFollowersItems.items}
+            deleteUserCallBack={deleteUserCallBack}
           />
         )}
       </ScrollArea>

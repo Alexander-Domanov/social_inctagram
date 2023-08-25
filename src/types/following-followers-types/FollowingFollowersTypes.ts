@@ -1,3 +1,6 @@
+import { AxiosResponse } from 'axios'
+import { UseMutateFunction } from 'react-query'
+
 import {
   ModalManagerType,
   StateModalFollowingFollowersType,
@@ -26,3 +29,15 @@ export interface FollowingFollowersPropsType {
 export type FollowingFollowersComponentsType = {
   isModalOpen: boolean
 } & Pick<ModalManagerType<StateModalFollowingFollowersType>, 'onClose'>
+
+export interface FollowUnfollowButtonPropsInterface {
+  useFollowUnfollowUser: UseMutateFunction<
+    AxiosResponse<any, any>,
+    unknown,
+    string | undefined,
+    unknown
+  >
+  isLoadingButton: boolean
+  isRefetching: boolean
+  followOrUnfollow: boolean
+}

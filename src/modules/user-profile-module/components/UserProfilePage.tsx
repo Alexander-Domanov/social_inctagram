@@ -9,7 +9,7 @@ import {
 import { useTranslation } from '@/components/translation'
 import { useGetUserProfileData } from '@/modules/user-profile-module'
 import { routes } from '@/routing/router'
-import { useFollowUnfollow } from '@/services'
+import { useFollowingOrUnfollowingUser } from '@/services'
 import { Avatar, GlobalButton, Spinner } from '@/ui'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
@@ -17,7 +17,7 @@ export const UserProfilePage = () => {
   const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
   const { userProfileData, userProfileAvatar, isLoading, refetch, isRefetching } =
     useGetUserProfileData(userNameQuery)
-  const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowUnfollow({
+  const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     userIdQuery,
     refetch,
   })

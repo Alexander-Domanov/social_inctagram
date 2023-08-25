@@ -1,18 +1,36 @@
 import React from 'react'
 
-import { FollowingsButtons, URLUsernameForModal } from '@/components/following-followers'
-import { FollowingsFollowersType } from '@/types'
+import { FollowUnfollowButton, URLUsernameForModal } from '@/components/following-followers'
+import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
 
-export const FollowingUsers = ({ items }: { items: FollowingsFollowersType[] }) => {
+type FollowersUsersProps = {
+  items: FollowingsFollowersType[]
+} & Omit<FollowUnfollowButtonPropsInterface, 'followOrUnfollow'>
+
+export const FollowingUsers = ({
+  items,
+  useFollowUnfollowUser,
+  isRefetching,
+  isLoadingButton,
+}: FollowersUsersProps) => {
   return (
     <>
-      {items.map(item => (
-        <div className="flex justify-between" key={item.userId}>
+      {items.map((item, index) => (
+        <div className="flex justify-between" key={index}>
           <URLUsernameForModal
+            key={item.userId}
             avatartSrc={item.avatars?.thumbnail.url || null}
             userName={item.userName}
           />
-          <FollowingsButtons />
+          <FollowUnfollowButton
+            key={index}
+            followOrUnfollow={item.isFollowing}
+            useFollowUnfollowUser={() =>
+              useFollowUnfollowUser ? useFollowUnfollowUser(item.userId.toString()) : ''
+            }
+            isLoadingButton={isLoadingButton}
+            isRefetching={isRefetching}
+          />
         </div>
       ))}
     </>
