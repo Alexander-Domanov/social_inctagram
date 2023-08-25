@@ -6,7 +6,6 @@ import { FollowersUsers } from '@/components/following-followers/followers/Follo
 import { ModalWithContent } from '@/components/modals'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useFollowUnfollow, useGetFollowers } from '@/services'
-import { useMeQuery } from '@/services/hookMe'
 import { FollowingFollowersComponentsType } from '@/types'
 import { InputSearch } from '@/ui'
 

@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { behaviorPlugin } from '@testing-library/user-event/dist/keyboard/types'
 import { AxiosResponse } from 'axios'
 import { UseMutateFunction } from 'react-query'
 
