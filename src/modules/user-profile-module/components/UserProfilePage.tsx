@@ -1,17 +1,15 @@
 import React from 'react'
 
 import { useGetQueryUserNameUserId } from '@/common/hooks/use-get-query-userName-userId/useGetQueryParamsUser'
+import { FollowUnfollowButton } from '@/components/following-followers/follow-unfollow-button/FollowUnfollowButton'
 import {
   DuplicateUserNameDescription,
   InfoAboutProfilePage,
 } from '@/components/info-about-profile-page'
 import { useTranslation } from '@/components/translation'
-import {
-  handleToggleSubscriptionCallBack,
-  useFollowUnfollow,
-  useGetUserProfileData,
-} from '@/modules/user-profile-module'
+import { useGetUserProfileData } from '@/modules/user-profile-module'
 import { routes } from '@/routing/router'
+import { useFollowUnfollow } from '@/services'
 import { Avatar, GlobalButton, Spinner } from '@/ui'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
@@ -19,7 +17,7 @@ export const UserProfilePage = () => {
   const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
   const { userProfileData, userProfileAvatar, isLoading, refetch, isRefetching } =
     useGetUserProfileData(userNameQuery)
-  const { followUnfollowUser, isLoading: isLoadingButton } = useFollowUnfollow({
+  const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowUnfollow({
     userIdQuery,
     refetch,
   })
@@ -45,23 +43,12 @@ export const UserProfilePage = () => {
                 <div className="flex flex-wrap justify-between">
                   <div className="font-bold">{userProfileData.userName}</div>
                   <div className="flex gap-3">
-                    <GlobalButton
-                      className={'text-base bg-dark-300 font-semibold'}
-                      type={'button'}
-                      variant={followOrUnfollow ? 'transparent' : 'default'}
-                      callback={() => handleToggleSubscriptionCallBack({ followUnfollowUser })}
-                      disabled={isLoadingButton}
-                    >
-                      {isRefetching ? (
-                        <Spinner />
-                      ) : (
-                        <span>
-                          {followOrUnfollow
-                            ? t.userProfile.buttonUnfollow
-                            : t.userProfile.buttonFollow}
-                        </span>
-                      )}
-                    </GlobalButton>
+                    <FollowUnfollowButton
+                      isRefetching={isRefetching}
+                      useFollowUnfollowUser={useFollowUnfollowUser}
+                      followOrUnfollow={followOrUnfollow}
+                      isLoadingButton={isLoadingButton}
+                    />
                     <GlobalButton
                       className={'text-base bg-dark-300 font-semibold'}
                       type={'button'}
@@ -76,7 +63,7 @@ export const UserProfilePage = () => {
                     aboutMe={userProfileData.aboutMe}
                     publications={userProfileData.publicationsCount}
                     followers={userProfileData.followersCount}
-                    followings={userProfileData.followingCount}
+                    following={userProfileData.followingCount}
                   />
                 </div>
               </div>

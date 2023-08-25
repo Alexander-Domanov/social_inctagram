@@ -6,7 +6,7 @@ import { StateModalFollowingFollowersType } from '@/types'
 interface InfoAboutProfilePageInterface {
   t: LocaleType
   aboutMe: string
-  followings: number
+  following: number
   followers: number
   publications: number
   setModalOpen?: Dispatch<SetStateAction<StateModalFollowingFollowersType>>
@@ -14,7 +14,7 @@ interface InfoAboutProfilePageInterface {
 export const InfoAboutProfilePage = ({
   t,
   aboutMe,
-  followings,
+  following,
   followers,
   publications,
   setModalOpen,
@@ -25,7 +25,7 @@ export const InfoAboutProfilePage = ({
     <>
       <div className="flex xsm:gap-3 sm:gap-3 md:gap-6 lg:gap-10 gap-20 flex-wrap">
         <div className="text-sm leading-6 font-normal">
-          <div className="font-bold">{followings}</div>
+          <div className="font-bold">{following}</div>
           <span
             className="linkText"
             onClick={() => (setModalOpen ? setModalOpen('Following') : null)}
@@ -37,7 +37,7 @@ export const InfoAboutProfilePage = ({
           <div className="font-bold">{followers}</div>
           <span
             className="linkText"
-            onClick={() => (setModalOpen ? setModalOpen('Following') : null)}
+            onClick={() => (setModalOpen ? setModalOpen('Followers') : null)}
           >
             {t.profile.profilePage.followers}
           </span>

@@ -4,9 +4,11 @@ import { getFollowersData } from '@/services/api/following-followers-api/getFoll
 import { FollowingFollowersPropsType } from '@/types'
 
 export const useGetFollowers = ({ userName, search }: FollowingFollowersPropsType) => {
-  const { data } = useQuery(['users-followers', search], () =>
-    getFollowersData({ userName, search })
-  )
+  const {
+    data: dataFollowersItems,
+    refetch: refetchFollowers,
+    isRefetching: isRefetchingFollowers,
+  } = useQuery(['users-followers', search], () => getFollowersData({ userName, search }))
 
-  return { data }
+  return { dataFollowersItems, refetchFollowers, isRefetchingFollowers }
 }

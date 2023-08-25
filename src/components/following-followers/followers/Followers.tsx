@@ -1,23 +1,30 @@
 import React from 'react'
 
-import { useRouter } from 'next/router'
-
+import { useGetQueryUserNameUserId } from '@/common'
 import { useSearch } from '@/common/hooks/useSearch'
-import { FollowingUsers } from '@/components/following-followers'
+import { FollowersUsers } from '@/components/following-followers/followers/FollowersUsers'
 import { ModalWithContent } from '@/components/modals'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { useGetFollowers } from '@/services'
+import { useFollowUnfollow, useGetFollowers } from '@/services'
+import { useMeQuery } from '@/services/hookMe'
 import { FollowingFollowersComponentsType } from '@/types'
 import { InputSearch } from '@/ui'
 
 export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
   const { search, searchInput, setSearchInput } = useSearch()
-  const { query } = useRouter()
-  const queryUserName = query.userName ? query.userName : ''
-  const { data } = useGetFollowers({ userName: queryUserName, search })
+  const { userNameQuery } = useGetQueryUserNameUserId()
+  const { dataFollowersItems, refetchFollowers, isRefetchingFollowers } = useGetFollowers({
+    userName: userNameQuery,
+    search,
+  })
+  const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowUnfollow({
+    refetch: refetchFollowers,
+  })
+
+  console.log(dataFollowersItems)
 
   return (
-    <ModalWithContent size="medium" isOpen={isModalOpen} onClose={onClose} title={'Followings'}>
+    <ModalWithContent size="medium" isOpen={isModalOpen} onClose={onClose} title={'Followers'}>
       <div className={'w-full p-5'}>
         <InputSearch
           className="h-9 w-full"
@@ -27,7 +34,14 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
         />
       </div>
       <ScrollArea className="max-w-full h-[400px]">
-        {data?.items && <FollowingUsers items={data.items} />}
+        {dataFollowersItems?.items && (
+          <FollowersUsers
+            isRefetching={isRefetchingFollowers}
+            isLoadingButton={isLoadingButton}
+            useFollowUnfollowUser={useFollowUnfollowUser}
+            items={dataFollowersItems.items}
+          />
+        )}
       </ScrollArea>
     </ModalWithContent>
   )

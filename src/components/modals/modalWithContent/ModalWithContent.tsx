@@ -5,7 +5,7 @@ import Modal from 'react-modal'
 
 import styles from './ModalWithContent.module.scss'
 
-import { cn } from '@/common/utils/utils'
+import { cn } from '@/common/utils/cn'
 
 const ButtonSizeTypes = ['small', 'medium'] as const
 

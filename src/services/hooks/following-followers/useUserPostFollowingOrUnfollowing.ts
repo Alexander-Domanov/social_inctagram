@@ -7,17 +7,17 @@ export const useFollowUnfollow = ({
   userIdQuery,
   refetch,
 }: {
-  userIdQuery: userQueryType
+  userIdQuery?: userQueryType
   refetch: () => void
 }) => {
-  const { mutate: followUnfollowUser, isLoading } = useMutation(
+  const { mutate: useFollowUnfollowUser, isLoading } = useMutation(
     ['following'],
-    () => postUserFollowingUnfollowing(userIdQuery),
+    (value?: string) => postUserFollowingUnfollowing(userIdQuery ? userIdQuery : value),
     { onSuccess: () => refetch() }
   )
 
   return {
-    followUnfollowUser,
+    useFollowUnfollowUser,
     isLoading,
   }
 }

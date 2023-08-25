@@ -60,7 +60,7 @@ export const ProfilePage = () => {
               t={t}
               aboutMe={aboutMe}
               publications={publications}
-              followings={followings}
+              following={followings}
               followers={followers}
               setModalOpen={setModalOpen}
             />

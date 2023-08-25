@@ -4,3 +4,4 @@ export * from './api/oauth_api/auth2-status'
 
 export * from './hooks/following-followers/userGetFollowings'
 export * from './hooks/following-followers/useGetFollowers'
+export * from './hooks/following-followers/useUserPostFollowingOrUnfollowing'
