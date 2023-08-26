@@ -13,7 +13,6 @@ export const useInViewScrollEffect = ({
 
   useEffect(() => {
     if (inView && hasNextPage) {
-      console.log('1')
       fetchNextPage()
     }
   }, [inView, hasNextPage])

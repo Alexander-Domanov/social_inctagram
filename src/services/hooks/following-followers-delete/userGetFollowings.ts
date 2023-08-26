@@ -27,6 +27,8 @@ export const userGetFollowings = ({
           return null
         }
       },
+      cacheTime: 0,
+      staleTime: 0,
       onError: (err: Error) => toast.error(err.message),
       enabled: Boolean(userName),
       retry: false,

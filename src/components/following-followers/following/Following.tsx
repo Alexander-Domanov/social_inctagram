@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { useInViewScrollEffect } from '@/common'
 import { useSearch } from '@/common/hooks/useSearch'
 import { FollowingUsers } from '@/components/following-followers/following/FollowingUsers'
+import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { ModalWithContent } from '@/components/modals'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
@@ -58,15 +59,11 @@ export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponents
             ))
           : 'Not found'}
 
-        {isSuccessFollowing && (
-          <div className="pt-4 flex w-full justify-center pb-4" ref={ref}>
-            {isFetchNextPageFollowing && (
-              <div>
-                <Spinner />
-              </div>
-            )}
-          </div>
-        )}
+        <RenderLoadingIndicator
+          isSuccess={isSuccessFollowing}
+          isFetchNextPage={isFetchNextPageFollowing}
+          customRef={ref}
+        />
       </ScrollArea>
     </ModalWithContent>
   )

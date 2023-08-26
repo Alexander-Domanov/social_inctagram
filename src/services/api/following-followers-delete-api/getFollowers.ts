@@ -4,10 +4,12 @@ import { FollowingFollowersPropsType, ItemsFollowingFollowersType } from '@/type
 export const getFollowersData = async ({
   userName,
   search,
-}: Omit<FollowingFollowersPropsType, 'pageParam'>) => {
+  pageParam,
+}: FollowingFollowersPropsType) => {
   const res = await authInstance.get<ItemsFollowingFollowersType>(`users/${userName}/followers`, {
     params: {
       search: search,
+      cursor: pageParam,
     },
   })
 

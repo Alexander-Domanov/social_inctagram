@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { useInViewScrollEffect } from '@/common'
+import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { useTranslation } from '@/components/translation'
 import { useUsersGetSearchData } from '@/modules/search-module/custom/hooks/useGetSearchData'
 import { InputSearch, Spinner } from '@/ui'
@@ -11,14 +12,17 @@ export const SearchUsers = () => {
   const redirectToUserProfilePage = useRedirectToUserProfilePage()
   const { t } = useTranslation()
   const {
-    data: searchData,
-    fetchNextPage,
-    hasNextPage,
-    isSuccess,
-    isFetchingNextPage,
+    dataSearch,
+    hasNextPageSearch,
+    isSuccessSearch,
+    isFetchingNextPageSearch,
+    fetchNextPageSearch,
   } = useUsersGetSearchData(search)
 
-  const { ref } = useInViewScrollEffect({ hasNextPage, fetchNextPage })
+  const { ref } = useInViewScrollEffect({
+    hasNextPage: hasNextPageSearch,
+    fetchNextPage: fetchNextPageSearch,
+  })
 
   return (
     <div className="w-full flex">
@@ -34,8 +38,8 @@ export const SearchUsers = () => {
           <span className="pt-7 text-base font-bold leading-6 text-light-100">
             {t.search.recentRequests}
           </span>
-          {searchData?.pages
-            ? searchData.pages.map((page, index) => (
+          {dataSearch?.pages
+            ? dataSearch.pages.map((page, index) => (
                 <UserFound
                   key={index}
                   redirectToUserProfilePage={redirectToUserProfilePage}
@@ -45,15 +49,11 @@ export const SearchUsers = () => {
             : 'notFound'}
         </>
 
-        {isSuccess && (
-          <div className="pt-4 flex w-full justify-center pb-4" ref={ref}>
-            {isFetchingNextPage && (
-              <div>
-                <Spinner />
-              </div>
-            )}
-          </div>
-        )}
+        <RenderLoadingIndicator
+          customRef={ref}
+          isSuccess={isSuccessSearch}
+          isFetchNextPage={isFetchingNextPageSearch}
+        />
       </div>
     </div>
   )
