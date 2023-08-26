@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { useInViewScrollEffect } from '@/common'
+import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { LatestPost } from '@/modules/post-modules/latest-posts-module/components/LatestPost'
 import { PostModal } from '@/modules/post-modules/latest-posts-module/components/PostModal'
 import { useGetLatestPosts } from '@/modules/post-modules/latest-posts-module/hooks/useGetLatestPosts'
@@ -57,13 +58,11 @@ export const LatestPosts: FC<{ userProfileId?: number | undefined }> = ({ userPr
             ))}
       </div>
 
-      {isSuccess && (
-        <div className="pt-4" ref={ref}>
-          {isFetchingNextPage && (
-            <div className={'grid grid-cols-4 gap-3'}>{usedToDrawArraysOfSkeletons(12)}</div>
-          )}
-        </div>
-      )}
+      <RenderLoadingIndicator
+        isSuccess={isSuccess}
+        isFetchNextPage={isFetchingNextPage}
+        customRef={ref}
+      />
       <PostModal isOpen={isOpenPostModal} onClose={onClose} />
     </div>
   )

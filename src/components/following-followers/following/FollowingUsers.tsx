@@ -6,7 +6,6 @@ import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/t
 type FollowersUsersProps = {
   items: FollowingsFollowersType[]
 } & Omit<FollowUnfollowButtonPropsInterface, 'followOrUnfollow'>
-
 export const FollowingUsers = ({
   items,
   useFollowUnfollowUser,

@@ -19,11 +19,18 @@ export type FollowingsFollowersType = {
 
 export type ItemsFollowingFollowersType = {
   items: FollowingsFollowersType[]
+  nextCursor: number
+  page: number
+  pageSize: number
+  pagesCount: number
+  prevCursor: number
+  totalCount: number
 }
 
 export interface FollowingFollowersPropsType {
   userName: string | string[]
   search: string
+  pageParam: any
 }
 
 export type FollowingFollowersComponentsType = {
