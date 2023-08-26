@@ -34,7 +34,7 @@ export const SearchUsers = () => {
           <span className="pt-7 text-base font-bold leading-6 text-light-100">
             {t.search.recentRequests}
           </span>
-          {searchData
+          {searchData?.pages
             ? searchData.pages.map((page, index) => (
                 <UserFound
                   key={index}

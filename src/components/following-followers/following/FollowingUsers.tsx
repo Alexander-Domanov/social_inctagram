@@ -1,12 +1,14 @@
 import React from 'react'
 
+import { boolean } from 'yup'
+
 import { FollowUnfollowButton, URLUsernameForModal } from '@/components/following-followers'
 import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
+import { Spinner } from '@/ui'
 
 type FollowersUsersProps = {
   items: FollowingsFollowersType[]
 } & Omit<FollowUnfollowButtonPropsInterface, 'followOrUnfollow'>
-
 export const FollowingUsers = ({
   items,
   useFollowUnfollowUser,
