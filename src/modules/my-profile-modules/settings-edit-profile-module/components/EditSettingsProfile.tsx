@@ -8,11 +8,9 @@ import { SettingsAccountLayout } from '@/components/account'
 import { UploadAvatarBlock } from '@/modules/my-profile-modules/avatar-module'
 import {
   AccountSettingForm,
-  ArrowBack,
   editAccountData,
   useGetProfile,
 } from '@/modules/my-profile-modules/settings-edit-profile-module'
-import { routes } from '@/routing/router'
 import { SkeletonEditSettingsProfile } from '@/ui'
 
 export const EditSettingProfile = () => {
