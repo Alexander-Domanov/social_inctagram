@@ -8,7 +8,7 @@ import { ModalWithContent } from '@/components/modals'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useDeleteFollower, useFollowingOrUnfollowingUser, useGetFollowers } from '@/services'
 import { FollowingFollowersComponentsType } from '@/types'
-import { InputSearch, Spinner } from '@/ui'
+import { InputSearch } from '@/ui'
 
 export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
   const { search, searchInput, setSearchInput } = useSearch()
