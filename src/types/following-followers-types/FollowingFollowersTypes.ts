@@ -28,7 +28,7 @@ export type ItemsFollowingFollowersType = {
 }
 
 export interface FollowingFollowersPropsType {
-  userName: string | string[]
+  userName: string | string[] | null
   search: string
   pageParam: any
 }

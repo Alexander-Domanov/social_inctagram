@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { useRouter } from 'next/router'
-
 import { useInViewScrollEffect } from '@/common'
 import { useSearch } from '@/common/hooks/useSearch'
 import { FollowingUsers } from '@/components/following-followers/following/FollowingUsers'
@@ -9,13 +7,14 @@ import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { ModalWithContent } from '@/components/modals'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
+import { useMeQuery } from '@/services/hookMe'
 import { FollowingFollowersComponentsType } from '@/types'
 import { InputSearch } from '@/ui'
 
 export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
   const { search, searchInput, setSearchInput } = useSearch()
-  const { query } = useRouter()
-  const queryUserName = query.userName ? query.userName : ''
+  const { data } = useMeQuery()
+  const myUserName = data?.data.userName as string | null
   const {
     followingData,
     refetchFollowing,
@@ -25,7 +24,7 @@ export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponents
     isSuccessFollowing,
     fetchNextPageFollowing,
   } = userGetFollowings({
-    userName: queryUserName,
+    userName: myUserName,
     search,
   })
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({

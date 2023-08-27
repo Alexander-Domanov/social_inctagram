@@ -1,18 +1,20 @@
 import React from 'react'
 
-import { useGetQueryUserNameUserId, useInViewScrollEffect } from '@/common'
+import { useInViewScrollEffect } from '@/common'
 import { useSearch } from '@/common/hooks/useSearch'
 import { FollowersUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { ModalWithContent } from '@/components/modals'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useDeleteFollower, useFollowingOrUnfollowingUser, useGetFollowers } from '@/services'
+import { useMeQuery } from '@/services/hookMe'
 import { FollowingFollowersComponentsType } from '@/types'
 import { InputSearch } from '@/ui'
 
 export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
   const { search, searchInput, setSearchInput } = useSearch()
-  const { userNameQuery } = useGetQueryUserNameUserId()
+  const { data } = useMeQuery()
+  const myUserName = data?.data.userName as string | null
   const {
     dataFollowersItems,
     refetchFollowers,
@@ -22,7 +24,7 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
     isFetchNextPageFollowers,
     hasNextPageFollowers,
   } = useGetFollowers({
-    userName: userNameQuery,
+    userName: myUserName,
     search,
   })
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
