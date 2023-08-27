@@ -21,22 +21,22 @@ export const FollowersUsers = ({
 }: FollowingUsersProps) => {
   return (
     <>
-      {items.map((item: FollowingsFollowersType, index) => (
-        <div className="flex items-center align-middle justify-between" key={item.userId}>
+      {items.map((user: FollowingsFollowersType, index) => (
+        <div className="flex items-center align-middle justify-between" key={user.userId}>
           <URLUsernameForModal
-            avatartSrc={item.avatars?.thumbnail.url || null}
-            userName={item.userName}
+            avatartSrc={user.avatars?.thumbnail.url || null}
+            userName={user.userName}
           />
           <FollowUnfollowButton
             key={index}
-            followOrUnfollow={item.isFollowing}
+            followOrUnfollow={user.isFollowing}
             useFollowUnfollowUser={() =>
-              useFollowUnfollowUser ? useFollowUnfollowUser(item.userId.toString()) : ''
+              useFollowUnfollowUser ? useFollowUnfollowUser(user.userId.toString()) : ''
             }
             isLoadingButton={isLoadingButton}
             isRefetching={isRefetching}
           />
-          <DeleteUserButton userId={item.userId} deleteUserCallBack={deleteUserCallBack} />
+          <DeleteUserButton userId={user.userId} deleteUserCallBack={deleteUserCallBack} />
         </div>
       ))}
     </>
