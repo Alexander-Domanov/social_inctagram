@@ -1,2 +1,5 @@
 export * from '@/modules/my-profile-modules/profile-page-module/profile-page/ProfilePage'
 export * from './custom/hooks/useReplacePathnameQueryEffect'
+export * from './profile-page/SkeletonProfilePage'
+export * from './profile-page/SkeletonInfoAboutProfilePage'
+export * from './profile-page/SkeletonDuplicateUserNameDescriotion'

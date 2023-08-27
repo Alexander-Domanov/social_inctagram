@@ -1,7 +1,7 @@
 import { useGetProfileData } from '@/modules/my-profile-modules/settings-edit-profile-module'
 
 export const useGetProfile = () => {
-  const { data: profileData, isLoading: isProfileLoading } = useGetProfileData()
+  const { data: profileData, isFetching: isFetchingProfileData, isLoading } = useGetProfileData()
 
   const initialProfileData = {
     userName: profileData?.userName || '',
@@ -19,6 +19,7 @@ export const useGetProfile = () => {
   return {
     profileData: initialProfileData,
     profileAvatar,
-    isProfileLoading,
+    isFetchingProfileData,
+    isLoading,
   }
 }

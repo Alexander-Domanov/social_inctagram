@@ -32,7 +32,7 @@ export const UserProfileButtons = ({
       />
       <GlobalButton
         className={
-          'xsm:text-sm xsm:w-full sm:w-full  text-base leading-6 w-[240px] bg-dark-300 text-light-100 font-semibold'
+          'xsm:text-sm xsm:w-full sm:w-full  text-base leading-6 w-[250px] bg-dark-300 text-light-100 font-semibold'
         }
         type={'button'}
         variant={'gray'}

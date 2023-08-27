@@ -16,7 +16,7 @@ import { SkeletonEditSettingsProfile } from '@/ui'
 export const EditSettingProfile = () => {
   const client = useQueryClient()
 
-  const { profileData, isProfileLoading, profileAvatar } = useGetProfile()
+  const { profileData, isLoading: isProfileLoading, profileAvatar } = useGetProfile()
 
   const { mutate: editeProfile, isLoading: isEditProfileLoading } = useMutation({
     mutationFn: editAccountData,
