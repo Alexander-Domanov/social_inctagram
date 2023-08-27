@@ -57,7 +57,7 @@ export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponents
           callBackSearch={setSearchInput}
         />
       </div>
-      <ScrollArea className="w-full h-[400px]">
+      <ScrollArea className="w-full h-[425px]">
         {followingData?.pages
           ? followingData.pages.map((users, index) => (
               <FollowingUsers

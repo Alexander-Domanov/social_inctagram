@@ -14,10 +14,7 @@ type FollowingUsersProps = {
   isLoadingDeleteUser: boolean
   handleToggleSubscriptionsCallBack: (userId: number) => void
   currentDeleteUserId: number | null
-} & Omit<
-  FollowUnfollowButtonPropsInterface,
-  'followOrUnfollow' | 'handleToggleSubscriptionsCallBack'
->
+} & Omit<FollowUnfollowButtonPropsInterface, 'isFollowing' | 'handleToggleSubscriptionsCallBack'>
 
 export const FollowersUsers = ({
   items,
@@ -40,7 +37,7 @@ export const FollowersUsers = ({
           {user.isFollowing && (
             <FollowUnfollowButton
               key={index}
-              followOrUnfollow={user.isFollowing}
+              isFollowing={user.isFollowing}
               handleToggleSubscriptionsCallBack={() =>
                 handleToggleSubscriptionsCallBack(user.userId)
               }

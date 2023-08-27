@@ -44,7 +44,7 @@ export const ProfilePage = () => {
           />
           <div className="flex w-full flex-col gap-5">
             <div className="flex sm:gap-5 md:gap-5 lg:gap-5 flex-wrap justify-between">
-              <div className="font-bold break-all xsm:hidden sm:hidden">{userName}</div>
+              <div className="font-bold break-all xsm:hidden sm:hidden md:hidden">{userName}</div>
               <GlobalButton
                 className={'xsm:hidden text-base bg-dark-300 font-semibold'}
                 type={'button'}
