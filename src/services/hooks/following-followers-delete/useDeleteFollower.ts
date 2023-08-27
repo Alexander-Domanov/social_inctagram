@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { deleteFollowerUser } from '@/services'
 
 export const useDeleteFollower = ({ refetch }: { refetch: () => void }) => {
-  const { mutate: useDeleteFollowerUser, isLoading } = useMutation(
+  const { mutate: useDeleteFollowerUser, isLoading: isLoadingDeleteUser } = useMutation(
     ['del-follower'],
     (userId: number) => deleteFollowerUser(userId),
     { onSuccess: () => refetch(), onError: (err: Error) => toast.error(err.message) }
@@ -12,6 +12,6 @@ export const useDeleteFollower = ({ refetch }: { refetch: () => void }) => {
 
   return {
     useDeleteFollowerUser,
-    isLoading,
+    isLoadingDeleteUser,
   }
 }

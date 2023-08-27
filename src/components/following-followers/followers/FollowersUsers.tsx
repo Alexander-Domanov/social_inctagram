@@ -10,11 +10,21 @@ import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/t
 type FollowingUsersProps = {
   items: FollowingsFollowersType[]
   deleteUserCallBack: (userId: number) => void
-} & Omit<FollowUnfollowButtonPropsInterface, 'followOrUnfollow'>
+  currentUserId: number | null
+  isLoadingDeleteUser: boolean
+  handleToggleSubscriptionsCallBack: (userId: number) => void
+  currentDeleteUserId: number | null
+} & Omit<
+  FollowUnfollowButtonPropsInterface,
+  'followOrUnfollow' | 'handleToggleSubscriptionsCallBack'
+>
 
 export const FollowersUsers = ({
   items,
-  useFollowUnfollowUser,
+  currentUserId,
+  currentDeleteUserId,
+  isLoadingDeleteUser,
+  handleToggleSubscriptionsCallBack,
   isRefetching,
   isLoadingButton,
   deleteUserCallBack,
@@ -30,13 +40,15 @@ export const FollowersUsers = ({
           <FollowUnfollowButton
             key={index}
             followOrUnfollow={user.isFollowing}
-            useFollowUnfollowUser={() =>
-              useFollowUnfollowUser ? useFollowUnfollowUser(user.userId.toString()) : ''
-            }
-            isLoadingButton={isLoadingButton}
-            isRefetching={isRefetching}
+            handleToggleSubscriptionsCallBack={() => handleToggleSubscriptionsCallBack(user.userId)}
+            isLoadingButton={currentUserId === user.userId && isLoadingButton}
+            isRefetching={currentUserId === user.userId && isRefetching}
           />
-          <DeleteUserButton userId={user.userId} deleteUserCallBack={deleteUserCallBack} />
+          <DeleteUserButton
+            disabled={user.userId === currentDeleteUserId && isLoadingDeleteUser}
+            userId={user.userId}
+            deleteUserCallBack={deleteUserCallBack}
+          />
         </div>
       ))}
     </>

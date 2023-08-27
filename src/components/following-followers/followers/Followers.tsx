@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useInViewScrollEffect } from '@/common'
 import { useSearch } from '@/common/hooks/useSearch'
@@ -14,6 +14,8 @@ import { InputSearch } from '@/ui'
 export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
   const { search, searchInput, setSearchInput } = useSearch()
   const { data } = useMeQuery()
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null)
+  const [currentDeleteUserId, setCurrentDeleteUserId] = useState<number | null>(null)
   const myUserName = data?.data.userName as string | null
   const {
     dataFollowersItems,
@@ -31,14 +33,22 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
     refetch: refetchFollowers,
   })
 
-  const { useDeleteFollowerUser, isLoading } = useDeleteFollower({ refetch: refetchFollowers })
-  const deleteUserCallBack = (userId: number) => {
-    useDeleteFollowerUser(userId)
-  }
+  const { useDeleteFollowerUser, isLoadingDeleteUser } = useDeleteFollower({
+    refetch: refetchFollowers,
+  })
+
   const { ref } = useInViewScrollEffect({
     hasNextPage: hasNextPageFollowers,
     fetchNextPage: fetchNextPageFollowers,
   })
+  const handleToggleSubscriptionsCallBack = (userId: number) => {
+    useFollowUnfollowUser(userId.toString())
+    setCurrentUserId(userId)
+  }
+  const deleteUserCallBack = (userId: number) => {
+    useDeleteFollowerUser(userId)
+    setCurrentDeleteUserId(userId)
+  }
 
   return (
     <ModalWithContent size="medium" isOpen={isModalOpen} onClose={onClose} title={'Followers'}>
@@ -59,9 +69,12 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
                     key={index}
                     isRefetching={isRefetchingFollowers}
                     isLoadingButton={isLoadingButton}
-                    useFollowUnfollowUser={useFollowUnfollowUser}
+                    isLoadingDeleteUser={isLoadingDeleteUser}
+                    handleToggleSubscriptionsCallBack={handleToggleSubscriptionsCallBack}
+                    currentUserId={currentUserId}
                     items={users.items}
                     deleteUserCallBack={deleteUserCallBack}
+                    currentDeleteUserId={currentDeleteUserId}
                   />
                 )
             )
