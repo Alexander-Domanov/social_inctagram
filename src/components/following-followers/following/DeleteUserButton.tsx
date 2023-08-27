@@ -24,7 +24,7 @@ export const DeleteUserButton = ({
         <GlobalButton
           callback={() => deleteUserCallBack(userId)}
           disabled={disabled}
-          className="max-w-[98px]"
+          className="max-w-[140px]"
           type={'button'}
           variant={'gray'}
         >
