@@ -8,7 +8,7 @@ import { ModalWithContent } from '@/components/modals'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useDeleteFollower, useFollowingOrUnfollowingUser, useGetFollowers } from '@/services'
 import { FollowingFollowersComponentsType } from '@/types'
-import { InputSearch, Spinner } from '@/ui'
+import { InputSearch } from '@/ui'
 
 export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
   const { search, searchInput, setSearchInput } = useSearch()
@@ -51,14 +51,14 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
       <ScrollArea className="max-w-full h-[400px]">
         {dataFollowersItems?.pages
           ? dataFollowersItems.pages.map(
-              (page, index) =>
-                page.items && (
+              (users, index) =>
+                users.items && (
                   <FollowersUsers
                     key={index}
                     isRefetching={isRefetchingFollowers}
                     isLoadingButton={isLoadingButton}
                     useFollowUnfollowUser={useFollowUnfollowUser}
-                    items={page.items}
+                    items={users.items}
                     deleteUserCallBack={deleteUserCallBack}
                   />
                 )

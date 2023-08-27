@@ -14,18 +14,18 @@ export const FollowingUsers = ({
 }: FollowersUsersProps) => {
   return (
     <>
-      {items.map((item, index) => (
+      {items.map((user, index) => (
         <div className="flex justify-between" key={index}>
           <URLUsernameForModal
-            key={item.userId}
-            avatartSrc={item.avatars?.thumbnail.url || null}
-            userName={item.userName}
+            key={user.userId}
+            avatartSrc={user.avatars?.thumbnail.url || null}
+            userName={user.userName}
           />
           <FollowUnfollowButton
             key={index}
-            followOrUnfollow={item.isFollowing}
+            followOrUnfollow={user.isFollowing}
             useFollowUnfollowUser={() =>
-              useFollowUnfollowUser ? useFollowUnfollowUser(item.userId.toString()) : ''
+              useFollowUnfollowUser ? useFollowUnfollowUser(user.userId.toString()) : ''
             }
             isLoadingButton={isLoadingButton}
             isRefetching={isRefetching}

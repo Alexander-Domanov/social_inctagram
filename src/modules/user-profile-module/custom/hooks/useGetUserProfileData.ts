@@ -5,10 +5,9 @@ import { getUserProfile, userProfilePageData, userQueryType } from '@/modules/us
 export const useGetUserProfileData = (userNameQuery: userQueryType) => {
   const {
     data: userProfileData,
-    isLoading,
-    refetch,
-    isFetching,
-    isRefetching,
+    isLoading: isLoadingUserProfile,
+    refetch: refetchUserProfile,
+    isRefetching: isRefetchingUserProfile,
   } = useQuery({
     queryKey: ['get-user-profile-page-page', userNameQuery],
     queryFn: () => getUserProfile(userNameQuery),
@@ -36,9 +35,8 @@ export const useGetUserProfileData = (userNameQuery: userQueryType) => {
   return {
     userProfileData: initialUserProfileData,
     userProfileAvatar,
-    isLoading,
-    refetch,
-    isFetching,
-    isRefetching,
+    isLoadingUserProfile,
+    refetchUserProfile,
+    isRefetchingUserProfile,
   }
 }
