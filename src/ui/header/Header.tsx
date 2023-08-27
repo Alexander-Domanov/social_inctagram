@@ -22,7 +22,7 @@ export const Header = () => {
         <div className="flex items-center justify-between">
           <div>
             <span className="block" onClick={() => replace(route, undefined, { shallow: true })}>
-              Inctagram ci/cd
+              Inctagram
             </span>
           </div>
           <div className="flex ">
