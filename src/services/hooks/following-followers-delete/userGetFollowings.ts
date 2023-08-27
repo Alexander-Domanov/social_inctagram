@@ -7,7 +7,7 @@ import { FollowingFollowersPropsType } from '@/types'
 export const userGetFollowings = ({
   userName,
   search,
-}: Pick<FollowingFollowersPropsType, 'userName' | 'search'>) => {
+}: Pick<FollowingFollowersPropsType, 'search' | 'userName'>) => {
   const {
     data: followingData,
     refetch: refetchFollowing,
