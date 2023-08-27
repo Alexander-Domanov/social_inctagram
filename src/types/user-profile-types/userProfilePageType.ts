@@ -1,4 +1,4 @@
-import { UserProfileAvatarInterface } from '@/types/user-profile-avatar-type/UserProfileAvatarType'
+import { UserProfileAvatarInterface } from '@/types/user-profile-types/user-profile-avatar-type/UserProfileAvatarType'
 
 export interface userProfilePageData {
   aboutMe: string | null

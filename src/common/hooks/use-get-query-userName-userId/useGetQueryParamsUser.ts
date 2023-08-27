@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import { userQueryType } from '@/modules/user-profile-module'
+import { userQueryType } from '@/types'
 
 export const useGetQueryUserNameUserId = () => {
   const { push, query } = useRouter()

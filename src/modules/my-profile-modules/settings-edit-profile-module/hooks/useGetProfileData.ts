@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { noRefetch } from '@/common'
 import { getAccountData } from '@/modules/my-profile-modules/settings-edit-profile-module'
+import { userProfilePageData } from '@/types'
 
 export const useGetProfileData = () => {
   return useQuery({
@@ -13,6 +14,6 @@ export const useGetProfileData = () => {
     ...noRefetch,
     staleTime: 0,
     cacheTime: 0,
-    select: (data: any) => data?.data,
+    select: (data: any): userProfilePageData => data?.data,
   })
 }
