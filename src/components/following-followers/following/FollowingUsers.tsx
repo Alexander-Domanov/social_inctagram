@@ -7,10 +7,7 @@ type FollowersUsersProps = {
   items: FollowingsFollowersType[]
   handleToggleSubscriptionsCallBack: (userId: number) => void
   currentUserId: number | null
-} & Omit<
-  FollowUnfollowButtonPropsInterface,
-  'followOrUnfollow' | 'handleToggleSubscriptionsCallBack'
->
+} & Omit<FollowUnfollowButtonPropsInterface, 'isFollowing' | 'handleToggleSubscriptionsCallBack'>
 export const FollowingUsers = ({
   items,
   currentUserId,
@@ -29,7 +26,7 @@ export const FollowingUsers = ({
           />
           <FollowUnfollowButton
             key={index}
-            followOrUnfollow={user.isFollowing}
+            isFollowing={user.isFollowing}
             handleToggleSubscriptionsCallBack={() => handleToggleSubscriptionsCallBack(user.userId)}
             isLoadingButton={currentUserId === user.userId && isLoadingButton}
             isRefetching={currentUserId === user.userId && isRefetching}

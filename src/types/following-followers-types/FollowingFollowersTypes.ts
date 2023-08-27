@@ -38,5 +38,6 @@ export interface FollowUnfollowButtonPropsInterface {
   handleToggleSubscriptionsCallBack: () => void
   isLoadingButton: boolean
   isRefetching: boolean
-  followOrUnfollow: boolean
+  isFollowing: boolean
+  className?: string
 }

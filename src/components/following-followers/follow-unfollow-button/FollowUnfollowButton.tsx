@@ -3,20 +3,22 @@ import React from 'react'
 import { useTranslation } from '@/components/translation'
 import { FollowUnfollowButtonPropsInterface } from '@/types'
 import { GlobalButton, Spinner } from '@/ui'
+import {twMerge} from "tailwind-merge";
 
 export const FollowUnfollowButton = ({
   handleToggleSubscriptionsCallBack,
   isLoadingButton,
   isRefetching,
-  followOrUnfollow,
+  isFollowing,
+  className,
 }: FollowUnfollowButtonPropsInterface) => {
   const { t } = useTranslation()
 
   return (
     <GlobalButton
-      className={'text-base mr-10 h-9 max-w-[140px] bg-dark-300 font-semibold'}
+      className={twMerge('text-base mr-10 h-9 bg-dark-300 font-semibold', className)}
       type={'button'}
-      variant={followOrUnfollow ? 'transparent' : 'default'}
+      variant={isFollowing ? 'transparent' : 'default'}
       callback={() => handleToggleSubscriptionsCallBack()}
       disabled={isLoadingButton}
     >
@@ -24,7 +26,7 @@ export const FollowUnfollowButton = ({
         <Spinner />
       ) : (
         <span className="my-1.5 mx-6">
-          {followOrUnfollow ? t.userProfile.buttonUnfollow : t.userProfile.buttonFollow}
+          {isFollowing ? t.userProfile.buttonUnfollow : t.userProfile.buttonFollow}
         </span>
       )}
     </GlobalButton>

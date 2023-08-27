@@ -23,7 +23,7 @@ export const InfoAboutProfilePage = ({
 
   return (
     <>
-      <div className="flex xsm:gap-3 sm:gap-3 md:gap-6 lg:gap-10 gap-20 flex-wrap">
+      <div className="flex xsm:gap-10 sm:gap-10 md:gap-10 lg:gap-10 gap-20 flex-wrap">
         <div className="text-sm leading-6 font-normal">
           <div className="font-bold">{following}</div>
           <span
