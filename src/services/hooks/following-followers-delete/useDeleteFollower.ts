@@ -7,7 +7,7 @@ export const useDeleteFollower = ({ refetch }: { refetch: () => void }) => {
   const { mutate: useDeleteFollowerUser, isLoading } = useMutation(
     ['del-follower'],
     (userId: number) => deleteFollowerUser(userId),
-    { onError: (err: Error) => toast.error(err.message) }
+    { onSuccess: () => refetch(), onError: (err: Error) => toast.error(err.message) }
   )
 
   return {
