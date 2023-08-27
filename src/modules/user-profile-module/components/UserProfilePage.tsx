@@ -2,9 +2,7 @@ import React from 'react'
 
 import { useGetQueryUserNameUserId } from '@/common'
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
-import {
-  ModalManagerFollowingFollowers,
-} from '@/components/following-followers'
+import { ModalManagerFollowingFollowers } from '@/components/following-followers'
 import {
   DuplicateUserNameDescription,
   InfoAboutProfilePage,
@@ -20,12 +18,8 @@ import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const UserProfilePage = () => {
   const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
-  const {
-    userProfileData,
-    userProfileAvatar,
-    isRefetchingUserProfile,
-    refetchUserProfile,
-  } = useGetUserProfileData(userNameQuery)
+  const { userProfileData, userProfileAvatar, isRefetchingUserProfile, refetchUserProfile } =
+    useGetUserProfileData(userNameQuery)
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     userIdQuery,
     refetch: refetchUserProfile,
