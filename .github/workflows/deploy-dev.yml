@@ -45,7 +45,7 @@ jobs:
           port: 22
           script: |
             cd ~/front/inctagram-dev/
-            git pull
+            git pull origin dev
             yarn install
             yarn build
             pm2 startOrRestart ecosystem-dev.config.js
