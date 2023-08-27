@@ -3,7 +3,6 @@ import React from 'react'
 import { useGetQueryUserNameUserId } from '@/common'
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
 import {
-  FollowUnfollowButton,
   ModalManagerFollowingFollowers,
 } from '@/components/following-followers'
 import {
@@ -16,7 +15,7 @@ import { UserProfileButtons } from '@/modules/user-profile-module/components/Use
 import { routes } from '@/routing/router'
 import { useFollowingOrUnfollowingUser } from '@/services'
 import { StateModalFollowingFollowersType } from '@/types'
-import { Avatar, GlobalButton, Spinner } from '@/ui'
+import { Avatar } from '@/ui'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const UserProfilePage = () => {
@@ -24,7 +23,6 @@ export const UserProfilePage = () => {
   const {
     userProfileData,
     userProfileAvatar,
-    isLoadingUserProfile,
     isRefetchingUserProfile,
     refetchUserProfile,
   } = useGetUserProfileData(userNameQuery)

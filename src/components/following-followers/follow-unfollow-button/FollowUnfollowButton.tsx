@@ -1,9 +1,10 @@
 import React from 'react'
 
+import { twMerge } from 'tailwind-merge'
+
 import { useTranslation } from '@/components/translation'
 import { FollowUnfollowButtonPropsInterface } from '@/types'
 import { GlobalButton, Spinner } from '@/ui'
-import {twMerge} from "tailwind-merge";
 
 export const FollowUnfollowButton = ({
   handleToggleSubscriptionsCallBack,
