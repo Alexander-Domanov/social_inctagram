@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'front-main',
+      name: 'front-main-dev',
       script: 'node_modules/next/dist/bin/next',
       args: 'start -p 3010',
       restartDelay: 1000,
