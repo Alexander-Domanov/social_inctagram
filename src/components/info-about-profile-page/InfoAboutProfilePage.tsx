@@ -9,7 +9,7 @@ interface InfoAboutProfilePageInterface {
   following: number
   followers: number
   publications: number
-  setModalOpen?: Dispatch<SetStateAction<StateModalFollowingFollowersType>>
+  setModalOpen: Dispatch<SetStateAction<StateModalFollowingFollowersType>>
 }
 export const InfoAboutProfilePage = ({
   t,

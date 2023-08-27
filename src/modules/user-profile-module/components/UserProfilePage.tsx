@@ -1,6 +1,8 @@
 import React from 'react'
 
+import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
 import { useGetQueryUserNameUserId } from '@/common/hooks/use-get-query-userName-userId/useGetQueryParamsUser'
+import { ModalManagerFollowingFollowers } from '@/components/following-followers'
 import { FollowUnfollowButton } from '@/components/following-followers/follow-unfollow-button/FollowUnfollowButton'
 import {
   DuplicateUserNameDescription,
@@ -10,6 +12,7 @@ import { useTranslation } from '@/components/translation'
 import { useGetUserProfileData } from '@/modules/user-profile-module'
 import { routes } from '@/routing/router'
 import { useFollowingOrUnfollowingUser } from '@/services'
+import { StateModalFollowingFollowersType } from '@/types'
 import { Avatar, GlobalButton, Spinner } from '@/ui'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
@@ -23,7 +26,8 @@ export const UserProfilePage = () => {
   })
 
   const { t } = useTranslation()
-
+  const { onCloseClick, modalOpen, setModalOpen } =
+    useOpenCloseModal<StateModalFollowingFollowersType>({})
   const onRedirectToSetting = () => push(routes.sideBar.messenger)
 
   const followOrUnfollow = userProfileData.isFollowing
@@ -64,9 +68,11 @@ export const UserProfilePage = () => {
                     publications={userProfileData.publicationsCount}
                     followers={userProfileData.followersCount}
                     following={userProfileData.followingCount}
+                    setModalOpen={setModalOpen}
                   />
                 </div>
               </div>
+              <ModalManagerFollowingFollowers isModalOpen={modalOpen} onClose={onCloseClick} />
               <DuplicateUserNameDescription
                 userName={userProfileData.userName}
                 aboutMe={userProfileData.aboutMe}
