@@ -18,11 +18,16 @@ import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const UserProfilePage = () => {
   const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
-  const { userProfileData, userProfileAvatar, isLoading, refetch, isRefetching } =
-    useGetUserProfileData(userNameQuery)
+  const {
+    userProfileData,
+    userProfileAvatar,
+    isLoadingUserProfile,
+    isRefetchingUserProfile,
+    refetchUserProfile,
+  } = useGetUserProfileData(userNameQuery)
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     userIdQuery,
-    refetch,
+    refetch: refetchUserProfile,
   })
 
   const { t } = useTranslation()
@@ -36,7 +41,7 @@ export const UserProfilePage = () => {
     <div className="flex w-full">
       <main className="pr-16 grow">
         <div className="flex w-full text-light-100 gap-9">
-          {(isLoading && (
+          {(isLoadingUserProfile && (
             <div className="flex justify-center h-full w-full align-middle">
               <Spinner />
             </div>
@@ -48,7 +53,7 @@ export const UserProfilePage = () => {
                   <div className="font-bold">{userProfileData.userName}</div>
                   <div className="flex gap-3">
                     <FollowUnfollowButton
-                      isRefetching={isRefetching}
+                      isRefetching={isRefetchingUserProfile}
                       useFollowUnfollowUser={useFollowUnfollowUser}
                       followOrUnfollow={followOrUnfollow}
                       isLoadingButton={isLoadingButton}

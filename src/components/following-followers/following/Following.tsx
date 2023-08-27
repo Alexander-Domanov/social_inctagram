@@ -48,13 +48,13 @@ export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponents
       </div>
       <ScrollArea className="w-full h-[400px]">
         {followingData?.pages
-          ? followingData.pages.map((page, index) => (
+          ? followingData.pages.map((users, index) => (
               <FollowingUsers
                 key={index}
                 isRefetching={isRefetchingFollowing}
                 isLoadingButton={isLoadingButton}
                 useFollowUnfollowUser={useFollowUnfollowUser}
-                items={page.items}
+                items={users.items}
               />
             ))
           : 'Not found'}

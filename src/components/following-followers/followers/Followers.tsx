@@ -51,14 +51,14 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
       <ScrollArea className="max-w-full h-[400px]">
         {dataFollowersItems?.pages
           ? dataFollowersItems.pages.map(
-              (page, index) =>
-                page.items && (
+              (users, index) =>
+                users.items && (
                   <FollowersUsers
                     key={index}
                     isRefetching={isRefetchingFollowers}
                     isLoadingButton={isLoadingButton}
                     useFollowUnfollowUser={useFollowUnfollowUser}
-                    items={page.items}
+                    items={users.items}
                     deleteUserCallBack={deleteUserCallBack}
                   />
                 )
