@@ -14,6 +14,7 @@ export const en = {
       buttonProfileSettings: 'Profile Settings',
       following: 'Following',
       followers: 'Followers',
+      delete: 'Delete',
       Publications: 'Publications',
     },
     settingsProfile: {

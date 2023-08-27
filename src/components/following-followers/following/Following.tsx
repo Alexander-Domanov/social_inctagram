@@ -5,6 +5,7 @@ import { useSearch } from '@/common/hooks/useSearch'
 import { FollowingUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { ModalWithContent } from '@/components/modals'
+import { useTranslation } from '@/components/translation'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
 import { useMeQuery } from '@/services/hookMe'
@@ -15,6 +16,7 @@ export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponents
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
   const { search, searchInput, setSearchInput } = useSearch()
   const { data } = useMeQuery()
+  const { t } = useTranslation()
   const myUserName = data?.data.userName as string | null
   const {
     followingData,
@@ -41,11 +43,16 @@ export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponents
   }
 
   return (
-    <ModalWithContent size="medium" isOpen={isModalOpen} onClose={onClose} title={'Following'}>
+    <ModalWithContent
+      size="medium"
+      isOpen={isModalOpen}
+      onClose={onClose}
+      title={t.profile.profilePage.following}
+    >
       <div className={'w-full p-5'}>
         <InputSearch
           className="h-9 w-full"
-          placeholder={'Search'}
+          placeholder={t.search.searchInput}
           value={searchInput}
           callBackSearch={setSearchInput}
         />

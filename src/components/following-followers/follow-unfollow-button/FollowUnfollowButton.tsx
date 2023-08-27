@@ -14,7 +14,7 @@ export const FollowUnfollowButton = ({
 
   return (
     <GlobalButton
-      className={'text-base h-9 max-w-full bg-dark-300 font-semibold'}
+      className={'text-base mr-10 h-9 max-w-[140px] bg-dark-300 font-semibold'}
       type={'button'}
       variant={followOrUnfollow ? 'transparent' : 'default'}
       callback={() => handleToggleSubscriptionsCallBack()}

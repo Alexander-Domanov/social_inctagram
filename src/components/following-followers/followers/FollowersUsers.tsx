@@ -37,13 +37,17 @@ export const FollowersUsers = ({
             avatartSrc={user.avatars?.thumbnail.url || null}
             userName={user.userName}
           />
-          <FollowUnfollowButton
-            key={index}
-            followOrUnfollow={user.isFollowing}
-            handleToggleSubscriptionsCallBack={() => handleToggleSubscriptionsCallBack(user.userId)}
-            isLoadingButton={currentUserId === user.userId && isLoadingButton}
-            isRefetching={currentUserId === user.userId && isRefetching}
-          />
+          {user.isFollowing && (
+            <FollowUnfollowButton
+              key={index}
+              followOrUnfollow={user.isFollowing}
+              handleToggleSubscriptionsCallBack={() =>
+                handleToggleSubscriptionsCallBack(user.userId)
+              }
+              isLoadingButton={currentUserId === user.userId && isLoadingButton}
+              isRefetching={currentUserId === user.userId && isRefetching}
+            />
+          )}
           <DeleteUserButton
             disabled={user.userId === currentDeleteUserId && isLoadingDeleteUser}
             userId={user.userId}
