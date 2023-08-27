@@ -14,7 +14,7 @@ export const useGetComments = (postId: number | null) => {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['comments', postId],
+    queryKey: ['comments', { postId }],
     queryFn: ({ pageParam = 1 }) => getPostComments(postId, pageParam),
     getNextPageParam: lastPage => {
       return lastPage.page * lastPage.pageSize < lastPage.totalCount ? lastPage.page + 1 : undefined
