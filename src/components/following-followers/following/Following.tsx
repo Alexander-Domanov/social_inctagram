@@ -5,12 +5,12 @@ import { useSearch } from '@/common/hooks/useSearch'
 import { FollowingUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { ModalWithContent } from '@/components/modals'
+import { useTranslation } from '@/components/translation'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
 import { useMeQuery } from '@/services/hookMe'
 import { FollowingFollowersComponentsType } from '@/types'
 import { InputSearch } from '@/ui'
-import {useTranslation} from "@/components/translation";
 
 export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
