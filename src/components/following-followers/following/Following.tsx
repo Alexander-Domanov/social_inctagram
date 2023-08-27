@@ -10,11 +10,13 @@ import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
 import { useMeQuery } from '@/services/hookMe'
 import { FollowingFollowersComponentsType } from '@/types'
 import { InputSearch } from '@/ui'
+import {useTranslation} from "@/components/translation";
 
 export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
   const { search, searchInput, setSearchInput } = useSearch()
   const { data } = useMeQuery()
+  const { t } = useTranslation()
   const myUserName = data?.data.userName as string | null
   const {
     followingData,
@@ -41,11 +43,16 @@ export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponents
   }
 
   return (
-    <ModalWithContent size="medium" isOpen={isModalOpen} onClose={onClose} title={'Following'}>
+    <ModalWithContent
+      size="medium"
+      isOpen={isModalOpen}
+      onClose={onClose}
+      title={t.profile.profilePage.following}
+    >
       <div className={'w-full p-5'}>
         <InputSearch
           className="h-9 w-full"
-          placeholder={'Search'}
+          placeholder={t.search.searchInput}
           value={searchInput}
           callBackSearch={setSearchInput}
         />

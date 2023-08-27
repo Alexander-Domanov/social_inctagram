@@ -16,6 +16,7 @@ export const ru: LocaleType = {
       buttonProfileSettings: 'Настройки профиля',
       following: 'Подписки',
       followers: 'Подписчики',
+      delete: 'Удалить',
       Publications: 'Публикации',
     },
     settingsProfile: {

@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { settings_profile_tabs, useLocalStorage } from '@/common'
 import { TabsTitle } from '@/components/account'
+import { useTranslation } from '@/components/translation'
 import { ArrowBack } from '@/modules/my-profile-modules/settings-edit-profile-module/utils/ArrowBack'
 import { routes } from '@/routing/router'
 
@@ -13,7 +14,7 @@ export const SettingsProfile = () => {
     settings_profile_tabs[0].label
   )
   const [activeTab, setActiveTab] = useState('')
-
+  const { t } = useTranslation()
   const onChangeTab = (tabLabel: string | undefined) => {
     setActiveTab(tabLabel ?? '')
 
@@ -33,7 +34,9 @@ export const SettingsProfile = () => {
     <div className="relative w-full">
       <Link href={routes.sideBar.profile} className="flex pb-5 w-full hidingElementMoreMobile">
         <ArrowBack />
-        <span className="text-lg m-auto font-bold leading-6 text-light-100">Profile Settings</span>
+        <span className="text-lg m-auto font-bold leading-6 text-light-100">
+          {t.profile.profilePage.buttonProfileSettings}
+        </span>
       </Link>
       <TabsTitle tabs={settings_profile_tabs} setActiveTab={onChangeTab} activeTab={activeTab} />
       {tabsLayout}

@@ -3,6 +3,7 @@ import React from 'react'
 import { clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
+import { useTranslation } from '@/components/translation'
 import { GlobalButton } from '@/ui'
 
 export const DeleteUserButton = ({
@@ -17,6 +18,7 @@ export const DeleteUserButton = ({
   const className = {
     disabled: clsx(!disabled && 'linkText', disabled && 'text-light-900'),
   }
+  const { t } = useTranslation()
 
   return (
     <>
@@ -34,7 +36,7 @@ export const DeleteUserButton = ({
               className.disabled
             )}
           >
-            Delete
+            {t.profile.profilePage.delete}
           </span>
         </GlobalButton>
       </div>
