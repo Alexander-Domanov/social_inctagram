@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useInViewScrollEffect } from '@/common'
 import { useSearch } from '@/common/hooks/useSearch'
-import { FollowingUsers } from '@/components/following-followers/following/FollowingUsers'
+import { FollowingUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { ModalWithContent } from '@/components/modals'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -12,6 +12,7 @@ import { FollowingFollowersComponentsType } from '@/types'
 import { InputSearch } from '@/ui'
 
 export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null)
   const { search, searchInput, setSearchInput } = useSearch()
   const { data } = useMeQuery()
   const myUserName = data?.data.userName as string | null
@@ -34,6 +35,10 @@ export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponents
     hasNextPage: hasNextPageFollowing,
     fetchNextPage: fetchNextPageFollowing,
   })
+  const handleToggleSubscriptionsCallBack = (userId: number) => {
+    useFollowUnfollowUser(userId.toString())
+    setCurrentUserId(userId)
+  }
 
   return (
     <ModalWithContent size="medium" isOpen={isModalOpen} onClose={onClose} title={'Following'}>
@@ -52,8 +57,9 @@ export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponents
                 key={index}
                 isRefetching={isRefetchingFollowing}
                 isLoadingButton={isLoadingButton}
-                useFollowUnfollowUser={useFollowUnfollowUser}
+                handleToggleSubscriptionsCallBack={handleToggleSubscriptionsCallBack}
                 items={users.items}
+                currentUserId={currentUserId}
               />
             ))
           : 'Not found'}

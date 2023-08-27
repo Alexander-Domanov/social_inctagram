@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
-import { userQueryType } from '@/modules/user-profile-module'
 import { postUserFollowingUnfollowing } from '@/modules/user-profile-module/api/postUserFollowingUnfollowing'
+import { userQueryType } from '@/types'
 
 export const useFollowingOrUnfollowingUser = ({
   userIdQuery,

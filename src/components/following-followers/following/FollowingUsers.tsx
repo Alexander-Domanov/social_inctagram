@@ -5,10 +5,16 @@ import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/t
 
 type FollowersUsersProps = {
   items: FollowingsFollowersType[]
-} & Omit<FollowUnfollowButtonPropsInterface, 'followOrUnfollow'>
+  handleToggleSubscriptionsCallBack: (userId: number) => void
+  currentUserId: number | null
+} & Omit<
+  FollowUnfollowButtonPropsInterface,
+  'followOrUnfollow' | 'handleToggleSubscriptionsCallBack'
+>
 export const FollowingUsers = ({
   items,
-  useFollowUnfollowUser,
+  currentUserId,
+  handleToggleSubscriptionsCallBack,
   isRefetching,
   isLoadingButton,
 }: FollowersUsersProps) => {
@@ -24,11 +30,9 @@ export const FollowingUsers = ({
           <FollowUnfollowButton
             key={index}
             followOrUnfollow={user.isFollowing}
-            useFollowUnfollowUser={() =>
-              useFollowUnfollowUser ? useFollowUnfollowUser(user.userId.toString()) : ''
-            }
-            isLoadingButton={isLoadingButton}
-            isRefetching={isRefetching}
+            handleToggleSubscriptionsCallBack={() => handleToggleSubscriptionsCallBack(user.userId)}
+            isLoadingButton={currentUserId === user.userId && isLoadingButton}
+            isRefetching={currentUserId === user.userId && isRefetching}
           />
         </div>
       ))}

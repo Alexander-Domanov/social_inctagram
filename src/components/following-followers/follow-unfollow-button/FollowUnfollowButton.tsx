@@ -1,12 +1,11 @@
 import React from 'react'
 
-import { handleToggleSubscriptionCallBack } from '@/common'
 import { useTranslation } from '@/components/translation'
 import { FollowUnfollowButtonPropsInterface } from '@/types'
 import { GlobalButton, Spinner } from '@/ui'
 
 export const FollowUnfollowButton = ({
-  useFollowUnfollowUser,
+  handleToggleSubscriptionsCallBack,
   isLoadingButton,
   isRefetching,
   followOrUnfollow,
@@ -18,7 +17,7 @@ export const FollowUnfollowButton = ({
       className={'text-base h-9 max-w-full bg-dark-300 font-semibold'}
       type={'button'}
       variant={followOrUnfollow ? 'transparent' : 'default'}
-      callback={() => handleToggleSubscriptionCallBack({ useFollowUnfollowUser })}
+      callback={() => handleToggleSubscriptionsCallBack()}
       disabled={isLoadingButton}
     >
       {isRefetching ? (

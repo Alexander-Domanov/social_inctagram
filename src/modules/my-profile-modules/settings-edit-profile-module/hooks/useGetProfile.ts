@@ -14,7 +14,7 @@ export const useGetProfile = () => {
     followers: profileData?.followersCount || 0,
     publications: profileData?.publicationsCount || 0,
   }
-  const profileAvatar = profileData?.avatars?.medium || ''
+  const profileAvatar = profileData?.avatars?.medium?.url || ''
 
   return {
     profileData: initialProfileData,

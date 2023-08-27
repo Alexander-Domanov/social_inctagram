@@ -1,9 +1,11 @@
 import React from 'react'
 
+import { useGetQueryUserNameUserId } from '@/common'
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
-import { useGetQueryUserNameUserId } from '@/common/hooks/use-get-query-userName-userId/useGetQueryParamsUser'
-import { ModalManagerFollowingFollowers } from '@/components/following-followers'
-import { FollowUnfollowButton } from '@/components/following-followers/follow-unfollow-button/FollowUnfollowButton'
+import {
+  FollowUnfollowButton,
+  ModalManagerFollowingFollowers,
+} from '@/components/following-followers'
 import {
   DuplicateUserNameDescription,
   InfoAboutProfilePage,
@@ -36,6 +38,12 @@ export const UserProfilePage = () => {
   const onRedirectToSetting = () => push(routes.sideBar.messenger)
 
   const followOrUnfollow = userProfileData.isFollowing
+  const userId = userProfileData.id || null
+  const handleToggleSubscriptionsCallBack = (userId: number | null) => {
+    if (userId) {
+      useFollowUnfollowUser(userId.toString())
+    }
+  }
 
   return (
     <div className="flex w-full">
@@ -54,7 +62,9 @@ export const UserProfilePage = () => {
                   <div className="flex gap-3">
                     <FollowUnfollowButton
                       isRefetching={isRefetchingUserProfile}
-                      useFollowUnfollowUser={useFollowUnfollowUser}
+                      handleToggleSubscriptionsCallBack={() =>
+                        handleToggleSubscriptionsCallBack(userId)
+                      }
                       followOrUnfollow={followOrUnfollow}
                       isLoadingButton={isLoadingButton}
                     />
