@@ -42,7 +42,7 @@ export interface Post {
       thumbnail: Image
       medium: Image
     }
-  }
+  }[]
 }
 
 interface GetPostsResponse {

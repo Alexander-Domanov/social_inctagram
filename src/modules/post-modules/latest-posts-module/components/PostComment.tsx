@@ -58,12 +58,6 @@ export const PostComment: FC<Props> = ({ comment }) => {
 
             <button className="font-semibold">Answer</button>
           </div>
-
-          <PostCommentAnswers
-            answerCount={comment.answerCount}
-            postId={comment.postId}
-            commentId={comment.id}
-          />
         </div>
 
         <div>
@@ -75,6 +69,12 @@ export const PostComment: FC<Props> = ({ comment }) => {
           </button>
         </div>
       </div>
+
+      <PostCommentAnswers
+        answerCount={comment.answerCount}
+        postId={comment.postId}
+        commentId={comment.id}
+      />
     </div>
   )
 }

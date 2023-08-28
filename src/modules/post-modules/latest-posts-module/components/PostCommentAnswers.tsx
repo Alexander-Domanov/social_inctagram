@@ -19,7 +19,7 @@ export const PostCommentAnswers: FC<Props> = ({ answerCount, commentId, postId }
   if (!answerCount) return null
 
   return (
-    <div className="mt-2 flex flex-col">
+    <div className="mt-2 ml-12 flex flex-col">
       <div
         className="cursor-pointer inline-flex items-center text-light-900 text-xs font-semibold select-none"
         onClick={() => setIsOpen(prev => !prev)}
