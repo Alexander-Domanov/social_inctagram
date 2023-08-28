@@ -9,19 +9,19 @@ import { v1 } from 'uuid'
 
 import plusAdd from '@/assets/icons/plus-square.svg'
 import placeholder from '@/assets/images/img-placeholder.png'
+import { ModalCreatePostType } from '@/modules/create-post-module'
 import { IPhoto, useImageSelector } from '@/store/storeSelectorPhoto'
 import { GlobalButton } from '@/ui'
-import { modalType } from 'src/modules/create-post-module'
 
 type PropsType = {
   maxImageSize?: number
   showButton?: boolean
   placeholderShow?: boolean
   onAdd?: (photos: IPhoto[]) => void
-} & Partial<modalType>
+} & Partial<ModalCreatePostType>
 
 export const PhotoSelector = ({
-  setModal,
+  setModalOpen,
   isModalOpen,
   showButton = true,
   placeholderShow = true,
@@ -69,8 +69,8 @@ export const PhotoSelector = ({
       if (onAdd && typeof onAdd === 'function') {
         onAdd(newImages)
       }
-      if (isModalOpen && setModal) {
-        setModal('crop-editor')
+      if (isModalOpen && setModalOpen) {
+        setModalOpen('crop-editor')
       }
     } else {
       setError('You can upload from 1 to 10 images')

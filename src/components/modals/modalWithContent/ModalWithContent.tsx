@@ -1,9 +1,15 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 
 import { FaTimes } from 'react-icons/fa'
 import Modal from 'react-modal'
 
 import styles from './ModalWithContent.module.scss'
+
+import { cn } from '@/common/utils/cn'
+
+const ButtonSizeTypes = ['small', 'medium'] as const
+
+export type ButtonSizeType = (typeof ButtonSizeTypes)[number]
 
 interface Props {
   isOpen: boolean
@@ -14,6 +20,8 @@ interface Props {
   children: any
   confirmButtonText?: string
   declineButtonText?: string
+  className?: string
+  size?: ButtonSizeType
 }
 
 export const ModalWithContent: FC<Props> = ({
@@ -25,6 +33,8 @@ export const ModalWithContent: FC<Props> = ({
   children,
   confirmButtonText,
   declineButtonText,
+  className,
+  size = 'small',
 }) => {
   return (
     <Modal
@@ -32,7 +42,10 @@ export const ModalWithContent: FC<Props> = ({
       onRequestClose={onClose}
       ariaHideApp={false}
       overlayClassName={styles.modalOverlay}
-      className={styles.modal}
+      className={cn(styles.modal, className, {
+        'max-w-[440px]': size === 'small',
+        'max-w-[644px]': size === 'medium',
+      })}
     >
       <div className={styles.modalHeader}>
         <div className={styles.modalTitle}>{title}</div>

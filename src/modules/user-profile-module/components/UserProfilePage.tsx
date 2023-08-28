@@ -1,81 +1,106 @@
 import React from 'react'
 
-import { InfoAboutProfilePage } from '@/components/info-about-profile-page'
-import { useTranslation } from '@/components/translation'
+import { useGetQueryUserNameUserId } from '@/common'
+import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
+import { ModalManagerFollowingFollowers } from '@/components/following-followers'
 import {
-  useFollowUnfollow,
-  useGetQueryParamsUser,
-  useGetUserProfileData,
-} from '@/modules/user-profile-module'
-import { handleToggleSubscriptionCallBack } from '@/modules/user-profile-module/custom/utils/handleToggleSubscriptionCallBack'
+  DuplicateUserNameDescription,
+  InfoAboutProfilePage,
+} from '@/components/info-about-profile-page'
+import { useTranslation } from '@/components/translation'
+import { SkeletonProfilePage } from '@/modules/my-profile-modules/profile-page-module'
+import { useGetUserProfileData } from '@/modules/user-profile-module'
+import { UserProfileButtons } from '@/modules/user-profile-module/components/UserProfileButtons'
 import { routes } from '@/routing/router'
-import { Avatar, GlobalButton, Spinner } from '@/ui'
+import { useFollowingOrUnfollowingUser } from '@/services'
+import { StateModalFollowingFollowersType } from '@/types'
+import { Avatar } from '@/ui'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const UserProfilePage = () => {
-  const { push, userIdQuery, userNameQuery } = useGetQueryParamsUser()
-  const { userProfileData, userProfileAvatar, isLoading, refetch, isRefetching } =
+  const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
+  const { userProfileData, userProfileAvatar, isRefetchingUserProfile, refetchUserProfile } =
     useGetUserProfileData(userNameQuery)
-  const { followUnfollowUser, isLoading: isLoadingButton } = useFollowUnfollow({
+  const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     userIdQuery,
-    refetch,
+    refetch: refetchUserProfile,
   })
 
   const { t } = useTranslation()
-
+  const { onCloseClick, modalOpen, setModalOpen } =
+    useOpenCloseModal<StateModalFollowingFollowersType>({})
   const onRedirectToSetting = () => push(routes.sideBar.messenger)
 
-  const followOrUnfollow = userProfileData.isFollowing
+  const isFollowing = userProfileData.isFollowing
+  const userId = userProfileData.id || null
+  const handleToggleSubscriptionsCallBack = (userId: number | null) => {
+    if (userId) {
+      useFollowUnfollowUser(userId.toString())
+    }
+  }
 
   return (
     <div className="flex w-full">
-      <main className="pr-16 grow">
-        <div className="flex text-light-100 gap-9">
-          {(isLoading && (
-            <div className="flex justify-center h-full w-full align-middle">
-              <Spinner />
-            </div>
-          )) || (
-            <>
-              <Avatar src={userProfileAvatar} alt={'photo'} />
+      <main className="grow">
+        {!isRefetchingUserProfile ? (
+          <>
+            {' '}
+            <div className="flex xsm:gap-0 sm:gap-3 sm:items-center text-light-100 gap-9">
+              <Avatar
+                src={userProfileAvatar}
+                alt={'photo'}
+                className={
+                  'xsm:w-[72px] xsm:mr-7 xsm:h-[72px] sm:w-[120px] sm:h-[120px] md:w-[140px] md:h-[140px]'
+                }
+              />
               <div className="flex w-full flex-col gap-5">
-                <div className="flex flex-wrap justify-between">
-                  <div className="font-bold">{userProfileData.userName}</div>
-                  <div className="flex gap-3">
-                    <GlobalButton
-                      className={'text-base bg-dark-300 font-semibold'}
-                      type={'button'}
-                      variant={followOrUnfollow ? 'transparent' : 'default'}
-                      callback={() => handleToggleSubscriptionCallBack({ followUnfollowUser })}
-                      disabled={isLoadingButton}
-                    >
-                      {isRefetching ? (
-                        <Spinner />
-                      ) : (
-                        <span>
-                          {followOrUnfollow
-                            ? t.userProfile.buttonUnfollow
-                            : t.userProfile.buttonFollow}
-                        </span>
-                      )}
-                    </GlobalButton>
-                    <GlobalButton
-                      className={'text-base bg-dark-300 font-semibold'}
-                      type={'button'}
-                      variant={'grey'}
-                      callback={onRedirectToSetting}
-                    >
-                      <span>{t.userProfile.buttonMessage}</span>
-                    </GlobalButton>
+                <div className="xsm:flex-col-reverse  sm:gap-5 md:gap-5 lg:gap-5 gap-5 w-full flex flex-wrap justify-between">
+                  <div className="lg:flex-col lg:gap-5 w-full flex justify-between items-center">
+                    <div className="font-bold flex w-full break-all xsm:hidden sm:hidden md:hidden">
+                      {userProfileData.userName}
+                    </div>
+                    <div className="xsm:hidden sm:hidden md:flex-col flex w-full gap-3">
+                      <UserProfileButtons
+                        isFollowing={isFollowing}
+                        onRedirectToSetting={onRedirectToSetting}
+                        isRefetchingUserProfile={isRefetchingUserProfile}
+                        isLoadingButton={isLoadingButton}
+                        handleToggleSubscriptionsCallBack={() =>
+                          handleToggleSubscriptionsCallBack(userId)
+                        }
+                      />
+                    </div>
                   </div>
+                  <InfoAboutProfilePage
+                    t={t}
+                    aboutMe={userProfileData.aboutMe}
+                    publications={userProfileData.publicationsCount}
+                    followers={userProfileData.followersCount}
+                    following={userProfileData.followingCount}
+                    setModalOpen={setModalOpen}
+                  />
                 </div>
-                <InfoAboutProfilePage t={t} aboutMe={userProfileData.aboutMe} />
               </div>
-            </>
-          )}
-        </div>
-
-        <LatestPosts userProfileId={userProfileData.id} />
+            </div>
+            <ModalManagerFollowingFollowers isModalOpen={modalOpen} onClose={onCloseClick} />
+            <DuplicateUserNameDescription
+              userName={userProfileData.userName}
+              aboutMe={userProfileData.aboutMe}
+            />
+            <div className="md:hidden lg:hidden xl:hidden exl:hidden flex w-full gap-3 flex-col">
+              <UserProfileButtons
+                isFollowing={isFollowing}
+                onRedirectToSetting={onRedirectToSetting}
+                isRefetchingUserProfile={isRefetchingUserProfile}
+                isLoadingButton={isLoadingButton}
+                handleToggleSubscriptionsCallBack={() => handleToggleSubscriptionsCallBack(userId)}
+              />
+            </div>
+            <LatestPosts userProfileId={userProfileData.id} />
+          </>
+        ) : (
+          <SkeletonProfilePage />
+        )}
       </main>
     </div>
   )

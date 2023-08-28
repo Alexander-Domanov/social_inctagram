@@ -3,15 +3,14 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { ModalWithContent } from '@/components/modals'
-import { modalType } from '@/modules/create-post-module'
+import { ModalCreatePostType } from '@/modules/create-post-module'
 import { getDraftPost } from '@/modules/create-post-module/indexedDB/getDraftPost'
 import { indexedDbPostDraft } from '@/modules/create-post-module/indexedDB/indexedDbPostDraft.repository'
 import { PhotoSelector } from '@/modules/my-profile-modules/avatar-module'
 import { useImageSelector } from '@/store/storeSelectorPhoto'
 import { GlobalButton } from '@/ui'
 
-type PropsType = modalType
-export const PhotoUploader = ({ isModalOpen, onClose, setModal }: PropsType) => {
+export const PhotoUploader = ({ isModalOpen, onClose, setModalOpen }: ModalCreatePostType) => {
   const [imageDbCount, setImageDbCount] = useState(0)
 
   const { replace, pathname } = useRouter()
@@ -25,7 +24,7 @@ export const PhotoUploader = ({ isModalOpen, onClose, setModal }: PropsType) => 
 
     await setImageSelector(photoArray)
     await setDescription(description)
-    setModal('add-full-post')
+    setModalOpen('add-full-post')
   }
 
   const onCloseClick = () => {
@@ -46,7 +45,7 @@ export const PhotoUploader = ({ isModalOpen, onClose, setModal }: PropsType) => 
   return (
     <ModalWithContent isOpen={isModalOpen} onClose={onCloseClick} title={'Add photo'}>
       <>
-        <PhotoSelector isModalOpen={isModalOpen} setModal={setModal} maxImageSize={5} />
+        <PhotoSelector isModalOpen={isModalOpen} setModalOpen={setModalOpen} maxImageSize={5} />
         {imageDbCount > 0 && (
           <GlobalButton type={'button'} callback={onOpenDraftClick}>
             Open draft

@@ -16,6 +16,7 @@ export const uk: LocaleType = {
       buttonProfileSettings: 'Налаштування профілю',
       following: 'Підписки',
       followers: 'Підписники',
+      delete: 'Видалити',
       Publications: 'Публікації',
     },
     settingsProfile: {

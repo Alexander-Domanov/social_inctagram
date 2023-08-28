@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'front-main',
+      name: 'cygan.lol',
       script: 'node_modules/next/dist/bin/next',
       args: 'start',
       restartDelay: 1000,
