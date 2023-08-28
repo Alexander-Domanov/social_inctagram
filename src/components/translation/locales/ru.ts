@@ -49,5 +49,11 @@ export const ru: LocaleType = {
     buttonFollow: 'Подписаться',
     buttonUnfollow: 'Отписаться',
   },
-  search: { searchTitle: 'Поиск', searchInput: 'Поиск', recentRequests: 'Недавние запросы' },
+  search: {
+    searchTitle: 'Поиск',
+    searchInput: 'Поиск',
+    recentRequests: 'Недавние запросы',
+    noRequests: 'Нет недавних запросов',
+    placeEmpty: 'Упс! Здесь выглядит пусто!',
+  },
 }

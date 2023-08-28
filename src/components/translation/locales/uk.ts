@@ -49,5 +49,11 @@ export const uk: LocaleType = {
     buttonFollow: 'Підписатися',
     buttonUnfollow: 'Відписатися',
   },
-  search: { searchTitle: 'Пошук', searchInput: 'Пошук', recentRequests: 'Останні запити' },
+  search: {
+    searchTitle: 'Пошук',
+    searchInput: 'Пошук',
+    recentRequests: 'Останні запити',
+    noRequests: 'Немає останніх запитів',
+    placeEmpty: 'Ой! Тут виглядає порожньо!',
+  },
 }
