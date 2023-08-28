@@ -4,7 +4,7 @@ import { useInViewScrollEffect } from '@/common'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { useTranslation } from '@/components/translation'
 import { useUsersGetSearchData } from '@/modules/search-module/custom/hooks/useGetSearchData'
-import { InputSearch, Spinner } from '@/ui'
+import { InputSearch } from '@/ui'
 import { useRedirectToUserProfilePage, UserFound, useSearch } from 'src/modules/search-module'
 
 export const SearchUsers = () => {
