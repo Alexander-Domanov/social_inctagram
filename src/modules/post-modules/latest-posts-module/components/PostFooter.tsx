@@ -16,7 +16,6 @@ export const PostFooter: FC = () => {
   )
 
   const onLikeClick = () => {
-    console.log('on like click')
     mutate()
   }
 
