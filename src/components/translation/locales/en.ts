@@ -51,6 +51,8 @@ export const en = {
     searchTitle: 'Search',
     searchInput: 'Search',
     recentRequests: 'Recent requests',
+    noRequests: 'No recent requests',
+    placeEmpty: 'Oops! This place looks empty!',
   },
 }
 

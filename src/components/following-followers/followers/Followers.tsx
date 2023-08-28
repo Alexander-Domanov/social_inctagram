@@ -15,6 +15,7 @@ import { InputSearch } from '@/ui'
 export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
   const { search, searchInput, setSearchInput } = useSearch()
   const { data } = useMeQuery()
+
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
   const [currentDeleteUserId, setCurrentDeleteUserId] = useState<number | null>(null)
   const { t } = useTranslation()
@@ -38,7 +39,6 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
   const { useDeleteFollowerUser, isLoadingDeleteUser } = useDeleteFollower({
     refetch: refetchFollowers,
   })
-
   const { ref } = useInViewScrollEffect({
     hasNextPage: hasNextPageFollowers,
     fetchNextPage: fetchNextPageFollowers,
