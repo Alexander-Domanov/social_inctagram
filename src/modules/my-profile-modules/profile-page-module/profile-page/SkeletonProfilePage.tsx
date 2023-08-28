@@ -10,10 +10,10 @@ import { Skeleton } from '@/ui/skeletons/Skeleton'
 export const SkeletonProfilePage = () => {
   return (
     <>
-      <div className="flex xsm:gap-0 sm:gap-3 sm:items-center text-light-100 gap-9">
+      <div className="flex w-full xsm:gap-0 sm:gap-3 sm:items-center text-light-100 gap-9">
         <Skeleton
           classes={
-            'xsm:w-[72px] xsm:mr-7 xsm:h-[72px] sm:w-[120px] sm:h-[120px] md:w-[140px] md:h-[140px] w-[204px] h-[204px] rounded-[50%] '
+            'xsm:w-[72px] xsm:mr-7 xsm:h-[72px] sm:w-[90px] sm:h-[90px] md:w-[120px] md:h-[120px] lg:w-[140px] lg:h-[140px] w-[200px] h-[200px] rounded-[50%] '
           }
         />
         <div className="flex w-full flex-col gap-5">

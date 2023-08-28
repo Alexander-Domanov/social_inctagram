@@ -17,7 +17,7 @@ export const SkeletonInfoAboutProfilePage = () => {
         </div>
       </div>
       <div className="w-full xsm:hidden sm:hidden md:hidden">
-        <Skeleton classes={'w-[730px] h-[73px]'} />
+        <Skeleton classes={'w-full h-[73px]'} />
       </div>
     </>
   )

@@ -37,7 +37,7 @@ export const ProfilePage = () => {
   return (
     <div className="flex w-full">
       <main className="grow">
-        {!isFetchingProfileData ? (
+        {!true ? (
           <>
             <div className="flex xsm:gap-0 sm:gap-3 sm:items-center text-light-100 gap-9">
               <Avatar
