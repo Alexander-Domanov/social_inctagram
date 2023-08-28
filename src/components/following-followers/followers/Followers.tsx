@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import { useInViewScrollEffect } from '@/common'
-import { useModal } from '@/common/hooks/useModal'
 import { useSearch } from '@/common/hooks/useSearch'
 import { FollowersUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
