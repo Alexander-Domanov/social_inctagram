@@ -4,7 +4,7 @@ import { useInViewScrollEffect } from '@/common'
 import { useSearch } from '@/common/hooks/useSearch'
 import { FollowersUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
-import { ModalWithContent } from '@/components/modals'
+import { Confirm, ModalWithContent } from '@/components/modals'
 import { useTranslation } from '@/components/translation'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useDeleteFollower, useFollowingOrUnfollowingUser, useGetFollowers } from '@/services'
@@ -47,9 +47,10 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
     useFollowUnfollowUser(userId.toString())
     setCurrentUserId(userId)
   }
-  const deleteUserCallBack = (userId: number) => {
-    useDeleteFollowerUser(userId)
-    setCurrentDeleteUserId(userId)
+  const deleteUserCallBack = () => {
+    if (currentDeleteUserId) {
+      useDeleteFollowerUser(currentDeleteUserId)
+    }
   }
 
   return (
@@ -80,8 +81,9 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
                     handleToggleSubscriptionsCallBack={handleToggleSubscriptionsCallBack}
                     currentUserId={currentUserId}
                     items={users.items}
-                    deleteUserCallBack={deleteUserCallBack}
+                    setCurrentDeleteUserId={setCurrentDeleteUserId}
                     currentDeleteUserId={currentDeleteUserId}
+                    deleteUserCallBack={deleteUserCallBack}
                   />
                 )
             )

@@ -2,18 +2,12 @@ import { useState } from 'react'
 
 import { UseMutateFunction } from 'react-query'
 
-export const useModal = () => {
+export const useModal = ({ callBack }: { callBack: () => void }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const onConfirmModal = <T>({
-    onConfirmAction,
-    value,
-  }: {
-    onConfirmAction: UseMutateFunction<any, Error, T, unknown>
-    value: T | null
-  }) => {
+  const onConfirmModal = ({ value }: { value: number }) => {
     if (value) {
-      onConfirmAction(value)
+      callBack()
     }
     setIsModalOpen(false)
   }

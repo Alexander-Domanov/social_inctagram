@@ -1,19 +1,22 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 
+import { useModal } from '@/common/hooks/useModal'
 import {
   DeleteUserButton,
   FollowUnfollowButton,
   URLUsernameForModal,
 } from '@/components/following-followers'
+import { Confirm } from '@/components/modals'
 import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
 
 type FollowingUsersProps = {
   items: FollowingsFollowersType[]
-  deleteUserCallBack: (userId: number) => void
+  setCurrentDeleteUserId: Dispatch<SetStateAction<number | null>>
   currentUserId: number | null
   isLoadingDeleteUser: boolean
   handleToggleSubscriptionsCallBack: (userId: number) => void
-  currentDeleteUserId: number | null
+  deleteUserCallBack: () => void
+  currentDeleteUserId: any
 } & Omit<FollowUnfollowButtonPropsInterface, 'isFollowing' | 'handleToggleSubscriptionsCallBack'>
 
 export const FollowersUsers = ({
@@ -24,8 +27,13 @@ export const FollowersUsers = ({
   handleToggleSubscriptionsCallBack,
   isRefetching,
   isLoadingButton,
+  setCurrentDeleteUserId,
   deleteUserCallBack,
 }: FollowingUsersProps) => {
+  const { isModalOpen, setIsModalOpen, onConfirmModal, onDeclineModal } = useModal({
+    callBack: () => deleteUserCallBack(),
+  })
+
   return (
     <>
       {items.map((user: FollowingsFollowersType, index) => (
@@ -45,10 +53,19 @@ export const FollowersUsers = ({
               isRefetching={currentUserId === user.userId && isRefetching}
             />
           )}
+          <Confirm
+            isOpen={isModalOpen}
+            onConfirm={() => onConfirmModal({ value: user.userId })}
+            onDecline={onDeclineModal}
+            onClose={onDeclineModal}
+            title="Delete Following"
+            text={`Do you really want to delete a Following "${user.userName}"?`}
+          />
           <DeleteUserButton
             disabled={user.userId === currentDeleteUserId && isLoadingDeleteUser}
             userId={user.userId}
-            deleteUserCallBack={deleteUserCallBack}
+            setCurrentDeleteUserId={setCurrentDeleteUserId}
+            setIsModalOpen={setIsModalOpen}
           />
         </div>
       ))}
