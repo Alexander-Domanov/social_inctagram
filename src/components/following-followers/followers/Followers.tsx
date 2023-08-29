@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { useInViewScrollEffect } from '@/common'
+import { useGetQueryUserNameUserId, useInViewScrollEffect } from '@/common'
 import { useSearch } from '@/common/hooks/useSearch'
 import { FollowersUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
@@ -8,18 +8,17 @@ import { ModalWithContent } from '@/components/modals'
 import { useTranslation } from '@/components/translation'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useDeleteFollower, useFollowingOrUnfollowingUser, useGetFollowers } from '@/services'
-import { useMeQuery } from '@/services/hookMe'
+import { useUserStore } from '@/store'
 import { FollowingFollowersComponentsType } from '@/types'
 import { InputSearch } from '@/ui'
 
 export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
   const { search, searchInput, setSearchInput } = useSearch()
-  const { data } = useMeQuery()
-
+  const { userNameQuery } = useGetQueryUserNameUserId()
+  const { followersCount } = useUserStore()
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
   const [currentDeleteUserId, setCurrentDeleteUserId] = useState<number | null>(null)
   const { t } = useTranslation()
-  const myUserName = data?.data.userName as string | null
   const {
     dataFollowersItems,
     refetchFollowers,
@@ -29,7 +28,7 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
     isFetchNextPageFollowers,
     hasNextPageFollowers,
   } = useGetFollowers({
-    userName: myUserName,
+    userName: userNameQuery,
     search,
   })
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
@@ -47,9 +46,10 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
     useFollowUnfollowUser(userId.toString())
     setCurrentUserId(userId)
   }
-  const deleteUserCallBack = (userId: number) => {
-    useDeleteFollowerUser(userId)
-    setCurrentDeleteUserId(userId)
+  const deleteUserCallBack = () => {
+    if (currentDeleteUserId) {
+      useDeleteFollowerUser(currentDeleteUserId)
+    }
   }
 
   return (
@@ -57,7 +57,7 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
       size="medium"
       isOpen={isModalOpen}
       onClose={onClose}
-      title={t.profile.profilePage.followers}
+      title={`${followersCount} ${t.profile.profilePage.followers}`}
     >
       <div className={'w-full p-5'}>
         <InputSearch
@@ -80,8 +80,9 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
                     handleToggleSubscriptionsCallBack={handleToggleSubscriptionsCallBack}
                     currentUserId={currentUserId}
                     items={users.items}
-                    deleteUserCallBack={deleteUserCallBack}
+                    setCurrentDeleteUserId={setCurrentDeleteUserId}
                     currentDeleteUserId={currentDeleteUserId}
+                    deleteUserCallBack={deleteUserCallBack}
                   />
                 )
             )

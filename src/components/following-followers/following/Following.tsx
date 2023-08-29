@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { useInViewScrollEffect } from '@/common'
+import { useGetQueryUserNameUserId, useInViewScrollEffect } from '@/common'
 import { useSearch } from '@/common/hooks/useSearch'
 import { FollowingUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
@@ -8,16 +8,16 @@ import { ModalWithContent } from '@/components/modals'
 import { useTranslation } from '@/components/translation'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
-import { useMeQuery } from '@/services/hookMe'
+import { useUserStore } from '@/store'
 import { FollowingFollowersComponentsType } from '@/types'
 import { InputSearch } from '@/ui'
 
 export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
   const { search, searchInput, setSearchInput } = useSearch()
-  const { data } = useMeQuery()
+  const { userNameQuery } = useGetQueryUserNameUserId()
+  const { followingCount } = useUserStore()
   const { t } = useTranslation()
-  const myUserName = data?.data.userName as string | null
   const {
     followingData,
     refetchFollowing,
@@ -27,7 +27,7 @@ export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponents
     isSuccessFollowing,
     fetchNextPageFollowing,
   } = userGetFollowings({
-    userName: myUserName,
+    userName: userNameQuery,
     search,
   })
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
@@ -47,7 +47,7 @@ export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponents
       size="medium"
       isOpen={isModalOpen}
       onClose={onClose}
-      title={t.profile.profilePage.following}
+      title={`${followingCount} ${t.profile.profilePage.following}`}
     >
       <div className={'w-full p-5'}>
         <InputSearch
