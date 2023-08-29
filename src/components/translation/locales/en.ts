@@ -20,8 +20,8 @@ export const en = {
       followers: 'Followers',
       delete: 'Delete',
       Publications: 'Publications',
-      confirmTitleDeleteFollowing: 'Delete Following"',
-      confirmDescriptionDeleteFollowing: 'Do you really want to delete a Following ',
+      confirmTitleDeleteFollowing: 'Delete FollowingPage"',
+      confirmDescriptionDeleteFollowing: 'Do you really want to delete a FollowingPage ',
     },
     settingsProfile: {
       settingsProfileTabs: {
