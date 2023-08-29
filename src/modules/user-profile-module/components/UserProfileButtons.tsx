@@ -10,6 +10,7 @@ type UserProfileButtonsType = {
   isFollowing: boolean
   isLoadingButton: boolean
   onRedirectToSetting: () => void
+  hideSubscriptionButtons: boolean
 }
 
 export const UserProfileButtons = ({
@@ -18,18 +19,21 @@ export const UserProfileButtons = ({
   isFollowing,
   isLoadingButton,
   onRedirectToSetting,
+  hideSubscriptionButtons,
 }: UserProfileButtonsType) => {
   const { t } = useTranslation()
 
   return (
     <>
-      <FollowUnfollowButton
-        isRefetching={isRefetchingUserProfile}
-        handleToggleSubscriptionsCallBack={() => handleToggleSubscriptionsCallBack()}
-        isFollowing={isFollowing}
-        isLoadingButton={isLoadingButton}
-        className={'xsm:w-full xsm:text-sm leading-6 sm:w-full w-[160px]'}
-      />
+      {hideSubscriptionButtons && (
+        <FollowUnfollowButton
+          isRefetching={isRefetchingUserProfile}
+          handleToggleSubscriptionsCallBack={() => handleToggleSubscriptionsCallBack()}
+          isFollowing={isFollowing}
+          isLoadingButton={isLoadingButton}
+          className={'xsm:w-full xsm:text-sm leading-6 sm:w-full w-[160px]'}
+        />
+      )}
       <GlobalButton
         className={
           'xsm:text-sm xsm:w-full sm:w-full  text-base leading-6 w-[250px] bg-dark-300 text-light-100 font-semibold'

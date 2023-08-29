@@ -11,6 +11,10 @@ export const ru: LocaleType = {
     favorites: 'Избранное',
     logout: 'Выйти',
   },
+  confirm: {
+    buttonYes: 'Да',
+    buttonNo: 'Нет',
+  },
   profile: {
     profilePage: {
       buttonProfileSettings: 'Настройки профиля',
@@ -18,6 +22,8 @@ export const ru: LocaleType = {
       followers: 'Подписчики',
       delete: 'Удалить',
       Publications: 'Публикации',
+      confirmTitleDeleteFollowing: 'Удалить подписку',
+      confirmDescriptionDeleteFollowing: 'Вы действительно хотите удалить подписку на ',
     },
     settingsProfile: {
       settingsProfileTabs: {

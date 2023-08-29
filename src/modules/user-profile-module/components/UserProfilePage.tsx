@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { useGetQueryUserNameUserId } from '@/common'
+import { useGetQueryUserNameUserId, useWindowSize } from '@/common'
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
 import { ModalManagerFollowingFollowers } from '@/components/following-followers'
 import {
@@ -13,12 +13,15 @@ import { useGetUserProfileData } from '@/modules/user-profile-module'
 import { UserProfileButtons } from '@/modules/user-profile-module/components/UserProfileButtons'
 import { routes } from '@/routing/router'
 import { useFollowingOrUnfollowingUser } from '@/services'
+import { useUserStore } from '@/store'
 import { StateModalFollowingFollowersType } from '@/types'
 import { Avatar } from '@/ui'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const UserProfilePage = () => {
   const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
+  const { setFollowersCount, userId: myUserID, setFollowingCount } = useUserStore()
+
   const {
     userProfileData,
     userProfileAvatar,
@@ -38,11 +41,18 @@ export const UserProfilePage = () => {
 
   const isFollowing = userProfileData.isFollowing
   const userId = userProfileData.id || null
+  const hideSubscriptionButtons = userId !== myUserID
   const handleToggleSubscriptionsCallBack = (userId: number | null) => {
     if (userId) {
       useFollowUnfollowUser(userId.toString())
     }
   }
+  const { width } = useWindowSize()
+
+  useEffect(() => {
+    setFollowersCount(userProfileData.followersCount)
+    setFollowingCount(userProfileData.followingCount)
+  }, [userProfileData.followersCount, userProfileData.followersCount])
 
   return (
     <div className="flex w-full">
@@ -64,16 +74,19 @@ export const UserProfilePage = () => {
                     <div className="font-bold flex w-full break-all xsm:hidden sm:hidden md:hidden">
                       {userProfileData.userName}
                     </div>
-                    <div className="xsm:hidden sm:hidden md:flex-col flex w-full gap-3">
-                      <UserProfileButtons
-                        isFollowing={isFollowing}
-                        onRedirectToSetting={onRedirectToSetting}
-                        isRefetchingUserProfile={isRefetchingUserProfile}
-                        isLoadingButton={isLoadingButton}
-                        handleToggleSubscriptionsCallBack={() =>
-                          handleToggleSubscriptionsCallBack(userId)
-                        }
-                      />
+                    <div className="md:flex-col flex w-full gap-3">
+                      {width && width >= 768 && (
+                        <UserProfileButtons
+                          hideSubscriptionButtons={hideSubscriptionButtons}
+                          isFollowing={isFollowing}
+                          onRedirectToSetting={onRedirectToSetting}
+                          isRefetchingUserProfile={isRefetchingUserProfile}
+                          isLoadingButton={isLoadingButton}
+                          handleToggleSubscriptionsCallBack={() =>
+                            handleToggleSubscriptionsCallBack(userId)
+                          }
+                        />
+                      )}
                     </div>
                   </div>
                   <InfoAboutProfilePage
@@ -92,15 +105,20 @@ export const UserProfilePage = () => {
               userName={userProfileData.userName}
               aboutMe={userProfileData.aboutMe}
             />
-            <div className="md:hidden lg:hidden xl:hidden exl:hidden flex w-full gap-3 flex-col">
-              <UserProfileButtons
-                isFollowing={isFollowing}
-                onRedirectToSetting={onRedirectToSetting}
-                isRefetchingUserProfile={isRefetchingUserProfile}
-                isLoadingButton={isLoadingButton}
-                handleToggleSubscriptionsCallBack={() => handleToggleSubscriptionsCallBack(userId)}
-              />
-            </div>
+            {width && width <= 768 && (
+              <div className="flex w-full gap-3 flex-col">
+                <UserProfileButtons
+                  hideSubscriptionButtons={hideSubscriptionButtons}
+                  isFollowing={isFollowing}
+                  onRedirectToSetting={onRedirectToSetting}
+                  isRefetchingUserProfile={isRefetchingUserProfile}
+                  isLoadingButton={isLoadingButton}
+                  handleToggleSubscriptionsCallBack={() =>
+                    handleToggleSubscriptionsCallBack(userId)
+                  }
+                />
+              </div>
+            )}
             <LatestPosts userProfileId={userProfileData.id} />
           </>
         ) : (

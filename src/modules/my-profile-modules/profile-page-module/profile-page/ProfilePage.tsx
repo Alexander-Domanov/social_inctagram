@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -14,6 +14,7 @@ import {
   useReplacePathnameQueryEffect,
 } from '@/modules/my-profile-modules/profile-page-module'
 import { useGetProfile } from '@/modules/my-profile-modules/settings-edit-profile-module'
+import { useUserStore } from '@/store'
 import { StateModalFollowingFollowersType } from '@/types'
 import { Avatar, GlobalButton } from '@/ui'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
@@ -22,6 +23,7 @@ export const ProfilePage = () => {
   const { push } = useRouter()
   const { profileData, profileAvatar, isFetchingProfileData } = useGetProfile()
   const { t } = useTranslation()
+  const { setFollowersCount, setFollowingCount } = useUserStore()
   const { onCloseClick, modalOpen, setModalOpen } =
     useOpenCloseModal<StateModalFollowingFollowersType>({})
   const userName = profileData && profileData.userName
@@ -33,6 +35,10 @@ export const ProfilePage = () => {
   const onRedirectToSetting = () => push('/profile/settings/edit')
 
   useReplacePathnameQueryEffect(userName)
+  useEffect(() => {
+    setFollowersCount(followers)
+    setFollowingCount(followings)
+  }, [followings, followers])
 
   return (
     <div className="flex w-full">
