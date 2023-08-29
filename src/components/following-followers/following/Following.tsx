@@ -8,7 +8,7 @@ import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
 
 export const Following = () => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
-  const { search, searchInput, setSearchInput } = useSearch()
+  const { search } = useSearch()
   const { userNameQuery } = useGetQueryUserNameUserId()
 
   const {

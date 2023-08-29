@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 
 import { useGetQueryUserNameUserId, useInViewScrollEffect } from '@/common'
-import { useSearch } from '@/common/hooks/useSearch'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
-import { useTranslation } from '@/components/translation'
 import { useDeleteFollower, useFollowingOrUnfollowingUser, useGetFollowers } from '@/services'
-import { useSearchStore, useUserStore } from '@/store'
+import { useSearchStore } from '@/store'
 import { FollowersUsers } from 'src/components/following-followers'
 
 export const Followers = () => {
