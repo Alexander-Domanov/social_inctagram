@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { FollowUnfollowButton } from '@/components/following-followers'
 import { useTranslation } from '@/components/translation'
 import { GlobalButton } from '@/ui'
+import { FollowUnfollowButton } from 'src/components/following-followers'
 
 type UserProfileButtonsType = {
   isRefetchingUserProfile: boolean

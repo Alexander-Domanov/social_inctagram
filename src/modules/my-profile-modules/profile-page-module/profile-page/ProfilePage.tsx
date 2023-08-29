@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
-import { ModalManagerFollowingFollowers } from '@/components/following-followers'
 import {
   DuplicateUserNameDescription,
   InfoAboutProfilePage,
@@ -17,6 +16,7 @@ import { useGetProfile } from '@/modules/my-profile-modules/settings-edit-profil
 import { useUserStore } from '@/store'
 import { StateModalFollowingFollowersType } from '@/types'
 import { Avatar, GlobalButton } from '@/ui'
+import { ModalManagerFollowingFollowers } from 'src/components/following-followers'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const ProfilePage = () => {

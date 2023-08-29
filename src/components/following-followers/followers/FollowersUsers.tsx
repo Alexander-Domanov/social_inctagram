@@ -2,14 +2,14 @@ import React, { Dispatch, SetStateAction } from 'react'
 
 import { useGetQueryUserNameUserId } from '@/common'
 import { useModal } from '@/common/hooks/useModal'
+import { Confirm } from '@/components/modals'
+import { useTranslation } from '@/components/translation'
+import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
 import {
   DeleteUserButton,
   FollowUnfollowButton,
   URLUsernameForModal,
-} from '@/components/following-followers'
-import { Confirm } from '@/components/modals'
-import { useTranslation } from '@/components/translation'
-import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
+} from 'src/components/following-followers'
 
 type FollowingUsersProps = {
   items: FollowingsFollowersType[]

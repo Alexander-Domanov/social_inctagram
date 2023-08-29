@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { useGetQueryUserNameUserId } from '@/common'
-import { FollowUnfollowButton, URLUsernameForModal } from '@/components/following-followers'
 import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
+import { FollowUnfollowButton, URLUsernameForModal } from 'src/components/following-followers'
 
 type FollowersUsersProps = {
   items: FollowingsFollowersType[]

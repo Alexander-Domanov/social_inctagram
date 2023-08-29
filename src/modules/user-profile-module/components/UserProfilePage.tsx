@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { useGetQueryUserNameUserId, useWindowSize } from '@/common'
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
@@ -9,6 +9,7 @@ import {
 } from '@/components/info-about-profile-page'
 import { useTranslation } from '@/components/translation'
 import { SkeletonProfilePage } from '@/modules/my-profile-modules/profile-page-module'
+import { LatestPosts } from '@/modules/post-modules/latest-posts-module'
 import { useGetUserProfileData } from '@/modules/user-profile-module'
 import { UserProfileButtons } from '@/modules/user-profile-module/components/UserProfileButtons'
 import { routes } from '@/routing/router'
@@ -16,7 +17,6 @@ import { useFollowingOrUnfollowingUser } from '@/services'
 import { useUserStore } from '@/store'
 import { StateModalFollowingFollowersType } from '@/types'
 import { Avatar } from '@/ui'
-import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const UserProfilePage = () => {
   const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
