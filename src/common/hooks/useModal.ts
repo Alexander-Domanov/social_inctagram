@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-import { UseMutateFunction } from 'react-query'
-
 export const useModal = ({ callBack }: { callBack: () => void }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 

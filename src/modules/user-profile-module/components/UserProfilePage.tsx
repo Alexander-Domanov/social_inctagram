@@ -19,8 +19,13 @@ import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const UserProfilePage = () => {
   const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
-  const { userProfileData, userProfileAvatar, isRefetchingUserProfile, refetchUserProfile, isLoadingUserProfile } =
-    useGetUserProfileData(userNameQuery)
+  const {
+    userProfileData,
+    userProfileAvatar,
+    isRefetchingUserProfile,
+    refetchUserProfile,
+    isLoadingUserProfile,
+  } = useGetUserProfileData(userNameQuery)
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     userIdQuery,
     refetch: refetchUserProfile,
