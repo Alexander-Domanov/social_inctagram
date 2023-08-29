@@ -42,7 +42,7 @@ export const FollowersUsers = ({
             avatartSrc={user.avatars?.thumbnail.url || null}
             userName={user.userName}
           />
-          {user.isFollowing && (
+          {!user.isFollowing && (
             <FollowUnfollowButton
               key={index}
               isFollowing={user.isFollowing}
