@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 
 import { clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
@@ -7,11 +7,13 @@ import { useTranslation } from '@/components/translation'
 import { GlobalButton } from '@/ui'
 
 export const DeleteUserButton = ({
-  deleteUserCallBack,
+  setCurrentDeleteUserId,
   userId,
   disabled,
+  setIsModalOpen,
 }: {
-  deleteUserCallBack: (userId: number) => void
+  setCurrentDeleteUserId: Dispatch<SetStateAction<number | null>>
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>
   userId: number
   disabled: boolean
 }) => {
@@ -19,12 +21,16 @@ export const DeleteUserButton = ({
     disabled: clsx(!disabled && 'linkText', disabled && 'text-light-900'),
   }
   const { t } = useTranslation()
+  const setIdAndOpenModalCallBack = () => {
+    setCurrentDeleteUserId(userId)
+    setIsModalOpen(true)
+  }
 
   return (
     <>
       <div className="flex items-center gap-10">
         <GlobalButton
-          callback={() => deleteUserCallBack(userId)}
+          callback={() => setIdAndOpenModalCallBack()}
           disabled={disabled}
           className="max-w-[140px]"
           type={'button'}

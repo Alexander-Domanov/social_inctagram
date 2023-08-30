@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { FollowUnfollowButton, URLUsernameForModal } from '@/components/following-followers'
+import { useGetQueryUserNameUserId } from '@/common'
 import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
+import { FollowUnfollowButton, URLUsernameForModal } from 'src/components/following-followers'
 
 type FollowersUsersProps = {
   items: FollowingsFollowersType[]
@@ -15,6 +16,8 @@ export const FollowingUsers = ({
   isRefetching,
   isLoadingButton,
 }: FollowersUsersProps) => {
+  const { userIdQuery } = useGetQueryUserNameUserId()
+
   return (
     <>
       {items.map((user, index) => (
@@ -24,13 +27,17 @@ export const FollowingUsers = ({
             avatartSrc={user.avatars?.thumbnail.url || null}
             userName={user.userName}
           />
-          <FollowUnfollowButton
-            key={index}
-            isFollowing={user.isFollowing}
-            handleToggleSubscriptionsCallBack={() => handleToggleSubscriptionsCallBack(user.userId)}
-            isLoadingButton={currentUserId === user.userId && isLoadingButton}
-            isRefetching={currentUserId === user.userId && isRefetching}
-          />
+          {!userIdQuery && (
+            <FollowUnfollowButton
+              key={index}
+              isFollowing={user.isFollowing}
+              handleToggleSubscriptionsCallBack={() =>
+                handleToggleSubscriptionsCallBack(user.userId)
+              }
+              isLoadingButton={currentUserId === user.userId && isLoadingButton}
+              isRefetching={currentUserId === user.userId && isRefetching}
+            />
+          )}
         </div>
       ))}
     </>

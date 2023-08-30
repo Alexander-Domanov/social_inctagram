@@ -1,5 +1,5 @@
-import { Followers } from '@/components/following-followers/followers/Followers'
-import { Following } from '@/components/following-followers/following/Following'
+import { FollowersPage } from '@/components/following-followers/followers/FollowersPage'
+import { FollowingPage } from '@/components/following-followers/following/FollowingPage'
 import { ModalManagerType, StateModalFollowingFollowersType } from '@/types'
 
 export const ModalManagerFollowingFollowers = ({
@@ -8,8 +8,8 @@ export const ModalManagerFollowingFollowers = ({
 }: Pick<ModalManagerType<StateModalFollowingFollowersType>, 'onClose' | 'isModalOpen'>) => {
   return (
     <>
-      <Following isModalOpen={isModalOpen === 'Following'} onClose={onClose} />
-      <Followers isModalOpen={isModalOpen === 'Followers'} onClose={onClose} />
+      <FollowingPage isModalOpen={isModalOpen === 'Following'} onClose={onClose} />
+      <FollowersPage isModalOpen={isModalOpen === 'Followers'} onClose={onClose} />
     </>
   )
 }

@@ -16,4 +16,4 @@ export interface userProfilePageData {
   userName: string
 }
 
-export type userQueryType = string | string[]
+export type userQueryType = string | string[] | number | null

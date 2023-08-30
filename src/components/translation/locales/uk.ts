@@ -11,6 +11,10 @@ export const uk: LocaleType = {
     favorites: 'Обране',
     logout: 'Вийти',
   },
+  confirm: {
+    buttonYes: 'Так',
+    buttonNo: 'Ні',
+  },
   profile: {
     profilePage: {
       buttonProfileSettings: 'Налаштування профілю',
@@ -18,6 +22,8 @@ export const uk: LocaleType = {
       followers: 'Підписники',
       delete: 'Видалити',
       Publications: 'Публікації',
+      confirmTitleDeleteFollowing: 'Видалити підписку',
+      confirmDescriptionDeleteFollowing: 'Ви дійсно бажаєте видалити підписку на ',
     },
     settingsProfile: {
       settingsProfileTabs: {
@@ -49,5 +55,11 @@ export const uk: LocaleType = {
     buttonFollow: 'Підписатися',
     buttonUnfollow: 'Відписатися',
   },
-  search: { searchTitle: 'Пошук', searchInput: 'Пошук', recentRequests: 'Останні запити' },
+  search: {
+    searchTitle: 'Пошук',
+    searchInput: 'Пошук',
+    recentRequests: 'Останні запити',
+    noRequests: 'Немає останніх запитів',
+    placeEmpty: 'Ой! Тут виглядає порожньо!',
+  },
 }

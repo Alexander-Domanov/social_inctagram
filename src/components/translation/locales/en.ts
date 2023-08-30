@@ -9,6 +9,10 @@ export const en = {
     favorites: 'Favorites',
     logout: 'Logout',
   },
+  confirm: {
+    buttonYes: 'Yes',
+    buttonNo: 'No',
+  },
   profile: {
     profilePage: {
       buttonProfileSettings: 'Profile Settings',
@@ -16,6 +20,8 @@ export const en = {
       followers: 'Followers',
       delete: 'Delete',
       Publications: 'Publications',
+      confirmTitleDeleteFollowing: 'Delete FollowingPage"',
+      confirmDescriptionDeleteFollowing: 'Do you really want to delete a FollowingPage ',
     },
     settingsProfile: {
       settingsProfileTabs: {
@@ -51,6 +57,8 @@ export const en = {
     searchTitle: 'Search',
     searchInput: 'Search',
     recentRequests: 'Recent requests',
+    noRequests: 'No recent requests',
+    placeEmpty: 'Oops! This place looks empty!',
   },
 }
 

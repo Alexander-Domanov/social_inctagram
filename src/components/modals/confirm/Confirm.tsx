@@ -3,6 +3,8 @@ import { FC } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import Modal from 'react-modal'
 
+import { useTranslation } from '@/components/translation'
+
 interface Props {
   isOpen: boolean
   onConfirm: () => void
@@ -26,6 +28,8 @@ export const Confirm: FC<Props> = ({
   confirmButtonText,
   declineButtonText,
 }) => {
+  const { t } = useTranslation()
+
   return (
     <Modal
       isOpen={isOpen}
@@ -64,7 +68,7 @@ export const Confirm: FC<Props> = ({
           onClick={() => onConfirm()}
           disabled={disabled}
         >
-          {confirmButtonText ?? 'Yes'}
+          {confirmButtonText ?? t.confirm.buttonYes}
         </button>
         {onDecline ? (
           <button
@@ -74,7 +78,7 @@ export const Confirm: FC<Props> = ({
             onClick={() => onDecline?.()}
             disabled={disabled}
           >
-            {declineButtonText ?? 'No'}
+            {declineButtonText ?? t.confirm.buttonNo}
           </button>
         ) : (
           ''
