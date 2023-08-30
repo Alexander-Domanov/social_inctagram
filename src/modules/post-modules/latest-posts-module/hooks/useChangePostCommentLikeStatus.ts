@@ -16,7 +16,7 @@ export const useChangePostCommentLikeStatus = (
     mutationKey: ['post-comment-like-status'],
     mutationFn: () => changePostCommentLikeStatus(postId, commentId, likeStatus),
     onSuccess: () => {
-      client.invalidateQueries({ queryKey: ['comments', { postId }] })
+      client.invalidateQueries({ queryKey: ['post_comments', { postId }] })
     },
   })
 

@@ -1,7 +1,7 @@
 import {
   COMMENTS_PER_PAGE,
   POSTS_PER_PAGE,
-} from '@/modules/post-modules/latest-posts-module/contastants/latest-posts-constants'
+} from '@/modules/post-modules/latest-posts-module/constants/latest-posts-constants'
 import { authInstance } from '@/services'
 
 interface Image {

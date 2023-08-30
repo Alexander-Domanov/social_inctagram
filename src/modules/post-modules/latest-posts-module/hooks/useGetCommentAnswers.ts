@@ -5,7 +5,7 @@ import { getPostCommentAnswers } from '@/modules/post-modules/latest-posts-modul
 
 export const useGetCommentAnswers = (postId: number, commentId: number, isOpen: boolean) => {
   const { data, isLoading, isFetching, isInitialLoading } = useQuery({
-    queryKey: ['answers', { postId, commentId }],
+    queryKey: ['post_comment_answers', { postId, commentId }],
     queryFn: () => getPostCommentAnswers(postId, commentId),
     ...noRefetch,
     enabled: Boolean(postId && commentId && isOpen),

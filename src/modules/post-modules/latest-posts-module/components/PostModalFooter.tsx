@@ -9,7 +9,7 @@ import { useGetPost } from '@/modules/post-modules/latest-posts-module/hooks/use
 import { useUserStore } from '@/store'
 import { Avatar } from '@/ui'
 
-export const PostFooter: FC = () => {
+export const PostModalFooter: FC = () => {
   const { postId } = useUserStore()
   const { post } = useGetPost(postId)
   const { mutate } = useChangePostLikeStatus(

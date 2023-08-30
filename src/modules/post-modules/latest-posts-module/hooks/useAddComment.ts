@@ -9,7 +9,7 @@ export const useAddComment = (postId: number | null, comment: string) => {
     mutationKey: ['add-comment'],
     mutationFn: () => addPostComment(postId, comment),
     onSuccess: () => {
-      client.invalidateQueries({ queryKey: ['comments', { postId }] })
+      client.invalidateQueries({ queryKey: ['post_comments', { postId }] })
     },
   })
 
