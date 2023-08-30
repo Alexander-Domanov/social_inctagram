@@ -1,6 +1,5 @@
-import { useEffect } from 'react'
-
 import { useGetQueryUserNameUserId, useWindowSize } from '@/common'
+import { useUpdateUserCounts } from '@/common/hooks/followers-following/useUpdateUserCounts'
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
 import { ModalManagerFollowingFollowers } from '@/components/following-followers'
 import {
@@ -20,7 +19,7 @@ import { Avatar } from '@/ui'
 
 export const UserProfilePage = () => {
   const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
-  const { setFollowersCount, userId: myUserID, setFollowingCount } = useUserStore()
+  const { userId: myUserID } = useUserStore()
 
   const {
     userProfileData,
@@ -49,10 +48,10 @@ export const UserProfilePage = () => {
   }
   const { width } = useWindowSize()
 
-  useEffect(() => {
-    setFollowersCount(userProfileData.followersCount)
-    setFollowingCount(userProfileData.followingCount)
-  }, [userProfileData.followersCount, userProfileData.followersCount])
+  useUpdateUserCounts({
+    followersCount: userProfileData.followersCount,
+    followingCount: userProfileData.followingCount,
+  })
 
   return (
     <div className="flex w-full">
