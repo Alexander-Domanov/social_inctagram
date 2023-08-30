@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
+import { BusinessAccountIcon } from '@/components/icon/BusinessAccountIcon'
 import {
   DuplicateUserNameDescription,
   InfoAboutProfilePage,
@@ -23,7 +24,7 @@ export const ProfilePage = () => {
   const { push } = useRouter()
   const { profileData, profileAvatar, isFetchingProfileData } = useGetProfile()
   const { t } = useTranslation()
-  const { setFollowersCount, setFollowingCount } = useUserStore()
+  const { setFollowersCount, setFollowingCount, hasBusinessAccount } = useUserStore()
   const { onCloseClick, modalOpen, setModalOpen } =
     useOpenCloseModal<StateModalFollowingFollowersType>({})
   const userName = profileData && profileData.userName
@@ -55,8 +56,9 @@ export const ProfilePage = () => {
               />
               <div className="flex w-full flex-col gap-5">
                 <div className="flex sm:gap-5 md:gap-5 lg:gap-5 flex-wrap justify-between">
-                  <div className="font-bold break-all xsm:hidden sm:hidden md:hidden">
+                  <div className="flex items-center gap-3 font-bold break-all xsm:hidden sm:hidden md:hidden">
                     {userName}
+                    {hasBusinessAccount && <BusinessAccountIcon />}
                   </div>
                   <GlobalButton
                     className={'xsm:hidden text-base bg-dark-300 font-semibold'}
