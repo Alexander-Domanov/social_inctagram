@@ -15,7 +15,8 @@ interface Props {
 }
 
 export const PostComments: FC<Props> = ({ postId }) => {
-  const { data, isFetchingNextPage, hasNextPage, fetchNextPage, isSuccess } = useGetComments(postId)
+  const { data, isFetchingNextPage, hasNextPage, fetchNextPage, isSuccess, isInitialLoading } =
+    useGetComments(postId)
 
   const { ref, inView } = useInView()
 
@@ -29,6 +30,12 @@ export const PostComments: FC<Props> = ({ postId }) => {
 
   return (
     <>
+      {isInitialLoading && (
+        <div className="flex justify-center">
+          <Spinner />
+        </div>
+      )}
+
       <>
         {data?.pages.map((page, idx) => (
           <Fragment key={idx}>

@@ -7,7 +7,7 @@ import { useUserStore } from '@/store'
 type PropsType = {
   isDeleteModalOpen: boolean
   setIsDeleteModalOpen: (isDeleteModalOpen: boolean) => void
-  postId: number | null
+  postId: number | undefined
   onPostModalClose: (isOpen: boolean) => void
 }
 

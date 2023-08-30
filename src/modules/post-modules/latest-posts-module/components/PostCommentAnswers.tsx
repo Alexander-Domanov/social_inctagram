@@ -5,6 +5,7 @@ import Image from 'next/image'
 import preloader from '@/assets/gif/loadingGrey.gif'
 import { PostCommentAnswer } from '@/modules/post-modules/latest-posts-module/components/PostCommentAnswer'
 import { useGetCommentAnswers } from '@/modules/post-modules/latest-posts-module/hooks/useGetCommentAnswers'
+import { Spinner } from '@/ui'
 
 interface Props {
   answerCount: number
@@ -15,8 +16,6 @@ interface Props {
 export const PostCommentAnswers: FC<Props> = ({ answerCount, commentId, postId }) => {
   const [isOpen, setIsOpen] = useState(false)
   const { data, isFetching, isInitialLoading } = useGetCommentAnswers(postId, commentId, isOpen)
-
-  if (!answerCount) return null
 
   return (
     <div className="mt-2 ml-12 flex flex-col">
@@ -30,7 +29,7 @@ export const PostCommentAnswers: FC<Props> = ({ answerCount, commentId, postId }
 
       {isInitialLoading && (
         <div className="flex justify-center">
-          <Image width={50} height={50} src={preloader} alt="preloader" />
+          <Spinner />
         </div>
       )}
 
