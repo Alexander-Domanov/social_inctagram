@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { useRouter } from 'next/router'
 
+import { useUpdateUserCounts } from '@/common/hooks/followers-following/useUpdateUserCounts'
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
 import { BusinessAccountIcon } from '@/components/icon/BusinessAccountIcon'
 import {
@@ -22,9 +23,9 @@ import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const ProfilePage = () => {
   const { push } = useRouter()
-  const { profileData, profileAvatar, isFetchingProfileData } = useGetProfile()
+  const { profileData, profileAvatar, isLoading } = useGetProfile()
   const { t } = useTranslation()
-  const { setFollowersCount, setFollowingCount, hasBusinessAccount } = useUserStore()
+  const { hasBusinessAccount } = useUserStore()
   const { onCloseClick, modalOpen, setModalOpen } =
     useOpenCloseModal<StateModalFollowingFollowersType>({})
   const userName = profileData && profileData.userName
@@ -36,15 +37,16 @@ export const ProfilePage = () => {
   const onRedirectToSetting = () => push('/profile/settings/edit')
 
   useReplacePathnameQueryEffect(userName)
-  useEffect(() => {
-    setFollowersCount(followers)
-    setFollowingCount(followings)
-  }, [followings, followers])
+
+  useUpdateUserCounts({
+    followersCount: followers,
+    followingCount: followings,
+  })
 
   return (
     <div className="flex w-full">
       <main className="grow">
-        {!isFetchingProfileData ? (
+        {!isLoading ? (
           <>
             <div className="flex xsm:gap-0 sm:gap-3 sm:items-center text-light-100 gap-9">
               <Avatar

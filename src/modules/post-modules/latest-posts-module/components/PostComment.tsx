@@ -70,11 +70,13 @@ export const PostComment: FC<Props> = ({ comment }) => {
         </div>
       </div>
 
-      <PostCommentAnswers
-        answerCount={comment.answerCount}
-        postId={comment.postId}
-        commentId={comment.id}
-      />
+      {comment?.answerCount > 0 && (
+        <PostCommentAnswers
+          answerCount={comment.answerCount}
+          postId={comment.postId}
+          commentId={comment.id}
+        />
+      )}
     </div>
   )
 }

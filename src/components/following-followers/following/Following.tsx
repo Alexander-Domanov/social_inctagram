@@ -4,7 +4,9 @@ import { useGetQueryUserNameUserId, useInViewScrollEffect } from '@/common'
 import { useSearch } from '@/common/hooks/useSearch'
 import { FollowingUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
+import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
+import { Spinner } from '@/ui'
 
 export const Following = () => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
@@ -19,42 +21,53 @@ export const Following = () => {
     isFetchNextPageFollowing,
     isSuccessFollowing,
     fetchNextPageFollowing,
+    isLoadingFollowing,
   } = userGetFollowings({
     userName: userNameQuery,
     search,
   })
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     refetch: refetchFollowing,
+    userId: currentUserId,
   })
   const { ref } = useInViewScrollEffect({
     hasNextPage: hasNextPageFollowing,
     fetchNextPage: fetchNextPageFollowing,
   })
   const handleToggleSubscriptionsCallBack = (userId: number) => {
-    useFollowUnfollowUser(userId.toString())
     setCurrentUserId(userId)
+    useFollowUnfollowUser()
   }
 
   return (
     <>
-      {followingData?.pages
-        ? followingData.pages.map((users, index) => (
-            <FollowingUsers
-              key={index}
-              isRefetching={isRefetchingFollowing}
-              isLoadingButton={isLoadingButton}
-              handleToggleSubscriptionsCallBack={handleToggleSubscriptionsCallBack}
-              items={users.items}
-              currentUserId={currentUserId}
-            />
-          ))
-        : 'Not found'}
-
-      <RenderLoadingIndicator
-        isSuccess={isSuccessFollowing}
-        isFetchNextPage={isFetchNextPageFollowing}
-        customRef={ref}
-      />
+      {!isLoadingFollowing ? (
+        <>
+          {followingData?.pages ? (
+            followingData.pages.map((users, index) => (
+              <FollowingUsers
+                key={index}
+                isRefetching={isRefetchingFollowing}
+                isLoadingButton={isLoadingButton}
+                handleToggleSubscriptionsCallBack={handleToggleSubscriptionsCallBack}
+                items={users.items}
+                currentUserId={currentUserId}
+              />
+            ))
+          ) : (
+            <NotFoundComponent message={'Not Found'} />
+          )}
+          <RenderLoadingIndicator
+            isSuccess={isSuccessFollowing}
+            isFetchNextPage={isFetchNextPageFollowing}
+            customRef={ref}
+          />
+        </>
+      ) : (
+        <div className="absolute h-full w-full flex justify-center items-center">
+          <Spinner />
+        </div>
+      )}
     </>
   )
 }

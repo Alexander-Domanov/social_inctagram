@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useState } from 'react'
 
 import { useGetQueryUserNameUserId, useWindowSize } from '@/common'
+import { useUpdateUserCounts } from '@/common/hooks/followers-following/useUpdateUserCounts'
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
 import { ModalManagerFollowingFollowers } from '@/components/following-followers'
 import {
@@ -20,8 +21,9 @@ import { Avatar } from '@/ui'
 
 export const UserProfilePage = () => {
   const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
-  const { setFollowersCount, userId: myUserID, setFollowingCount } = useUserStore()
 
+  const { userId: myUserID } = useUserStore()
+  const [currentUserId, setCurrentUserId] = useState<number | null>()
   const {
     userProfileData,
     userProfileAvatar,
@@ -32,6 +34,7 @@ export const UserProfilePage = () => {
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     userIdQuery,
     refetch: refetchUserProfile,
+    userId: currentUserId,
   })
 
   const { t } = useTranslation()
@@ -43,16 +46,17 @@ export const UserProfilePage = () => {
   const userId = userProfileData.id || null
   const hideSubscriptionButtons = userId !== myUserID
   const handleToggleSubscriptionsCallBack = (userId: number | null) => {
+    setCurrentUserId(userId)
     if (userId) {
-      useFollowUnfollowUser(userId.toString())
+      useFollowUnfollowUser()
     }
   }
   const { width } = useWindowSize()
 
-  useEffect(() => {
-    setFollowersCount(userProfileData.followersCount)
-    setFollowingCount(userProfileData.followingCount)
-  }, [userProfileData.followersCount, userProfileData.followersCount])
+  useUpdateUserCounts({
+    followersCount: userProfileData.followersCount,
+    followingCount: userProfileData.followingCount,
+  })
 
   return (
     <div className="flex w-full">

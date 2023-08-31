@@ -1,3 +1,5 @@
+import { pluralizeEn } from '@/common'
+
 export const en = {
   navBar: {
     home: 'Home',
@@ -18,6 +20,76 @@ export const en = {
       buttonProfileSettings: 'Profile Settings',
       following: 'Following',
       followers: 'Followers',
+      getCountFollower(count: number) {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'other':
+            return 'Followers'
+          case 'one':
+            return `${count} follower`
+          case 'few':
+            return `${count} followers`
+          case 'many':
+            return `${count} followers`
+        }
+      },
+      getCountFollowing(count: number) {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'other':
+            return 'Following'
+          case 'one':
+            return `${count} Following`
+          case 'few':
+            return `${count} Followings`
+          case 'many':
+            return `${count} Followings`
+        }
+      },
+      getCountFollowerPage(count: number): string | undefined {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'other':
+            return 'Followers'
+          case 'one':
+            return `Follower`
+          case 'few':
+            return `Followers`
+          case 'many':
+            return `Followers`
+        }
+      },
+      getCountFollowingPage(count: number): string | undefined {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'other':
+            return 'Following'
+          case 'one':
+            return `Following`
+          case 'few':
+            return `Followings`
+          case 'many':
+            return `Followings`
+        }
+      },
+      getCountPublicationPage(count: number): string | undefined {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'other':
+            return 'Publication'
+          case 'one':
+            return `Publication`
+          case 'few':
+            return `Publications`
+          case 'many':
+            return `Publications`
+        }
+      },
       delete: 'Delete',
       Publications: 'Publications',
       confirmTitleDeleteFollowing: 'Delete FollowingPage"',
