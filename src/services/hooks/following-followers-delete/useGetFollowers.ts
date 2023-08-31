@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
 import { getFollowersData } from '@/services/api/following-followers-delete-api/getFollowers'

@@ -5,7 +5,7 @@ import { useSearch } from '@/common/hooks/useSearch'
 import { FollowingUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
-import {Spinner} from "@/ui";
+import { Spinner } from '@/ui'
 
 export const Following = () => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
@@ -64,9 +64,9 @@ export const Following = () => {
           />
         </>
       ) : (
-          <div className="absolute h-full w-full flex justify-center items-center">
-            <Spinner />
-          </div>
+        <div className="absolute h-full w-full flex justify-center items-center">
+          <Spinner />
+        </div>
       )}
     </>
   )
