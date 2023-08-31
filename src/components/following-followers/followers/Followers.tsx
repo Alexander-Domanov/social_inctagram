@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { useGetQueryUserNameUserId, useInViewScrollEffect } from '@/common'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
+import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useDeleteFollower, useFollowingOrUnfollowingUser, useGetFollowers } from '@/services'
 import { useSearchStore } from '@/store'
 import { Spinner } from '@/ui'
@@ -12,6 +13,7 @@ export const Followers = () => {
   const { search } = useSearchStore()
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
   const [currentDeleteUserId, setCurrentDeleteUserId] = useState<number | null>(null)
+  const [textModal, setTextModal] = useState<string | null>(null)
 
   const {
     dataFollowersItems,
@@ -38,7 +40,7 @@ export const Followers = () => {
     hasNextPage: hasNextPageFollowers,
     fetchNextPage: fetchNextPageFollowers,
   })
-  const handleToggleSubscriptionsCallBack = (userId: number) => {
+  const handleToggleSubscriptionsCallBack = ({ userId }: { userId: number }) => {
     useFollowUnfollowUser()
     setCurrentUserId(userId)
   }
@@ -67,13 +69,13 @@ export const Followers = () => {
                     setCurrentDeleteUserId={setCurrentDeleteUserId}
                     currentDeleteUserId={currentDeleteUserId}
                     deleteUserCallBack={deleteUserCallBack}
+                    textModal={textModal}
+                    setTextModal={setTextModal}
                   />
                 )
             )
           ) : (
-            <span className="flex justify-center align-middle leading-6 font-normal text-base">
-              Not found
-            </span>
+            <NotFoundComponent message={'Not Found'} />
           )}
           <RenderLoadingIndicator
             isFetchNextPage={isFetchNextPageFollowers}

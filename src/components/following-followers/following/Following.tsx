@@ -4,6 +4,7 @@ import { useGetQueryUserNameUserId, useInViewScrollEffect } from '@/common'
 import { useSearch } from '@/common/hooks/useSearch'
 import { FollowingUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
+import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
 import { Spinner } from '@/ui'
 
@@ -54,9 +55,7 @@ export const Following = () => {
               />
             ))
           ) : (
-            <span className="flex justify-center align-middle leading-6 font-normal text-base">
-              Not found
-            </span>
+            <NotFoundComponent message={'Not Found'} />
           )}
           <RenderLoadingIndicator
             isSuccess={isSuccessFollowing}

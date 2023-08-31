@@ -21,6 +21,7 @@ import { Avatar } from '@/ui'
 
 export const UserProfilePage = () => {
   const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
+
   const { userId: myUserID } = useUserStore()
   const [currentUserId, setCurrentUserId] = useState<number | null>()
   const {

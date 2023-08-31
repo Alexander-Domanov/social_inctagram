@@ -24,6 +24,8 @@ export const en = {
         const str = pluralizeEn(count)
 
         switch (str) {
+          case 'other':
+            return 'Followers'
           case 'one':
             return `${count} follower`
           case 'few':
