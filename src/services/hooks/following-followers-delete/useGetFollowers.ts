@@ -16,6 +16,7 @@ export const useGetFollowers = ({
     hasNextPage: hasNextPageFollowers,
     isFetchingNextPage: isFetchNextPageFollowers,
     fetchNextPage: fetchNextPageFollowers,
+    isLoading: isLoadingFollowers,
   } = useInfiniteQuery(
     ['users-followers', search],
     ({ pageParam = 0 }) => getFollowersData({ userName, search, pageParam }),
@@ -41,5 +42,6 @@ export const useGetFollowers = ({
     isSuccessFollowers,
     isFetchNextPageFollowers,
     hasNextPageFollowers,
+    isLoadingFollowers,
   }
 }

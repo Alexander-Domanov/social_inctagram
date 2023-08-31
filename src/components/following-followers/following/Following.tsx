@@ -5,6 +5,7 @@ import { useSearch } from '@/common/hooks/useSearch'
 import { FollowingUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
+import {Spinner} from "@/ui";
 
 export const Following = () => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
@@ -19,6 +20,7 @@ export const Following = () => {
     isFetchNextPageFollowing,
     isSuccessFollowing,
     fetchNextPageFollowing,
+    isLoadingFollowing,
   } = userGetFollowings({
     userName: userNameQuery,
     search,
@@ -37,24 +39,35 @@ export const Following = () => {
 
   return (
     <>
-      {followingData?.pages
-        ? followingData.pages.map((users, index) => (
-            <FollowingUsers
-              key={index}
-              isRefetching={isRefetchingFollowing}
-              isLoadingButton={isLoadingButton}
-              handleToggleSubscriptionsCallBack={handleToggleSubscriptionsCallBack}
-              items={users.items}
-              currentUserId={currentUserId}
-            />
-          ))
-        : 'Not found'}
-
-      <RenderLoadingIndicator
-        isSuccess={isSuccessFollowing}
-        isFetchNextPage={isFetchNextPageFollowing}
-        customRef={ref}
-      />
+      {!isLoadingFollowing ? (
+        <>
+          {followingData?.pages ? (
+            followingData.pages.map((users, index) => (
+              <FollowingUsers
+                key={index}
+                isRefetching={isRefetchingFollowing}
+                isLoadingButton={isLoadingButton}
+                handleToggleSubscriptionsCallBack={handleToggleSubscriptionsCallBack}
+                items={users.items}
+                currentUserId={currentUserId}
+              />
+            ))
+          ) : (
+            <span className="flex justify-center align-middle leading-6 font-normal text-base">
+              Not found
+            </span>
+          )}
+          <RenderLoadingIndicator
+            isSuccess={isSuccessFollowing}
+            isFetchNextPage={isFetchNextPageFollowing}
+            customRef={ref}
+          />
+        </>
+      ) : (
+          <div className="absolute h-full w-full flex justify-center items-center">
+            <Spinner />
+          </div>
+      )}
     </>
   )
 }

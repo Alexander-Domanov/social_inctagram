@@ -21,7 +21,7 @@ export const FollowingUsers = ({
   return (
     <>
       {items.map((user, index) => (
-        <div className="flex justify-between" key={index}>
+        <div className="flex justify-between items-center" key={index}>
           <URLUsernameForModal
             key={user.userId}
             avatartSrc={user.avatars?.thumbnail.url || null}
