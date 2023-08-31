@@ -15,7 +15,7 @@ import { createPostEffect } from '@/modules/create-post-module/components/create
 import { StateModalPostType } from '@/types'
 
 export const CreatePost = () => {
-  const { query } = useRouter()
+  const { query, replace, pathname } = useRouter()
   const { t } = useTranslation()
 
   const { onCloseClick, modalOpen, setModalOpen } = useOpenCloseModal<StateModalPostType>({
@@ -29,7 +29,8 @@ export const CreatePost = () => {
       <Link
         className="flex gap-[15px] items-center"
         href={{
-          query: { create: true },
+          pathname: pathname,
+          query: { create: true, ...query },
         }}
       >
         <Image src={modalOpen ? plus : plusOutline} alt={t.navBar.create} height={24} width={24} />
