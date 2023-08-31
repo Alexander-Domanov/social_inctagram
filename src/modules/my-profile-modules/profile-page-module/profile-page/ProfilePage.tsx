@@ -23,7 +23,7 @@ import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const ProfilePage = () => {
   const { push } = useRouter()
-  const { profileData, profileAvatar, isFetchingProfileData } = useGetProfile()
+  const { profileData, profileAvatar, isLoading } = useGetProfile()
   const { t } = useTranslation()
   const { hasBusinessAccount } = useUserStore()
   const { onCloseClick, modalOpen, setModalOpen } =
@@ -46,7 +46,7 @@ export const ProfilePage = () => {
   return (
     <div className="flex w-full">
       <main className="grow">
-        {!isFetchingProfileData ? (
+        {!isLoading ? (
           <>
             <div className="flex xsm:gap-0 sm:gap-3 sm:items-center text-light-100 gap-9">
               <Avatar

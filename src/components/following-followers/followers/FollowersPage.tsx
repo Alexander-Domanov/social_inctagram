@@ -24,7 +24,7 @@ export const FollowersPage = ({ isModalOpen, onClose }: FollowingFollowersCompon
       size="medium"
       isOpen={isModalOpen}
       onClose={onClose}
-      title={`${followersCount} ${t.profile.profilePage.followers}`}
+      title={`${t.profile.profilePage.getCountFollower(followersCount)}`}
     >
       <div className={'w-full p-5'}>
         <InputSearch

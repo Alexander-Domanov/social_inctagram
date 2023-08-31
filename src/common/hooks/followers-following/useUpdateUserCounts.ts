@@ -14,5 +14,5 @@ export const useUpdateUserCounts = ({
   useEffect(() => {
     setFollowersCount(followersCount)
     setFollowingCount(followingCount)
-  }, [followersCount, followersCount])
+  }, [followersCount, followingCount])
 }

@@ -17,7 +17,7 @@ export const FollowingPage = ({ isModalOpen, onClose }: FollowingFollowersCompon
       size="medium"
       isOpen={isModalOpen}
       onClose={onClose}
-      title={`${followingCount} ${t.profile.profilePage.following}`}
+      title={`${t.profile.profilePage.getCountFollowing(followingCount)}`}
     >
       <SearchLayout>
         <ScrollArea className="w-full h-[425px]">

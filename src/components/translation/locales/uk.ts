@@ -1,3 +1,4 @@
+import { pluralizeUk } from '@/common'
 import { LocaleType } from '@/components/translation'
 
 export const uk: LocaleType = {
@@ -20,6 +21,68 @@ export const uk: LocaleType = {
       buttonProfileSettings: 'Налаштування профілю',
       following: 'Підписки',
       followers: 'Підписники',
+      getCountFollower(count: number) {
+        const str = pluralizeUk(count)
+
+        switch (str) {
+          case 'one':
+            return `${count} підписник`
+          case 'few':
+            return `${count} підписника`
+          case 'many':
+            return `${count} підписників`
+        }
+      },
+
+      getCountFollowing(count: number) {
+        const str = pluralizeUk(count)
+
+        switch (str) {
+          case 'one':
+            return `${count} підписка`
+          case 'few':
+            return `${count} підписки`
+          case 'many':
+            return `${count} підписок`
+        }
+      },
+      getCountFollowerPage(count: number) {
+        const str = pluralizeUk(count)
+
+        switch (str) {
+          case 'one':
+            return `Підписник`
+          case 'few':
+            return `Підписника`
+          case 'many':
+            return `Підписників`
+        }
+      },
+
+      getCountFollowingPage(count: number) {
+        const str = pluralizeUk(count)
+
+        switch (str) {
+          case 'one':
+            return `Підписка`
+          case 'few':
+            return `Підписки`
+          case 'many':
+            return `Підписок`
+        }
+      },
+      getCountPublicationPage(count: number): string | undefined {
+        const str = pluralizeUk(count)
+
+        switch (str) {
+          case 'one':
+            return `Публікація`
+          case 'few':
+            return 'Публікації'
+          case 'many':
+            return 'Публікацій'
+        }
+      },
       delete: 'Видалити',
       Publications: 'Публікації',
       confirmTitleDeleteFollowing: 'Видалити підписку',
