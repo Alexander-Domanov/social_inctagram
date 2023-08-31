@@ -1,3 +1,4 @@
+import { pluralizeUk } from '@/common'
 import { LocaleType } from '@/components/translation'
 
 export const uk: LocaleType = {
@@ -20,6 +21,31 @@ export const uk: LocaleType = {
       buttonProfileSettings: 'Налаштування профілю',
       following: 'Підписки',
       followers: 'Підписники',
+      getCountFollower(count: number) {
+        const str = pluralizeUk(count)
+
+        switch (str) {
+          case 'one':
+            return `${count} підписник`
+          case 'few':
+            return `${count} підписника`
+          case 'many':
+            return `${count} підписників`
+        }
+      },
+
+      getCountFollowing(count: number) {
+        const str = pluralizeUk(count)
+
+        switch (str) {
+          case 'one':
+            return `${count} підписка`
+          case 'few':
+            return `${count} підписки`
+          case 'many':
+            return `${count} підписок`
+        }
+      },
       delete: 'Видалити',
       Publications: 'Публікації',
       confirmTitleDeleteFollowing: 'Видалити підписку',

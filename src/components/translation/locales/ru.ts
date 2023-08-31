@@ -1,3 +1,4 @@
+import { pluralizeRu } from '@/common'
 import { LocaleType } from '@/components/translation'
 
 export const ru: LocaleType = {
@@ -20,6 +21,30 @@ export const ru: LocaleType = {
       buttonProfileSettings: 'Настройки профиля',
       following: 'Подписки',
       followers: 'Подписчики',
+      getCountFollower(count: number) {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'one':
+            return `${count} подписчик`
+          case 'few':
+            return `${count} подписчика`
+          case 'many':
+            return `${count} подписчиков`
+        }
+      },
+      getCountFollowing(count: number) {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'one':
+            return `${count} подписка`
+          case 'few':
+            return `${count} подписки`
+          case 'many':
+            return `${count} подписок`
+        }
+      },
       delete: 'Удалить',
       Publications: 'Публикации',
       confirmTitleDeleteFollowing: 'Удалить подписку',

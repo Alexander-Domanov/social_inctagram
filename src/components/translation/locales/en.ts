@@ -1,3 +1,5 @@
+import { pluralizeEn } from '@/common'
+
 export const en = {
   navBar: {
     home: 'Home',
@@ -18,6 +20,30 @@ export const en = {
       buttonProfileSettings: 'Profile Settings',
       following: 'Following',
       followers: 'Followers',
+      getCountFollower(count: number) {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'one':
+            return `${count} follower`
+          case 'few':
+            return `${count} followers`
+          case 'many':
+            return `${count} followers`
+        }
+      },
+      getCountFollowing(count: number) {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'one':
+            return `${count} following`
+          case 'few':
+            return `${count} followings`
+          case 'many':
+            return `${count} followings`
+        }
+      },
       delete: 'Delete',
       Publications: 'Publications',
       confirmTitleDeleteFollowing: 'Delete FollowingPage"',
