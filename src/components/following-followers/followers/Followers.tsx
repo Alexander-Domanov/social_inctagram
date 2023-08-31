@@ -28,6 +28,7 @@ export const Followers = () => {
   })
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     refetch: refetchFollowers,
+    userId: currentUserId,
   })
 
   const { useDeleteFollowerUser, isLoadingDeleteUser } = useDeleteFollower({
@@ -38,7 +39,7 @@ export const Followers = () => {
     fetchNextPage: fetchNextPageFollowers,
   })
   const handleToggleSubscriptionsCallBack = (userId: number) => {
-    useFollowUnfollowUser(userId.toString())
+    useFollowUnfollowUser()
     setCurrentUserId(userId)
   }
   const deleteUserCallBack = () => {

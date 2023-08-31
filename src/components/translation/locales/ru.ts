@@ -26,11 +26,11 @@ export const ru: LocaleType = {
 
         switch (str) {
           case 'one':
-            return `${count} подписчик`
+            return `${count} Подписчик`
           case 'few':
-            return `${count} подписчика`
+            return `${count} Подписчика`
           case 'many':
-            return `${count} подписчиков`
+            return `${count} Подписчиков`
         }
       },
       getCountFollowing(count: number) {
@@ -38,13 +38,50 @@ export const ru: LocaleType = {
 
         switch (str) {
           case 'one':
-            return `${count} подписка`
+            return `${count} Подписка`
           case 'few':
-            return `${count} подписки`
+            return `${count} Подписки`
           case 'many':
-            return `${count} подписок`
+            return `${count} Подписок`
         }
       },
+      getCountFollowerPage(count: number) {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'one':
+            return `Подписчик`
+          case 'few':
+            return `Подписчика`
+          case 'many':
+            return `Подписчиков`
+        }
+      },
+      getCountFollowingPage(count: number) {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'one':
+            return `Подписка`
+          case 'few':
+            return `Подписки`
+          case 'many':
+            return `Подписок`
+        }
+      },
+      getCountPublicationPage(count: number): string | undefined {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'one':
+            return `Публикация`
+          case 'few':
+            return `Публикации`
+          case 'many':
+            return `Публикаций`
+        }
+      },
+
       delete: 'Удалить',
       Publications: 'Публикации',
       confirmTitleDeleteFollowing: 'Удалить подписку',

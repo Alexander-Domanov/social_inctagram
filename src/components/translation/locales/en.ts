@@ -37,11 +37,47 @@ export const en = {
 
         switch (str) {
           case 'one':
-            return `${count} following`
+            return `${count} Following`
           case 'few':
-            return `${count} followings`
+            return `${count} Followings`
           case 'many':
-            return `${count} followings`
+            return `${count} Followings`
+        }
+      },
+      getCountFollowerPage(count: number): string | undefined {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'one':
+            return `Follower`
+          case 'few':
+            return `Followers`
+          case 'many':
+            return `Followers`
+        }
+      },
+      getCountFollowingPage(count: number): string | undefined {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'one':
+            return `Following`
+          case 'few':
+            return `Followings`
+          case 'many':
+            return `Followings`
+        }
+      },
+      getCountPublicationPage(count: number): string | undefined {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'one':
+            return `Publication`
+          case 'few':
+            return `Publications`
+          case 'many':
+            return `Publications`
         }
       },
       delete: 'Delete',

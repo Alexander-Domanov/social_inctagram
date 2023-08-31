@@ -27,14 +27,15 @@ export const Following = () => {
   })
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     refetch: refetchFollowing,
+    userId: currentUserId,
   })
   const { ref } = useInViewScrollEffect({
     hasNextPage: hasNextPageFollowing,
     fetchNextPage: fetchNextPageFollowing,
   })
   const handleToggleSubscriptionsCallBack = (userId: number) => {
-    useFollowUnfollowUser(userId.toString())
     setCurrentUserId(userId)
+    useFollowUnfollowUser()
   }
 
   return (
