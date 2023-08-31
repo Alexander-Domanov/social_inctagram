@@ -11,11 +11,15 @@ export const DeleteUserButton = ({
   userId,
   disabled,
   setIsModalOpen,
+  textModal,
+  setTextModal,
 }: {
   setCurrentDeleteUserId: Dispatch<SetStateAction<number | null>>
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
   userId: number
+  textModal: string
   disabled: boolean
+  setTextModal: (text: string | null) => void
 }) => {
   const className = {
     disabled: clsx(!disabled && 'linkText', disabled && 'text-light-900'),
@@ -24,6 +28,7 @@ export const DeleteUserButton = ({
   const setIdAndOpenModalCallBack = () => {
     setCurrentDeleteUserId(userId)
     setIsModalOpen(true)
+    setTextModal(textModal)
   }
 
   return (

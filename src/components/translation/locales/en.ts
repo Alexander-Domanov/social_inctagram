@@ -24,6 +24,8 @@ export const en = {
         const str = pluralizeEn(count)
 
         switch (str) {
+          case 'other':
+            return 'Followers'
           case 'one':
             return `${count} follower`
           case 'few':
@@ -36,6 +38,8 @@ export const en = {
         const str = pluralizeEn(count)
 
         switch (str) {
+          case 'other':
+            return 'Following'
           case 'one':
             return `${count} Following`
           case 'few':
@@ -48,6 +52,8 @@ export const en = {
         const str = pluralizeEn(count)
 
         switch (str) {
+          case 'other':
+            return 'Followers'
           case 'one':
             return `Follower`
           case 'few':
@@ -60,6 +66,8 @@ export const en = {
         const str = pluralizeEn(count)
 
         switch (str) {
+          case 'other':
+            return 'Following'
           case 'one':
             return `Following`
           case 'few':
@@ -72,6 +80,8 @@ export const en = {
         const str = pluralizeEn(count)
 
         switch (str) {
+          case 'other':
+            return 'Publication'
           case 'one':
             return `Publication`
           case 'few':
