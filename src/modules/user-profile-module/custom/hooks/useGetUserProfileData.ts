@@ -14,6 +14,8 @@ export const useGetUserProfileData = (userNameQuery: userQueryType) => {
     queryFn: () => getUserProfile(userNameQuery),
     select: (data: any): userProfilePageData => data?.data,
     staleTime: 0,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const initialUserProfileData = {

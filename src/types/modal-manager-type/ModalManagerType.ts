@@ -6,7 +6,7 @@ export type ModalManagerType<M> = {
   setModalOpen: Dispatch<SetStateAction<M>>
 }
 
-export type StateModalFollowingFollowersType = 'Following' | 'Followers'
+export type StateModalFollowingFollowersType = 'Following' | 'Followers' | null
 export type StateModalPostType =
   | 'photo-uploader'
   | 'crop-editor'

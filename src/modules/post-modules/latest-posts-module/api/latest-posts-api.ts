@@ -54,12 +54,12 @@ interface GetPostsResponse {
 }
 
 interface GetPostsParams {
-  userId: number | undefined
+  userName: string | string[] | null
   page: number
 }
 
-export const getPosts = async ({ userId, page }: GetPostsParams) => {
-  const res = await authInstance.get<GetPostsResponse>(`posts/${userId}`, {
+export const getPosts = async ({ userName, page }: GetPostsParams) => {
+  const res = await authInstance.get<GetPostsResponse>(`posts/${userName}`, {
     params: {
       pageNumber: page,
       pageSize: POSTS_PER_PAGE,

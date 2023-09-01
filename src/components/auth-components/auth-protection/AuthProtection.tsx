@@ -9,7 +9,7 @@ import { Preloader } from '@/ui'
 
 const AuthProtection: FC<PropsWithChildren> = memo(({ children }) => {
   const { pathname, replace } = useRouter()
-  const { setUserId, setHasBusinessAccount } = useUserStore()
+  const { setUserId, setHasBusinessAccount, setUserName } = useUserStore()
 
   const { isSuccess, isError, fetchStatus } = useMeQuery(
     userId => {
@@ -17,6 +17,9 @@ const AuthProtection: FC<PropsWithChildren> = memo(({ children }) => {
     },
     hasBusinessAccount => {
       setHasBusinessAccount(hasBusinessAccount)
+    },
+    userName => {
+      setUserName(userName)
     }
   )
 

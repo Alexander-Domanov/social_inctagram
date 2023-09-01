@@ -25,7 +25,7 @@ export const en = {
 
         switch (str) {
           case 'other':
-            return 'Followers'
+            return `${count} Followers`
           case 'one':
             return `${count} follower`
           case 'few':
@@ -39,7 +39,7 @@ export const en = {
 
         switch (str) {
           case 'other':
-            return 'Following'
+            return `${count} Following`
           case 'one':
             return `${count} Following`
           case 'few':

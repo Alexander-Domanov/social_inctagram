@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useGetQueryUserNameUserId, useWindowSize } from '@/common'
 import { useUpdateUserCounts } from '@/common/hooks/followers-following/useUpdateUserCounts'
@@ -21,7 +21,6 @@ import { Avatar } from '@/ui'
 
 export const UserProfilePage = () => {
   const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
-
   const { userId: myUserID } = useUserStore()
   const [currentUserId, setCurrentUserId] = useState<number | null>()
   const {
@@ -57,6 +56,10 @@ export const UserProfilePage = () => {
     followersCount: userProfileData.followersCount,
     followingCount: userProfileData.followingCount,
   })
+
+  useEffect(() => {
+    setModalOpen(null)
+  }, [userNameQuery])
 
   return (
     <div className="flex w-full">
@@ -123,7 +126,7 @@ export const UserProfilePage = () => {
                 />
               </div>
             )}
-            <LatestPosts userProfileId={userProfileData.id} />
+            <LatestPosts />
           </>
         ) : (
           <SkeletonProfilePage />
