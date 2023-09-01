@@ -30,7 +30,6 @@ export const useGetFollowers = ({
       },
       onError: (err: Error) => toast.error(err.message),
       enabled: Boolean(userName),
-      retry: false,
       cacheTime: 0,
       staleTime: 0,
     }

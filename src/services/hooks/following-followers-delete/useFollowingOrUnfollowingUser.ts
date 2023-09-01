@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
+import { noRefetch } from '@/common'
 import { postUserFollowingUnfollowing } from '@/modules/user-profile-module/api/postUserFollowingUnfollowing'
 import { userQueryType } from '@/types'
 
@@ -25,6 +26,8 @@ export const useFollowingOrUnfollowingUser = ({
         }
       },
       onError: (err: Error) => toast.error(err.message),
+      cacheTime: 0,
+      ...noRefetch,
     }
   )
 

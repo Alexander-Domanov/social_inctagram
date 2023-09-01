@@ -2,6 +2,7 @@ import React from 'react'
 
 import { useGetQueryUserNameUserId } from '@/common'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
+import { useUserStore } from '@/store'
 import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
 import { FollowUnfollowButton, URLUsernameForModal } from 'src/components/following-followers'
 
@@ -17,7 +18,9 @@ export const FollowingUsers = ({
   isRefetching,
   isLoadingButton,
 }: FollowersUsersProps) => {
-  const { userIdQuery } = useGetQueryUserNameUserId()
+  const { userNameQuery } = useGetQueryUserNameUserId()
+  const { userName } = useUserStore()
+  const isUserName: boolean = userName === userNameQuery
 
   return (
     <>
@@ -29,7 +32,7 @@ export const FollowingUsers = ({
               avatartSrc={user.avatars?.thumbnail.url || null}
               userName={user.userName}
             />
-            {!userIdQuery && (
+            {isUserName && (
               <FollowUnfollowButton
                 key={index}
                 isFollowing={user.isFollowing}

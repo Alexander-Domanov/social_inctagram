@@ -5,7 +5,8 @@ import { meSendRequest } from '@/services'
 
 export const useMeQuery = (
   saveUserId?: (userId: number) => void,
-  setHasBusinessAccount?: (hasBusinessAccount: boolean) => void
+  setHasBusinessAccount?: (hasBusinessAccount: boolean) => void,
+  setUserName?: (userName: string | null) => void
 ) => {
   return useQuery({
     queryFn: meSendRequest,
@@ -15,6 +16,9 @@ export const useMeQuery = (
       }
       if (setHasBusinessAccount) {
         setHasBusinessAccount(data.data.hasBusinessAccount)
+      }
+      if (setUserName) {
+        setUserName(data.data.userName)
       }
     },
     queryKey: ['me'],

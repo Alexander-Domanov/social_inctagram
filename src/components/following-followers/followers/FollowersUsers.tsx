@@ -5,6 +5,7 @@ import { useModal } from '@/common/hooks/useModal'
 import { Confirm } from '@/components/modals'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useTranslation } from '@/components/translation'
+import { useUserStore } from '@/store'
 import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
 import {
   DeleteUserButton,
@@ -47,7 +48,9 @@ export const FollowersUsers = ({
     callBack: () => deleteUserCallBack(),
   })
   const { t } = useTranslation()
-  const { userIdQuery } = useGetQueryUserNameUserId()
+  const { userNameQuery } = useGetQueryUserNameUserId()
+  const { userName } = useUserStore()
+  const isUserName: boolean = userName === userNameQuery
 
   return (
     <>
@@ -61,7 +64,7 @@ export const FollowersUsers = ({
               avatartSrc={user.avatars?.thumbnail.url || null}
               userName={user.userName}
             />
-            {!userIdQuery && (
+            {isUserName && (
               <>
                 {!user.isFollowing && (
                   <FollowUnfollowButton

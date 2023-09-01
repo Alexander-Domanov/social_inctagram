@@ -19,7 +19,9 @@ interface UserStore {
   uploadId: string
   setUploadId: (uploadId: string) => void
   userId: number | null
+  userName: string | null
   setUserId: (userId: number) => void
+  setUserName: (userName: string | null) => void
   postId: number | null
   setPostId: (id: number) => void
   hasBusinessAccount: boolean
@@ -39,6 +41,7 @@ export const useUserStore = create<UserStore>()(
     uploadId: '',
     hasBusinessAccount: false,
     userId: null,
+    userName: null,
     postId: null,
     descriptionLocal: '',
     followingCount: 0,
@@ -52,6 +55,9 @@ export const useUserStore = create<UserStore>()(
     },
     setUserId(userId) {
       set({ userId: userId })
+    },
+    setUserName(userName) {
+      set({ userName: userName })
     },
     setPostId(id) {
       set({ postId: id })

@@ -11,25 +11,25 @@ import plus from '@/assets/icons/plus-square.svg'
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
 import { useTranslation } from '@/components/translation'
 import { ModalManagerPost } from '@/modules/create-post-module'
-import { createPostEffect } from '@/modules/create-post-module/components/create-post/custom/custom'
 import { StateModalPostType } from '@/types'
 
 export const CreatePost = () => {
-  const { query } = useRouter()
+  const { query, pathname } = useRouter()
   const { t } = useTranslation()
 
   const { onCloseClick, modalOpen, setModalOpen } = useOpenCloseModal<StateModalPostType>({
-    closeOnRouteChange: true,
+    closeOnRouteChange: false,
   })
 
-  createPostEffect(setModalOpen, query)
+  // createPostEffect(setModalOpen, query)
 
   return (
     <div>
       <Link
         className="flex gap-[15px] items-center"
         href={{
-          query: { create: true },
+          pathname: pathname,
+          query: { ...query, create: true },
         }}
       >
         <Image src={modalOpen ? plus : plusOutline} alt={t.navBar.create} height={24} width={24} />
@@ -39,13 +39,13 @@ export const CreatePost = () => {
           {t.navBar.create}
         </div>
       </Link>
-      {query.create && (
+      {
         <ModalManagerPost
           onClose={onCloseClick}
           isModalOpen={modalOpen}
           setModalOpen={setModalOpen}
         />
-      )}
+      }
     </div>
   )
 }

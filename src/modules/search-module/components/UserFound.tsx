@@ -6,7 +6,7 @@ export const UserFound = ({
   redirectToUserProfilePage,
 }: {
   userItems: UserItemInterface[]
-  redirectToUserProfilePage: (value: string | null, userId: string | null) => void
+  redirectToUserProfilePage: (value: string | null) => void
 }) => {
   return (
     <div className="flex pt-4 flex-col gap-4">
@@ -22,10 +22,7 @@ export const UserFound = ({
                 src={user.avatars?.thumbnail.url || null}
               />
               <div className="flex flex-col text-light-100 text-sm leading-6 font-normal">
-                <span
-                  onClick={() => redirectToUserProfilePage(user.userName, user.id.toString())}
-                  className="linkText"
-                >
+                <span onClick={() => redirectToUserProfilePage(user.userName)} className="linkText">
                   {user.userName}
                 </span>
                 <span className="text-light-900 break-all">{`${
