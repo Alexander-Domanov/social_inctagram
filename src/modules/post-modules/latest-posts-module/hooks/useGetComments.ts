@@ -13,8 +13,9 @@ export const useGetComments = (postId: number | null) => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
+    isInitialLoading,
   } = useInfiniteQuery({
-    queryKey: ['comments', postId],
+    queryKey: ['post_comments', { postId }],
     queryFn: ({ pageParam = 1 }) => getPostComments(postId, pageParam),
     getNextPageParam: lastPage => {
       return lastPage.page * lastPage.pageSize < lastPage.totalCount ? lastPage.page + 1 : undefined
@@ -32,5 +33,6 @@ export const useGetComments = (postId: number | null) => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
+    isInitialLoading,
   }
 }

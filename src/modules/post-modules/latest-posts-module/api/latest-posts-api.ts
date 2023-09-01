@@ -1,7 +1,7 @@
 import {
   COMMENTS_PER_PAGE,
   POSTS_PER_PAGE,
-} from '@/modules/post-modules/latest-posts-module/contastants/latest-posts-constants'
+} from '@/modules/post-modules/latest-posts-module/constants/latest-posts-constants'
 import { authInstance } from '@/services'
 
 interface Image {
@@ -42,7 +42,7 @@ export interface Post {
       thumbnail: Image
       medium: Image
     }
-  }
+  }[]
 }
 
 interface GetPostsResponse {
@@ -54,12 +54,12 @@ interface GetPostsResponse {
 }
 
 interface GetPostsParams {
-  userId: number | undefined
+  userName: string | string[] | null
   page: number
 }
 
-export const getPosts = async ({ userId, page }: GetPostsParams) => {
-  const res = await authInstance.get<GetPostsResponse>(`posts/${userId}`, {
+export const getPosts = async ({ userName, page }: GetPostsParams) => {
+  const res = await authInstance.get<GetPostsResponse>(`posts/${userName}`, {
     params: {
       pageNumber: page,
       pageSize: POSTS_PER_PAGE,
@@ -84,7 +84,7 @@ export const deletePostImage = (postId: number, uploadId: string) => {
   return authInstance.delete(`posts/${postId}/images/${uploadId}`)
 }
 
-interface Comment {
+export interface Comment {
   id: number
   postId: number
   from: {
@@ -97,8 +97,25 @@ interface Comment {
   }
   content: string
   createdAt: string
-  answerCount: 0
-  likeCount: 0
+  answerCount: number
+  likeCount: number
+  isLiked: boolean
+}
+
+export interface Answer {
+  id: number
+  commentId: number
+  from: {
+    id: number
+    username: string
+    avatars: {
+      thumbnail: Image
+      medium: Image
+    }
+  }
+  content: string
+  createdAt: string
+  likeCount: number
   isLiked: boolean
 }
 
@@ -108,6 +125,14 @@ interface GetCommentsResponse {
   page: number
   pageSize: number
   items: Comment[]
+}
+
+interface GetCommentAnswersResponse {
+  totalCount: number
+  pagesCount: number
+  page: number
+  pageSize: number
+  items: Answer[]
 }
 
 export const getPostComments = async (postId: number | null, page: number) => {
@@ -133,8 +158,35 @@ export enum LikeStatus {
   DISLIKE = 'DISLIKE',
 }
 
-export const changePostListStatus = (postId: number | null, likeStatus: LikeStatus) => {
+export const changePostLikeStatus = (postId: number | null, likeStatus: LikeStatus) => {
   return authInstance.put(`posts/${postId}/like-status`, {
+    likeStatus,
+  })
+}
+
+export const getPostCommentAnswers = (postId: number, commentId: number) => {
+  return authInstance.get<GetCommentAnswersResponse>(
+    `posts/${postId}/comments/${commentId}/answers`
+  )
+}
+
+export const changePostCommentLikeStatus = (
+  postId: number | null,
+  commentId: number,
+  likeStatus: LikeStatus
+) => {
+  return authInstance.put(`posts/${postId}/comments/${commentId}/like-status`, {
+    likeStatus,
+  })
+}
+
+export const changePostCommentAnswerLikeStatus = (
+  postId: number | null,
+  commentId: number,
+  answerId: number,
+  likeStatus: LikeStatus
+) => {
+  return authInstance.put(`posts/${postId}/comments/${commentId}/answers/${answerId}/like-status`, {
     likeStatus,
   })
 }

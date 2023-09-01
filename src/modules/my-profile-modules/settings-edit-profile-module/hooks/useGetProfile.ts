@@ -1,7 +1,7 @@
 import { useGetProfileData } from '@/modules/my-profile-modules/settings-edit-profile-module'
 
 export const useGetProfile = () => {
-  const { data: profileData, isLoading: isProfileLoading } = useGetProfileData()
+  const { data: profileData, isFetching: isFetchingProfileData, isLoading } = useGetProfileData()
 
   const initialProfileData = {
     userName: profileData?.userName || '',
@@ -14,11 +14,12 @@ export const useGetProfile = () => {
     followers: profileData?.followersCount || 0,
     publications: profileData?.publicationsCount || 0,
   }
-  const profileAvatar = profileData?.avatars?.medium || ''
+  const profileAvatar = profileData?.avatars?.medium?.url || ''
 
   return {
     profileData: initialProfileData,
     profileAvatar,
-    isProfileLoading,
+    isFetchingProfileData,
+    isLoading,
   }
 }

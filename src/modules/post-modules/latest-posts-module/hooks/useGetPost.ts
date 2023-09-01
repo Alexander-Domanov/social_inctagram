@@ -13,7 +13,7 @@ export const useGetPost = (
     isLoading,
     isFetching,
   } = useQuery({
-    queryKey: ['post', postId],
+    queryKey: ['post', { postId }],
     onSuccess: data => {
       if (saveDescription) {
         saveDescription(data.description)

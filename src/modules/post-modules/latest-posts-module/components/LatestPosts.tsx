@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -7,20 +7,16 @@ import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { LatestPost } from '@/modules/post-modules/latest-posts-module/components/LatestPost'
 import { PostModal } from '@/modules/post-modules/latest-posts-module/components/PostModal'
 import { useGetLatestPosts } from '@/modules/post-modules/latest-posts-module/hooks/useGetLatestPosts'
-import { useMeQuery } from '@/services/hookMe'
 import { useUserStore } from '@/store'
 import { SkeletonPost } from '@/ui'
 import { useStoreIsLoadingPublication } from 'src/modules/create-post-module'
 
-export const LatestPosts: FC<{ userProfileId?: number | undefined }> = ({ userProfileId }) => {
-  const { data: me } = useMeQuery()
+export const LatestPosts = () => {
   const { setPostId } = useUserStore()
   const { query } = useRouter()
-  const userId = userProfileId ? userProfileId : me?.data?.userId
-  const userName = query.userName ? query.userName : 'user'
+  const userName = query.userName ? query.userName : null
   const { isLoading, isSuccess, data, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useGetLatestPosts({
-      userId,
       userName,
     })
   const [isOpenPostModal, setIsOpenPostModal] = useState(false)

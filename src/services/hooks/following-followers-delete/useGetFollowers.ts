@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
 import { getFollowersData } from '@/services/api/following-followers-delete-api/getFollowers'
@@ -16,6 +16,7 @@ export const useGetFollowers = ({
     hasNextPage: hasNextPageFollowers,
     isFetchingNextPage: isFetchNextPageFollowers,
     fetchNextPage: fetchNextPageFollowers,
+    isLoading: isLoadingFollowers,
   } = useInfiniteQuery(
     ['users-followers', search],
     ({ pageParam = 0 }) => getFollowersData({ userName, search, pageParam }),
@@ -29,7 +30,8 @@ export const useGetFollowers = ({
       },
       onError: (err: Error) => toast.error(err.message),
       enabled: Boolean(userName),
-      retry: false,
+      cacheTime: 0,
+      staleTime: 0,
     }
   )
 
@@ -41,5 +43,6 @@ export const useGetFollowers = ({
     isSuccessFollowers,
     isFetchNextPageFollowers,
     hasNextPageFollowers,
+    isLoadingFollowers,
   }
 }

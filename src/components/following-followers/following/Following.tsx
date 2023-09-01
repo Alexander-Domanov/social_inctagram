@@ -1,20 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { useInViewScrollEffect } from '@/common'
-import { useSearch } from '@/common/hooks/useSearch'
-import { FollowingUsers } from '@/components/following-followers/following/FollowingUsers'
+import { useGetQueryUserNameUserId, useInViewScrollEffect } from '@/common'
+import { FollowingUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
-import { ModalWithContent } from '@/components/modals'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
-import { useMeQuery } from '@/services/hookMe'
-import { FollowingFollowersComponentsType } from '@/types'
-import { InputSearch } from '@/ui'
+import { useSearchStore } from '@/store'
+import { Spinner } from '@/ui'
 
-export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
-  const { search, searchInput, setSearchInput } = useSearch()
-  const { data } = useMeQuery()
-  const myUserName = data?.data.userName as string | null
+export const Following = () => {
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null)
+  const { search } = useSearchStore()
+  const { userNameQuery } = useGetQueryUserNameUserId()
+
   const {
     followingData,
     refetchFollowing,
@@ -23,47 +21,53 @@ export const Following = ({ isModalOpen, onClose }: FollowingFollowersComponents
     isFetchNextPageFollowing,
     isSuccessFollowing,
     fetchNextPageFollowing,
+    isLoadingFollowing,
   } = userGetFollowings({
-    userName: myUserName,
+    userName: userNameQuery,
     search,
   })
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     refetch: refetchFollowing,
+    userId: currentUserId,
   })
   const { ref } = useInViewScrollEffect({
     hasNextPage: hasNextPageFollowing,
     fetchNextPage: fetchNextPageFollowing,
   })
+  const handleToggleSubscriptionsCallBack = (userId: number) => {
+    setCurrentUserId(userId)
+    useFollowUnfollowUser()
+  }
 
   return (
-    <ModalWithContent size="medium" isOpen={isModalOpen} onClose={onClose} title={'Following'}>
-      <div className={'w-full p-5'}>
-        <InputSearch
-          className="h-9 w-full"
-          placeholder={'Search'}
-          value={searchInput}
-          callBackSearch={setSearchInput}
-        />
-      </div>
-      <ScrollArea className="w-full h-[400px]">
-        {followingData?.pages
-          ? followingData.pages.map((users, index) => (
+    <>
+      {!isLoadingFollowing ? (
+        <>
+          {followingData?.pages ? (
+            followingData.pages.map((users, index) => (
               <FollowingUsers
                 key={index}
                 isRefetching={isRefetchingFollowing}
                 isLoadingButton={isLoadingButton}
-                useFollowUnfollowUser={useFollowUnfollowUser}
+                handleToggleSubscriptionsCallBack={handleToggleSubscriptionsCallBack}
                 items={users.items}
+                currentUserId={currentUserId}
               />
             ))
-          : 'Not found'}
-
-        <RenderLoadingIndicator
-          isSuccess={isSuccessFollowing}
-          isFetchNextPage={isFetchNextPageFollowing}
-          customRef={ref}
-        />
-      </ScrollArea>
-    </ModalWithContent>
+          ) : (
+            <NotFoundComponent message={'Not Found'} />
+          )}
+          <RenderLoadingIndicator
+            isSuccess={isSuccessFollowing}
+            isFetchNextPage={isFetchNextPageFollowing}
+            customRef={ref}
+          />
+        </>
+      ) : (
+        <div className="absolute h-full w-full flex justify-center items-center">
+          <Spinner />
+        </div>
+      )}
+    </>
   )
 }

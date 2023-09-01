@@ -3,13 +3,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { noRefetch } from '@/common'
 import { getPosts } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
 
-export const useGetLatestPosts = ({
-  userId,
-  userName,
-}: {
-  userId: number | undefined
-  userName: string | string[]
-}) => {
+export const useGetLatestPosts = ({ userName }: { userName: string | string[] | null }) => {
   const {
     data,
     isLoading,
@@ -20,13 +14,15 @@ export const useGetLatestPosts = ({
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['posts', `${userName}_${userId}`],
-    queryFn: ({ pageParam = 1 }) => getPosts({ userId, page: pageParam }),
+    queryKey: ['posts', `${userName}`],
+    queryFn: ({ pageParam = 1 }) => getPosts({ userName, page: pageParam }),
     getNextPageParam: (lastPage, _allPages) => {
       return lastPage.page * lastPage.pageSize < lastPage.totalCount ? lastPage.page + 1 : undefined
     },
-    enabled: !!userId,
+    enabled: !!userName,
     ...noRefetch,
+    cacheTime: 0,
+    staleTime: 0,
   })
 
   return {

@@ -16,6 +16,7 @@ export const userGetFollowings = ({
     hasNextPage: hasNextPageFollowing,
     isFetchingNextPage: isFetchNextPageFollowing,
     fetchNextPage: fetchNextPageFollowing,
+    isLoading: isLoadingFollowing,
   } = useInfiniteQuery(
     ['users-following', search],
     ({ pageParam = 0 }) => getFollowingData({ userName, search, pageParam }),
@@ -31,7 +32,6 @@ export const userGetFollowings = ({
       staleTime: 0,
       onError: (err: Error) => toast.error(err.message),
       enabled: Boolean(userName),
-      retry: false,
     }
   )
 
@@ -43,5 +43,6 @@ export const userGetFollowings = ({
     isFetchNextPageFollowing,
     hasNextPageFollowing,
     fetchNextPageFollowing,
+    isLoadingFollowing,
   }
 }

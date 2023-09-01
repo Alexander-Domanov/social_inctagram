@@ -1,37 +1,53 @@
 import React from 'react'
 
-import { FollowUnfollowButton, URLUsernameForModal } from '@/components/following-followers'
+import { useGetQueryUserNameUserId } from '@/common'
+import { NotFoundComponent } from '@/components/not-found/NotFound'
+import { useUserStore } from '@/store'
 import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
+import { FollowUnfollowButton, URLUsernameForModal } from 'src/components/following-followers'
 
 type FollowersUsersProps = {
   items: FollowingsFollowersType[]
-} & Omit<FollowUnfollowButtonPropsInterface, 'followOrUnfollow'>
+  handleToggleSubscriptionsCallBack: (userId: number) => void
+  currentUserId: number | null
+} & Omit<FollowUnfollowButtonPropsInterface, 'isFollowing' | 'handleToggleSubscriptionsCallBack'>
 export const FollowingUsers = ({
   items,
-  useFollowUnfollowUser,
+  currentUserId,
+  handleToggleSubscriptionsCallBack,
   isRefetching,
   isLoadingButton,
 }: FollowersUsersProps) => {
+  const { userNameQuery } = useGetQueryUserNameUserId()
+  const { userName } = useUserStore()
+  const isUserName: boolean = userName === userNameQuery
+
   return (
     <>
-      {items.map((user, index) => (
-        <div className="flex justify-between" key={index}>
-          <URLUsernameForModal
-            key={user.userId}
-            avatartSrc={user.avatars?.thumbnail.url || null}
-            userName={user.userName}
-          />
-          <FollowUnfollowButton
-            key={index}
-            followOrUnfollow={user.isFollowing}
-            useFollowUnfollowUser={() =>
-              useFollowUnfollowUser ? useFollowUnfollowUser(user.userId.toString()) : ''
-            }
-            isLoadingButton={isLoadingButton}
-            isRefetching={isRefetching}
-          />
-        </div>
-      ))}
+      {items.length > 0 ? (
+        items.map((user, index) => (
+          <div className="flex justify-between items-center" key={index}>
+            <URLUsernameForModal
+              key={user.userId}
+              avatartSrc={user.avatars?.thumbnail.url || null}
+              userName={user.userName}
+            />
+            {isUserName && (
+              <FollowUnfollowButton
+                key={index}
+                isFollowing={user.isFollowing}
+                handleToggleSubscriptionsCallBack={() =>
+                  handleToggleSubscriptionsCallBack(user.userId)
+                }
+                isLoadingButton={currentUserId === user.userId && isLoadingButton}
+                isRefetching={currentUserId === user.userId && isRefetching}
+              />
+            )}
+          </div>
+        ))
+      ) : (
+        <NotFoundComponent message={'Not Found'} />
+      )}
     </>
   )
 }

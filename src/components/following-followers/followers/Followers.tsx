@@ -1,20 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { useInViewScrollEffect } from '@/common'
-import { useSearch } from '@/common/hooks/useSearch'
-import { FollowersUsers } from '@/components/following-followers'
+import { useGetQueryUserNameUserId, useInViewScrollEffect } from '@/common'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
-import { ModalWithContent } from '@/components/modals'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useDeleteFollower, useFollowingOrUnfollowingUser, useGetFollowers } from '@/services'
-import { useMeQuery } from '@/services/hookMe'
-import { FollowingFollowersComponentsType } from '@/types'
-import { InputSearch } from '@/ui'
+import { useSearchStore } from '@/store'
+import { Spinner } from '@/ui'
+import { FollowersUsers } from 'src/components/following-followers'
 
-export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
-  const { search, searchInput, setSearchInput } = useSearch()
-  const { data } = useMeQuery()
-  const myUserName = data?.data.userName as string | null
+export const Followers = () => {
+  const { userNameQuery } = useGetQueryUserNameUserId()
+  const { search } = useSearchStore()
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null)
+  const [currentDeleteUserId, setCurrentDeleteUserId] = useState<number | null>(null)
+  const [textModal, setTextModal] = useState<string | null>(null)
+
   const {
     dataFollowersItems,
     refetchFollowers,
@@ -23,55 +23,71 @@ export const Followers = ({ isModalOpen, onClose }: FollowingFollowersComponents
     fetchNextPageFollowers,
     isFetchNextPageFollowers,
     hasNextPageFollowers,
+    isLoadingFollowers,
   } = useGetFollowers({
-    userName: myUserName,
+    userName: userNameQuery,
     search,
   })
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     refetch: refetchFollowers,
+    userId: currentUserId,
   })
 
-  const { useDeleteFollowerUser, isLoading } = useDeleteFollower({ refetch: refetchFollowers })
-  const deleteUserCallBack = (userId: number) => {
-    useDeleteFollowerUser(userId)
-  }
+  const { useDeleteFollowerUser, isLoadingDeleteUser } = useDeleteFollower({
+    refetch: refetchFollowers,
+  })
   const { ref } = useInViewScrollEffect({
     hasNextPage: hasNextPageFollowers,
     fetchNextPage: fetchNextPageFollowers,
   })
+  const handleToggleSubscriptionsCallBack = ({ userId }: { userId: number }) => {
+    useFollowUnfollowUser()
+    setCurrentUserId(userId)
+  }
+  const deleteUserCallBack = () => {
+    if (currentDeleteUserId) {
+      useDeleteFollowerUser(currentDeleteUserId)
+    }
+  }
 
   return (
-    <ModalWithContent size="medium" isOpen={isModalOpen} onClose={onClose} title={'Followers'}>
-      <div className={'w-full p-5'}>
-        <InputSearch
-          className="h-9 w-full"
-          placeholder={'Search'}
-          value={searchInput}
-          callBackSearch={setSearchInput}
-        />
-      </div>
-      <ScrollArea className="max-w-full h-[400px]">
-        {dataFollowersItems?.pages
-          ? dataFollowersItems.pages.map(
+    <>
+      {!isLoadingFollowers ? (
+        <>
+          {dataFollowersItems?.pages ? (
+            dataFollowersItems.pages.map(
               (users, index) =>
                 users.items && (
                   <FollowersUsers
                     key={index}
                     isRefetching={isRefetchingFollowers}
                     isLoadingButton={isLoadingButton}
-                    useFollowUnfollowUser={useFollowUnfollowUser}
+                    isLoadingDeleteUser={isLoadingDeleteUser}
+                    handleToggleSubscriptionsCallBack={handleToggleSubscriptionsCallBack}
+                    currentUserId={currentUserId}
                     items={users.items}
+                    setCurrentDeleteUserId={setCurrentDeleteUserId}
+                    currentDeleteUserId={currentDeleteUserId}
                     deleteUserCallBack={deleteUserCallBack}
+                    textModal={textModal}
+                    setTextModal={setTextModal}
                   />
                 )
             )
-          : 'Not found'}
-        <RenderLoadingIndicator
-          isFetchNextPage={isFetchNextPageFollowers}
-          isSuccess={isSuccessFollowers}
-          customRef={ref}
-        />
-      </ScrollArea>
-    </ModalWithContent>
+          ) : (
+            <NotFoundComponent message={'Not Found'} />
+          )}
+          <RenderLoadingIndicator
+            isFetchNextPage={isFetchNextPageFollowers}
+            isSuccess={isSuccessFollowers}
+            customRef={ref}
+          />
+        </>
+      ) : (
+        <div className="absolute h-full w-full flex justify-center items-center">
+          <Spinner />
+        </div>
+      )}
+    </>
   )
 }

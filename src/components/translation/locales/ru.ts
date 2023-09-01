@@ -1,3 +1,4 @@
+import { pluralizeRu } from '@/common'
 import { LocaleType } from '@/components/translation'
 
 export const ru: LocaleType = {
@@ -11,12 +12,80 @@ export const ru: LocaleType = {
     favorites: 'Избранное',
     logout: 'Выйти',
   },
+  confirm: {
+    buttonYes: 'Да',
+    buttonNo: 'Нет',
+  },
   profile: {
     profilePage: {
       buttonProfileSettings: 'Настройки профиля',
       following: 'Подписки',
       followers: 'Подписчики',
+      getCountFollower(count: number) {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'one':
+            return `${count} Подписчик`
+          case 'few':
+            return `${count} Подписчика`
+          case 'many':
+            return `${count} Подписчиков`
+        }
+      },
+      getCountFollowing(count: number) {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'one':
+            return `${count} Подписка`
+          case 'few':
+            return `${count} Подписки`
+          case 'many':
+            return `${count} Подписок`
+        }
+      },
+      getCountFollowerPage(count: number) {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'one':
+            return `Подписчик`
+          case 'few':
+            return `Подписчика`
+          case 'many':
+            return `Подписчиков`
+        }
+      },
+      getCountFollowingPage(count: number) {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'one':
+            return `Подписка`
+          case 'few':
+            return `Подписки`
+          case 'many':
+            return `Подписок`
+        }
+      },
+      getCountPublicationPage(count: number): string | undefined {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'one':
+            return `Публикация`
+          case 'few':
+            return `Публикации`
+          case 'many':
+            return `Публикаций`
+        }
+      },
+
+      delete: 'Удалить',
       Publications: 'Публикации',
+      confirmTitleDeleteFollowing: 'Удалить подписку',
+      confirmDescriptionDeleteFollowing: 'Вы действительно хотите удалить подписку на ',
     },
     settingsProfile: {
       settingsProfileTabs: {
@@ -48,5 +117,11 @@ export const ru: LocaleType = {
     buttonFollow: 'Подписаться',
     buttonUnfollow: 'Отписаться',
   },
-  search: { searchTitle: 'Поиск', searchInput: 'Поиск', recentRequests: 'Недавние запросы' },
+  search: {
+    searchTitle: 'Поиск',
+    searchInput: 'Поиск',
+    recentRequests: 'Недавние запросы',
+    noRequests: 'Нет недавних запросов',
+    placeEmpty: 'Упс! Здесь выглядит пусто!',
+  },
 }

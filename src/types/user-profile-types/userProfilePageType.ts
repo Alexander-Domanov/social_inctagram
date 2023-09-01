@@ -1,4 +1,4 @@
-import { UserProfileAvatarInterface } from '@/types/user-profile-avatar-type/UserProfileAvatarType'
+import { UserProfileAvatarInterface } from '@/types/user-profile-types/user-profile-avatar-type/UserProfileAvatarType'
 
 export interface userProfilePageData {
   aboutMe: string | null
@@ -16,4 +16,4 @@ export interface userProfilePageData {
   userName: string
 }
 
-export type userQueryType = string | string[]
+export type userQueryType = string | string[] | number | null
