@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 
 import { useGetQueryUserNameUserId, useInViewScrollEffect } from '@/common'
-import { useSearch } from '@/common/hooks/useSearch'
 import { FollowingUsers } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
+import { useSearchStore } from '@/store'
 import { Spinner } from '@/ui'
 
 export const Following = () => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
-  const { search } = useSearch()
+  const { search } = useSearchStore()
   const { userNameQuery } = useGetQueryUserNameUserId()
 
   const {
