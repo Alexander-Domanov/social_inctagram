@@ -10,7 +10,9 @@ import { SliderImagesPost } from '@/components/slider/SliderImagesPosts'
 import { useTranslation } from '@/components/translation'
 import { LikesMessageSendBlock } from '@/modules/home-module'
 import { AddCommentForm } from '@/modules/post-modules/latest-posts-module/components/AddCommentForm'
+
 import { PostActions } from '@/modules/post-modules/latest-posts-module/components/PostActions'
+
 import { PostModal } from '@/modules/post-modules/latest-posts-module/components/PostModal'
 import { useGetPublication } from '@/services'
 import { useUserStore } from '@/store'
@@ -78,7 +80,9 @@ export const HomePage = () => {
                     publication={publication}
                     postId={postId}
                     setPostId={() => setPostId(publication.id)}
+
                     onPostClick={() => onPostClick(publication.id)}
+
                   >
                     <div className="flex mt-5 gap-3 w-full">
                       <Avatar

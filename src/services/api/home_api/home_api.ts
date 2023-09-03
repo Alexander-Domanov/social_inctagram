@@ -43,8 +43,10 @@ export type UserPublicationType = {
   description: string
   location: string
   images: UserPublicationsImages[]
+
   createdAt: string
   updatedAt: string
+
   commentCount: number
   likeCount: number
   userName: string
