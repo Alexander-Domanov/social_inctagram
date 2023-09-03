@@ -13,6 +13,7 @@ export const useChangePostLikeStatus = (postId: number | null, likeStatus: LikeS
     mutationFn: () => changePostLikeStatus(postId, likeStatus),
     onSuccess: () => {
       client.invalidateQueries({ queryKey: ['post', { postId }] })
+      client.invalidateQueries({ queryKey: ['publications'] })
     },
   })
 

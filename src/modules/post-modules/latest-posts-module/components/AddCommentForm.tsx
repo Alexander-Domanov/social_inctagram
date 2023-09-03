@@ -4,9 +4,10 @@ import { useAddComment } from '@/modules/post-modules/latest-posts-module/hooks/
 
 interface Props {
   postId: number | null
+  setPostId?: () => void
 }
 
-export const AddCommentForm: FC<Props> = ({ postId }) => {
+export const AddCommentForm: FC<Props> = ({ postId, setPostId }) => {
   const [comment, setComment] = useState('')
   const { mutateAsync } = useAddComment(postId, comment)
 
@@ -25,6 +26,7 @@ export const AddCommentForm: FC<Props> = ({ postId }) => {
     >
       <div>
         <input
+          onClick={() => (setPostId ? setPostId() : null)}
           type="text"
           className="text-white placeholder-light-900 h-6 w-full bg-transparent outline-none text-sm"
           placeholder="Add a Comment..."
