@@ -7,6 +7,7 @@ export const useGetPost = (
   postId: number | null,
   saveDescription?: (description: string) => void
 ) => {
+  const client = {}
   const {
     data: post,
     isError,
