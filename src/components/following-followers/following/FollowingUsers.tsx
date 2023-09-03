@@ -27,11 +27,13 @@ export const FollowingUsers = ({
       {items.length > 0 ? (
         items.map((user, index) => (
           <div className="flex justify-between items-center" key={index}>
-            <URLUsernameForModal
-              key={user.userId}
-              avatartSrc={user.avatars?.thumbnail.url || null}
-              userName={user.userName}
-            />
+            <div className="flex p-4 ">
+              <URLUsernameForModal
+                avatartSrc={user.avatars?.thumbnail.url || null}
+                userName={user.userName}
+                className={'w-[150px]'}
+              />
+            </div>
             {isUserName && (
               <FollowUnfollowButton
                 key={index}
