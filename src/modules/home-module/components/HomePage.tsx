@@ -10,11 +10,11 @@ import { SliderImagesPost } from '@/components/slider/SliderImagesPosts'
 import { useTranslation } from '@/components/translation'
 import { LikesMessageSendBlock } from '@/modules/home-module'
 import { AddCommentForm } from '@/modules/post-modules/latest-posts-module/components/AddCommentForm'
+import { PostActions } from '@/modules/post-modules/latest-posts-module/components/PostActions'
 import { PostModal } from '@/modules/post-modules/latest-posts-module/components/PostModal'
 import { useGetPublication } from '@/services'
 import { useUserStore } from '@/store'
 import { Avatar, Spinner } from '@/ui'
-import {PostActions} from "@/modules/post-modules/latest-posts-module/components/PostActions";
 
 export const HomePage = () => {
   const { setPostId, postId } = useUserStore()

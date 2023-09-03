@@ -21,7 +21,8 @@ export const useGetComments = (postId: number | null) => {
       return lastPage.page * lastPage.pageSize < lastPage.totalCount ? lastPage.page + 1 : undefined
     },
     enabled: !!postId,
-    ...noRefetch,
+    cacheTime: 0,
+    staleTime: 0,
   })
 
   return {
