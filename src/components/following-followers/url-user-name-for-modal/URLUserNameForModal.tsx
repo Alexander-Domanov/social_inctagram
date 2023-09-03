@@ -8,9 +8,11 @@ import { Avatar } from '@/ui'
 export const URLUsernameForModal = ({
   avatartSrc,
   userName,
+  className,
 }: {
   avatartSrc: string | null
   userName: string
+  className?: string
 }) => {
   const router = useRouter()
   const callBack = () => {
@@ -19,10 +21,10 @@ export const URLUsernameForModal = ({
 
   return (
     <>
-      <div className="p-4 flex justify-between text-light-100 leading-6 font-semibold text-base">
-        <div className=" flex gap-3 items-center">
+      <div className="flex justify-between text-light-100 leading-6 font-semibold text-base">
+        <div className="flex gap-3 items-center">
           <Avatar src={avatartSrc} width={36} height={36} alt={''} />
-          <span className="linkText w-[150px] overflow-hidden truncate" onClick={callBack}>
+          <span className={`linkText overflow-hidden truncate ${className}`} onClick={callBack}>
             {userName}
           </span>
         </div>

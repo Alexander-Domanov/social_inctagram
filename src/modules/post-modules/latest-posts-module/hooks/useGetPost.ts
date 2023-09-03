@@ -23,6 +23,8 @@ export const useGetPost = (
     queryFn: () => getPost(postId),
     enabled: !!postId,
     ...noRefetch,
+    cacheTime: 0,
+    staleTime: 0,
   })
 
   return { post, isError, isLoading, isFetching }
