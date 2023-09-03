@@ -1,8 +1,5 @@
 import React, { FC, useState } from 'react'
 
-import Image from 'next/image'
-
-import preloader from '@/assets/gif/loadingGrey.gif'
 import { PostCommentAnswer } from '@/modules/post-modules/latest-posts-module/components/PostCommentAnswer'
 import { useGetCommentAnswers } from '@/modules/post-modules/latest-posts-module/hooks/useGetCommentAnswers'
 import { Spinner } from '@/ui'
@@ -11,11 +8,12 @@ interface Props {
   answerCount: number
   postId: number
   commentId: number
+  focusInput: () => void
 }
 
-export const PostCommentAnswers: FC<Props> = ({ answerCount, commentId, postId }) => {
+export const PostCommentAnswers: FC<Props> = ({ answerCount, commentId, postId, focusInput }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const { data, isFetching, isInitialLoading } = useGetCommentAnswers(postId, commentId, isOpen)
+  const { data, isInitialLoading } = useGetCommentAnswers(postId, commentId, isOpen)
 
   return (
     <div className="mt-2 ml-12 flex flex-col">
@@ -24,7 +22,7 @@ export const PostCommentAnswers: FC<Props> = ({ answerCount, commentId, postId }
         onClick={() => setIsOpen(prev => !prev)}
       >
         <span className="h-[1px] w-6 bg-light-900 mr-3"></span>
-        {`${isOpen ? 'Hide Answers' : 'Show answers'} ${answerCount}`}
+        {`${isOpen ? 'Hide Answers' : 'Show answers'} (${answerCount})`}
       </div>
 
       {isInitialLoading && (
@@ -37,7 +35,12 @@ export const PostCommentAnswers: FC<Props> = ({ answerCount, commentId, postId }
         {isOpen &&
           data &&
           data.data.items.map(answer => (
-            <PostCommentAnswer answer={answer} postId={postId} key={answer.id} />
+            <PostCommentAnswer
+              answer={answer}
+              postId={postId}
+              key={answer.id}
+              focusInput={focusInput}
+            />
           ))}
       </div>
     </div>

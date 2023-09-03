@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 
 import dayjs from 'dayjs'
 import { FaTimes } from 'react-icons/fa'
@@ -30,9 +30,25 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
     setDescriptionLocal(description)
   })
 
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const focusInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }
+
   const onRequestClose = () => {
     onClose()
   }
+
+  useEffect(() => {
+    console.log(inputRef)
+
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [inputRef])
 
   return (
     <Modal
@@ -101,12 +117,12 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
               </div>
             </div>
 
-            <PostComments postId={postId} />
+            <PostComments postId={postId} focusInput={focusInput} />
           </ScrollArea>
 
           <PostModalFooter />
 
-          <AddCommentForm postId={postId} />
+          <AddCommentForm postId={postId} ref={inputRef} />
         </div>
       </div>
     </Modal>

@@ -1,21 +1,38 @@
-import { FC, FormEvent, useState } from 'react'
+import { FormEvent, forwardRef, useState } from 'react'
 
 import { useAddComment } from '@/modules/post-modules/latest-posts-module/hooks/useAddComment'
+import { useAddCommentAnswer } from '@/modules/post-modules/latest-posts-module/hooks/useAddCommentAnswer'
+import { useModalsStore } from '@/store'
 
 interface Props {
   postId: number | null
 }
 
-export const AddCommentForm: FC<Props> = ({ postId }) => {
+const AddCommentForm = forwardRef<HTMLInputElement, Props>(({ postId }, inputRef) => {
   const [comment, setComment] = useState('')
-  const { mutateAsync } = useAddComment(postId, comment)
+  const { postModal } = useModalsStore()
+  const { addCommentAsync } = useAddComment(postId, comment)
+  const { addCommentAnswerAsync } = useAddCommentAnswer(postId, postModal.commentId, comment)
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    mutateAsync().then(() => {
-      setComment('')
-    })
+    switch (postModal.replyTo) {
+      case 'post': {
+        addCommentAsync().then(() => {
+          setComment('')
+          postModal.setReply('post', null)
+        })
+        break
+      }
+
+      case 'comment': {
+        addCommentAnswerAsync().then(() => {
+          setComment('')
+          postModal.setReply('post', null)
+        })
+      }
+    }
   }
 
   return (
@@ -32,6 +49,7 @@ export const AddCommentForm: FC<Props> = ({ postId }) => {
           onChange={e => setComment(e.target.value)}
           required
           minLength={2}
+          ref={inputRef}
         />
       </div>
 
@@ -42,4 +60,8 @@ export const AddCommentForm: FC<Props> = ({ postId }) => {
       </div>
     </form>
   )
-}
+})
+
+AddCommentForm.displayName = 'AddCommentForm'
+
+export { AddCommentForm }

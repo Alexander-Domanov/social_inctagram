@@ -6,22 +6,33 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 import { getTimeFromNow } from '@/common/helpers/getTimeFromNow'
 import { Answer, LikeStatus } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
 import { useChangePostCommentAnswerLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostCommentAnswerLikeStatus'
+import { useModalsStore } from '@/store'
 import { Avatar } from '@/ui'
 
 interface Props {
   postId: number | null
   answer: Answer
+  focusInput: () => void
 }
 
-export const PostCommentAnswer: FC<Props> = ({ answer, postId }) => {
-  const { isLoading, mutate } = useChangePostCommentAnswerLikeStatus(
+export const PostCommentAnswer: FC<Props> = ({ answer, postId, focusInput }) => {
+  const { mutate } = useChangePostCommentAnswerLikeStatus(
     postId,
     answer.commentId,
     answer.id,
     answer.isLiked ? LikeStatus.NONE : LikeStatus.LIKE
   )
+
+  const { postModal } = useModalsStore()
+
   const onLikeClick = () => {
     mutate()
+  }
+
+  const onAnswerClick = () => {
+    postModal.setReply('comment', answer.commentId)
+
+    focusInput()
   }
 
   return (
@@ -51,7 +62,9 @@ export const PostCommentAnswer: FC<Props> = ({ answer, postId }) => {
 
             {answer.likeCount > 0 && <div className="font-semibold">Like: {answer.likeCount}</div>}
 
-            <button className="font-semibold">Answer</button>
+            <button className="font-semibold" onClick={onAnswerClick}>
+              Answer
+            </button>
           </div>
         </div>
 
