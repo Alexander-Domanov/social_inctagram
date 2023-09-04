@@ -10,21 +10,31 @@ import {
 } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
 import { PostCommentAnswers } from '@/modules/post-modules/latest-posts-module/components/PostCommentAnswers'
 import { useChangePostCommentLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostCommentLikeStatus'
+import { useModalsStore } from '@/store'
 import { Avatar } from '@/ui'
 
 interface Props {
   comment: Comment
+  focusInput: () => void
 }
 
-export const PostComment: FC<Props> = ({ comment }) => {
+export const PostComment: FC<Props> = ({ comment, focusInput }) => {
   const { mutate } = useChangePostCommentLikeStatus(
     comment.postId,
     comment.id,
     comment.isLiked ? LikeStatus.NONE : LikeStatus.LIKE
   )
 
+  const { postModal } = useModalsStore()
+
   const onLikeClick = () => {
     mutate()
+  }
+
+  const onAnswerClick = () => {
+    postModal.setReply('comment', comment.id)
+
+    focusInput()
   }
 
   return (
@@ -56,7 +66,9 @@ export const PostComment: FC<Props> = ({ comment }) => {
               <div className="font-semibold">Like: {comment.likeCount}</div>
             )}
 
-            <button className="font-semibold">Answer</button>
+            <button className="font-semibold" onClick={onAnswerClick}>
+              Answer
+            </button>
           </div>
         </div>
 
@@ -75,6 +87,7 @@ export const PostComment: FC<Props> = ({ comment }) => {
           answerCount={comment.answerCount}
           postId={comment.postId}
           commentId={comment.id}
+          focusInput={focusInput}
         />
       )}
     </div>

@@ -5,7 +5,12 @@ import { addPostComment } from '@/modules/post-modules/latest-posts-module/api/l
 export const useAddComment = (postId: number | null, comment: string) => {
   const client = useQueryClient()
 
-  const { isLoading, mutateAsync, data, isSuccess } = useMutation({
+  const {
+    isLoading,
+    mutateAsync: addCommentAsync,
+    data,
+    isSuccess,
+  } = useMutation({
     mutationKey: ['add-comment'],
     mutationFn: () => addPostComment(postId, comment),
     onSuccess: () => {
@@ -14,5 +19,5 @@ export const useAddComment = (postId: number | null, comment: string) => {
     },
   })
 
-  return { mutateAsync, data, isLoading, isSuccess }
+  return { addCommentAsync, data, isLoading, isSuccess }
 }

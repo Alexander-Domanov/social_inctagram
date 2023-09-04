@@ -9,14 +9,29 @@ interface Props {
 
 export const AddCommentForm: FC<Props> = ({ postId, setPostId }) => {
   const [comment, setComment] = useState('')
-  const { mutateAsync } = useAddComment(postId, comment)
+  const { postModal } = useModalsStore()
+  const { addCommentAsync } = useAddComment(postId, comment)
+  const { addCommentAnswerAsync } = useAddCommentAnswer(postId, postModal.commentId, comment)
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    mutateAsync().then(() => {
-      setComment('')
-    })
+    switch (postModal.replyTo) {
+      case 'post': {
+        addCommentAsync().then(() => {
+          setComment('')
+          postModal.setReply('post', null)
+        })
+        break
+      }
+
+      case 'comment': {
+        addCommentAnswerAsync().then(() => {
+          setComment('')
+          postModal.setReply('post', null)
+        })
+      }
+    }
   }
 
   return (
@@ -34,6 +49,7 @@ export const AddCommentForm: FC<Props> = ({ postId, setPostId }) => {
           onChange={e => setComment(e.target.value)}
           required
           minLength={2}
+          ref={inputRef}
         />
       </div>
 
@@ -44,4 +60,8 @@ export const AddCommentForm: FC<Props> = ({ postId, setPostId }) => {
       </div>
     </form>
   )
-}
+})
+
+AddCommentForm.displayName = 'AddCommentForm'
+
+export { AddCommentForm }

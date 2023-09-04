@@ -1,20 +1,17 @@
 import { FC, Fragment, useEffect } from 'react'
 
-import dayjs from 'dayjs'
-import Image from 'next/image'
 import { useInView } from 'react-intersection-observer'
 
-import preloader from '@/assets/gif/loadingGrey.gif'
 import { PostComment } from '@/modules/post-modules/latest-posts-module/components/PostComment'
-import { PostCommentAnswers } from '@/modules/post-modules/latest-posts-module/components/PostCommentAnswers'
 import { useGetComments } from '@/modules/post-modules/latest-posts-module/hooks/useGetComments'
-import { Avatar, Spinner } from '@/ui'
+import { Spinner } from '@/ui'
 
 interface Props {
   postId: number | null
+  focusInput: () => void
 }
 
-export const PostComments: FC<Props> = ({ postId }) => {
+export const PostComments: FC<Props> = ({ postId, focusInput }) => {
   const { data, isFetchingNextPage, hasNextPage, fetchNextPage, isSuccess, isInitialLoading } =
     useGetComments(postId)
 
@@ -39,7 +36,10 @@ export const PostComments: FC<Props> = ({ postId }) => {
       <>
         {data?.pages.map((page, idx) => (
           <Fragment key={idx}>
-            {page && page.items.map(comment => <PostComment key={comment.id} comment={comment} />)}
+            {page &&
+              page.items.map(comment => (
+                <PostComment key={comment.id} comment={comment} focusInput={focusInput} />
+              ))}
           </Fragment>
         ))}
       </>
