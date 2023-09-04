@@ -62,9 +62,11 @@ export const PostActions: FC<Props> = ({ post, isLoading }) => {
                 <FaEnvelope className={iconClassname} /> Report
               </DropdownMenuItem>
 
-              <DropdownMenuItem>
-                <FaUserMinus className={iconClassname} /> Unfollow
-              </DropdownMenuItem>
+              {
+                <DropdownMenuItem>
+                  <FaUserMinus className={iconClassname} /> Unfollow
+                </DropdownMenuItem>
+              }
             </>
           )}
         </DropdownMenuContent>

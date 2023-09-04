@@ -15,7 +15,6 @@ export type LikesMessageSendBlockType = {
   postId: number | null
   setPostId: () => void
   onPostClick: () => void
-
 }
 
 export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSendBlockType> = ({
@@ -24,7 +23,6 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
   setPostId,
   postId,
   onPostClick,
-
 }) => {
   const { mutate } = useChangePostLikeStatus(
     postId,
@@ -59,7 +57,6 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
       {children}
 
       <div className="flex items-center mt-5 text-white text-sm leading-none h-6">
-        
         {publication?.likeCount! > 0 && (
           <div className="mr-3 flex items-center">
             {publication?.newLikes?.map((like, idx, array) => (

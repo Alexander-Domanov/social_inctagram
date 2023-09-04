@@ -1,13 +1,15 @@
-import { FC, FormEvent, useState } from 'react'
+import { FormEvent, forwardRef, useState } from 'react'
 
 import { useAddComment } from '@/modules/post-modules/latest-posts-module/hooks/useAddComment'
+import { useAddCommentAnswer } from '@/modules/post-modules/latest-posts-module/hooks/useAddCommentAnswer'
+import { useModalsStore } from '@/store'
 
 interface Props {
   postId: number | null
   setPostId?: () => void
 }
 
-export const AddCommentForm: FC<Props> = ({ postId, setPostId }) => {
+const AddCommentForm = forwardRef<HTMLInputElement, Props>(({ postId, setPostId }, inputRef) => {
   const [comment, setComment] = useState('')
   const { postModal } = useModalsStore()
   const { addCommentAsync } = useAddComment(postId, comment)
