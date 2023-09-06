@@ -1,9 +1,10 @@
 import { FC } from 'react'
 
 import dayjs from 'dayjs'
-import { FaHeart, FaRegBookmark, FaRegHeart, FaRegPaperPlane } from 'react-icons/fa6'
+import { FaHeart, FaRegHeart, FaRegPaperPlane } from 'react-icons/fa6'
 
 import { LikeStatus } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
+import { PostFavorite } from '@/modules/post-modules/latest-posts-module/components/PostFavorite'
 import { useChangePostLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostLikeStatus'
 import { useGetPost } from '@/modules/post-modules/latest-posts-module/hooks/useGetPost'
 import { useUserStore } from '@/store'
@@ -32,9 +33,7 @@ export const PostModalFooter: FC = () => {
           <FaRegPaperPlane />
         </button>
 
-        <button className="w-6 h-6 ml-auto">
-          <FaRegBookmark />
-        </button>
+        <PostFavorite postId={postId} post={post} />
       </div>
 
       <div className="flex items-center mt-3 text-white text-sm leading-none h-6">
