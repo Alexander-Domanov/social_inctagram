@@ -43,6 +43,7 @@ export interface Post {
       medium: Image
     }
   }[]
+  isFavorite: boolean
 }
 
 interface GetPostsResponse {
@@ -69,13 +70,8 @@ export const getPosts = async ({ userName, page }: GetPostsParams) => {
   return res.data
 }
 
-interface GetPostResponse extends Post {
-  createdAt: string
-  updatedAt: string
-}
-
 export const getPost = async (postId: number | null) => {
-  const res = await authInstance.get<GetPostResponse>(`posts/p/${postId}`)
+  const res = await authInstance.get<Post>(`posts/p/${postId}`)
 
   return res.data
 }
@@ -199,4 +195,8 @@ export const changePostCommentAnswerLikeStatus = (
   return authInstance.put(`posts/${postId}/comments/${commentId}/answers/${answerId}/like-status`, {
     likeStatus,
   })
+}
+
+export const toggleFavoritePost = (postId: number | null) => {
+  return authInstance.post(`users/favorite/${postId}`)
 }
