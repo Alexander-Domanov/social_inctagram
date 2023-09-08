@@ -5,14 +5,14 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { PostImagesSlide } from '@/modules/post-modules/latest-posts-module/components/PostImagesSlide'
 import { useGetPost } from '@/modules/post-modules/latest-posts-module/hooks/useGetPost'
-import { useUserStore } from '@/store'
+import { useModalsStore } from '@/store'
 
 interface IPostImagesSlider {
   showIconDelete?: boolean
 }
 
 export const PostImagesSlider: FC<IPostImagesSlider> = ({ showIconDelete }) => {
-  const { postId } = useUserStore()
+  const { postId } = useModalsStore(state => state.postModal)
 
   const { post, isLoading, isFetching } = useGetPost(postId)
 
