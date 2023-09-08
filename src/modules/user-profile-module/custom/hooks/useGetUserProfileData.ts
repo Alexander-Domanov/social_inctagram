@@ -10,7 +10,7 @@ export const useGetUserProfileData = (userNameQuery: userQueryType) => {
     refetch: refetchUserProfile,
     isRefetching: isRefetchingUserProfile,
   } = useQuery({
-    queryKey: ['get-user-profile-page-page', userNameQuery],
+    queryKey: ['get-user-profile-page', userNameQuery],
     queryFn: () => getUserProfile(userNameQuery),
     select: (data: any): userProfilePageData => data?.data,
     staleTime: 0,

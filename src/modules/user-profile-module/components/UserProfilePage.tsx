@@ -23,7 +23,7 @@ export const UserProfilePage = () => {
   const { userNameQuery } = useGetQueryUserNameUserId()
   const { userId: myUserID } = useUserStore()
 
-  const [currentUserId, setCurrentUserId] = useState<number | null>()
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null)
   const {
     userProfileData,
     userProfileAvatar,

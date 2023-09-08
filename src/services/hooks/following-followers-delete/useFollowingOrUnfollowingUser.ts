@@ -3,7 +3,6 @@ import { toast } from 'react-toastify'
 
 import { noRefetch } from '@/common'
 import { postUserFollowingUnfollowing } from '@/modules/user-profile-module/api/postUserFollowingUnfollowing'
-import { userQueryType } from '@/types'
 
 export const useFollowingOrUnfollowingUser = ({
   refetch,
@@ -23,6 +22,9 @@ export const useFollowingOrUnfollowingUser = ({
         }
         if (userId) {
           client.invalidateQueries({ queryKey: ['get-profile-page'] })
+          client.invalidateQueries({ queryKey: ['publications'] })
+          client.invalidateQueries({ queryKey: ['get-user-profile-page'] })
+          client.invalidateQueries({ queryKey: ['post'] })
         }
       },
       onError: (err: Error) => toast.error(err.message),

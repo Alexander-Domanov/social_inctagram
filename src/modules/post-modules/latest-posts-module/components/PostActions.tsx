@@ -69,7 +69,7 @@ export const PostActions: FC<Props> = ({ post, isLoading }) => {
                 <FaEnvelope className={iconClassname} /> Report
               </DropdownMenuItem>
 
-              {post?.isFollowedBy ? (
+              {post?.isFollowing ? (
                 <DropdownMenuItem>
                   <FaUserMinus className={iconClassname} /> Unfollow
                 </DropdownMenuItem>
