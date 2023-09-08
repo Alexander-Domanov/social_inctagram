@@ -148,6 +148,16 @@ export const addPostComment = async (postId: number | null, comment: string) => 
   })
 }
 
+export const addPostCommentAnswer = async (
+  postId: number | null,
+  commentId: number | null,
+  comment: string
+) => {
+  return authInstance.post<Answer>(`posts/${postId}/comments/${commentId}/answers`, {
+    content: comment,
+  })
+}
+
 export enum LikeStatus {
   NONE = 'NONE',
   LIKE = 'LIKE',
