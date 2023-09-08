@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { formatDistance, parseISO } from 'date-fns'
 
@@ -11,9 +11,8 @@ import { useTranslation } from '@/components/translation'
 import { LikesMessageSendBlock } from '@/modules/home-module'
 import { AddCommentForm } from '@/modules/post-modules/latest-posts-module/components/AddCommentForm'
 import { PostActions } from '@/modules/post-modules/latest-posts-module/components/PostActions'
-import { PostModal } from '@/modules/post-modules/latest-posts-module/components/PostModal'
 import { useGetPublication } from '@/services'
-import { useUserStore } from '@/store'
+import { useModalsStore, useUserStore } from '@/store'
 import { Avatar, Spinner } from '@/ui'
 
 export const HomePage = () => {
@@ -27,20 +26,16 @@ export const HomePage = () => {
     isLoadingPublications,
   } = useGetPublication()
   const { locale } = useTranslation()
-  const [isOpenPostModal, setIsOpenPostModal] = useState(false)
-
+  const { setPostIdAndOpenModal } = useModalsStore(state => state.postModal)
   const localeTime: Locale | undefined = localTimeDisplayLanguageInThePost[locale || 'en']
   const { ref } = useInViewScrollEffect({
     hasNextPage: hasNextPagePublications,
     fetchNextPage: fetchNextPublications,
   })
 
-  const onClose = () => {
-    setIsOpenPostModal(false)
-  }
   const onPostClick = (id: number) => {
     setPostId(id)
-    setIsOpenPostModal(true)
+    setPostIdAndOpenModal(id)
   }
 
   return (
@@ -95,14 +90,13 @@ export const HomePage = () => {
                   <div className="pt-6">
                     <span
                       onClick={() => onPostClick(publication.id)}
-                      className="text-sm font-semibold leading-6 text-light-900"
+                      className="text-sm cursor-pointer font-semibold leading-6 text-light-900"
                     >{`View All Comments (${publication.commentCount})`}</span>
                     <AddCommentForm setPostId={() => setPostId(publication.id)} postId={postId} />
                   </div>
                 </div>
               ))
           )}
-          <PostModal isOpen={isOpenPostModal} onClose={onClose} />
           <div className="flex">
             <RenderLoadingIndicator
               isSuccess={isSuccessPublications}

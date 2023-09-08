@@ -20,10 +20,10 @@ import { StateModalFollowingFollowersType } from '@/types'
 import { Avatar } from '@/ui'
 
 export const UserProfilePage = () => {
-  const { userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
+  const { userNameQuery } = useGetQueryUserNameUserId()
   const { userId: myUserID } = useUserStore()
 
-  const [currentUserId, setCurrentUserId] = useState<number | null>()
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null)
   const {
     userProfileData,
     userProfileAvatar,
@@ -32,7 +32,6 @@ export const UserProfilePage = () => {
     isLoadingUserProfile,
   } = useGetUserProfileData(userNameQuery)
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
-    userIdQuery,
     refetch: refetchUserProfile,
     userId: currentUserId,
   })
