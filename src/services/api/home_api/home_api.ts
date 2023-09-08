@@ -52,6 +52,11 @@ export type UserPublicationType = {
   userName: string
   avatars: UserProfileAvatarInterface
   isLiked: boolean
+
+  isFavorite: true
+  isFollowing: true
+  isFollowedBy: true
+
   newLikes: NewLikes[]
 }
 

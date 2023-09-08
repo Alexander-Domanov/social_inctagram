@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useGetQueryUserNameUserId, useWindowSize } from '@/common'
 import { useUpdateUserCounts } from '@/common/hooks/followers-following/useUpdateUserCounts'
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
 import { ModalManagerFollowingFollowers } from '@/components/following-followers'
+import { BusinessAccountIcon } from '@/components/icon/BusinessAccountIcon'
 import {
   DuplicateUserNameDescription,
   InfoAboutProfilePage,
@@ -17,11 +18,12 @@ import { routes } from '@/routing/router'
 import { useFollowingOrUnfollowingUser } from '@/services'
 import { useUserStore } from '@/store'
 import { StateModalFollowingFollowersType } from '@/types'
-import { Avatar } from '@/ui'
+import { Avatar, GlobalButton } from '@/ui'
 
 export const UserProfilePage = () => {
-  const { push, userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
+  const { userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
   const { userId: myUserID } = useUserStore()
+
   const [currentUserId, setCurrentUserId] = useState<number | null>()
   const {
     userProfileData,
@@ -39,8 +41,6 @@ export const UserProfilePage = () => {
   const { t } = useTranslation()
   const { onCloseClick, modalOpen, setModalOpen } =
     useOpenCloseModal<StateModalFollowingFollowersType>({})
-  const onRedirectToSetting = () => push(routes.sideBar.messenger)
-
   const isFollowing = userProfileData.isFollowing
   const userId = userProfileData.id || null
   const hideSubscriptionButtons = userId !== myUserID
@@ -66,7 +66,6 @@ export const UserProfilePage = () => {
       <main className="grow">
         {!isLoadingUserProfile ? (
           <>
-            {' '}
             <div className="flex xsm:gap-0 sm:gap-3 sm:items-center text-light-100 gap-9">
               <Avatar
                 src={userProfileAvatar}
@@ -77,16 +76,16 @@ export const UserProfilePage = () => {
               />
               <div className="flex w-full flex-col gap-5">
                 <div className="xsm:flex-col-reverse  sm:gap-5 md:gap-5 lg:gap-5 gap-5 w-full flex flex-wrap justify-between">
-                  <div className="lg:flex-col lg:gap-5 w-full flex justify-between items-center">
-                    <div className="font-bold flex w-full break-all xsm:hidden sm:hidden md:hidden">
+                  <div className="lg:flex-col xl:flex-col lg:gap-5 w-full flex justify-between items-center">
+                    <div className="font-bold gap-3 flex w-full break-all xsm:hidden sm:hidden md:hidden">
                       {userProfileData.userName}
+                      {userProfileData.isBusinessAccount && <BusinessAccountIcon />}
                     </div>
                     <div className="md:flex-col flex w-full gap-3">
                       {width && width >= 768 && (
                         <UserProfileButtons
                           hideSubscriptionButtons={hideSubscriptionButtons}
                           isFollowing={isFollowing}
-                          onRedirectToSetting={onRedirectToSetting}
                           isRefetchingUserProfile={isRefetchingUserProfile}
                           isLoadingButton={isLoadingButton}
                           handleToggleSubscriptionsCallBack={() =>
@@ -117,7 +116,6 @@ export const UserProfilePage = () => {
                 <UserProfileButtons
                   hideSubscriptionButtons={hideSubscriptionButtons}
                   isFollowing={isFollowing}
-                  onRedirectToSetting={onRedirectToSetting}
                   isRefetchingUserProfile={isRefetchingUserProfile}
                   isLoadingButton={isLoadingButton}
                   handleToggleSubscriptionsCallBack={() =>
