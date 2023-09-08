@@ -13,17 +13,14 @@ import { PostImagesSlider } from '@/modules/post-modules/latest-posts-module/com
 import { PostModalFooter } from '@/modules/post-modules/latest-posts-module/components/PostModalFooter'
 import { PostModalHeader } from '@/modules/post-modules/latest-posts-module/components/PostModalHeader'
 import { useGetPost } from '@/modules/post-modules/latest-posts-module/hooks/useGetPost'
-import { useSaveDescription, useUserStore } from '@/store'
+import { useModalsStore, useSaveDescription, useUserStore } from '@/store'
 import { Avatar } from '@/ui'
 
-interface Props {
-  isOpen: boolean
-  onClose: () => void
-}
-
-export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
-  const { postId, setDescriptionLocal } = useUserStore()
+export const PostModal: FC = () => {
+  const { setDescriptionLocal } = useUserStore()
   const { setDescription } = useSaveDescription()
+
+  const { postId, isOpen, setIsOpen } = useModalsStore(state => state.postModal)
 
   const { post, isLoading } = useGetPost(postId, description => {
     setDescription(description)
@@ -39,16 +36,16 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
   }
 
   const onRequestClose = () => {
-    onClose()
+    setIsOpen(false)
   }
 
   useEffect(() => {
-    console.log(inputRef)
-
     if (inputRef.current) {
       inputRef.current.focus()
     }
   }, [inputRef])
+
+  if (!isOpen) return null
 
   return (
     <Modal
@@ -60,7 +57,7 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
     >
       <button
         className="absolute -top-8 -right-8 text-base w-6 h-6 flex items-center justify-center text-white"
-        onClick={() => onClose()}
+        onClick={() => onRequestClose()}
       >
         <FaTimes size={'24px'} />
       </button>
