@@ -1,35 +1,21 @@
-import React, { FC, Fragment, useState } from 'react'
+import React, { FC, Fragment } from 'react'
 
 import { useInViewScrollEffect } from '@/common'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { Favorite } from '@/modules/favorites-module/components/Favorite'
 import { FavoriteSkeleton } from '@/modules/favorites-module/components/FavoriteSkeleton'
 import { useGetFavorites } from '@/modules/favorites-module/hooks/useGetFavorites'
-import { PostModal } from '@/modules/post-modules/latest-posts-module/components/PostModal'
-import { useUserStore } from '@/store'
+import { useModalsStore } from '@/store'
 
 export const Favorites: FC = () => {
-  const { setPostId } = useUserStore()
-  const {
-    isInitialLoading,
-    favorites,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-    isSuccess,
-    isLoading,
-  } = useGetFavorites()
-  const [isOpenPostModal, setIsOpenPostModal] = useState(false)
+  const { isInitialLoading, favorites, isFetchingNextPage, hasNextPage, fetchNextPage, isSuccess } =
+    useGetFavorites()
+  const { setPostIdAndOpenModal } = useModalsStore(state => state.postModal)
 
   const { ref } = useInViewScrollEffect({ hasNextPage, fetchNextPage })
 
-  const onClose = () => {
-    setIsOpenPostModal(false)
-  }
-
   const onPostClick = (id: number) => {
-    setPostId(id)
-    setIsOpenPostModal(true)
+    setPostIdAndOpenModal(id)
   }
 
   const FavoriteSkeletons = () => {
@@ -67,8 +53,6 @@ export const Favorites: FC = () => {
           customRef={ref}
         />
       </div>
-
-      <PostModal isOpen={isOpenPostModal} onClose={onClose} />
     </div>
   )
 }

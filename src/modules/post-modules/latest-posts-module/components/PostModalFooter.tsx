@@ -7,11 +7,11 @@ import { LikeStatus } from '@/modules/post-modules/latest-posts-module/api/lates
 import { PostFavorite } from '@/modules/post-modules/latest-posts-module/components/PostFavorite'
 import { useChangePostLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostLikeStatus'
 import { useGetPost } from '@/modules/post-modules/latest-posts-module/hooks/useGetPost'
-import { useUserStore } from '@/store'
+import { useModalsStore } from '@/store'
 import { Avatar } from '@/ui'
 
 export const PostModalFooter: FC = () => {
-  const { postId } = useUserStore()
+  const { postId } = useModalsStore(state => state.postModal)
   const { post } = useGetPost(postId)
   const { mutate } = useChangePostLikeStatus(
     postId,
