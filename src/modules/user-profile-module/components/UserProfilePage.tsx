@@ -14,11 +14,10 @@ import { SkeletonProfilePage } from '@/modules/my-profile-modules/profile-page-m
 import { LatestPosts } from '@/modules/post-modules/latest-posts-module'
 import { useGetUserProfileData } from '@/modules/user-profile-module'
 import { UserProfileButtons } from '@/modules/user-profile-module/components/UserProfileButtons'
-import { routes } from '@/routing/router'
 import { useFollowingOrUnfollowingUser } from '@/services'
 import { useUserStore } from '@/store'
 import { StateModalFollowingFollowersType } from '@/types'
-import { Avatar, GlobalButton } from '@/ui'
+import { Avatar } from '@/ui'
 
 export const UserProfilePage = () => {
   const { userIdQuery, userNameQuery } = useGetQueryUserNameUserId()
