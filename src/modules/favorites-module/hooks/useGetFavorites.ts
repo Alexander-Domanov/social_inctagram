@@ -14,6 +14,8 @@ export const useGetFavorites = () => {
     fetchNextPage,
     hasNextPage,
     isSuccess,
+    isRefetching,
+    isInitialLoading,
   } = useInfiniteQuery({
     queryKey: ['favorites'],
     queryFn: ({ pageParam = 0 }) => getFavorites(me?.data.userName, pageParam),
@@ -25,5 +27,14 @@ export const useGetFavorites = () => {
     refetchOnMount: 'always',
   })
 
-  return { favorites, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isSuccess }
+  return {
+    favorites,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    isSuccess,
+    isRefetching,
+    isInitialLoading,
+  }
 }

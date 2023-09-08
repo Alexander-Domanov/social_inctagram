@@ -10,6 +10,7 @@ export const useToggleFavoritePost = (postId: number | null) => {
     mutationFn: () => toggleFavoritePost(postId),
     onSuccess: () => {
       client.invalidateQueries({ queryKey: ['post', { postId }] })
+      client.invalidateQueries({ queryKey: ['favorites'] })
     },
   })
 
