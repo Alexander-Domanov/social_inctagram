@@ -44,6 +44,8 @@ export interface Post {
     }
   }[]
   isFavorite: boolean
+  isFollowing: true
+  isFollowedBy: true
 }
 
 interface GetPostsResponse {

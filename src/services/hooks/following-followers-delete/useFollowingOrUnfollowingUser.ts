@@ -6,21 +6,21 @@ import { postUserFollowingUnfollowing } from '@/modules/user-profile-module/api/
 import { userQueryType } from '@/types'
 
 export const useFollowingOrUnfollowingUser = ({
-  userIdQuery,
   refetch,
   userId,
 }: {
-  userIdQuery?: userQueryType
-  refetch: () => void
-  userId?: number | null
+  refetch?: () => void
+  userId: number | null
 }) => {
   const client = useQueryClient()
   const { mutate: useFollowUnfollowUser, isLoading } = useMutation(
     ['following'],
-    () => postUserFollowingUnfollowing(userIdQuery ? userIdQuery : userId),
+    () => postUserFollowingUnfollowing(userId),
     {
       onSuccess: () => {
-        refetch()
+        if (refetch) {
+          refetch()
+        }
         if (userId) {
           client.invalidateQueries({ queryKey: ['get-profile-page'] })
         }
