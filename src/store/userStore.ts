@@ -23,7 +23,7 @@ interface UserStore {
   setUserId: (userId: number) => void
   setUserName: (userName: string | null) => void
   postId: number | null
-  setPostId: (id: number) => void
+  setPostId: (id: number | null) => void
   hasBusinessAccount: boolean
   setHasBusinessAccount: (hasBusinessAccount: boolean) => void
   descriptionLocal: string

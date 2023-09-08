@@ -8,12 +8,16 @@ import { useToggleFavoritePost } from '@/modules/post-modules/latest-posts-modul
 interface Props {
   postId: number | null
   post: Post | undefined
+  setPostId?: () => void
 }
 
-export const PostFavorite: FC<Props> = ({ postId, post }) => {
+export const PostFavorite: FC<Props> = ({ postId, post, setPostId }) => {
   const { toggleFavoritePostMutation } = useToggleFavoritePost(postId)
 
   const onFavoriteClick = () => {
+    if (setPostId) {
+      setPostId()
+    }
     toggleFavoritePostMutation()
   }
 

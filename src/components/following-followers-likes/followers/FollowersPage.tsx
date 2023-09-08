@@ -7,7 +7,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { useSearchStore, useUserStore } from '@/store'
 import { FollowingFollowersComponentsType } from '@/types'
 import { InputSearch } from '@/ui'
-import { Followers } from 'src/components/following-followers'
+import { Followers } from 'src/components/following-followers-likes'
 
 export const FollowersPage = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
   const { followersCount } = useUserStore()

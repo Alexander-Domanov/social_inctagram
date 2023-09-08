@@ -4,7 +4,7 @@ import {
   UserProfileAvatarInterface,
 } from '@/types'
 
-export type FollowingsFollowersType = {
+export type FollowingsFollowersLikesType = {
   avatars: UserProfileAvatarInterface | null
   createdAt: string
   id: number
@@ -14,8 +14,8 @@ export type FollowingsFollowersType = {
   userName: string
 }
 
-export type ItemsFollowingFollowersType = {
-  items: FollowingsFollowersType[]
+export type ItemsFollowingFollowersLikesType = {
+  items: FollowingsFollowersLikesType[]
   nextCursor: number
   page: number
   pageSize: number
@@ -24,10 +24,11 @@ export type ItemsFollowingFollowersType = {
   totalCount: number
 }
 
-export interface FollowingFollowersPropsType {
+export interface FollowingFollowersLikesPropsType {
   userName: string | string[] | null
   search: string
   pageParam: any
+  postId: number | null
 }
 
 export type FollowingFollowersComponentsType = {

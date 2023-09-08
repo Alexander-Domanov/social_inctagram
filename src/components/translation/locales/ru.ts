@@ -124,4 +124,41 @@ export const ru: LocaleType = {
     noRequests: 'Нет недавних запросов',
     placeEmpty: 'Упс! Здесь выглядит пусто!',
   },
+  homepage: {
+    viewComments: 'Посмотреть все комментарии',
+  },
+  likes: {
+    getCountTitleLikes(count: number) {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'other':
+          return `${count} Нравится`
+        case 'one':
+          return `${count} Нравится`
+        case 'few':
+          return `${count} Нравится`
+        case 'many':
+          return `${count} Нравится`
+      }
+    },
+    getCountLikes(count: number): string | undefined {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'other':
+          return 'Нравится'
+        case 'one':
+          return `Нравится`
+        case 'few':
+          return `Нравится`
+        case 'many':
+          return `Нравится`
+      }
+    },
+  },
+  addCommentForm: {
+    addComment: 'Добавить комментарий...',
+    publish: 'Опубликовать',
+  },
 }

@@ -125,4 +125,41 @@ export const uk: LocaleType = {
     noRequests: 'Немає останніх запитів',
     placeEmpty: 'Ой! Тут виглядає порожньо!',
   },
+  likes: {
+    getCountTitleLikes(count: number) {
+      const str = pluralizeUk(count)
+
+      switch (str) {
+        case 'other':
+          return `${count} Подобається`
+        case 'one':
+          return `${count} Подобається`
+        case 'few':
+          return `${count} Подобається`
+        case 'many':
+          return `${count} Подобається`
+      }
+    },
+    getCountLikes(count: number): string | undefined {
+      const str = pluralizeUk(count)
+
+      switch (str) {
+        case 'other':
+          return 'Подобається'
+        case 'one':
+          return `Подобається`
+        case 'few':
+          return `Подобається`
+        case 'many':
+          return `Подобається`
+      }
+    },
+  },
+  homepage: {
+    viewComments: 'Переглянути всі коментарі',
+  },
+  addCommentForm: {
+    addComment: 'Додати коментар...',
+    publish: 'Опублікувати',
+  },
 }

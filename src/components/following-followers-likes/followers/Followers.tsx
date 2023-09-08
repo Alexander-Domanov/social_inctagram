@@ -6,7 +6,7 @@ import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useDeleteFollower, useFollowingOrUnfollowingUser, useGetFollowers } from '@/services'
 import { useSearchStore } from '@/store'
 import { Spinner } from '@/ui'
-import { FollowersUsers } from 'src/components/following-followers'
+import { FollowersUsers } from 'src/components/following-followers-likes'
 
 export const Followers = () => {
   const { userNameQuery } = useGetQueryUserNameUserId()

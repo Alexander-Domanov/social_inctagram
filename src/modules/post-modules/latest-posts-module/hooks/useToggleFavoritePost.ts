@@ -11,6 +11,7 @@ export const useToggleFavoritePost = (postId: number | null) => {
     onSuccess: () => {
       client.invalidateQueries({ queryKey: ['post', { postId }] })
       client.invalidateQueries({ queryKey: ['favorites'] })
+      client.invalidateQueries({ queryKey: ['publications'] })
     },
   })
 

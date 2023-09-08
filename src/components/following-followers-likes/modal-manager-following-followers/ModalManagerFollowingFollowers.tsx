@@ -1,5 +1,5 @@
-import { FollowersPage } from '@/components/following-followers/followers/FollowersPage'
-import { FollowingPage } from '@/components/following-followers/following/FollowingPage'
+import { FollowersPage } from '@/components/following-followers-likes/followers/FollowersPage'
+import { FollowingPage } from '@/components/following-followers-likes/following/FollowingPage'
 import { ModalManagerType, StateModalFollowingFollowersType } from '@/types'
 
 export const ModalManagerFollowingFollowers = ({

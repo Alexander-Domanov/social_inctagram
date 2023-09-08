@@ -1,10 +1,11 @@
-import { FC, useEffect, useRef } from 'react'
+import React, { FC, useEffect, useRef } from 'react'
 
 import dayjs from 'dayjs'
 import { FaTimes } from 'react-icons/fa'
 import Modal from 'react-modal'
 
 import { getTimeFromNow } from '@/common/helpers/getTimeFromNow'
+import { LikesPage } from '@/components/following-followers-likes'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Skeleton } from '@/components/ui/skeleton'
 // eslint-disable-next-line
@@ -120,7 +121,10 @@ export const PostModal: FC = () => {
 
           <PostModalFooter />
 
-          <AddCommentForm postId={postId} ref={inputRef} />
+          <LikesPage />
+          <div className="px-6">
+            <AddCommentForm postId={postId} ref={inputRef} />
+          </div>
         </div>
       </div>
     </Modal>

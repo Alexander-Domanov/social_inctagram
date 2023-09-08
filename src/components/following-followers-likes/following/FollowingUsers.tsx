@@ -3,11 +3,11 @@ import React from 'react'
 import { useGetQueryUserNameUserId } from '@/common'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useUserStore } from '@/store'
-import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
-import { FollowUnfollowButton, URLUsernameForModal } from 'src/components/following-followers'
+import { FollowingsFollowersLikesType, FollowUnfollowButtonPropsInterface } from '@/types'
+import { FollowUnfollowButton, URLUsernameForModal } from 'src/components/following-followers-likes'
 
 type FollowersUsersProps = {
-  items: FollowingsFollowersType[]
+  items: FollowingsFollowersLikesType[]
   handleToggleSubscriptionsCallBack: (userId: number) => void
   currentUserId: number | null
 } & Omit<FollowUnfollowButtonPropsInterface, 'isFollowing' | 'handleToggleSubscriptionsCallBack'>
