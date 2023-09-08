@@ -125,12 +125,49 @@ export const en = {
     buttonFollow: 'Follow',
     buttonUnfollow: 'Unfollow',
   },
+  likes: {
+    getCountTitleLikes(count: number) {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'other':
+          return `${count} Likes`
+        case 'one':
+          return `${count} Like`
+        case 'few':
+          return `${count} Likes`
+        case 'many':
+          return `${count} Likes`
+      }
+    },
+    getCountLikes(count: number): string | undefined {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'other':
+          return 'Likes'
+        case 'one':
+          return `Like`
+        case 'few':
+          return `Likes`
+        case 'many':
+          return `Likes`
+      }
+    },
+  },
+  addCommentForm: {
+    addComment: 'Add a comment...',
+    publish: 'Publish',
+  },
   search: {
     searchTitle: 'Search',
     searchInput: 'Search',
     recentRequests: 'Recent requests',
     noRequests: 'No recent requests',
     placeEmpty: 'Oops! This place looks empty!',
+  },
+  homepage: {
+    viewComments: 'View All Comments',
   },
 }
 

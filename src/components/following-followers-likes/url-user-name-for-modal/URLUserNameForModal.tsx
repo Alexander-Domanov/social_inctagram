@@ -16,7 +16,7 @@ export const URLUsernameForModal = ({
 }) => {
   const router = useRouter()
   const callBack = () => {
-    router.replace(`${routes.sideBar.userHomePage}${userName}`)
+    router.push(`${routes.sideBar.userHomePage}${userName}`)
   }
 
   return (
@@ -24,7 +24,10 @@ export const URLUsernameForModal = ({
       <div className="flex justify-between text-light-100 leading-6 font-semibold text-base">
         <div className="flex gap-3 items-center">
           <Avatar src={avatartSrc} width={36} height={36} alt={''} />
-          <span className={`linkText overflow-hidden truncate ${className}`} onClick={callBack}>
+          <span
+            className={`linkText overflow-hidden cursor-pointer truncate ${className}`}
+            onClick={callBack}
+          >
             {userName}
           </span>
         </div>

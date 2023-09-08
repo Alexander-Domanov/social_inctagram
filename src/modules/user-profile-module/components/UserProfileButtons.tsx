@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from '@/components/translation'
 import { routes } from '@/routing/router'
 import { GlobalButton } from '@/ui'
-import { FollowUnfollowButton } from 'src/components/following-followers'
+import { FollowUnfollowButton } from 'src/components/following-followers-likes'
 
 type UserProfileButtonsType = {
   isRefetchingUserProfile: boolean

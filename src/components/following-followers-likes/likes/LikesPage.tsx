@@ -1,27 +1,27 @@
 import React from 'react'
 
-import { Following } from '@/components/following-followers/following/Following'
+import { Likes } from '@/components/following-followers-likes'
 import { SearchLayout } from '@/components/layout'
 import { ModalWithContent } from '@/components/modals'
 import { useTranslation } from '@/components/translation'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { useUserStore } from '@/store'
-import { FollowingFollowersComponentsType } from '@/types'
+import { useLikesModalStore, useUserStore } from '@/store'
 
-export const FollowingPage = ({ isModalOpen, onClose }: FollowingFollowersComponentsType) => {
+export const LikesPage = () => {
   const { followingCount } = useUserStore()
   const { t } = useTranslation()
+  const { isLikesModal, setLikesModal } = useLikesModalStore()
 
   return (
     <ModalWithContent
       size="medium"
-      isOpen={isModalOpen}
-      onClose={onClose}
-      title={`${t.profile.profilePage.getCountFollowing(followingCount)}`}
+      isOpen={isLikesModal}
+      onClose={() => setLikesModal(false)}
+      title={`${t.likes.getCountTitleLikes(followingCount)}`}
     >
       <SearchLayout>
         <ScrollArea className="w-full h-[425px]">
-          <Following />
+          <Likes />
         </ScrollArea>
       </SearchLayout>
     </ModalWithContent>

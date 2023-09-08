@@ -3,23 +3,30 @@ import { FC } from 'react'
 import dayjs from 'dayjs'
 import { FaHeart, FaRegHeart, FaRegPaperPlane } from 'react-icons/fa6'
 
+import { useTranslation } from '@/components/translation'
 import { LikeStatus } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
 import { PostFavorite } from '@/modules/post-modules/latest-posts-module/components/PostFavorite'
 import { useChangePostLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostLikeStatus'
 import { useGetPost } from '@/modules/post-modules/latest-posts-module/hooks/useGetPost'
-import { useModalsStore } from '@/store'
+import { useLikesModalStore, useModalsStore, useUserStore } from '@/store'
 import { Avatar } from '@/ui'
 
 export const PostModalFooter: FC = () => {
+  const { t } = useTranslation()
   const { postId } = useModalsStore(state => state.postModal)
   const { post } = useGetPost(postId)
   const { mutate } = useChangePostLikeStatus(
     postId,
     post?.isLiked ? LikeStatus.NONE : LikeStatus.LIKE
   )
-
+  const { setPostId } = useUserStore()
   const onLikeClick = () => {
     mutate()
+  }
+  const { setLikesModal } = useLikesModalStore()
+  const onOpenModalLikes = () => {
+    setLikesModal(true)
+    setPostId(postId)
   }
 
   return (
@@ -56,8 +63,11 @@ export const PostModalFooter: FC = () => {
         )}
 
         {post && (
-          <div>
-            {post?.likeCount} <span className="font-bold">Like</span>
+          <div onClick={onOpenModalLikes}>
+            {post?.likeCount}{' '}
+            <span className="font-bold cursor-pointer">
+              {t.likes.getCountLikes(post.likeCount)}
+            </span>
           </div>
         )}
       </div>

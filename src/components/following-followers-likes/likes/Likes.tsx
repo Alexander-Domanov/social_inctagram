@@ -1,38 +1,37 @@
 import React, { useState } from 'react'
 
-import { useGetQueryUserNameUserId, useInViewScrollEffect } from '@/common'
-import { FollowingUsers } from '@/components/following-followers'
+import { useInViewScrollEffect } from '@/common'
+import { LikesUsers } from '@/components/following-followers-likes'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
-import { useFollowingOrUnfollowingUser, userGetFollowings } from '@/services'
-import { useSearchStore } from '@/store'
+import { useFollowingOrUnfollowingUser, useGetLikes } from '@/services'
+import { useSearchStore, useUserStore } from '@/store'
 import { Spinner } from '@/ui'
 
-export const Following = () => {
+export const Likes = () => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
   const { search } = useSearchStore()
-  const { userNameQuery } = useGetQueryUserNameUserId()
-
+  const { postId } = useUserStore()
   const {
-    followingData,
-    refetchFollowing,
-    isRefetchingFollowing,
-    hasNextPageFollowing,
-    isFetchNextPageFollowing,
-    isSuccessFollowing,
-    fetchNextPageFollowing,
-    isLoadingFollowing,
-  } = userGetFollowings({
-    userName: userNameQuery,
+    likesData,
+    refetchLikes,
+    isRefetchingLikes,
+    hasNextPageLikes,
+    isFetchingNextPageLikes,
+    isSuccessLikes,
+    fetchNextPageLikes,
+    isLoadingLikes,
+  } = useGetLikes({
+    postId: postId,
     search,
   })
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
-    refetch: refetchFollowing,
+    refetch: refetchLikes,
     userId: currentUserId,
   })
   const { ref } = useInViewScrollEffect({
-    hasNextPage: hasNextPageFollowing,
-    fetchNextPage: fetchNextPageFollowing,
+    hasNextPage: hasNextPageLikes,
+    fetchNextPage: fetchNextPageLikes,
   })
   const handleToggleSubscriptionsCallBack = (userId: number) => {
     setCurrentUserId(userId)
@@ -41,13 +40,13 @@ export const Following = () => {
 
   return (
     <>
-      {!isLoadingFollowing ? (
+      {!isLoadingLikes ? (
         <>
-          {followingData?.pages ? (
-            followingData.pages.map((users, index) => (
-              <FollowingUsers
+          {likesData?.pages ? (
+            likesData.pages.map((users, index) => (
+              <LikesUsers
                 key={index}
-                isRefetching={isRefetchingFollowing}
+                isRefetching={isRefetchingLikes}
                 isLoadingButton={isLoadingButton}
                 handleToggleSubscriptionsCallBack={handleToggleSubscriptionsCallBack}
                 items={users.items}
@@ -58,8 +57,8 @@ export const Following = () => {
             <NotFoundComponent message={'Not Found'} />
           )}
           <RenderLoadingIndicator
-            isSuccess={isSuccessFollowing}
-            isFetchNextPage={isFetchNextPageFollowing}
+            isSuccess={isSuccessLikes}
+            isFetchNextPage={isFetchingNextPageLikes}
             customRef={ref}
           />
         </>

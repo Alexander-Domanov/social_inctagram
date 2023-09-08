@@ -6,15 +6,15 @@ import { Confirm } from '@/components/modals'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useTranslation } from '@/components/translation'
 import { useUserStore } from '@/store'
-import { FollowingsFollowersType, FollowUnfollowButtonPropsInterface } from '@/types'
+import { FollowingsFollowersLikesType, FollowUnfollowButtonPropsInterface } from '@/types'
 import {
   DeleteUserButton,
   FollowUnfollowButton,
   URLUsernameForModal,
-} from 'src/components/following-followers'
+} from 'src/components/following-followers-likes'
 
 type FollowingUsersProps = {
-  items: FollowingsFollowersType[]
+  items: FollowingsFollowersLikesType[]
   setCurrentDeleteUserId: Dispatch<SetStateAction<number | null>>
   currentUserId: number | null
   isLoadingDeleteUser: boolean
@@ -55,7 +55,7 @@ export const FollowersUsers = ({
   return (
     <>
       {items.length > 0 ? (
-        items.map((user: FollowingsFollowersType, index) => (
+        items.map((user: FollowingsFollowersLikesType, index) => (
           <div
             className="flex xsm:flex-col items-center align-middle justify-between"
             key={user.userId}

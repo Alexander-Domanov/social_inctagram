@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useGetQueryUserNameUserId, useWindowSize } from '@/common'
 import { useUpdateUserCounts } from '@/common/hooks/followers-following/useUpdateUserCounts'
 import { useOpenCloseModal } from '@/common/hooks/open-close-modal/useOpenCloseModal'
-import { ModalManagerFollowingFollowers } from '@/components/following-followers'
 import { BusinessAccountIcon } from '@/components/icon/BusinessAccountIcon'
 import {
   DuplicateUserNameDescription,
@@ -18,6 +17,7 @@ import { useFollowingOrUnfollowingUser } from '@/services'
 import { useUserStore } from '@/store'
 import { StateModalFollowingFollowersType } from '@/types'
 import { Avatar } from '@/ui'
+import { ModalManagerFollowingFollowers } from 'src/components/following-followers-likes'
 
 export const UserProfilePage = () => {
   const { userNameQuery } = useGetQueryUserNameUserId()

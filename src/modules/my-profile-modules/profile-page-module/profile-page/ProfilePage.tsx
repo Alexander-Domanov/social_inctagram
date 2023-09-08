@@ -18,7 +18,7 @@ import { useGetProfile } from '@/modules/my-profile-modules/settings-edit-profil
 import { useUserStore } from '@/store'
 import { StateModalFollowingFollowersType } from '@/types'
 import { Avatar, GlobalButton } from '@/ui'
-import { ModalManagerFollowingFollowers } from 'src/components/following-followers'
+import { ModalManagerFollowingFollowers } from 'src/components/following-followers-likes'
 import { LatestPosts } from 'src/modules/post-modules/latest-posts-module'
 
 export const ProfilePage = () => {

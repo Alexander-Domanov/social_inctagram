@@ -3,7 +3,6 @@ import React from 'react'
 import { formatDistance, parseISO } from 'date-fns'
 
 import { localTimeDisplayLanguageInThePost, useInViewScrollEffect } from '@/common'
-import { URLUsernameForModal } from '@/components/following-followers'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { SliderImagesPost } from '@/components/slider/SliderImagesPosts'
@@ -14,9 +13,11 @@ import { PostActions } from '@/modules/post-modules/latest-posts-module/componen
 import { useGetPublication } from '@/services'
 import { useModalsStore, useUserStore } from '@/store'
 import { Avatar, Spinner } from '@/ui'
+import { LikesPage, URLUsernameForModal } from 'src/components/following-followers-likes'
 
 export const HomePage = () => {
   const { setPostId, postId } = useUserStore()
+  const { t } = useTranslation()
   const {
     dataPublications,
     isSuccessPublications,
@@ -70,6 +71,7 @@ export const HomePage = () => {
                     <NotFoundComponent message={'No images'} />
                   )}
                   <LikesMessageSendBlock
+                    post={publication}
                     publication={publication}
                     postId={postId}
                     setPostId={() => setPostId(publication.id)}
@@ -91,7 +93,7 @@ export const HomePage = () => {
                     <span
                       onClick={() => onPostClick(publication.id)}
                       className="text-sm cursor-pointer font-semibold leading-6 text-light-900"
-                    >{`View All Comments (${publication.commentCount})`}</span>
+                    >{`${t.homepage.viewComments} (${publication.commentCount})`}</span>
                     <AddCommentForm setPostId={() => setPostId(publication.id)} postId={postId} />
                   </div>
                 </div>
@@ -110,6 +112,7 @@ export const HomePage = () => {
           <Spinner />
         </div>
       )}
+      <LikesPage />
     </div>
   )
 }

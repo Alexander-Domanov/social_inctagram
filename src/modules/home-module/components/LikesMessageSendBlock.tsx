@@ -3,11 +3,14 @@ import { PropsWithChildren } from 'react'
 import dayjs from 'dayjs'
 import { NextPage } from 'next'
 import { AiOutlineMessage } from 'react-icons/ai'
-import { FaHeart, FaRegBookmark, FaRegHeart, FaRegPaperPlane } from 'react-icons/fa6'
+import { FaHeart, FaRegHeart, FaRegPaperPlane } from 'react-icons/fa6'
 
+import { useTranslation } from '@/components/translation'
 import { LikeStatus } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
+import { PostFavorite } from '@/modules/post-modules/latest-posts-module/components/PostFavorite'
 import { useChangePostLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostLikeStatus'
 import { UserPublicationType } from '@/services'
+import { useLikesModalStore } from '@/store'
 import { Avatar } from '@/ui'
 
 export type LikesMessageSendBlockType = {
@@ -15,6 +18,7 @@ export type LikesMessageSendBlockType = {
   postId: number | null
   setPostId: () => void
   onPostClick: () => void
+  post: UserPublicationType
 }
 
 export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSendBlockType> = ({
@@ -23,15 +27,21 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
   setPostId,
   postId,
   onPostClick,
+  post,
 }) => {
+  const { t } = useTranslation()
   const { mutate } = useChangePostLikeStatus(
     postId,
     publication?.isLiked ? LikeStatus.NONE : LikeStatus.LIKE
   )
-
+  const { setLikesModal } = useLikesModalStore()
   const onLikeClick = () => {
     setPostId()
     mutate()
+  }
+  const onOpenModalLikes = () => {
+    setLikesModal(true)
+    setPostId()
   }
 
   return (
@@ -49,9 +59,7 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
           </button>
         </div>
 
-        <button className="pt-3 ml-auto">
-          <FaRegBookmark />
-        </button>
+        <PostFavorite setPostId={() => setPostId()} postId={postId} post={post} />
       </div>
 
       {children}
@@ -76,8 +84,11 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
         )}
 
         {publication && (
-          <div>
-            {publication?.likeCount} <span className="font-bold">Like</span>
+          <div onClick={onOpenModalLikes}>
+            {publication?.likeCount}{' '}
+            <span className="font-bold cursor-pointer">
+              {t.likes.getCountLikes(publication.likeCount)}
+            </span>
           </div>
         )}
       </div>

@@ -1,13 +1,13 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
-import { getFollowingData } from '@/services/api/following-followers-delete-api/getFollowing'
-import { FollowingFollowersPropsType } from '@/types'
+import { getFollowingData } from '@/services/api/following-followers-delete_api/getFollowing'
+import { FollowingFollowersLikesPropsType } from '@/types'
 
 export const userGetFollowings = ({
   userName,
   search,
-}: Pick<FollowingFollowersPropsType, 'search' | 'userName'>) => {
+}: Pick<FollowingFollowersLikesPropsType, 'search' | 'userName'>) => {
   const {
     data: followingData,
     refetch: refetchFollowing,
