@@ -36,6 +36,30 @@ export type UserPublicationsImages = {
     }
   }
 }
+
+export type UserPublicationType = {
+  id: number
+  ownerId: number
+  description: string
+  location: string
+  images: UserPublicationsImages[]
+
+  createdAt: string
+  updatedAt: string
+
+  commentCount: number
+  likeCount: number
+  userName: string
+  avatars: UserProfileAvatarInterface
+  isLiked: boolean
+
+  isFavorite: true
+  isFollowing: true
+  isFollowedBy: true
+
+  newLikes: NewLikes[]
+}
+
 export type UserPublicationsType = {
   totalCount: number
   pagesCount: number
@@ -43,23 +67,7 @@ export type UserPublicationsType = {
   pageSize: number
   prevCursor: number
   nextCursor: number
-  items: [
-    {
-      id: number
-      ownerId: number
-      description: string
-      location: string
-      images: UserPublicationsImages[]
-      createdAt: Date
-      updatedAt: Date
-      commentCount: number
-      likeCount: number
-      userName: string
-      avatars: UserProfileAvatarInterface
-      isLiked: boolean
-      newLikes: NewLikes[]
-    }
-  ]
+  items: UserPublicationType[]
 }
 
 export const getPublicationsApi = async ({ pageParam }: { pageParam: number }) => {

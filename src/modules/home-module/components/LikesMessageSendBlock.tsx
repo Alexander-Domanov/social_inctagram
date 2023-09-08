@@ -7,19 +7,30 @@ import { FaHeart, FaRegBookmark, FaRegHeart, FaRegPaperPlane } from 'react-icons
 
 import { LikeStatus } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
 import { useChangePostLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostLikeStatus'
-import { useGetPost } from '@/modules/post-modules/latest-posts-module/hooks/useGetPost'
-import { useUserStore } from '@/store'
+import { UserPublicationType } from '@/services'
 import { Avatar } from '@/ui'
 
-export const LikesMessageSendBlock: NextPage<PropsWithChildren> = ({ children }) => {
-  const { postId } = useUserStore()
-  const { post } = useGetPost(postId)
+export type LikesMessageSendBlockType = {
+  publication: UserPublicationType
+  postId: number | null
+  setPostId: () => void
+  onPostClick: () => void
+}
+
+export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSendBlockType> = ({
+  publication,
+  children,
+  setPostId,
+  postId,
+  onPostClick,
+}) => {
   const { mutate } = useChangePostLikeStatus(
     postId,
-    post?.isLiked ? LikeStatus.NONE : LikeStatus.LIKE
+    publication?.isLiked ? LikeStatus.NONE : LikeStatus.LIKE
   )
 
   const onLikeClick = () => {
+    setPostId()
     mutate()
   }
 
@@ -28,9 +39,9 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren> = ({ children })
       <div className="flex items-center text-2xl leading-none text-white">
         <div className="flex gap-5 pt-3">
           <button className="" onClick={onLikeClick}>
-            {post?.isLiked ? <FaHeart className="text-danger-500" /> : <FaRegHeart />}
+            {publication?.isLiked ? <FaHeart className="text-danger-500" /> : <FaRegHeart />}
           </button>
-          <button>
+          <button onClick={() => onPostClick()}>
             <AiOutlineMessage />
           </button>
           <button className="">
@@ -45,10 +56,10 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren> = ({ children })
 
       {children}
 
-      <div className="flex items-center mt-3 text-white text-sm leading-none h-6">
-        {post?.likeCount! > 0 && (
+      <div className="flex items-center mt-5 text-white text-sm leading-none h-6">
+        {publication?.likeCount! > 0 && (
           <div className="mr-3 flex items-center">
-            {post?.newLikes?.map((like, idx, array) => (
+            {publication?.newLikes?.map((like, idx, array) => (
               <div
                 key={like.id}
                 style={{ marginLeft: idx === 0 ? 0 : '-12px', zIndex: array.length - idx }}
@@ -64,15 +75,15 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren> = ({ children })
           </div>
         )}
 
-        {post && (
+        {publication && (
           <div>
-            {post?.likeCount} <span className="font-bold">Like</span>
+            {publication?.likeCount} <span className="font-bold">Like</span>
           </div>
         )}
       </div>
 
       <div className="mt-2 text-xs leading-none text-light-900">
-        {post?.createdAt && dayjs(post.createdAt).format('MMMM D, YYYY')}
+        {publication?.createdAt && dayjs(publication.createdAt).format('MMMM D, YYYY')}
       </div>
     </div>
   )

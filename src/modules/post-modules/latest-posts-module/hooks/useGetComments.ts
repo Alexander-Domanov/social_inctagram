@@ -1,6 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 
-import { noRefetch } from '@/common'
 import { getPostComments } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
 
 export const useGetComments = (postId: number | null) => {
@@ -21,7 +20,8 @@ export const useGetComments = (postId: number | null) => {
       return lastPage.page * lastPage.pageSize < lastPage.totalCount ? lastPage.page + 1 : undefined
     },
     enabled: !!postId,
-    ...noRefetch,
+    cacheTime: 0,
+    staleTime: 0,
   })
 
   return {

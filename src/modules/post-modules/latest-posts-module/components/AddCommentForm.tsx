@@ -6,9 +6,10 @@ import { useModalsStore } from '@/store'
 
 interface Props {
   postId: number | null
+  setPostId?: () => void
 }
 
-const AddCommentForm = forwardRef<HTMLInputElement, Props>(({ postId }, inputRef) => {
+const AddCommentForm = forwardRef<HTMLInputElement, Props>(({ postId, setPostId }, inputRef) => {
   const [comment, setComment] = useState('')
   const { postModal } = useModalsStore()
   const { addCommentAsync } = useAddComment(postId, comment)
@@ -42,6 +43,7 @@ const AddCommentForm = forwardRef<HTMLInputElement, Props>(({ postId }, inputRef
     >
       <div>
         <input
+          onClick={() => (setPostId ? setPostId() : null)}
           type="text"
           className="text-white placeholder-light-900 h-6 w-full bg-transparent outline-none text-sm"
           placeholder="Add a Comment..."

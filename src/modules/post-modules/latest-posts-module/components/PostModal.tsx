@@ -7,6 +7,7 @@ import Modal from 'react-modal'
 import { getTimeFromNow } from '@/common/helpers/getTimeFromNow'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Skeleton } from '@/components/ui/skeleton'
+// eslint-disable-next-line
 import { AddCommentForm } from '@/modules/post-modules/latest-posts-module/components/AddCommentForm'
 import { PostComments } from '@/modules/post-modules/latest-posts-module/components/PostComments'
 import { PostImagesSlider } from '@/modules/post-modules/latest-posts-module/components/PostImagesSlider'

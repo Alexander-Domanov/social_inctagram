@@ -7,6 +7,7 @@ export const useGetPost = (
   postId: number | null,
   saveDescription?: (description: string) => void
 ) => {
+  const client = {}
   const {
     data: post,
     isError,
@@ -22,6 +23,8 @@ export const useGetPost = (
     queryFn: () => getPost(postId),
     enabled: !!postId,
     ...noRefetch,
+    cacheTime: 0,
+    staleTime: 0,
   })
 
   return { post, isError, isLoading, isFetching }

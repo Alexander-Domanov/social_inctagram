@@ -7,6 +7,7 @@ export type RootProfile = {
   dateOfBirth: string | null | Date
   aboutMe: string | null
   avatars: RootAvatars[] | []
+  hasBusinessAccount: boolean
 }
 type RootAvatars = {
   uploadId: number

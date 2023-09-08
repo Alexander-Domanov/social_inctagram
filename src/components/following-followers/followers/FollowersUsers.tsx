@@ -60,10 +60,13 @@ export const FollowersUsers = ({
             className="flex xsm:flex-col items-center align-middle justify-between"
             key={user.userId}
           >
-            <URLUsernameForModal
-              avatartSrc={user.avatars?.thumbnail.url || null}
-              userName={user.userName}
-            />
+            <div className="flex p-4 ">
+              <URLUsernameForModal
+                avatartSrc={user.avatars?.thumbnail.url || null}
+                userName={user.userName}
+                className={'w-[150px]'}
+              />
+            </div>
             {isUserName && (
               <>
                 {!user.isFollowing && (

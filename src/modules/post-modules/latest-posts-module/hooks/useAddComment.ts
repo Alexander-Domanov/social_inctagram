@@ -15,6 +15,7 @@ export const useAddComment = (postId: number | null, comment: string) => {
     mutationFn: () => addPostComment(postId, comment),
     onSuccess: () => {
       client.invalidateQueries({ queryKey: ['post_comments', { postId }] })
+      client.invalidateQueries({ queryKey: ['publications'] })
     },
   })
 

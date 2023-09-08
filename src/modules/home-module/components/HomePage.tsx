@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { formatDistance, parseISO } from 'date-fns'
 
@@ -10,6 +10,8 @@ import { SliderImagesPost } from '@/components/slider/SliderImagesPosts'
 import { useTranslation } from '@/components/translation'
 import { LikesMessageSendBlock } from '@/modules/home-module'
 import { AddCommentForm } from '@/modules/post-modules/latest-posts-module/components/AddCommentForm'
+import { PostActions } from '@/modules/post-modules/latest-posts-module/components/PostActions'
+import { PostModal } from '@/modules/post-modules/latest-posts-module/components/PostModal'
 import { useGetPublication } from '@/services'
 import { useUserStore } from '@/store'
 import { Avatar, Spinner } from '@/ui'
@@ -25,38 +27,45 @@ export const HomePage = () => {
     isLoadingPublications,
   } = useGetPublication()
   const { locale } = useTranslation()
+  const [isOpenPostModal, setIsOpenPostModal] = useState(false)
+
   const localeTime: Locale | undefined = localTimeDisplayLanguageInThePost[locale || 'en']
   const { ref } = useInViewScrollEffect({
     hasNextPage: hasNextPagePublications,
     fetchNextPage: fetchNextPublications,
   })
 
-  useEffect(() => {
-    dataPublications?.pages.map(publications =>
-      publications.items.map(publication => setPostId(publication.id))
-    )
-  }, [dataPublications?.pages])
+  const onClose = () => {
+    setIsOpenPostModal(false)
+  }
+  const onPostClick = (id: number) => {
+    setPostId(id)
+    setIsOpenPostModal(true)
+  }
 
   return (
-    <div className="flex flex-col gap-9 w-full text-light-100 ">
+    <div className="flex justify-center w-full ">
       {!isLoadingPublications ? (
-        <>
+        <div className="flex flex-col">
           {dataPublications?.pages.map(
             publications =>
               publications.items.length > 0 &&
               publications.items.map((publication, index) => (
-                <div key={index} className="flex flex-col w-full h-full">
-                  <div className="flex items-center w-full">
-                    <URLUsernameForModal
-                      avatartSrc={publication.avatars?.thumbnail.url}
-                      userName={publication.userName}
-                    />
-                    <div className="flex text-light-900 leading-none text-xs">
-                      {formatDistance(parseISO(publication.createdAt.toString()), new Date(), {
-                        addSuffix: true,
-                        locale: localeTime,
-                      })}
+                <div key={index} className="flex mb-9 text-light-900 leading-none text-xs flex-col">
+                  <div className="flex justify-between pb-3 items-center">
+                    <div className="flex gap-3 items-center">
+                      <URLUsernameForModal
+                        avatartSrc={publication.avatars?.thumbnail.url}
+                        userName={publication.userName}
+                      />
+                      <div className="flex ">
+                        {formatDistance(parseISO(publication.createdAt.toString()), new Date(), {
+                          addSuffix: true,
+                          locale: localeTime,
+                        })}
+                      </div>
                     </div>
+                    <PostActions post={publication} isLoading={isLoadingPublications} />
                   </div>
                   {publication.images ? (
                     <div className="flex h-[491px]">
@@ -65,7 +74,12 @@ export const HomePage = () => {
                   ) : (
                     <NotFoundComponent message={'No images'} />
                   )}
-                  <LikesMessageSendBlock>
+                  <LikesMessageSendBlock
+                    publication={publication}
+                    postId={postId}
+                    setPostId={() => setPostId(publication.id)}
+                    onPostClick={() => onPostClick(publication.id)}
+                  >
                     <div className="flex mt-5 gap-3 w-full">
                       <Avatar
                         src={publication.avatars?.thumbnail.url}
@@ -79,12 +93,16 @@ export const HomePage = () => {
                     </div>
                   </LikesMessageSendBlock>
                   <div className="pt-6">
-                    <span className="text-sm font-semibold leading-6 text-light-900">{`View All Comments (${publication.commentCount})`}</span>
-                    <AddCommentForm postId={postId} />
+                    <span
+                      onClick={() => onPostClick(publication.id)}
+                      className="text-sm font-semibold leading-6 text-light-900"
+                    >{`View All Comments (${publication.commentCount})`}</span>
+                    <AddCommentForm setPostId={() => setPostId(publication.id)} postId={postId} />
                   </div>
                 </div>
               ))
           )}
+          <PostModal isOpen={isOpenPostModal} onClose={onClose} />
           <div className="flex">
             <RenderLoadingIndicator
               isSuccess={isSuccessPublications}
@@ -92,7 +110,7 @@ export const HomePage = () => {
               customRef={ref}
             />
           </div>
-        </>
+        </div>
       ) : (
         <div className="absolute h-full w-full flex justify-center items-center">
           <Spinner />

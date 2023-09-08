@@ -10,7 +10,7 @@ import { DateCalendar, GlobalButton, GlobalInput, Textarea } from '@/ui'
 
 type PropsType = {
   onSubmit: (data: SettingsSchemaType) => void
-  initialProfileData: Omit<RootProfile, 'avatars' | 'id'>
+  initialProfileData: Omit<RootProfile, 'avatars' | 'id' | 'hasBusinessAccount'>
 }
 
 export const AccountSettingForm: FC<Partial<PropsType>> = ({ initialProfileData, onSubmit }) => {
