@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactPortal, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { NextPage } from 'next'
 
