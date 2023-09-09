@@ -2,6 +2,7 @@ import { PropsWithChildren, ReactElement } from 'react'
 
 import { NextPage } from 'next'
 
+import { LikesCommentsPage, LikesPage } from '@/components/following-followers-likes'
 import { LayoutWithHeader } from '@/components/layout/LayoutWithHeader/LayoutWithHeader'
 import { Modals } from '@/components/modals'
 import { Sidebar } from '@/components/sidebar/Sidebar'
@@ -16,7 +17,8 @@ export const GlobalLayout: NextPage<PropsWithChildren> = ({ children }) => {
           {children}
         </div>
       </div>
-
+      <LikesPage />
+      <LikesCommentsPage />
       <Modals />
     </LayoutWithHeader>
   )

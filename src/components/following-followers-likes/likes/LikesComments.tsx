@@ -4,17 +4,18 @@ import { useInViewScrollEffect } from '@/common'
 import { LikesUsers } from '@/components/following-followers-likes'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
-import { useFollowingOrUnfollowingUser, useGetLikes } from '@/services'
+import { useFollowingOrUnfollowingUser } from '@/services'
+import { useGetCommentsLikes } from '@/services/hooks/likes/useGetCommentsLikes'
 import { useSearchStore, useUserStore } from '@/store'
 import { Spinner } from '@/ui'
 
-export const Likes = () => {
+export const LikesComments = () => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
 
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     userId: currentUserId,
   })
-  const { postId } = useUserStore()
+  const { postId, commentId } = useUserStore()
   const { search } = useSearchStore()
   const {
     likesData,
@@ -24,8 +25,9 @@ export const Likes = () => {
     isSuccessLikes,
     fetchNextPageLikes,
     isLoadingLikes,
-  } = useGetLikes({
+  } = useGetCommentsLikes({
     postId: postId,
+    commentId,
     search,
   })
 

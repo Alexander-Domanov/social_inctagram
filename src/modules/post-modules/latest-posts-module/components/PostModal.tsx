@@ -5,11 +5,9 @@ import { FaTimes } from 'react-icons/fa'
 import Modal from 'react-modal'
 
 import { getTimeFromNow } from '@/common/helpers/getTimeFromNow'
-import { LikesPage } from '@/components/following-followers-likes'
 import { useTranslation } from '@/components/translation'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Skeleton } from '@/components/ui/skeleton'
-// eslint-disable-next-line
 import { AddCommentForm } from '@/modules/post-modules/latest-posts-module/components/AddCommentForm'
 import { PostComments } from '@/modules/post-modules/latest-posts-module/components/PostComments'
 import { PostImagesSlider } from '@/modules/post-modules/latest-posts-module/components/PostImagesSlider'
@@ -124,7 +122,6 @@ export const PostModal: FC = () => {
 
           <PostModalFooter />
 
-          <LikesPage />
           <div className="px-6">
             <AddCommentForm postId={postId} ref={inputRef} />
           </div>
