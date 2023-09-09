@@ -8,16 +8,23 @@ import { useTranslation } from '@/components/translation'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useLikesModalStore, useUserStore } from '@/store'
 
-export const LikesLayout: NextPage<PropsWithChildren> = ({ children }) => {
+type LikesLayoutProps = {
+  isModalOpen: boolean
+}
+
+export const LikesLayout: NextPage<PropsWithChildren & LikesLayoutProps> = ({
+  children,
+  isModalOpen,
+}) => {
   const { likesCount } = useUserStore()
   const { t } = useTranslation()
-  const { isLikesModal, setLikesModal } = useLikesModalStore()
+  const { setLikesModal } = useLikesModalStore()
 
   return (
     <ModalWithContent
       size="medium"
-      isOpen={isLikesModal}
-      onClose={() => setLikesModal(false)}
+      isOpen={isModalOpen}
+      onClose={() => setLikesModal('')}
       title={`${t.likes.getCountTitleLikes(likesCount)}`}
     >
       <SearchLayout>

@@ -15,8 +15,6 @@ export const FollowUnfollowButton = ({
 }: FollowUnfollowButtonPropsInterface) => {
   const { t } = useTranslation()
 
-  console.log(isFollowing)
-
   return (
     <GlobalButton
       className={twMerge('text-base mr-10 h-9 bg-dark-300 font-semibold', className)}

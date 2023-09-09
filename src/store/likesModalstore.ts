@@ -1,14 +1,16 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
+type LikesModalString = 'likes' | 'commentLikes' | 'commentAnswerLikes' | ''
+
 interface LikesModalStoreInterface {
-  isLikesModal: boolean
-  setLikesModal: (isLikesModal: boolean) => void
+  isLikesModal: LikesModalString | boolean
+  setLikesModal: (isLikesModal: LikesModalString | boolean) => void
 }
 
 export const useLikesModalStore = create<LikesModalStoreInterface>()(
   immer(set => ({
-    isLikesModal: false,
+    isLikesModal: '',
     setLikesModal(isLikesModal) {
       set({ isLikesModal: isLikesModal })
     },

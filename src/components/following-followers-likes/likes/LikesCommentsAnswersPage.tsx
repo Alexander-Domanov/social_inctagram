@@ -1,10 +1,10 @@
 import React from 'react'
 
 import { Likes, LikesLayout } from '@/components/following-followers-likes'
-import { useGetLikes } from '@/services'
+import { useGetCommentsAnswersLikes } from '@/services/hooks/likes/useGetCommentsAnswerLikes'
 import { useLikesModalStore, useSearchStore, useUserStore } from '@/store'
 
-export const LikesPage = () => {
+export const LikesCommentsAnswersPage = () => {
   const { search } = useSearchStore()
   const { isLikesModal } = useLikesModalStore()
   const { postId } = useUserStore()
@@ -16,13 +16,15 @@ export const LikesPage = () => {
     isSuccessLikes,
     fetchNextPageLikes,
     isLoadingLikes,
-  } = useGetLikes({
+  } = useGetCommentsAnswersLikes({
     postId: postId,
     search,
+    answerId: 0,
+    commentId: 0,
   })
 
   return (
-    <LikesLayout isModalOpen={isLikesModal === 'likes'}>
+    <LikesLayout isModalOpen={isLikesModal === 'commentAnswerLikes'}>
       <Likes
         isLoadingLikes={isLoadingLikes}
         isRefetchingLikes={isRefetchingLikes}

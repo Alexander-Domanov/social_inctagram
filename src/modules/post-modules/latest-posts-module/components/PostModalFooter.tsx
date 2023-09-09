@@ -27,7 +27,7 @@ export const PostModalFooter: FC = () => {
   }
   const { setLikesModal } = useLikesModalStore()
   const onOpenModalLikes = () => {
-    setLikesModal(true)
+    setLikesModal('likes')
     setPostId(postId)
     if (post?.likeCount !== undefined) {
       setLikesCount(post.likeCount)

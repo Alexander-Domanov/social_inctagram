@@ -41,7 +41,7 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
     mutate()
   }
   const onOpenModalLikes = () => {
-    setLikesModal(true)
+    setLikesModal('likes')
     setPostId()
     setLikesCount(publication.likeCount)
   }

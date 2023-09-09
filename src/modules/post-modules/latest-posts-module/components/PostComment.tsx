@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 
 import { getTimeFromNow } from '@/common/helpers/getTimeFromNow'
+import { LikesCommentsPage } from '@/components/following-followers-likes'
 import { useTranslation } from '@/components/translation'
 import {
   Comment,
@@ -11,7 +12,7 @@ import {
 } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
 import { PostCommentAnswers } from '@/modules/post-modules/latest-posts-module/components/PostCommentAnswers'
 import { useChangePostCommentLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostCommentLikeStatus'
-import { useModalsStore } from '@/store'
+import { useLikesModalStore, useModalsStore, useUserStore } from '@/store'
 import { Avatar } from '@/ui'
 
 interface Props {
@@ -26,8 +27,9 @@ export const PostComment: FC<Props> = ({ comment, focusInput }) => {
     comment.isLiked ? LikeStatus.NONE : LikeStatus.LIKE
   )
   const { t } = useTranslation()
+  const { setCommentId, setLikesCount } = useUserStore()
   const { postModal } = useModalsStore()
-
+  const { setLikesModal } = useLikesModalStore()
   const onLikeClick = () => {
     mutate()
   }
@@ -36,6 +38,12 @@ export const PostComment: FC<Props> = ({ comment, focusInput }) => {
     postModal.setReply('comment', comment.id)
 
     focusInput()
+  }
+
+  const onOpenLikeCommentModal = () => {
+    setCommentId(comment.id)
+    setLikesCount(comment.likeCount)
+    setLikesModal('commentLikes')
   }
 
   return (
@@ -64,7 +72,7 @@ export const PostComment: FC<Props> = ({ comment, focusInput }) => {
             </time>
 
             {comment.likeCount > 0 && (
-              <div className="font-semibold">
+              <div className="font-semibold cursor-pointer" onClick={onOpenLikeCommentModal}>
                 {t.likes.getCountLikes(comment.likeCount)}: {comment.likeCount}
               </div>
             )}
@@ -93,6 +101,7 @@ export const PostComment: FC<Props> = ({ comment, focusInput }) => {
           focusInput={focusInput}
         />
       )}
+      <LikesCommentsPage />
     </div>
   )
 }

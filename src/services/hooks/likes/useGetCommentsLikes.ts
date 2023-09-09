@@ -4,10 +4,11 @@ import { toast } from 'react-toastify'
 import { apiLikes } from '@/services'
 import { FollowingFollowersLikesPropsType } from '@/types'
 
-export const useGetLikes = ({
-  postId,
-  search,
-}: Pick<FollowingFollowersLikesPropsType, 'search' | 'postId'>) => {
+type UseGetCommentsLikes = {
+  commentId: number | null
+} & Pick<FollowingFollowersLikesPropsType, 'search' | 'postId'>
+
+export const useGetCommentsLikes = ({ postId, search, commentId }: UseGetCommentsLikes) => {
   const {
     data: likesData,
     refetch: refetchLikes,
@@ -18,8 +19,8 @@ export const useGetLikes = ({
     fetchNextPage: fetchNextPageLikes,
     isLoading: isLoadingLikes,
   } = useInfiniteQuery(
-    ['likes', search, postId],
-    ({ pageParam = 0 }) => apiLikes.getLikes({ postId, search, pageParam }),
+    ['likes-comments', search, postId, commentId],
+    ({ pageParam = 0 }) => apiLikes.getCommentsLikes({ commentId, postId, search, pageParam }),
     {
       getNextPageParam: (lastPage, _allPages) => {
         if (lastPage.nextCursor) {
@@ -31,7 +32,7 @@ export const useGetLikes = ({
       cacheTime: 0,
       staleTime: 0,
       onError: (err: Error) => toast.error(err.message),
-      enabled: Boolean(postId),
+      enabled: Boolean(postId && commentId),
     }
   )
 

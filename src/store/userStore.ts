@@ -24,6 +24,10 @@ interface UserStore {
   setUserName: (userName: string | null) => void
   postId: number | null
   setPostId: (id: number | null) => void
+  commentId: number | null
+  setCommentId: (id: number | null) => void
+  answerId: number | null
+  setAnswerId: (id: number | null) => void
   hasBusinessAccount: boolean
   setHasBusinessAccount: (hasBusinessAccount: boolean) => void
   descriptionLocal: string
@@ -50,6 +54,8 @@ export const useUserStore = create<UserStore>()(
     followersCount: 0,
     publicationCount: 0,
     likesCount: 0,
+    commentId: 0,
+    answerId: 0,
     setHasBusinessAccount(hasBusinessAccount) {
       set({ hasBusinessAccount: hasBusinessAccount })
     },
@@ -64,6 +70,12 @@ export const useUserStore = create<UserStore>()(
     },
     setPostId(id) {
       set({ postId: id })
+    },
+    setCommentId(id) {
+      set({ commentId: id })
+    },
+    setAnswerId(id) {
+      set({ answerId: id })
     },
     setDescriptionLocal(descriptionLocal) {
       set({ descriptionLocal: descriptionLocal })

@@ -15,4 +15,4 @@ export * from './hooks/home/useGetPublication'
 export * from './api/home_api/home_api'
 
 export * from './hooks/likes/useGetLikes'
-export * from './api/likes_api/getLikes'
+export * from './api/likes_api/getLikes_api'
