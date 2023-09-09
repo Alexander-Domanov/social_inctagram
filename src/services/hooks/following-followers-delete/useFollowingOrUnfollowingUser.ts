@@ -25,6 +25,7 @@ export const useFollowingOrUnfollowingUser = ({
           client.invalidateQueries({ queryKey: ['publications'] })
           client.invalidateQueries({ queryKey: ['get-user-profile-page'] })
           client.invalidateQueries({ queryKey: ['post'] })
+          client.invalidateQueries({ queryKey: ['likes'] })
         }
       },
       onError: (err: Error) => toast.error(err.message),

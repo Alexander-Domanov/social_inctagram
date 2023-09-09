@@ -1,29 +1,36 @@
 import React from 'react'
 
-import { Likes } from '@/components/following-followers-likes'
-import { SearchLayout } from '@/components/layout'
-import { ModalWithContent } from '@/components/modals'
-import { useTranslation } from '@/components/translation'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { useLikesModalStore, useUserStore } from '@/store'
+import { Likes, LikesLayout } from '@/components/following-followers-likes'
+import { useGetLikes } from '@/services'
+import { useSearchStore, useUserStore } from '@/store'
 
 export const LikesPage = () => {
-  const { likesCount } = useUserStore()
-  const { t } = useTranslation()
-  const { isLikesModal, setLikesModal } = useLikesModalStore()
+  const { search } = useSearchStore()
+  const { postId } = useUserStore()
+  const {
+    likesData,
+    isRefetchingLikes,
+    hasNextPageLikes,
+    isFetchingNextPageLikes,
+    isSuccessLikes,
+    fetchNextPageLikes,
+    isLoadingLikes,
+  } = useGetLikes({
+    postId: postId,
+    search,
+  })
 
   return (
-    <ModalWithContent
-      size="medium"
-      isOpen={isLikesModal}
-      onClose={() => setLikesModal(false)}
-      title={`${t.likes.getCountTitleLikes(likesCount)}`}
-    >
-      <SearchLayout>
-        <ScrollArea className="w-full h-[425px]">
-          <Likes />
-        </ScrollArea>
-      </SearchLayout>
-    </ModalWithContent>
+    <LikesLayout>
+      <Likes
+        isLoadingLikes={isLoadingLikes}
+        isRefetchingLikes={isRefetchingLikes}
+        likesData={likesData}
+        isSuccessLikes={isSuccessLikes}
+        fetchNextPageLikes={fetchNextPageLikes}
+        hasNextPageLikes={hasNextPageLikes}
+        isFetchingNextPageLikes={isFetchingNextPageLikes}
+      />
+    </LikesLayout>
   )
 }
