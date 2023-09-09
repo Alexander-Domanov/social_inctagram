@@ -4,7 +4,6 @@ import dayjs from 'dayjs'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 
 import { getTimeFromNow } from '@/common/helpers/getTimeFromNow'
-import { LikesCommentsPage } from '@/components/following-followers-likes'
 import { useTranslation } from '@/components/translation'
 import {
   Comment,
@@ -101,7 +100,6 @@ export const PostComment: FC<Props> = ({ comment, focusInput }) => {
           focusInput={focusInput}
         />
       )}
-      <LikesCommentsPage />
     </div>
   )
 }

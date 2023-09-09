@@ -13,7 +13,7 @@ import { PostActions } from '@/modules/post-modules/latest-posts-module/componen
 import { useGetPublication } from '@/services'
 import { useModalsStore, useUserStore } from '@/store'
 import { Avatar, Spinner } from '@/ui'
-import { LikesPage, URLUsernameForModal } from 'src/components/following-followers-likes'
+import { URLUsernameForModal } from 'src/components/following-followers-likes'
 
 export const HomePage = () => {
   const { setPostId, postId } = useUserStore()
@@ -112,7 +112,6 @@ export const HomePage = () => {
           <Spinner />
         </div>
       )}
-      <LikesPage />
     </div>
   )
 }
