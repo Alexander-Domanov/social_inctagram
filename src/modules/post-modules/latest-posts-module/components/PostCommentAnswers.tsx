@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
 
+import { useTranslation } from '@/components/translation'
 import { PostCommentAnswer } from '@/modules/post-modules/latest-posts-module/components/PostCommentAnswer'
 import { useGetCommentAnswers } from '@/modules/post-modules/latest-posts-module/hooks/useGetCommentAnswers'
 import { Spinner } from '@/ui'
@@ -14,6 +15,7 @@ interface Props {
 export const PostCommentAnswers: FC<Props> = ({ answerCount, commentId, postId, focusInput }) => {
   const [isOpen, setIsOpen] = useState(false)
   const { data, isInitialLoading } = useGetCommentAnswers(postId, commentId, isOpen)
+  const { t } = useTranslation()
 
   return (
     <div className="mt-2 ml-12 flex flex-col">
@@ -22,7 +24,11 @@ export const PostCommentAnswers: FC<Props> = ({ answerCount, commentId, postId, 
         onClick={() => setIsOpen(prev => !prev)}
       >
         <span className="h-[1px] w-6 bg-light-900 mr-3"></span>
-        {`${isOpen ? 'Hide Answers' : 'Show answers'} (${answerCount})`}
+        {`${
+          isOpen
+            ? t.PostCommentAnswers.getCountHideAnswers(answerCount)
+            : t.PostCommentAnswers.getCountShowAnswers(answerCount)
+        }`}
       </div>
 
       {isInitialLoading && (

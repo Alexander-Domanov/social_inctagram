@@ -10,7 +10,7 @@ import { LikeStatus } from '@/modules/post-modules/latest-posts-module/api/lates
 import { PostFavorite } from '@/modules/post-modules/latest-posts-module/components/PostFavorite'
 import { useChangePostLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostLikeStatus'
 import { UserPublicationType } from '@/services'
-import { useLikesModalStore } from '@/store'
+import { useLikesModalStore, useUserStore } from '@/store'
 import { Avatar } from '@/ui'
 
 export type LikesMessageSendBlockType = {
@@ -29,7 +29,8 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
   onPostClick,
   post,
 }) => {
-  const { t } = useTranslation()
+  const { t, localeLanguage } = useTranslation()
+  const { setLikesCount } = useUserStore()
   const { mutate } = useChangePostLikeStatus(
     postId,
     publication?.isLiked ? LikeStatus.NONE : LikeStatus.LIKE
@@ -40,8 +41,9 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
     mutate()
   }
   const onOpenModalLikes = () => {
-    setLikesModal(true)
+    setLikesModal('likes')
     setPostId()
+    setLikesCount(publication.likeCount)
   }
 
   return (
@@ -94,7 +96,8 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
       </div>
 
       <div className="mt-2 text-xs leading-none text-light-900">
-        {publication?.createdAt && dayjs(publication.createdAt).format('MMMM D, YYYY')}
+        {publication?.createdAt &&
+          dayjs(publication.createdAt).locale(localeLanguage).format('MMMM D, YYYY')}
       </div>
     </div>
   )

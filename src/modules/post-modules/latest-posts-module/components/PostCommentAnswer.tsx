@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 
 import { getTimeFromNow } from '@/common/helpers/getTimeFromNow'
+import { useTranslation } from '@/components/translation'
 import { Answer, LikeStatus } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
 import { useChangePostCommentAnswerLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostCommentAnswerLikeStatus'
 import { useModalsStore } from '@/store'
@@ -22,7 +23,7 @@ export const PostCommentAnswer: FC<Props> = ({ answer, postId, focusInput }) => 
     answer.id,
     answer.isLiked ? LikeStatus.NONE : LikeStatus.LIKE
   )
-
+  const { t } = useTranslation()
   const { postModal } = useModalsStore()
 
   const onLikeClick = () => {
@@ -63,7 +64,7 @@ export const PostCommentAnswer: FC<Props> = ({ answer, postId, focusInput }) => 
             {answer.likeCount > 0 && <div className="font-semibold">Like: {answer.likeCount}</div>}
 
             <button className="font-semibold" onClick={onAnswerClick}>
-              Answer
+              {t.PostCommentAnswers.answer}
             </button>
           </div>
         </div>

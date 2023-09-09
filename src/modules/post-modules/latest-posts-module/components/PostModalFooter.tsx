@@ -12,8 +12,10 @@ import { useLikesModalStore, useModalsStore, useUserStore } from '@/store'
 import { Avatar } from '@/ui'
 
 export const PostModalFooter: FC = () => {
-  const { t } = useTranslation()
+  const { t, localeLanguage } = useTranslation()
   const { postId } = useModalsStore(state => state.postModal)
+  const { setLikesCount } = useUserStore()
+
   const { post } = useGetPost(postId)
   const { mutate } = useChangePostLikeStatus(
     postId,
@@ -25,8 +27,11 @@ export const PostModalFooter: FC = () => {
   }
   const { setLikesModal } = useLikesModalStore()
   const onOpenModalLikes = () => {
-    setLikesModal(true)
+    setLikesModal('likes')
     setPostId(postId)
+    if (post?.likeCount !== undefined) {
+      setLikesCount(post.likeCount)
+    }
   }
 
   return (
@@ -73,7 +78,7 @@ export const PostModalFooter: FC = () => {
       </div>
 
       <div className="mt-2 text-xs leading-none text-light-900">
-        {post?.createdAt && dayjs(post.createdAt).format('MMMM D, YYYY')}
+        {post?.createdAt && dayjs(post.createdAt).locale(localeLanguage).format('MMMM D, YYYY')}
       </div>
     </div>
   )

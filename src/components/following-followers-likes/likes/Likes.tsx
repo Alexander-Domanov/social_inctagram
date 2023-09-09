@@ -1,32 +1,37 @@
 import React, { useState } from 'react'
 
+import { InfiniteData } from '@tanstack/query-core/src/types'
+
 import { useInViewScrollEffect } from '@/common'
 import { LikesUsers } from '@/components/following-followers-likes'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
-import { useFollowingOrUnfollowingUser, useGetLikes } from '@/services'
-import { useSearchStore, useUserStore } from '@/store'
+import { useFollowingOrUnfollowingUser } from '@/services'
+import { ItemsFollowingFollowersLikesType } from '@/types'
 import { Spinner } from '@/ui'
 
-export const Likes = () => {
+type LikeType = {
+  likesData: InfiniteData<ItemsFollowingFollowersLikesType> | undefined
+  isRefetchingLikes: boolean
+  hasNextPageLikes: boolean | undefined
+  isFetchingNextPageLikes: boolean
+  isSuccessLikes: boolean
+  fetchNextPageLikes: () => void
+  isLoadingLikes: boolean
+}
+
+export const Likes = ({
+  likesData,
+  isLoadingLikes,
+  isSuccessLikes,
+  fetchNextPageLikes,
+  isRefetchingLikes,
+  hasNextPageLikes,
+  isFetchingNextPageLikes,
+}: LikeType) => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
-  const { search } = useSearchStore()
-  const { postId } = useUserStore()
-  const {
-    likesData,
-    refetchLikes,
-    isRefetchingLikes,
-    hasNextPageLikes,
-    isFetchingNextPageLikes,
-    isSuccessLikes,
-    fetchNextPageLikes,
-    isLoadingLikes,
-  } = useGetLikes({
-    postId: postId,
-    search,
-  })
+
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
-    refetch: refetchLikes,
     userId: currentUserId,
   })
   const { ref } = useInViewScrollEffect({
