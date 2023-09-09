@@ -159,6 +159,13 @@ export const en = {
     addComment: 'Add a comment...',
     publish: 'Publish',
   },
+  postActions: {
+    follow: 'Follow',
+    unFollow: 'Unfollow',
+    deletePost: 'Delete Post',
+    editPost: 'Edit Post',
+    report: 'Report',
+  },
   search: {
     searchTitle: 'Search',
     searchInput: 'Search',
@@ -168,6 +175,37 @@ export const en = {
   },
   homepage: {
     viewComments: 'View All Comments',
+  },
+  PostCommentAnswers: {
+    answer: 'Answer',
+    getCountShowAnswers(count: number) {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'other':
+          return `Show answers (${count})`
+        case 'one':
+          return `Show answer (${count})`
+        case 'few':
+          return `Show answers (${count})`
+        case 'many':
+          return `Show answers (${count})`
+      }
+    },
+    getCountHideAnswers(count: number): string | undefined {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'other':
+          return `Hide answers (${count})`
+        case 'one':
+          return `Hide answer (${count})`
+        case 'few':
+          return `Hide answers (${count})`
+        case 'many':
+          return `Hide answers (${count})`
+      }
+    },
   },
 }
 

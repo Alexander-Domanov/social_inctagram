@@ -12,6 +12,7 @@ export const useTranslation = () => {
   }
 
   const t: LocaleType = locale !== undefined ? translations[locale] : en
+  const localeLanguage = locale ? locale : 'en'
 
-  return { t, locale, defaultLocale }
+  return { t, localeLanguage, defaultLocale }
 }

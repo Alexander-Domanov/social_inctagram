@@ -26,9 +26,9 @@ export const HomePage = () => {
     fetchNextPublications,
     isLoadingPublications,
   } = useGetPublication()
-  const { locale } = useTranslation()
+  const { localeLanguage } = useTranslation()
   const { setPostIdAndOpenModal } = useModalsStore(state => state.postModal)
-  const localeTime: Locale | undefined = localTimeDisplayLanguageInThePost[locale || 'en']
+  const localeTime: Locale = localTimeDisplayLanguageInThePost[localeLanguage]
   const { ref } = useInViewScrollEffect({
     hasNextPage: hasNextPagePublications,
     fetchNextPage: fetchNextPublications,

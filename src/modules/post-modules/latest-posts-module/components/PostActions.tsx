@@ -3,6 +3,7 @@ import { FC, useState } from 'react'
 import { FaPen, FaTrash } from 'react-icons/fa'
 import { FaEllipsis, FaEnvelope, FaUserMinus, FaUserPlus } from 'react-icons/fa6'
 
+import { useTranslation } from '@/components/translation'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,6 +30,8 @@ export const PostActions: FC<Props> = ({ post, isLoading }) => {
   const userPostId = post?.ownerId || null
   const { isLoading: isLoadingFollowUnfollow, useFollowUnfollowUser } =
     useFollowingOrUnfollowingUser({ userId: userPostId })
+
+  const { t } = useTranslation()
   const onPostDelete = () => {
     setIsDeletePostOpen(true)
   }
@@ -56,26 +59,26 @@ export const PostActions: FC<Props> = ({ post, isLoading }) => {
           {isMyPost ? (
             <>
               <DropdownMenuItem onSelect={onPostEdit}>
-                <FaPen className={iconClassname} /> Edit Post
+                <FaPen className={iconClassname} /> {t.postActions.editPost}
               </DropdownMenuItem>
 
               <DropdownMenuItem onSelect={onPostDelete}>
-                <FaTrash className={iconClassname} /> Delete Post
+                <FaTrash className={iconClassname} /> {t.postActions.deletePost}
               </DropdownMenuItem>
             </>
           ) : (
             <div onClick={handleToggleSubscriptionsCallBack}>
               <DropdownMenuItem>
-                <FaEnvelope className={iconClassname} /> Report
+                <FaEnvelope className={iconClassname} /> {t.postActions.report}
               </DropdownMenuItem>
 
               {post?.isFollowing ? (
                 <DropdownMenuItem>
-                  <FaUserMinus className={iconClassname} /> Unfollow
+                  <FaUserMinus className={iconClassname} /> {t.postActions.unFollow}
                 </DropdownMenuItem>
               ) : (
                 <DropdownMenuItem>
-                  <FaUserPlus className={iconClassname} /> Follow
+                  <FaUserPlus className={iconClassname} /> {t.postActions.follow}
                 </DropdownMenuItem>
               )}
             </div>

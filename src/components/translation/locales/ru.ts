@@ -161,4 +161,42 @@ export const ru: LocaleType = {
     addComment: 'Добавить комментарий...',
     publish: 'Опубликовать',
   },
+  postActions: {
+    follow: 'Подписаться',
+    unFollow: 'Отписаться',
+    deletePost: 'Удалить пост',
+    editPost: 'Редактировать пост',
+    report: 'Пожаловаться',
+  },
+  PostCommentAnswers: {
+    answer: 'Ответ',
+    getCountShowAnswers(count: number) {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'other':
+          return `Показать ответы (${count})`
+        case 'one':
+          return `Показать ответ (${count})`
+        case 'few':
+          return `Показать ответы (${count})`
+        case 'many':
+          return `Показать ответы (${count})`
+      }
+    },
+    getCountHideAnswers(count: number): string | undefined {
+      const str = pluralizeRu(count)
+
+      switch (str) {
+        case 'other':
+          return `Скрыть ответы (${count})`
+        case 'one':
+          return `Скрыть ответ (${count})`
+        case 'few':
+          return `Скрыть ответы (${count})`
+        case 'many':
+          return `Скрыть ответы (${count})`
+      }
+    },
+  },
 }

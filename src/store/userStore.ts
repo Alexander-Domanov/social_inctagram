@@ -31,6 +31,8 @@ interface UserStore {
   publicationCount: number
   followersCount: number
   followingCount: number
+  likesCount: number
+  setLikesCount: (count: number) => void
   setFollowersCount: (count: number) => void
   setFollowingCount: (count: number) => void
   setPublicationsCount: (count: number) => void
@@ -47,6 +49,7 @@ export const useUserStore = create<UserStore>()(
     followingCount: 0,
     followersCount: 0,
     publicationCount: 0,
+    likesCount: 0,
     setHasBusinessAccount(hasBusinessAccount) {
       set({ hasBusinessAccount: hasBusinessAccount })
     },
@@ -70,6 +73,9 @@ export const useUserStore = create<UserStore>()(
     },
     setFollowingCount(followingCount) {
       set({ followingCount })
+    },
+    setLikesCount(likesCount) {
+      set({ likesCount })
     },
     setPublicationsCount(publicationCount) {
       set({ publicationCount })

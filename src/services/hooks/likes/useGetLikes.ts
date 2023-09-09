@@ -18,7 +18,7 @@ export const useGetLikes = ({
     fetchNextPage: fetchNextPageLikes,
     isLoading: isLoadingLikes,
   } = useInfiniteQuery(
-    ['likes', search],
+    ['likes', search, postId],
     ({ pageParam = 0 }) => getLikes({ postId, search, pageParam }),
     {
       getNextPageParam: (lastPage, _allPages) => {

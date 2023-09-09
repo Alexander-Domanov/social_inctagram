@@ -8,7 +8,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { useLikesModalStore, useUserStore } from '@/store'
 
 export const LikesPage = () => {
-  const { followingCount } = useUserStore()
+  const { likesCount } = useUserStore()
   const { t } = useTranslation()
   const { isLikesModal, setLikesModal } = useLikesModalStore()
 
@@ -17,7 +17,7 @@ export const LikesPage = () => {
       size="medium"
       isOpen={isLikesModal}
       onClose={() => setLikesModal(false)}
-      title={`${t.likes.getCountTitleLikes(followingCount)}`}
+      title={`${t.likes.getCountTitleLikes(likesCount)}`}
     >
       <SearchLayout>
         <ScrollArea className="w-full h-[425px]">

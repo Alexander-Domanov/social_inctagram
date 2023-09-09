@@ -6,6 +6,7 @@ import Modal from 'react-modal'
 
 import { getTimeFromNow } from '@/common/helpers/getTimeFromNow'
 import { LikesPage } from '@/components/following-followers-likes'
+import { useTranslation } from '@/components/translation'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Skeleton } from '@/components/ui/skeleton'
 // eslint-disable-next-line
@@ -21,7 +22,7 @@ import { Avatar } from '@/ui'
 export const PostModal: FC = () => {
   const { setDescriptionLocal } = useUserStore()
   const { setDescription } = useSaveDescription()
-
+  const { localeLanguage } = useTranslation()
   const { postId, isOpen, setIsOpen } = useModalsStore(state => state.postModal)
 
   const { post, isLoading } = useGetPost(postId, description => {
@@ -104,7 +105,9 @@ export const PostModal: FC = () => {
                       <div className="mt-2 text-xs leading-none text-light-900">
                         <time
                           dateTime={post?.createdAt}
-                          title={dayjs(post?.createdAt).format('DD.MM.YYYY HH:mm')}
+                          title={dayjs(post?.createdAt)
+                            .locale(localeLanguage)
+                            .format('DD.MM.YYYY HH:mm')}
                           className="inline-flex"
                         >
                           {post?.createdAt && getTimeFromNow(post?.createdAt)}

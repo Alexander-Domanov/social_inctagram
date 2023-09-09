@@ -162,4 +162,42 @@ export const uk: LocaleType = {
     addComment: 'Додати коментар...',
     publish: 'Опублікувати',
   },
+  postActions: {
+    follow: 'Підписатися',
+    unFollow: 'Відписатися',
+    deletePost: 'Видалити пост',
+    editPost: 'Редагувати пост',
+    report: 'Поскаржитися',
+  },
+  PostCommentAnswers: {
+    answer: 'Відповідь',
+    getCountShowAnswers(count: number) {
+      const str = pluralizeUk(count)
+
+      switch (str) {
+        case 'other':
+          return `Показати відповіді (${count})`
+        case 'one':
+          return `Показати відповідь (${count})`
+        case 'few':
+          return `Показати відповіді (${count})`
+        case 'many':
+          return `Показати відповіді (${count})`
+      }
+    },
+    getCountHideAnswers(count: number): string | undefined {
+      const str = pluralizeUk(count)
+
+      switch (str) {
+        case 'other':
+          return `Сховати відповіді (${count})`
+        case 'one':
+          return `Сховати відповідь (${count})`
+        case 'few':
+          return `Сховати відповіді (${count})`
+        case 'many':
+          return `Сховати відповіді (${count})`
+      }
+    },
+  },
 }
