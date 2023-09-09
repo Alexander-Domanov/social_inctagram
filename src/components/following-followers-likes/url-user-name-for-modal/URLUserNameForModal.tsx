@@ -3,6 +3,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 
 import { routes } from '@/routing/router'
+import { useLikesModalStore } from '@/store'
 import { Avatar } from '@/ui'
 
 export const URLUsernameForModal = ({
@@ -15,8 +16,10 @@ export const URLUsernameForModal = ({
   className?: string
 }) => {
   const router = useRouter()
+  const { setLikesModal } = useLikesModalStore()
   const callBack = () => {
     router.push(`${routes.sideBar.userHomePage}${userName}`)
+    setLikesModal('')
   }
 
   return (
