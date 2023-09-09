@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { NotFoundComponent } from '@/components/not-found/NotFound'
+import { useUserStore } from '@/store'
 import { FollowingsFollowersLikesType, FollowUnfollowButtonPropsInterface } from '@/types'
 import { FollowUnfollowButton, URLUsernameForModal } from 'src/components/following-followers-likes'
 
@@ -16,9 +17,7 @@ export const LikesUsers = ({
   isRefetching,
   isLoadingButton,
 }: FollowersUsersProps) => {
-  // const { userNameQuery } = useGetQueryUserNameUserId()
-  // const { userName } = useUserStore()
-  // const isUserName: boolean = userName === userNameQuery
+  const { userName } = useUserStore()
 
   return (
     <>
@@ -32,15 +31,17 @@ export const LikesUsers = ({
                 className={'w-[150px]'}
               />
             </div>
-            <FollowUnfollowButton
-              key={index}
-              isFollowing={user.isFollowing}
-              handleToggleSubscriptionsCallBack={() =>
-                handleToggleSubscriptionsCallBack(user.userId)
-              }
-              isLoadingButton={currentUserId === user.userId && isLoadingButton}
-              isRefetching={currentUserId === user.userId && isRefetching}
-            />
+            {userName !== user.userName && (
+              <FollowUnfollowButton
+                key={index}
+                isFollowing={user.isFollowing}
+                handleToggleSubscriptionsCallBack={() =>
+                  handleToggleSubscriptionsCallBack(user.userId)
+                }
+                isLoadingButton={currentUserId === user.userId && isLoadingButton}
+                isRefetching={currentUserId === user.userId && isRefetching}
+              />
+            )}
           </div>
         ))
       ) : (
