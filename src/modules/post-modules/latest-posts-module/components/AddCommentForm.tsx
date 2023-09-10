@@ -44,7 +44,9 @@ const AddCommentForm = forwardRef<HTMLInputElement, Props>(({ postId, setPostId 
           onClick={() => (setPostId ? setPostId() : null)}
           type="text"
           className="text-white placeholder-light-900 h-6 w-full bg-transparent outline-none text-sm"
-          placeholder={t.addCommentForm.addComment}
+          placeholder={
+            postModal.replyTo === 'post' ? t.addCommentForm.addComment : t.addCommentForm.addAnswer
+          }
           value={comment}
           onChange={e => setComment(e.target.value)}
           required

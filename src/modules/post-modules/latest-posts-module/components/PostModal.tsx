@@ -1,6 +1,7 @@
-import React, { FC, useEffect, useRef } from 'react'
+import React, { FC, useRef } from 'react'
 
 import dayjs from 'dayjs'
+import Link from 'next/link'
 import { FaTimes } from 'react-icons/fa'
 import Modal from 'react-modal'
 
@@ -21,7 +22,7 @@ export const PostModal: FC = () => {
   const { setDescriptionLocal } = useUserStore()
   const { setDescription } = useSaveDescription()
   const { localeLanguage } = useTranslation()
-  const { postId, isOpen, setIsOpen } = useModalsStore(state => state.postModal)
+  const { postId, isOpen, closeModal } = useModalsStore(state => state.postModal)
 
   const { post, isLoading } = useGetPost(postId, description => {
     setDescription(description)
@@ -37,14 +38,12 @@ export const PostModal: FC = () => {
   }
 
   const onRequestClose = () => {
-    setIsOpen(false)
+    closeModal()
   }
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [inputRef])
+  const onLinkClick = () => {
+    closeModal()
+  }
 
   if (!isOpen) return null
 
@@ -97,7 +96,10 @@ export const PostModal: FC = () => {
                   ) : (
                     <>
                       <div>
-                        <span className="font-semibold">{post?.userName}</span> {post?.description}
+                        <Link href={`/${post?.userName}`} onClick={onLinkClick}>
+                          <span className="font-semibold">{post?.userName}</span>
+                        </Link>{' '}
+                        {post?.description}
                       </div>
 
                       <div className="mt-2 text-xs leading-none text-light-900">
@@ -105,7 +107,7 @@ export const PostModal: FC = () => {
                           dateTime={post?.createdAt}
                           title={dayjs(post?.createdAt)
                             .locale(localeLanguage)
-                            .format('DD.MM.YYYY HH:mm')}
+                            .format('DD.MM.YYYY HH:mm:ss')}
                           className="inline-flex"
                         >
                           {post?.createdAt && getTimeFromNow(post?.createdAt)}

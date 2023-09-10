@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
 import dayjs from 'dayjs'
+import Link from 'next/link'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 
 import { getTimeFromNow } from '@/common/helpers/getTimeFromNow'
@@ -36,6 +37,10 @@ export const PostCommentAnswer: FC<Props> = ({ answer, postId, focusInput }) => 
     focusInput()
   }
 
+  const onLinkClick = () => {
+    postModal.closeModal()
+  }
+
   return (
     <div className="py-3">
       <div className="grid grid-cols-[36px_1fr_24px] gap-3">
@@ -44,13 +49,16 @@ export const PostCommentAnswer: FC<Props> = ({ answer, postId, focusInput }) => 
             src={answer.from.avatars?.thumbnail.url}
             width={36}
             height={36}
-            alt={answer.from.username}
+            alt={answer.from.userName}
           />
         </div>
 
         <div className="text-sm leading-6 text-white">
           <div>
-            <span className="font-semibold">{answer.from.username}</span> {answer.content}
+            <Link href={`/${answer.from.userName}`} onClick={onLinkClick}>
+              <span className="font-semibold">{answer.from.userName}</span>
+            </Link>{' '}
+            {answer.content}
           </div>
 
           <div className="mt-2 flex items-center gap-3 text-xs text-light-900 leading-none">

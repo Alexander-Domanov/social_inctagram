@@ -1,7 +1,7 @@
-import { FC, Fragment, useEffect } from 'react'
+import React, { FC, Fragment } from 'react'
 
-import { useInView } from 'react-intersection-observer'
-
+import { useInViewScrollEffect } from '@/common'
+import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { PostComment } from '@/modules/post-modules/latest-posts-module/components/PostComment'
 import { useGetComments } from '@/modules/post-modules/latest-posts-module/hooks/useGetComments'
 import { Spinner } from '@/ui'
@@ -15,15 +15,7 @@ export const PostComments: FC<Props> = ({ postId, focusInput }) => {
   const { data, isFetchingNextPage, hasNextPage, fetchNextPage, isSuccess, isInitialLoading } =
     useGetComments(postId)
 
-  const { ref, inView } = useInView()
-
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage()
-    }
-  }, [inView, hasNextPage])
-
-  if (!isSuccess) return null
+  const { ref } = useInViewScrollEffect({ hasNextPage, fetchNextPage })
 
   return (
     <>
@@ -44,13 +36,11 @@ export const PostComments: FC<Props> = ({ postId, focusInput }) => {
         ))}
       </>
 
-      <div ref={ref} className="mt-4">
-        {isFetchingNextPage && (
-          <div className="flex justify-center">
-            <Spinner />
-          </div>
-        )}
-      </div>
+      <RenderLoadingIndicator
+        isSuccess={isSuccess}
+        isFetchNextPage={isFetchingNextPage}
+        customRef={ref}
+      />
     </>
   )
 }
