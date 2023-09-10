@@ -9,10 +9,8 @@ export const useGetProfileData = () => {
     queryFn: getAccountData,
     onSuccess: data => {},
     onError: err => {},
-    retry: 3,
     staleTime: 0,
     cacheTime: 0,
-    enabled: true,
     select: (data: any): userProfilePageData => data?.data,
   })
 }

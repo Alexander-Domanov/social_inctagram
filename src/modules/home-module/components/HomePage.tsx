@@ -111,7 +111,7 @@ export const HomePage = () => {
           />
         </>
       ) : (
-        <div className="absolute h-full w-full flex justify-center items-center">
+        <div className="flex justify-center items-center h-full">
           <Spinner />
         </div>
       )}
