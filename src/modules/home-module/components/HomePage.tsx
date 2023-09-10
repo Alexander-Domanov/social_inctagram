@@ -86,7 +86,7 @@ export const HomePage = () => {
                           src={publication.avatars?.thumbnail.url}
                           width={36}
                           height={36}
-                          alt={''}
+                          alt={'avatar'}
                         />
                         <p className=" text-light-100">
                           {publication.description ? publication.description : 'No Description'}
@@ -96,7 +96,7 @@ export const HomePage = () => {
                     <div className="pt-6">
                       <span
                         onClick={() => onPostClick(publication.id)}
-                        className="text-sm cursor-pointer font-semibold leading-6 text-light-900"
+                        className="text-sm xsm:text-xs cursor-pointer font-semibold leading-6 text-light-900"
                       >{`${t.homepage.viewComments} (${publication.commentCount})`}</span>
                       <AddCommentForm setPostId={() => setPostId(publication.id)} postId={postId} />
                     </div>

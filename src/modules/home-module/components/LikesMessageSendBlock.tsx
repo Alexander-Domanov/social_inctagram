@@ -75,7 +75,7 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
                 style={{ marginLeft: idx === 0 ? 0 : '-12px', zIndex: array.length - idx }}
               >
                 <Avatar
-                  alt={like.username}
+                  alt={like.username || 'avatar'}
                   width={24}
                   height={24}
                   src={like?.avatars?.thumbnail.url}
@@ -88,7 +88,7 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
         {publication && (
           <div onClick={onOpenModalLikes}>
             {publication?.likeCount}{' '}
-            <span className="font-bold cursor-pointer">
+            <span className="font-bold xsm:text-sm cursor-pointer">
               {t.likes.getCountLikes(publication.likeCount)}
             </span>
           </div>
