@@ -18,7 +18,7 @@ export const UserFound = ({
                 className={'cursor-default object-cover rounded-full'}
                 height={48}
                 width={48}
-                alt={'alt'}
+                alt={'Post Images'}
                 src={user.avatars?.thumbnail.url || null}
               />
               <div className="flex flex-col text-light-100 text-sm leading-6 font-normal">

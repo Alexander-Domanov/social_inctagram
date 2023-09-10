@@ -19,6 +19,7 @@ export const Placeholder = ({ src, alt, height = 192, width = 192, className }: 
       className={`${className}`}
       width={width}
       height={height}
+      priority={true}
     />
   )
 }

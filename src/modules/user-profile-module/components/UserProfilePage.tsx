@@ -73,13 +73,13 @@ export const UserProfilePage = () => {
                 }
               />
               <div className="flex w-full flex-col gap-5">
-                <div className="xsm:flex-col-reverse  sm:gap-5 md:gap-5 lg:gap-5 gap-5 w-full flex flex-wrap justify-between">
-                  <div className="lg:flex-col xl:flex-col lg:gap-5 w-full flex justify-between items-center">
-                    <div className="font-bold gap-3 flex w-full break-all xsm:hidden sm:hidden md:hidden">
+                <div className="xsm:flex-col-reverse  sm:gap-5 md:gap-5 lg:gap-5 gap-5 w-full flex flex-col flex-wrap justify-between">
+                  <div className="lg:flex-col justify-between lg:gap-5 flex items-center">
+                    <div className="font-bold gap-3 flex break-all xsm:hidden sm:hidden md:hidden">
                       {userProfileData.userName}
                       {userProfileData.isBusinessAccount && <BusinessAccountIcon />}
                     </div>
-                    <div className="md:flex-col flex w-full gap-3">
+                    <div className="md:flex-col flex gap-3">
                       {width && width >= 768 && (
                         <UserProfileButtons
                           hideSubscriptionButtons={hideSubscriptionButtons}

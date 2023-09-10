@@ -26,7 +26,7 @@ export const URLUsernameForModal = ({
     <>
       <div className="flex justify-between text-light-100 leading-6 font-semibold text-base">
         <div className="flex gap-3 items-center">
-          <Avatar src={avatartSrc} width={36} height={36} alt={''} />
+          <Avatar src={avatartSrc} width={36} height={36} alt={'avatar'} />
           <span
             className={`linkText overflow-hidden cursor-pointer truncate ${className}`}
             onClick={callBack}
