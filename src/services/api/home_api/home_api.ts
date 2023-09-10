@@ -3,7 +3,7 @@ import { UserProfileAvatarInterface } from '@/types'
 
 export type NewLikes = {
   id: number
-  username: string
+  userName: string
   avatars: {
     thumbnail: {
       url: string

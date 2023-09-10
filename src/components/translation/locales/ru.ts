@@ -159,6 +159,7 @@ export const ru: LocaleType = {
   },
   addCommentForm: {
     addComment: 'Добавить комментарий...',
+    addAnswer: 'Добавить ответ...',
     publish: 'Опубликовать',
   },
   postActions: {

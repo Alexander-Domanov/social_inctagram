@@ -75,7 +75,7 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
                 style={{ marginLeft: idx === 0 ? 0 : '-12px', zIndex: array.length - idx }}
               >
                 <Avatar
-                  alt={like.username || 'avatar'}
+                  alt={like.userName || 'avatar'}
                   width={24}
                   height={24}
                   src={like?.avatars?.thumbnail.url}

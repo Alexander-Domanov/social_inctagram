@@ -157,6 +157,7 @@ export const en = {
   },
   addCommentForm: {
     addComment: 'Add a comment...',
+    addAnswer: 'Add a answer...',
     publish: 'Publish',
   },
   postActions: {
