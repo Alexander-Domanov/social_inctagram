@@ -48,15 +48,15 @@ export const LikesMessageSendBlock: NextPage<PropsWithChildren & LikesMessageSen
 
   return (
     <div className="">
-      <div className="flex items-center text-2xl leading-none text-white">
-        <div className="flex gap-5 pt-3">
+      <div className="flex items-center pt-3 text-2xl leading-none text-white">
+        <div className="flex items-center gap-5">
           <button className="" onClick={onLikeClick}>
             {publication?.isLiked ? <FaHeart className="text-danger-500" /> : <FaRegHeart />}
           </button>
           <button onClick={() => onPostClick()}>
             <AiOutlineMessage />
           </button>
-          <button className="">
+          <button>
             <FaRegPaperPlane />
           </button>
         </div>

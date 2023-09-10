@@ -64,7 +64,7 @@ export const Sidebar: FC = () => {
     <aside
       className={`xsm:fixed xsm:bottom-0 xsm:max-w-full sticky max-w-[320px] w-full border-r-[1px] border-r-bgLogBorder ${className.hiddenSettings}`}
     >
-      <div className="xsm:bottom-0 xsm:bg-dark-700 xsm:w-full xsm:border-dark-300 xsm:border-t-[1px] xsm:justify-center xsm:h-[60px] xsm:py-0  xsm:fixed text-light-100 font-medium flex flex-col items-center justify-between py-[72px] h-full">
+      <div className="xsm:bottom-0 xsm:bg-dark-700 z-[999] xsm:w-full xsm:border-dark-300 xsm:border-t-[1px] xsm:justify-center xsm:h-[60px] xsm:py-0  xsm:fixed text-light-100 font-medium flex flex-col items-center justify-between py-[72px] h-full">
         <ul className="xsm:flex-row list-none flex gap-6 flex-col">
           <li>
             <Link href={routes.sideBar.home} className={className.home}>
