@@ -57,7 +57,7 @@ export const PostModalFooter: FC = () => {
                 style={{ marginLeft: idx === 0 ? 0 : '-12px', zIndex: array.length - idx }}
               >
                 <Avatar
-                  alt={like.username}
+                  alt={like.userName}
                   width={24}
                   height={24}
                   src={like?.avatars?.thumbnail.url}
@@ -77,7 +77,7 @@ export const PostModalFooter: FC = () => {
         )}
       </div>
 
-      <div className="mt-2 text-xs leading-none text-light-900">
+      <div className="mt-2 text-xs leading-none text-light-900 capitalize">
         {post?.createdAt && dayjs(post.createdAt).locale(localeLanguage).format('MMMM D, YYYY')}
       </div>
     </div>

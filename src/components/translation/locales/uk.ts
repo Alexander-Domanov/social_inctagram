@@ -160,6 +160,7 @@ export const uk: LocaleType = {
   },
   addCommentForm: {
     addComment: 'Додати коментар...',
+    addAnswer: 'Додати відповідь...',
     publish: 'Опублікувати',
   },
   postActions: {

@@ -37,7 +37,7 @@ export interface Post {
   isLiked: boolean
   newLikes: {
     id: number
-    username: string
+    userName: string
     avatars: {
       thumbnail: Image
       medium: Image
@@ -87,7 +87,7 @@ export interface Comment {
   postId: number
   from: {
     id: number
-    username: string
+    userName: string
     avatars: {
       thumbnail: Image
       medium: Image
@@ -105,7 +105,7 @@ export interface Answer {
   commentId: number
   from: {
     id: number
-    username: string
+    userName: string
     avatars: {
       thumbnail: Image
       medium: Image

@@ -13,6 +13,7 @@ interface ModalsStore {
     setPostIdAndOpenModal: (posId: number) => void
     setIsOpen: (open: boolean) => void
     setReply: (type: ReplyTo, commentId: number | null) => void
+    closeModal: () => void
   }
 }
 
@@ -39,6 +40,11 @@ export const useModalsStore = create<ModalsStore>()(
         set(state => {
           state.postModal.replyTo = type
           state.postModal.commentId = commentId
+        })
+      },
+      closeModal: () => {
+        set(state => {
+          state.postModal.isOpen = false
         })
       },
     },
