@@ -6,13 +6,14 @@ import { useInViewScrollEffect } from '@/common'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { LatestPost } from '@/modules/post-modules/latest-posts-module/components/LatestPost'
 import { useGetLatestPosts } from '@/modules/post-modules/latest-posts-module/hooks/useGetLatestPosts'
-import { useModalsStore } from '@/store'
+import { useModalsStore, useUserStore } from '@/store'
 import { SkeletonPost } from '@/ui'
 import { useStoreIsLoadingPublication } from 'src/modules/create-post-module'
 
 export const LatestPosts = () => {
   const { query } = useRouter()
-  const userName = query.userName ? query.userName : null
+  const { userName: myUserName } = useUserStore()
+  const userName = query.userName ? query.userName : myUserName
   const { isLoading, isSuccess, data, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useGetLatestPosts({
       userName,

@@ -20,7 +20,7 @@ export const useGetLatestPosts = ({ userName }: { userName: string | string[] | 
       return lastPage.page * lastPage.pageSize < lastPage.totalCount ? lastPage.page + 1 : undefined
     },
     enabled: !!userName,
-    ...noRefetch,
+    retry: 3,
     cacheTime: 0,
     staleTime: 0,
   })

@@ -74,7 +74,7 @@ export const UserProfilePage = () => {
               />
               <div className="flex w-full flex-col gap-5">
                 <div className="xsm:flex-col-reverse  sm:gap-5 md:gap-5 lg:gap-5 gap-5 w-full flex flex-col flex-wrap justify-between">
-                  <div className="lg:flex-col bg-accent-900 justify-between lg:gap-5 flex items-center">
+                  <div className="lg:flex-col justify-between lg:gap-5 flex items-center">
                     <div className="font-bold gap-3 flex break-all xsm:hidden sm:hidden md:hidden">
                       {userProfileData.userName}
                       {userProfileData.isBusinessAccount && <BusinessAccountIcon />}

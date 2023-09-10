@@ -12,6 +12,7 @@ export const useGetProfileData = () => {
     retry: 3,
     staleTime: 0,
     cacheTime: 0,
+    enabled: true,
     select: (data: any): userProfilePageData => data?.data,
   })
 }
