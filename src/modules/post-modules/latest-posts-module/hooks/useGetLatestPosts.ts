@@ -1,6 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 
-import { noRefetch } from '@/common'
 import { getPosts } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
 
 export const useGetLatestPosts = ({ userName }: { userName: string | string[] | null }) => {
