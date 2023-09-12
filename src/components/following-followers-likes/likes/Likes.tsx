@@ -5,7 +5,7 @@ import { LikesUsers } from '@/components/following-followers-likes'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useFollowingOrUnfollowingUser, useGetLikes } from '@/services'
-import { useModalsStore, useSearchStore, useUserStore } from '@/store'
+import { useModalsStore, useSearchStore } from '@/store'
 import { Spinner } from '@/ui'
 
 export const Likes = () => {
