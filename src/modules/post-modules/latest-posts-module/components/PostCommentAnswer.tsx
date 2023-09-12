@@ -8,7 +8,7 @@ import { getTimeFromNow } from '@/common/helpers/getTimeFromNow'
 import { useTranslation } from '@/components/translation'
 import { Answer, LikeStatus } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
 import { useChangePostCommentAnswerLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostCommentAnswerLikeStatus'
-import { useModalsStore } from '@/store'
+import { useLikesModalStore, useModalsStore, useUserStore } from '@/store'
 import { Avatar } from '@/ui'
 
 interface Props {
@@ -26,7 +26,8 @@ export const PostCommentAnswer: FC<Props> = ({ answer, postId, focusInput }) => 
   )
   const { t } = useTranslation()
   const { postModal } = useModalsStore()
-
+  const { setLikesModal } = useLikesModalStore()
+  const { setAnswerId, setCommentId, setLikesCount } = useUserStore()
   const onLikeClick = () => {
     mutate()
   }
@@ -39,6 +40,13 @@ export const PostCommentAnswer: FC<Props> = ({ answer, postId, focusInput }) => 
 
   const onLinkClick = () => {
     postModal.closeModal()
+  }
+
+  const onLikeAnswerClick = () => {
+    setCommentId(answer.commentId)
+    setAnswerId(answer.id)
+    setLikesCount(answer.likeCount)
+    setLikesModal('commentAnswerLikes')
   }
 
   return (
@@ -69,7 +77,11 @@ export const PostCommentAnswer: FC<Props> = ({ answer, postId, focusInput }) => 
               {answer.content && getTimeFromNow(answer.createdAt)}
             </time>
 
-            {answer.likeCount > 0 && <div className="font-semibold">Like: {answer.likeCount}</div>}
+            {answer.likeCount > 0 && (
+              <div className="font-semibold cursor-pointer" onClick={onLikeAnswerClick}>
+                {t.likes.getCountLikes(answer.likeCount)}: {answer.likeCount}
+              </div>
+            )}
 
             <button className="font-semibold" onClick={onAnswerClick}>
               {t.PostCommentAnswers.answer}

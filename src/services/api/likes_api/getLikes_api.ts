@@ -47,7 +47,7 @@ export const apiLikes = {
     answerId,
   }: GetCommentsAnswersLikeProps) => {
     const res = await authInstance.get<ItemsFollowingFollowersLikesType>(
-      `posts/${postId}/comments/${commentId}/answers/${answerId}likes`,
+      `posts/${postId}/comments/${commentId}/answers/${answerId}/likes`,
       {
         params: {
           search: search,
