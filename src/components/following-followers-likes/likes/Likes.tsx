@@ -5,7 +5,7 @@ import { LikesUsers } from '@/components/following-followers-likes'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useFollowingOrUnfollowingUser, useGetLikes } from '@/services'
-import { useSearchStore, useUserStore } from '@/store'
+import { useModalsStore, useSearchStore } from '@/store'
 import { Spinner } from '@/ui'
 
 export const Likes = () => {
@@ -14,7 +14,8 @@ export const Likes = () => {
   const { useFollowUnfollowUser, isLoading: isLoadingButton } = useFollowingOrUnfollowingUser({
     userId: currentUserId,
   })
-  const { postId } = useUserStore()
+  const postId = useModalsStore(state => state.postModal.postId)
+
   const { search } = useSearchStore()
   const {
     likesData,

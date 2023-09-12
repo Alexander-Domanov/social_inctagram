@@ -6,13 +6,14 @@ import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { useFollowingOrUnfollowingUser } from '@/services'
 import { useGetCommentsAnswersLikes } from '@/services/hooks/likes/useGetCommentsAnswerLikes'
-import { useSearchStore, useUserStore } from '@/store'
+import { useModalsStore, useSearchStore, useUserStore } from '@/store'
 import { Spinner } from '@/ui'
 
 export const LikesCommentsAnswers = () => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
   const { search } = useSearchStore()
-  const { postId, answerId, commentId } = useUserStore()
+  const { answerId, commentId } = useUserStore()
+  const postId = useModalsStore(state => state.postModal.postId)
   const {
     likesData,
     isRefetchingLikes,
