@@ -3,7 +3,7 @@ import React from 'react'
 import { LikesCommentsAnswers, LikesLayout } from '@/components/following-followers-likes'
 import { useLikesModalStore } from '@/store'
 
-export const LikesCommentsPage = () => {
+export const LikesCommentsAnswersPage = () => {
   const { isLikesModal } = useLikesModalStore()
 
   return (

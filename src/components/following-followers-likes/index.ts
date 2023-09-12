@@ -1,3 +1,5 @@
+import { LikesCommentsPage } from '@/components/following-followers-likes/likes/LikesCommentsPage'
+
 export * from './modal-manager-following-followers/ModalManagerFollowingFollowers'
 export * from './url-user-name-for-modal/URLUserNameForModal'
 
@@ -14,6 +16,7 @@ export * from './likes/Likes'
 export * from './likes/LikesPage'
 export * from './likes/LikesUsers'
 export * from './likes/LikesLayout'
-export * from './likes/LikesCommentsPage'
 export * from './likes/LikesCommentsAnswers'
 export * from './likes/LikesComments'
+export * from './likes/LikesCommentsAnswersPage'
+export * from './likes/LikesCommentsPage'

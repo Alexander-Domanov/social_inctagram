@@ -1,12 +1,11 @@
-# The  Inct🍊gr🍊m  - copy of Instagram
-[![GitHub contributors](https://img.shields.io/github/contributors/Alexsandr3/Inctagram.svg)](https://github.com/Armazok/Inctagram/graphs/contributors)
+# The Inct🍊gr🍊m - copy of Instagram
 
+[![GitHub contributors](https://img.shields.io/github/contributors/Alexsandr3/Inctagram.svg)](https://github.com/Armazok/Inctagram/graphs/contributors)
 
 ## Description
 
 **The Inct🍊gr🍊m** is a social network application built on the **NextJS** framework with a microservices architecture.
 It aims to replicate the functionality of Instagram, offering users a platform to create posts, stories, highlights, comments, likes, follow other users, engage in chats and messages, and purchase subscriptions.
-
 
 ## Features
 
@@ -29,6 +28,7 @@ It aims to replicate the functionality of Instagram, offering users a platform t
   Like and comment on stories, as well as like and reply to comments.
 
 ## Technologies Used
+
 - [**Framework:**](#framework)
   **Next JS**
 - [**Language:**](#language)
@@ -44,17 +44,16 @@ It aims to replicate the functionality of Instagram, offering users a platform t
 - [**Internationalization:**](#internationalization)
   **118n**
 
-
-
 ## App Screenshots
+
 <a href="https://ibb.co.com/0V1vQR5"><img src="https://i.ibb.co.com/sJcztd7/2023-09-06-16-24-33.png" alt="2023-09-06-16-24-33" border="0"></a>
 <a href="https://ibb.co.com/85YqS6j"><img src="https://i.ibb.co.com/NjT5HZL/2023-09-06-16-24-03.png" alt="2023-09-06-16-24-03" border="0"></a>
 <a href="https://ibb.co.com/hBxkBc5"><img src="https://i.ibb.co.com/6Hc2H8h/2023-09-06-16-24-47.png" alt="2023-09-06-16-24-47" border="0"></a>
 
-
 ### Start the project
+
 To start the project, get a local copy up and running follow these simple example steps.
+
 - Clone the repository into your local machine
 - Use `yarn` to install dependencies.
 - Use `yarn start` to start project.
-
