@@ -24,6 +24,8 @@ export const useFollowingOrUnfollowingUser = ({
           client.invalidateQueries({ queryKey: ['get-profile-page'] })
           client.invalidateQueries({ queryKey: ['publications'] })
           client.invalidateQueries({ queryKey: ['get-user-profile-page'] })
+          client.invalidateQueries({ queryKey: ['likes-comments-answers'] })
+          client.invalidateQueries({ queryKey: ['likes-comments'] })
           client.invalidateQueries({ queryKey: ['post'] })
           client.invalidateQueries({ queryKey: ['likes'] })
         }
