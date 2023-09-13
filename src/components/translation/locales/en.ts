@@ -211,10 +211,17 @@ export const en = {
   auth: {
     signUp: 'Sign Up',
     singIn: 'Sing In',
+    email: 'Email',
+    password: 'Password',
     confirm: {
       ok: 'OK',
       titleEmail: 'Email Sent',
       text: 'We have sent a link to confirm your email to',
+    },
+    login: {
+      forgotPassword: 'Forgot password?',
+      haveAccount: `Don't have account?`,
+      errors: 'The password or the email or Username are incorrect. Try again, please',
     },
     registration: {
       userName: 'UserName',
