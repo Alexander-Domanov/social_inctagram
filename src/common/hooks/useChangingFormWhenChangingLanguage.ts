@@ -12,7 +12,7 @@ export const useChangingFormWhenChangingLanguage = ({
   errors: FieldErrors
 }) => {
   useEffect(() => {
-    if (typeof errors?.root?.message === 'string' && errors.root.message.length > 0) {
+    if (Object.values(errors).length > 0) {
       trigger()
     }
   }, [localeLanguage])
