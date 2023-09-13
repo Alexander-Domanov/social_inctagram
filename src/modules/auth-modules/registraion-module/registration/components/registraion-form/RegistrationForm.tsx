@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useChangingFormWhenChangingLanguage, useGlobalForm } from '@/common'
 import { Confirm } from '@/components/modals/confirm/Confirm'
@@ -19,7 +19,7 @@ export const RegistrationForm = () => {
     setCustomError
   )
 
-  useChangingFormWhenChangingLanguage({ trigger, localeLanguage })
+  useChangingFormWhenChangingLanguage({ trigger, localeLanguage, errors })
 
   const registeredDataSubmit = (data: any) => {
     sendRegisteredData(data)
