@@ -1,8 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 
-import { useTranslation } from '@/components/translation'
-
 export const useGlobalForm = (schema: any) => {
   const {
     register,
@@ -14,8 +12,6 @@ export const useGlobalForm = (schema: any) => {
   } = useForm({
     resolver: yupResolver(schema),
   })
-  const { localeLanguage } = useTranslation()
-
   const setCustomError = (name: string, message: string) => {
     setError(name, {
       type: 'custom',
