@@ -208,6 +208,44 @@ export const en = {
       }
     },
   },
+  auth: {
+    signUp: 'Sign Up',
+    singIn: 'Sing In',
+    confirm: {
+      ok: 'OK',
+      titleEmail: 'Email Sent',
+      text: 'We have sent a link to confirm your email to',
+    },
+    registration: {
+      userName: 'UserName',
+      email: 'Email',
+      password: 'Password',
+      passwordConfirmation: 'Password Confirmation',
+      confirmationMessage: `
+          'Didn't receive a confirmation message?`,
+      haveAccount: 'Do you have an account',
+      errors: {
+        userName: {
+          required: 'User name is required filed',
+          min: 'minimum number of characters 6',
+          max: 'maximum number of characters 30',
+        },
+        email: {
+          required: 'Email is required filed',
+          email: 'email must be a valid email',
+        },
+        password: {
+          min: 'minimum number of characters 6',
+          max: 'password must be at most 20 characters',
+        },
+        confirmPassword: {
+          min: 'minimum number of characters 6',
+          max: 'password must be at most 20 characters',
+          password: 'passwords do not match',
+        },
+      },
+    },
+  },
 }
 
 export type LocaleType = typeof en
