@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { useChangingFormWhenChangingLanguage, useGlobalForm } from '@/common'
 import { Confirm } from '@/components/modals/confirm/Confirm'
