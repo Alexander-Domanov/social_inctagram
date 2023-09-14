@@ -14,7 +14,7 @@ import { Avatar } from '@/ui'
 export const PostModalFooter: FC = () => {
   const { t, localeLanguage } = useTranslation()
   const { postId } = useModalsStore(state => state.postModal)
-  const { setLikesCount } = useUserStore()
+  const { setLikesCount, setPostId } = useUserStore()
 
   const { post } = useGetPost(postId)
   const { mutate } = useChangePostLikeStatus(
@@ -26,6 +26,7 @@ export const PostModalFooter: FC = () => {
   }
   const { setLikesModal } = useLikesModalStore()
   const onOpenModalLikes = () => {
+    setPostId(postId)
     setLikesModal('likes')
     if (post?.likeCount !== undefined) {
       setLikesCount(post.likeCount)
