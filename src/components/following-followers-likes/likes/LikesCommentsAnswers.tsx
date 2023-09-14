@@ -13,7 +13,9 @@ export const LikesCommentsAnswers = () => {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
   const { search } = useSearchStore()
   const { answerId, commentId } = useUserStore()
+
   const postId = useModalsStore(state => state.postModal.postId)
+
   const {
     likesData,
     isRefetchingLikes,

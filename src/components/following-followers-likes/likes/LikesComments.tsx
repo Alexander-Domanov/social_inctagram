@@ -16,7 +16,7 @@ export const LikesComments = () => {
     userId: currentUserId,
   })
   const { commentId } = useUserStore()
-  const postId = useModalsStore(state => state.postModal.postId)
+  const { postId } = useModalsStore(state => state.postModal)
 
   const { search } = useSearchStore()
   const {
