@@ -1,5 +1,7 @@
 import React, { FC } from 'react'
 
+import { twMerge } from 'tailwind-merge'
+
 import { TabComponent } from '@/ui'
 
 interface TabsType {
@@ -10,11 +12,12 @@ interface TabsType {
 
 interface PropsTabType {
   tabs?: Omit<TabsType, 'content'>[]
+  className?: string
   activeTab?: string
   setActiveTab?: (activeTab: string | undefined) => void
 }
 
-export const TabsTitle: FC<PropsTabType> = ({ tabs, setActiveTab, activeTab }) => {
+export const TabsTitle: FC<PropsTabType> = ({ tabs, className, setActiveTab, activeTab }) => {
   const tabsLayout = tabs?.map(tab => (
     <TabComponent
       key={tab.id}
@@ -26,7 +29,12 @@ export const TabsTitle: FC<PropsTabType> = ({ tabs, setActiveTab, activeTab }) =
 
   return (
     <>
-      <div className="flex w-full xsm:overflow-x-scroll xsm:no-scrollbar sm:overflow-x-scroll sm:no-scrollbar  border-b border-gray-200  border-none h-[96] gap-[2px]">
+      <div
+        className={twMerge(
+          className,
+          'flex w-full xsm:overflow-x-scroll xsm:no-scrollbar sm:overflow-x-scroll sm:no-scrollbar  border-b border-gray-200  border-none h-[96] gap-[2px]'
+        )}
+      >
         {tabsLayout}
       </div>
       <div className="divide-y-[100%] bg-bgLogBorder h-[1px]"></div>
