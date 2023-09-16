@@ -1,0 +1,6 @@
+export * from './components/StatisticsBusinessTabs'
+export * from './components/StatisticsPage'
+export * from './components/likes/StatisticsLikes'
+export * from './types/statisticsTypes'
+export * from './api/statistics-api'
+export * from './hooks/useGetStatistics'
