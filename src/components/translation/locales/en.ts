@@ -253,6 +253,61 @@ export const en = {
       },
     },
   },
+  statistics: {
+    pagesTitle: {
+      likes: 'Likes',
+      comments: 'Comments',
+      publication: 'Publication views',
+    },
+    tabsTitle: {
+      week: 'Week',
+      month: 'Month',
+    },
+    popUp: {
+      getCountTitleLikes(count: number) {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'other':
+            return `${count} Likes`
+          case 'one':
+            return `${count} Like`
+          case 'few':
+            return `${count} Likes`
+          case 'many':
+            return `${count} Likes`
+        }
+      },
+      getCountTitleComments(count: number) {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'other':
+            return `${count} Comments`
+          case 'one':
+            return `${count} Comment`
+          case 'few':
+            return `${count} Comments`
+          case 'many':
+            return `${count} Comments`
+        }
+      },
+      getCountTitlePublication(count: number) {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'other':
+            return `${count} Publication views`
+          case 'one':
+            return `${count} Publication view`
+          case 'few':
+            return `${count} Publication views`
+          case 'many':
+            return `${count} Publication views`
+        }
+      },
+    },
+  },
 }
 
 export type LocaleType = typeof en

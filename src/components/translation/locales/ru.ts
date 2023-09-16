@@ -245,4 +245,56 @@ export const ru: LocaleType = {
       },
     },
   },
+  statistics: {
+    tabsTitle: { week: 'Неделя', month: 'Месяц' },
+    pagesTitle: {
+      likes: 'Лайки',
+      comments: 'Комментарии',
+      publication: 'Просмотры публикации',
+    },
+    popUp: {
+      getCountTitleLikes(count: number) {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'other':
+            return `${count} Лайков`
+          case 'one':
+            return `${count} Лайк`
+          case 'few':
+            return `${count} Лайков`
+          case 'many':
+            return `${count} Лайков`
+        }
+      },
+      getCountTitleComments(count: number) {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'other':
+            return `${count} Комментариев`
+          case 'one':
+            return `${count} Комментарий`
+          case 'few':
+            return `${count} Комментария`
+          case 'many':
+            return `${count} Комментариев`
+        }
+      },
+      getCountTitlePublication(count: number) {
+        const str = pluralizeRu(count)
+
+        switch (str) {
+          case 'other':
+            return `${count} Просмотров публикации`
+          case 'one':
+            return `${count} Просмотр публикации`
+          case 'few':
+            return `${count} Просмотра публикации`
+          case 'many':
+            return `${count} Просмотров публикации`
+        }
+      },
+    },
+  },
 }
