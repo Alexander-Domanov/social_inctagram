@@ -246,4 +246,59 @@ export const uk: LocaleType = {
       },
     },
   },
+  statistics: {
+    tabsTitle: {
+      week: 'Тиждень',
+      month: 'Місяць',
+    },
+    pagesTitle: {
+      likes: 'Лайки',
+      comments: 'Коментарі',
+      publication: 'Перегляди публікації',
+    },
+    popUp: {
+      getCountTitleLikes(count: number) {
+        const str = pluralizeUk(count)
+
+        switch (str) {
+          case 'other':
+            return `${count} Лайків`
+          case 'one':
+            return `${count} Лайк`
+          case 'few':
+            return `${count} Лайки`
+          case 'many':
+            return `${count} Лайків`
+        }
+      },
+      getCountTitleComments(count: number) {
+        const str = pluralizeUk(count)
+
+        switch (str) {
+          case 'other':
+            return `${count} Коментарів`
+          case 'one':
+            return `${count} Коментар`
+          case 'few':
+            return `${count} Коментарі`
+          case 'many':
+            return `${count} Коментарів`
+        }
+      },
+      getCountTitlePublication(count: number) {
+        const str = pluralizeUk(count)
+
+        switch (str) {
+          case 'other':
+            return `${count} Переглядів публікації`
+          case 'one':
+            return `${count} Перегляд публікації`
+          case 'few':
+            return `${count} Перегляди публікації`
+          case 'many':
+            return `${count} Переглядів публікації`
+        }
+      },
+    },
+  },
 }
