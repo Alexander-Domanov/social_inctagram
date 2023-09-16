@@ -16,11 +16,13 @@ export const StatisticsLikes = ({ props }: { props: string }) => {
   }))
 
   const formatDate = (date: any) => {
-    if (!(date instanceof Date)) {
-      return ''
+    const parsedDate = date instanceof Date ? date : new Date(date)
+
+    if (isNaN(parsedDate.getTime())) {
+      return '' // Возвращаем пустую строку, если дата неверная
     }
 
-    const formattedDate = format(date, 'MMMM do')
+    const formattedDate = format(parsedDate, 'MMMM do')
 
     return formattedDate
   }
@@ -56,6 +58,7 @@ export const StatisticsLikes = ({ props }: { props: string }) => {
           className={'bg-dark-500 border-dark-300 border-1 rounded-sm pt-3 text-xs text-light-900'}
           margin={{ right: 24, left: 24, bottom: 12 }}
         >
+          <XAxis dataKey="name" tickFormatter={formatDate} minTickGap={266} />
           <Tooltip
             cursor={false}
             cursorStyle="red"
@@ -72,7 +75,7 @@ export const StatisticsLikes = ({ props }: { props: string }) => {
             strokeWidth={3}
             strokeLinecap="square"
           />
-          <XAxis dataKey="name" tickFormatter={formatDate} minTickGap={266} />
+
           <XAxis dataKey="name" />
           <YAxis />
         </LineChart>
