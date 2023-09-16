@@ -1,0 +1,82 @@
+import React from 'react'
+
+import { format } from 'date-fns'
+import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
+
+import { useGetStatistics } from '@/modules/statistics-modules'
+
+export const StatisticsLikes = ({ props }: { props: string }) => {
+  const { statisticsData, isSuccessData, isLoadingData } = useGetStatistics({ grouping: props })
+  const count = statisticsData?.data.metrics.count
+  const dataTimeStart = statisticsData?.data.metrics.time_intervals[0]
+
+  const data = count?.map((value, index) => ({
+    name: dataTimeStart ? new Date(dataTimeStart).getTime() + index * 24 * 60 * 60 * 1000 : null,
+    value,
+  }))
+
+  const formatDate = (date: any) => {
+    if (!(date instanceof Date)) {
+      return ''
+    }
+
+    const formattedDate = format(date, 'MMMM do')
+
+    return formattedDate
+  }
+
+  const CustomTooltip = ({
+    active,
+    payload,
+    label,
+  }: {
+    active?: any
+    payload?: any
+    label?: any
+  }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-dark-300 w-[81px] text-light-100 text-sm leading-6 font-normal text-center">
+          <p className="label">{`${payload[0].value} Like`}</p>
+        </div>
+      )
+    }
+
+    return null
+  }
+
+  return (
+    <div className="text-light-100">
+      {props}
+      {data && !isLoadingData && (
+        <LineChart
+          width={972}
+          height={300}
+          data={data}
+          className={'bg-dark-500 border-dark-300 border-1 rounded-sm pt-3 text-xs text-light-900'}
+          margin={{ right: 24, left: 24, bottom: 12 }}
+        >
+          <Tooltip
+            cursor={false}
+            cursorStyle="red"
+            isAnimationActive={true}
+            content={<CustomTooltip />}
+            wrapperStyle={{ lineHeight: 0 }}
+          />
+          <Line
+            legendType={'square'}
+            dot={false}
+            activeDot={false}
+            dataKey="value"
+            stroke="#CC1439"
+            strokeWidth={3}
+            strokeLinecap="square"
+          />
+          <XAxis dataKey="name" tickFormatter={formatDate} minTickGap={266} />
+          <XAxis dataKey="name" />
+          <YAxis />
+        </LineChart>
+      )}
+    </div>
+  )
+}
