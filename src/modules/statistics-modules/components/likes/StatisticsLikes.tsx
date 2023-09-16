@@ -3,10 +3,12 @@ import React from 'react'
 import { format } from 'date-fns'
 import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
 
+import { useTranslation } from '@/components/translation'
 import { useGetStatistics } from '@/modules/statistics-modules'
 
 export const StatisticsLikes = ({ props }: { props: string }) => {
   const { statisticsData, isSuccessData, isLoadingData } = useGetStatistics({ grouping: props })
+  const { t, localeLanguage } = useTranslation()
   const count = statisticsData?.data.metrics.count
   const dataTimeStart = statisticsData?.data.metrics.time_intervals[0]
 
@@ -22,7 +24,7 @@ export const StatisticsLikes = ({ props }: { props: string }) => {
       return '' // Возвращаем пустую строку, если дата неверная
     }
 
-    const formattedDate = format(parsedDate, 'MMMM do')
+    const formattedDate = format(parsedDate, 'do MMM')
 
     return formattedDate
   }
@@ -38,7 +40,8 @@ export const StatisticsLikes = ({ props }: { props: string }) => {
   }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-dark-300 w-[81px] text-light-100 text-sm leading-6 font-normal text-center">
+        <div className="bg-dark-300 w-[110px] text-light-100 text-sm leading-6 font-normal text-center">
+          <p className="label">{`${format(label, 'do MMMM')}`}</p>
           <p className="label">{`${payload[0].value} Like`}</p>
         </div>
       )
@@ -49,7 +52,6 @@ export const StatisticsLikes = ({ props }: { props: string }) => {
 
   return (
     <div className="text-light-100">
-      {props}
       {data && !isLoadingData && (
         <LineChart
           width={972}
@@ -58,7 +60,12 @@ export const StatisticsLikes = ({ props }: { props: string }) => {
           className={'bg-dark-500 border-dark-300 border-1 rounded-sm pt-3 text-xs text-light-900'}
           margin={{ right: 24, left: 24, bottom: 12 }}
         >
-          <XAxis dataKey="name" tickFormatter={formatDate} minTickGap={266} />
+          <XAxis
+            dataKey="name"
+            interval="preserveStartEnd"
+            tickFormatter={formatDate}
+            minTickGap={props === 'week' ? 400 : 375}
+          />
           <Tooltip
             cursor={false}
             cursorStyle="red"
@@ -67,9 +74,10 @@ export const StatisticsLikes = ({ props }: { props: string }) => {
             wrapperStyle={{ lineHeight: 0 }}
           />
           <Line
-            legendType={'square'}
-            dot={false}
-            activeDot={false}
+            // legendType={'square'}
+            // dot={false}
+            // activeDot={false}
+            //   type={'basis'}
             dataKey="value"
             stroke="#CC1439"
             strokeWidth={3}
