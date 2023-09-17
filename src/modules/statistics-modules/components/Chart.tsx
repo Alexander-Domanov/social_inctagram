@@ -22,26 +22,21 @@ export const Chart = ({ type, category, statisticsData }: ChartProps) => {
   const { width } = useWindowSize()
   // eslint-disable-next-line no-nested-ternary
   const language: Locale = localeLanguage === 'ru' ? ru : localeLanguage === 'en' ? enUS : uk
-  const count = statisticsData?.data.metrics.count
-  const dataTimeStart = statisticsData?.data.metrics.time_intervals[0]
+  const maxCount = statisticsData?.data.metrics.maxCount
+  const data = statisticsData.data.metrics.items
+  // const dataTimeStart = statisticsData?.data.metrics.time_intervals[0]
 
-  const data = count?.map((value, index) => ({
-    name: dataTimeStart ? new Date(dataTimeStart).getTime() + index * 24 * 60 * 60 * 1000 : null,
-    value,
-  }))
   const classNames = getChartColors({ type })
 
   return (
     <ResponsiveContainer minWidth="330" height={width && width > 576 ? 300 : 240}>
       <LineChart
-        // width={972}
-        // height={300}
         data={data}
         className={'bg-dark-500 border-dark-300 border-1 rounded-sm pt-3 text-xs text-light-900'}
         margin={{ right: 24, bottom: 12 }}
       >
         <XAxis
-          dataKey="name"
+          dataKey="date"
           interval="preserveStartEnd"
           tickFormatter={value => changedFormatDateXAxis({ date: value, language })}
           minTickGap={category === 'week' ? 400 : 375}
@@ -59,12 +54,12 @@ export const Chart = ({ type, category, statisticsData }: ChartProps) => {
             fill: classNames.activeDot.fill,
             r: 4,
           }}
-          dataKey="value"
+          dataKey="count"
           stroke={classNames.stroke}
           strokeWidth={3}
           strokeLinecap="square"
         />
-        <YAxis />
+        <YAxis domain={[0, maxCount]} />
       </LineChart>
     </ResponsiveContainer>
   )
