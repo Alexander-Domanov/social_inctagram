@@ -12,6 +12,8 @@ export const useGetStatisticsLikes = ({ grouping }: StatisticsQueryParamsType) =
     queryKey: ['statistics-likes', grouping],
     queryFn: () => getStatistics_api.getStatisticsLikes({ grouping }),
     onError: (err: Error) => toast.error(err.message),
+    staleTime: 60 * 1000,
+    enabled: Boolean(grouping),
   })
 
   return { statisticsData, isSuccessData, isLoadingData }

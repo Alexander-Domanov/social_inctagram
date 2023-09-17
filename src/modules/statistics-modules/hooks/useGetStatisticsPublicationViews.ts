@@ -12,6 +12,8 @@ export const useGetStatisticsPublicationViews = ({ grouping }: StatisticsQueryPa
     queryKey: ['statistics-publication-views', grouping],
     queryFn: () => getStatistics_api.getStatisticsViews({ grouping }),
     onError: (err: Error) => toast.error(err.message),
+    staleTime: 60 * 1000,
+    enabled: Boolean(grouping),
   })
 
   return { statisticsData, isSuccessData, isLoadingData }
