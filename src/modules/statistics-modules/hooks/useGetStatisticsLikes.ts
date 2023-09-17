@@ -8,6 +8,7 @@ export const useGetStatisticsLikes = ({ grouping }: StatisticsQueryParamsType) =
     data: statisticsData,
     isSuccess: isSuccessData,
     isLoading: isLoadingData,
+    isFetching: isFetchingData,
   } = useQuery({
     queryKey: ['statistics-likes', grouping],
     queryFn: () => getStatistics_api.getStatisticsLikes({ grouping }),
@@ -16,5 +17,5 @@ export const useGetStatisticsLikes = ({ grouping }: StatisticsQueryParamsType) =
     enabled: Boolean(grouping),
   })
 
-  return { statisticsData, isSuccessData, isLoadingData }
+  return { statisticsData, isSuccessData, isLoadingData, isFetchingData }
 }

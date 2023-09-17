@@ -4,7 +4,7 @@ import { ChartStatisticsComponent, StatisticsProps } from '@/modules/statistics-
 import { useGetStatisticsPublicationViews } from '@/modules/statistics-modules/hooks/useGetStatisticsPublicationViews'
 
 export const StatisticsPublicationViews = ({ type, category }: StatisticsProps) => {
-  const { statisticsData, isLoadingData } = useGetStatisticsPublicationViews({
+  const { statisticsData, isFetchingData } = useGetStatisticsPublicationViews({
     grouping: category,
   })
 
@@ -13,7 +13,7 @@ export const StatisticsPublicationViews = ({ type, category }: StatisticsProps) 
       <ChartStatisticsComponent
         type={type}
         category={category}
-        isLoadingData={isLoadingData}
+        isLoadingData={isFetchingData}
         statisticsData={statisticsData}
       />
     </div>
