@@ -3,14 +3,14 @@ import { toast } from 'react-toastify'
 
 import { getStatistics_api, StatisticsQueryParamsType } from '@/modules/statistics-modules'
 
-export const useGetStatistics = ({ grouping }: StatisticsQueryParamsType) => {
+export const useGetStatisticsPublicationViews = ({ grouping }: StatisticsQueryParamsType) => {
   const {
     data: statisticsData,
     isSuccess: isSuccessData,
     isLoading: isLoadingData,
   } = useQuery({
-    queryKey: ['statistics', grouping],
-    queryFn: () => getStatistics_api.getStatisticsLikes({ grouping }),
+    queryKey: ['statistics-publication-views', grouping],
+    queryFn: () => getStatistics_api.getStatisticsViews({ grouping }),
     onError: (err: Error) => toast.error(err.message),
   })
 

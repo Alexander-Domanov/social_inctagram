@@ -12,40 +12,40 @@ export const StatisticsBusinessTabs = ({
   title,
 }: {
   keyLocalStorage: string
-  tabs: () => Tab[]
+  tabs: Tab[]
   title: string
 }) => {
-  const statistics_business_tabs = tabs()
   const { locale } = useRouter()
-  const [storedTabsLabel, setStoredTabsLabel] = useLocalStorage(
-    keyLocalStorage,
-    statistics_business_tabs[0].label
-  )
+  const [storedTabsLabel, setStoredTabsLabel] = useLocalStorage(keyLocalStorage, tabs[0].label)
   const [activeTab, setActiveTab] = useState('')
 
-  useEffect(() => setActiveTab(statistics_business_tabs[0].label), [locale])
+  useEffect(() => {
+    setStoredTabsLabel(tabs[0].label)
+    setActiveTab(tabs[0].label)
+  }, [locale])
+
   const onChangeTab = (tabLabel: string | undefined) => {
     setActiveTab(tabLabel ?? '')
 
     setStoredTabsLabel(tabLabel ?? '')
   }
 
-  const tabsLayout = statistics_business_tabs?.map(tab => {
+  const tabsLayout = tabs?.map(tab => {
     return <div key={tab.id}>{activeTab === tab.label && tab.content}</div>
   })
 
-  useEffect(() => {
-    setStoredTabsLabel(storedTabsLabel)
-    setActiveTab(storedTabsLabel)
-  }, [])
+  // useEffect(() => {
+  //   setStoredTabsLabel(storedTabsLabel)
+  //   setActiveTab(storedTabsLabel)
+  // }, [])
 
   return (
     <div className="relative w-full">
       <div className="flex justify-between items-center">
-        <span>{title}</span>
+        <span className="w-full">{title}</span>
         <TabsTitle
           className="justify-end mb-3"
-          tabs={statistics_business_tabs}
+          tabs={tabs}
           setActiveTab={onChangeTab}
           activeTab={activeTab}
         />
