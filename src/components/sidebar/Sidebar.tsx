@@ -49,7 +49,7 @@ export const Sidebar: FC = () => {
     ),
     statistics: clsx(
       pathname === routes.sideBar.statistics ? 'text-accent-500' : '',
-      'flex gap-[15px] items-center mt-14'
+      'flex gap-[15px] items-center'
     ),
     favorites: clsx(
       pathname === routes.sideBar.favorites ? 'text-accent-500' : '',
@@ -116,8 +116,9 @@ export const Sidebar: FC = () => {
               <span className={className.hidden}>{t.navBar.search}</span>
             </Link>
           </li>
-          {hasBusinessAccount && (
-            <li className="xsm:hidden">
+
+          <li className="xsm:hidden mt-14">
+            {hasBusinessAccount && (
               <Link href={routes.sideBar.statistics} className={className.statistics}>
                 <Image
                   src={pathname === routes.sideBar.statistics ? trending : trendingOutline}
@@ -127,8 +128,9 @@ export const Sidebar: FC = () => {
                 />
                 <span className={className.hidden}>{t.navBar.statistics}</span>
               </Link>
-            </li>
-          )}
+            )}
+          </li>
+
           <li className="xsm:hidden">
             <Link href={routes.sideBar.favorites} className={className.favorites}>
               <Image
