@@ -4,7 +4,7 @@ import { ChartStatisticsComponent, StatisticsProps } from '@/modules/statistics-
 import { useGetStatisticsComments } from '@/modules/statistics-modules/hooks/useGetStatisticsComments'
 
 export const StatisticsComments = ({ type, category }: StatisticsProps) => {
-  const { statisticsData, isSuccessData, isLoadingData } = useGetStatisticsComments({
+  const { statisticsData, isLoadingData } = useGetStatisticsComments({
     grouping: category,
   })
 

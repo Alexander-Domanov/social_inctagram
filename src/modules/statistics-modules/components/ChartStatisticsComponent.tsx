@@ -1,10 +1,11 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
+
+import { twMerge } from 'tailwind-merge'
 
 import { useWindowSize } from '@/common'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { Chart, StatisticsProps, StatisticsType } from '@/modules/statistics-modules'
 import { Spinner } from '@/ui'
-import {twMerge} from "tailwind-merge";
 
 type ChartStatisticsComponentProps = {
   isLoadingData: boolean

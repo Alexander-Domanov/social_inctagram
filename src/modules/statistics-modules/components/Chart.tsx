@@ -1,8 +1,5 @@
 import React from 'react'
 
-// eslint-disable-next-line import/no-duplicates
-import { format } from 'date-fns'
-// eslint-disable-next-line import/no-duplicates
 import { ru, enUS, uk } from 'date-fns/locale'
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
