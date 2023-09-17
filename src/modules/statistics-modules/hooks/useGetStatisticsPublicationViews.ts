@@ -8,6 +8,7 @@ export const useGetStatisticsPublicationViews = ({ grouping }: StatisticsQueryPa
     data: statisticsData,
     isSuccess: isSuccessData,
     isLoading: isLoadingData,
+    isFetching: isFetchingData,
   } = useQuery({
     queryKey: ['statistics-publication-views', grouping],
     queryFn: () => getStatistics_api.getStatisticsViews({ grouping }),
@@ -16,5 +17,5 @@ export const useGetStatisticsPublicationViews = ({ grouping }: StatisticsQueryPa
     enabled: Boolean(grouping),
   })
 
-  return { statisticsData, isSuccessData, isLoadingData }
+  return { statisticsData, isSuccessData, isLoadingData, isFetchingData }
 }

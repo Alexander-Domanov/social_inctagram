@@ -24,7 +24,6 @@ export const Chart = ({ type, category, statisticsData }: ChartProps) => {
   const language: Locale = localeLanguage === 'ru' ? ru : localeLanguage === 'en' ? enUS : uk
   const maxCount = statisticsData?.data.metrics.maxRound
   const data = statisticsData.data.metrics.items
-  // const dataTimeStart = statisticsData?.data.metrics.time_intervals[0]
 
   const classNames = getChartColors({ type })
 

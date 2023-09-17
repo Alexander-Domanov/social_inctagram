@@ -7,14 +7,16 @@ import {
 } from '@/modules/statistics-modules'
 
 export const StatisticsLikes = ({ type, category }: StatisticsProps) => {
-  const { statisticsData, isLoadingData } = useGetStatisticsLikes({ grouping: category })
+  const { statisticsData, isFetchingData } = useGetStatisticsLikes({
+    grouping: category,
+  })
 
   return (
     <div className="text-light-100">
       <ChartStatisticsComponent
         type={type}
         category={category}
-        isLoadingData={isLoadingData}
+        isLoadingData={isFetchingData}
         statisticsData={statisticsData}
       />
     </div>

@@ -8,6 +8,7 @@ export const useGetStatisticsComments = ({ grouping }: StatisticsQueryParamsType
     data: statisticsData,
     isSuccess: isSuccessData,
     isLoading: isLoadingData,
+    isFetching: isFetchingData,
   } = useQuery({
     queryKey: ['statistics-comments', grouping],
     queryFn: () => getStatistics_api.getStatisticsComments({ grouping }),
@@ -16,5 +17,5 @@ export const useGetStatisticsComments = ({ grouping }: StatisticsQueryParamsType
     enabled: Boolean(grouping),
   })
 
-  return { statisticsData, isSuccessData, isLoadingData }
+  return { statisticsData, isSuccessData, isLoadingData, isFetchingData }
 }
