@@ -1,8 +1,10 @@
 import React, { ReactNode } from 'react'
 
+import { useWindowSize } from '@/common'
 import { NotFoundComponent } from '@/components/not-found/NotFound'
 import { Chart, StatisticsProps, StatisticsType } from '@/modules/statistics-modules'
 import { Spinner } from '@/ui'
+import {twMerge} from "tailwind-merge";
 
 type ChartStatisticsComponentProps = {
   isLoadingData: boolean
@@ -14,6 +16,8 @@ export const ChartStatisticsComponent = ({
   statisticsData,
   isLoadingData,
 }: ChartStatisticsComponentProps) => {
+  const { width } = useWindowSize()
+
   return (
     <>
       {!isLoadingData ? (
@@ -25,7 +29,12 @@ export const ChartStatisticsComponent = ({
           )}
         </>
       ) : (
-        <div className={'flex justify-center pt-3'}>
+        <div
+          className={twMerge(
+            width && width > 576 ? 'h-[300px]' : 'h-[240pxx]',
+            'flex items-center justify-center pt-3'
+          )}
+        >
           <Spinner />
         </div>
       )}
