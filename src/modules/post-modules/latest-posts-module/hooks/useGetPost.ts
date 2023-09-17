@@ -2,12 +2,13 @@ import { useQuery } from '@tanstack/react-query'
 
 import { noRefetch } from '@/common'
 import { getPost } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
+import { usePutPostAddView } from '@/services/hooks/posts/usePutPostAddView'
 
 export const useGetPost = (
   postId: number | null,
   saveDescription?: (description: string) => void
 ) => {
-  const client = {}
+  const { useAddView } = usePutPostAddView()
   const {
     data: post,
     isError,
@@ -16,6 +17,9 @@ export const useGetPost = (
   } = useQuery({
     queryKey: ['post', { postId }],
     onSuccess: data => {
+      if (postId) {
+        useAddView(postId)
+      }
       if (saveDescription) {
         saveDescription(data.description)
       }
