@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { format } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 
 import { LocaleType } from '@/components/translation'
 import { StatisticsProps } from '@/modules/statistics-modules'
@@ -33,10 +33,11 @@ export const ChartCustomTooltip = ({
         : type === 'publicationViews'
         ? t.statistics.popUp.getCountTitlePublication(payloadValue)
         : ''
+    const parsedLabel = parseISO(label)
 
     return (
-      <div className="bg-dark-300 w-[110px] text-light-100 text-sm leading-6 font-normal text-center">
-        <p className="label">{`${format(label, 'd MMMM', { locale: language })}`}</p>
+      <div className="bg-dark-300 w-[140px] text-light-100 text-sm leading-6 font-normal text-center">
+        <p className="label">{`${format(parsedLabel, 'd MMMM', { locale: language })}`}</p>
         <p className="label">{description}</p>
       </div>
     )

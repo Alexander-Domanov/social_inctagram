@@ -2,8 +2,15 @@ export type StatisticsQueryParamsType = {
   grouping: string
 }
 
+export type StatisticsItems = {
+  items: {
+    date: Date
+    count: number
+  }
+}
+
 export type StatisticsMetricsType = {
-  count: number[]
+  items: StatisticsItems[]
   total_rows: number
   time_intervals: Date[]
   maxCount: number
