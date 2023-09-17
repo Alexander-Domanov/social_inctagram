@@ -252,6 +252,7 @@ export const uk: LocaleType = {
       month: 'Місяць',
     },
     pagesTitle: {
+      title: 'Статистика',
       likes: 'Лайки',
       comments: 'Коментарі',
       publication: 'Перегляди публікації',

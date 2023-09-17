@@ -255,6 +255,7 @@ export const en = {
   },
   statistics: {
     pagesTitle: {
+      title: 'Statistics',
       likes: 'Likes',
       comments: 'Comments',
       publication: 'Publication views',

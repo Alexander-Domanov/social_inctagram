@@ -248,6 +248,7 @@ export const ru: LocaleType = {
   statistics: {
     tabsTitle: { week: 'Неделя', month: 'Месяц' },
     pagesTitle: {
+      title: 'Статистика',
       likes: 'Лайки',
       comments: 'Комментарии',
       publication: 'Просмотры публикации',

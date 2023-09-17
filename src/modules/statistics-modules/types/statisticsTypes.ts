@@ -25,3 +25,8 @@ export type StatisticsType = {
   query: StatisticsQueryType
   data: StatisticsDataType
 }
+
+export type StatisticsProps = {
+  type: 'likes' | 'comments' | 'publicationViews'
+  category: 'week' | 'month'
+}
