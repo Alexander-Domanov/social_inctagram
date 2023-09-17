@@ -7,7 +7,7 @@ export const StatisticsPage = () => {
   const tabs = statistics_business_tabs()
 
   return (
-    <div className="">
+    <div className="w-full">
       <span>{t.statistics.pagesTitle.title}</span>
       <div className="flex flex-col text-xl mt-3 leading-9 font-bold gap-9">
         <StatisticsBusinessTabs
