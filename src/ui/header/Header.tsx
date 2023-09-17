@@ -6,6 +6,7 @@ import { twMerge } from 'tailwind-merge'
 import { Container } from '@/components/container'
 import { MoreInfoMobile } from '@/components/more-info-mobile'
 import { LanguageSwitcher } from '@/components/translation'
+import { Notification } from '@/modules/notification-module'
 import { routes } from '@/routing/router'
 import { useMeQuery } from '@/services/hookMe'
 
@@ -25,7 +26,10 @@ export const Header = () => {
               Inctagram
             </span>
           </div>
-          <div className="flex ">
+          <div className="flex items-center ">
+            <div className="xsm:mr-3 mr-12  ">
+              <Notification />
+            </div>
             <LanguageSwitcher />
 
             <div className={twMerge('flex hidingElementMoreMobile w-full', moreInfoClass)}>
