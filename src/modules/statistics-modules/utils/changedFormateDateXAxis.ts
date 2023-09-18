@@ -7,5 +7,13 @@ export const changedFormatDateXAxis = ({ date, language }: { date: any; language
     return ''
   }
 
-  return format(parsedDate, 'd MMM', { locale: language })
+  const utcDay = parsedDate.getUTCDate()
+  const utcMonth = parsedDate.getUTCMonth()
+  const formattedDate = format(
+    new Date(Date.UTC(parsedDate.getUTCFullYear(), utcMonth, utcDay)),
+    'd MMM',
+    { locale: language }
+  )
+
+  return formattedDate
 }
