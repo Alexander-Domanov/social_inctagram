@@ -28,7 +28,7 @@ export const Header = () => {
           </div>
           <div className="flex items-center ">
             <div className="xsm:mr-3 mr-12  ">
-              <Notification />
+              {!routes.auth.unProtectedPaths.includes(pathname) && <Notification />}
             </div>
             <LanguageSwitcher />
 
