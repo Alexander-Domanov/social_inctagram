@@ -51,7 +51,7 @@ export const Notification = () => {
               className="cursor-pointer"
             />
             {dataNotifications?.count && (
-              <span className="absolute leading-6 font-medium text-[10px] top-0 right-0 bg-red-500 rounded-full w-3 h-3 flex items-center justify-center text-white">
+              <span className="absolute  leading-6 font-medium text-[10px] top-0 right-0 bg-red-500 rounded-full w-3 h-3 flex items-center justify-center text-white">
                 {dataNotifications.count}
               </span>
             )}
