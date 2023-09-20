@@ -13,7 +13,7 @@ export type NotReadNotificationsData = {
       userId: number
       title: string
       message: string
-      createdAt: Date
+      createdAt: string
       isRead: boolean
     }
   ]
