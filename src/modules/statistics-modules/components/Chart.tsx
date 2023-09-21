@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ru, enUS, uk } from 'date-fns/locale'
-import {Area, AreaChart, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts'
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 import { useWindowSize } from '@/common'
 import { useTranslation } from '@/components/translation'
