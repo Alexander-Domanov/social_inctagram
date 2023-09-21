@@ -6,6 +6,7 @@ export const getFollowingData = async ({
   search,
   pageParam,
 }: Omit<FollowingFollowersLikesPropsType, 'postId'>) => {
+  console.log(pageParam)
   const res = await authInstance.get<ItemsFollowingFollowersLikesType>(
     `users/${userName}/following`,
     {

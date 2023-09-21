@@ -15,7 +15,7 @@ export const useGetNotReadNotifications = () => {
     isLoading: isLoadingNotReadNotifications,
   } = useInfiniteQuery(
     ['get-not-read-notifications'],
-    ({ pageParam = 0 }) => notification_api.getNotReadNotifications(pageParam),
+    ({ pageParam = 0 }) => notification_api.getNotReadNotifications({ pageParam: pageParam }),
     {
       getNextPageParam: (lastPage, _allPages) => {
         if (lastPage.nextCursor) {
