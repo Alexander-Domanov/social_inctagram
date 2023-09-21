@@ -26,12 +26,12 @@ export const notification_api = {
     return res.data
   },
 
-  getNotReadNotifications: async (cursor: number) => {
+  getNotReadNotifications: async ({ pageParam }: { pageParam: number }) => {
     const res = await authInstance.get<NotReadNotificationsData>(
       'notification/get-all-notifications',
       {
         params: {
-          cursor: cursor,
+          cursor: pageParam,
         },
       }
     )

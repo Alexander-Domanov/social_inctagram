@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ru, enUS, uk } from 'date-fns/locale'
-import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 import { useWindowSize } from '@/common'
 import { useTranslation } from '@/components/translation'
@@ -29,7 +29,7 @@ export const Chart = ({ type, category, statisticsData }: ChartProps) => {
 
   return (
     <ResponsiveContainer minWidth="330" height={width && width > 576 ? 300 : 240}>
-      <LineChart
+      <AreaChart
         data={data}
         className={'bg-dark-500 border-dark-300 border-1 rounded-sm pt-3 text-xs text-light-900'}
         margin={{ right: 24, bottom: 12 }}
@@ -46,20 +46,22 @@ export const Chart = ({ type, category, statisticsData }: ChartProps) => {
           content={<ChartCustomTooltip t={t} type={type} language={language} />}
           wrapperStyle={{ lineHeight: 0 }}
         />
-        <Line
+        <Area
           dot={{ stroke: classNames.dot.stroke, fill: classNames.dot.fill }}
           activeDot={{
             stroke: classNames.activeDot.stroke,
             fill: classNames.activeDot.fill,
-            r: 4,
+            r: 11,
           }}
+          type="monotone"
           dataKey="count"
           stroke={classNames.stroke}
           strokeWidth={3}
-          strokeLinecap="square"
+          fill={classNames.fillArea}
+          fillOpacity={0.6}
         />
         <YAxis domain={[0, maxCount]} />
-      </LineChart>
+      </AreaChart>
     </ResponsiveContainer>
   )
 }
