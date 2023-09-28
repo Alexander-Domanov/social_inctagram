@@ -24,10 +24,7 @@ export const PostModal: FC = () => {
   const { localeLanguage } = useTranslation()
   const { postId, isOpen, closeModal } = useModalsStore(state => state.postModal)
 
-  const { post, isLoading } = useGetPost(postId, description => {
-    setDescription(description)
-    setDescriptionLocal(description)
-  })
+  const { post, isLoading } = useGetPost(postId)
 
   const inputRef = useRef<HTMLInputElement>(null)
 
