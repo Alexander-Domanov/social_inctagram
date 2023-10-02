@@ -15,7 +15,8 @@ export const Header = () => {
   const { replace, pathname } = useRouter()
 
   const route = isSuccess ? routes.sideBar.profile : routes.auth.login
-  const moreInfoClass = routes.auth.unProtectedPaths.includes(pathname) ? 'hidden' : ''
+  const hiddenBlock = routes.auth.unProtectedPaths.includes(pathname)
+  const moreInfoClass = hiddenBlock ? 'hidden' : ''
 
   return (
     <header className="h-[60px] flex items-center text-white bg-dark-700 border-b border-dark-100">
@@ -27,9 +28,11 @@ export const Header = () => {
             </span>
           </div>
           <div className="flex items-center ">
-            <div className={twMerge('xsm:mr-3 mr-12 ', moreInfoClass)}>
-              <Notification />
-            </div>
+            {!routes.auth.unProtectedPaths.includes(pathname) && (
+              <div className={twMerge('xsm:mr-3 mr-12 ', moreInfoClass)}>
+                <Notification />
+              </div>
+            )}
             <LanguageSwitcher />
 
             <div className={twMerge('flex hidingElementMoreMobile w-full', moreInfoClass)}>
