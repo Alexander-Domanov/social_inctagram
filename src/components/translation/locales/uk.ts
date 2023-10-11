@@ -245,6 +245,20 @@ export const uk: LocaleType = {
         },
       },
     },
+    forgotPassword: {
+      title: 'Забули пароль',
+      backToSignIn: 'Повернутися до Входу',
+      description: 'Введіть вашу електронну адресу, і ми надішлемо вам дальші інструкції',
+      buttonSend: 'Надіслати інструкції',
+      modal: {
+        title: 'Лист надіслано',
+        text: {
+          getDescription(email: string | undefined) {
+            return `Посилання було надіслано на вашу електронну пошту ${email}. Якщо ви не отримали листа, надішліть посилання ще раз.`
+          },
+        },
+      },
+    },
   },
   statistics: {
     tabsTitle: {

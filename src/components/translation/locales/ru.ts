@@ -244,6 +244,20 @@ export const ru: LocaleType = {
         },
       },
     },
+    forgotPassword: {
+      title: 'Забыли пароль',
+      backToSignIn: 'Вернуться к Входу',
+      description: 'Введите ваш адрес электронной почты, и мы отправим вам дальнейшие инструкции',
+      buttonSend: 'Отправить инструкции',
+      modal: {
+        title: 'Письмо отправлено',
+        text: {
+          getDescription(email: string | undefined) {
+            return `Ссылка была отправлена на вашу электронную почту ${email}. Если вы не получили письмо, отправьте ссылку еще раз.`
+          },
+        },
+      },
+    },
   },
   statistics: {
     tabsTitle: { week: 'Неделя', month: 'Месяц' },
