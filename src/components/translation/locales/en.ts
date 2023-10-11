@@ -219,11 +219,13 @@ export const en = {
       text: 'We have sent a link to confirm your email to',
     },
     login: {
+      title: 'Login',
       forgotPassword: 'Forgot password?',
       haveAccount: `Don't have account?`,
       errors: 'The password or the email or Username are incorrect. Try again, please',
     },
     registration: {
+      title: 'Sign Up',
       userName: 'UserName',
       email: 'Email',
       password: 'Password',
