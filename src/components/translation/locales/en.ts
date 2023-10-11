@@ -219,11 +219,13 @@ export const en = {
       text: 'We have sent a link to confirm your email to',
     },
     login: {
+      title: 'Login',
       forgotPassword: 'Forgot password?',
       haveAccount: `Don't have account?`,
       errors: 'The password or the email or Username are incorrect. Try again, please',
     },
     registration: {
+      title: 'Sign Up',
       userName: 'UserName',
       email: 'Email',
       password: 'Password',
@@ -234,21 +236,35 @@ export const en = {
       errors: {
         userName: {
           required: 'User name is required filed',
-          min: 'minimum number of characters 6',
-          max: 'maximum number of characters 30',
+          min: 'Minimum number of characters 6',
+          max: 'Maximum number of characters 30',
         },
         email: {
           required: 'Email is required filed',
-          email: 'email must be a valid email',
+          email: 'Email must be a valid email',
         },
         password: {
-          min: 'minimum number of characters 6',
-          max: 'password must be at most 20 characters',
+          min: 'Minimum number of characters 6',
+          max: 'Password must be at most 20 characters',
         },
         confirmPassword: {
-          min: 'minimum number of characters 6',
-          max: 'password must be at most 20 characters',
-          password: 'passwords do not match',
+          min: 'Minimum number of characters 6',
+          max: 'Password must be at most 20 characters',
+          password: 'Passwords do not match',
+        },
+      },
+    },
+    forgotPassword: {
+      title: 'Forgot Password',
+      backToSignIn: 'Back to Sign In',
+      description: ' Enter your email address and we will send you further instructions',
+      buttonSend: 'Send instructions',
+      modal: {
+        title: 'Email sent',
+        text: {
+          getDescription(email: string | undefined) {
+            return `The link has been sent to your email ${email}. If you don’t receive an email send link again.`
+          },
         },
       },
     },

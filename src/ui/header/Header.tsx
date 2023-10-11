@@ -23,7 +23,10 @@ export const Header = () => {
       <Container>
         <div className="flex items-center justify-between">
           <div>
-            <span className="block" onClick={() => replace(route, undefined, { shallow: true })}>
+            <span
+              className="block cursor-pointer"
+              onClick={() => replace(route, undefined, { shallow: true })}
+            >
               Inctagram
             </span>
           </div>
