@@ -296,6 +296,9 @@ export const uk: LocaleType = {
       },
     },
     recovery: {
+      resendForm: {
+        headTitle: 'Відправка повторного підтвердження відновлення пароля',
+      },
       headTitle: 'Відновлення пароля',
       createNewPasswordPage: {
         title: 'Створення нового пароля',

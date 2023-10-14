@@ -298,6 +298,9 @@ export const ru: LocaleType = {
       },
     },
     recovery: {
+      resendForm: {
+        headTitle: 'Отправка повторного подтверждения восстановления пароля',
+      },
       headTitle: 'Восстановление пароля',
       createNewPasswordPage: {
         title: 'Создание нового пароля',

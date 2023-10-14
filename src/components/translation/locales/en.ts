@@ -309,6 +309,9 @@ export const en = {
       },
     },
     recovery: {
+      resendForm: {
+        headTitle: 'Resending Password Recovery Confirmation',
+      },
       headTitle: 'Password recovery',
       createNewPasswordPage: {
         title: 'Create New Password',
