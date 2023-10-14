@@ -253,6 +253,27 @@ export const en = {
           password: 'Passwords do not match',
         },
       },
+      resendForm: {
+        title: 'Resend-Form',
+        resendLink: 'Resend verification link',
+        email: 'Email',
+        send: 'Send',
+        error: {
+          email: 'Email is required filed',
+        },
+      },
+      externalAccount: {
+        titlePage: 'External-Account',
+        title: 'Merger of Accounts',
+        description: (email: string): string =>
+          `The user with email:${email} is already in the system. Could we merge this accounts?`,
+        buttonYes: 'Yes, merge',
+        buttonNo: 'no',
+        modalConfirm: {
+          title: 'Merger of Accounts',
+          buttonOk: 'Ok',
+        },
+      },
     },
     forgotPassword: {
       title: 'Forgot Password',
@@ -264,6 +285,49 @@ export const en = {
         text: {
           getDescription(email: string | undefined) {
             return `The link has been sent to your email ${email}. If you don’t receive an email send link again.`
+          },
+        },
+      },
+      error: {
+        required: 'Email is required field',
+        email: 'Email is invalid',
+      },
+    },
+    registrationConfirmation: {
+      emailSuccessMessage: {
+        headTitle: 'Email Confirmation',
+        title: 'Congratulations!',
+        description: 'Your email has been confirmed',
+        signIn: 'Sign in',
+      },
+      ResendingVerificationLink: {
+        headTitle: 'Email Verification Link Expired',
+        title: 'Email verification link expired',
+        description:
+          ' Looks like the verification link has expired. Not to worry, we can send the link again',
+        resendLink: ' Resend verification link',
+      },
+    },
+    recovery: {
+      resendForm: {
+        headTitle: 'Resending Password Recovery Confirmation',
+      },
+      headTitle: 'Password recovery',
+      createNewPasswordPage: {
+        title: 'Create New Password',
+        password: '"New password"',
+        passwordConfirmation: 'Password confirmation',
+        descriptionPassword: 'Your password must be between 6 and 20 characters',
+        button: 'Create new password',
+        error: {
+          password: {
+            min: 'Minimum number of characters 6',
+            max: 'Password must be at most 20 characters',
+          },
+          confirmPassword: {
+            min: 'Minimum number of characters 6',
+            max: 'Password must be at most 20 characters',
+            password: 'Passwords do not match',
           },
         },
       },

@@ -13,7 +13,7 @@ import { GlobalButton, GlobalInput, InputWithEye, Preloader } from '@/ui'
 export const LoginForm = () => {
   const { setCustomError, trigger, handleSubmit, register, errors, reset } =
     useGlobalForm(schemaLogin)
-  const { t, localeLanguage } = useTranslation()
+  const { t } = useTranslation()
   const { push } = useRouter()
 
   const { sendLoginData, isLoading } = useLoginMutation(
@@ -24,7 +24,7 @@ export const LoginForm = () => {
     () => reset()
   )
 
-  useChangingFormWhenChangingLanguage({ trigger, localeLanguage, errors })
+  useChangingFormWhenChangingLanguage({ trigger, errors })
 
   const handleFormSubmit = async ({ email, password }: FieldValues) => {
     await sendLoginData({

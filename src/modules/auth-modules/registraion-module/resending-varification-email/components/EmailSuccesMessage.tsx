@@ -4,13 +4,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import EmailConfirmationImg from '@/assets/images/bro.svg'
+import { useTranslation } from '@/components/translation'
 
 export const EmailSuccessMessage = () => {
+  const { t } = useTranslation()
+
   return (
     <div className={'flex justify-center items-center flex-col text-light-100 h-screen'}>
-      <span className={'font-bold mt-6 mb-3'}>Congratulations!</span>
+      <span className={'font-bold mt-6 mb-3'}>
+        {t.auth.registrationConfirmation.emailSuccessMessage.title}
+      </span>
       <br />
-      <span className={'mb-12'}>Your email has been confirmed</span>
+      <span className={'mb-12'}>
+        {t.auth.registrationConfirmation.emailSuccessMessage.description}
+      </span>
 
       <Link
         className={
@@ -18,7 +25,7 @@ export const EmailSuccessMessage = () => {
         }
         href={'/'}
       >
-        Sign in
+        {t.auth.registrationConfirmation.emailSuccessMessage.signIn}
       </Link>
       <Image className={'mt-20'} src={EmailConfirmationImg} alt={'bro'} height={432} width={300} />
     </div>

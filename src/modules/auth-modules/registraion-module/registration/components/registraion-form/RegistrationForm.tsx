@@ -7,8 +7,8 @@ import { registrationSchema, useRegister } from '@/modules/auth-modules/registra
 import { GlobalButton, GlobalInput, InputWithEye, Preloader } from '@/ui'
 
 export const RegistrationForm = () => {
+  const { t } = useTranslation()
   const [toggleModal, setToggleModal] = useState(false)
-  const { localeLanguage, t } = useTranslation()
 
   const { errors, trigger, register, reset, handleSubmit, setCustomError } = useGlobalForm(
     registrationSchema()
@@ -19,7 +19,7 @@ export const RegistrationForm = () => {
     setCustomError
   )
 
-  useChangingFormWhenChangingLanguage({ trigger, localeLanguage, errors })
+  useChangingFormWhenChangingLanguage({ trigger, errors })
 
   const registeredDataSubmit = (data: any) => {
     sendRegisteredData(data)

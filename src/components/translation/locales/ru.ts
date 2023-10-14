@@ -245,6 +245,24 @@ export const ru: LocaleType = {
           password: 'Пароли не совпадают',
         },
       },
+      resendForm: {
+        title: 'Форма повторной отправки',
+        resendLink: 'Отправить повторно ссылку для верификации',
+        email: 'Электронная почта',
+        send: 'Отправить',
+        error: {
+          email: 'Email является обязательным полем',
+        },
+      },
+      externalAccount: {
+        titlePage: 'Внешний аккаунт',
+        title: 'Объединение аккаунтов',
+        description: (email: string): string =>
+          `Пользователь с адресом электронной почты:${email} уже существует в системе. Хотите объединить эти аккаунты?`,
+        buttonYes: 'Да, объединить',
+        buttonNo: 'нет',
+        modalConfirm: { title: 'Объединение аккаунтов', buttonOk: 'Ок' },
+      },
     },
     forgotPassword: {
       title: 'Забыли пароль',
@@ -256,6 +274,49 @@ export const ru: LocaleType = {
         text: {
           getDescription(email: string | undefined) {
             return `Ссылка была отправлена на вашу электронную почту ${email}. Если вы не получили письмо, отправьте ссылку еще раз.`
+          },
+        },
+      },
+      error: {
+        required: 'Поле Email обязательно для заполнения',
+        email: 'Недопустимый формат Email',
+      },
+    },
+    registrationConfirmation: {
+      emailSuccessMessage: {
+        headTitle: 'Подтверждение Email',
+        title: 'Поздравляем!',
+        description: 'Ваш email был подтвержден',
+        signIn: 'Войти',
+      },
+      ResendingVerificationLink: {
+        headTitle: 'Срок действия ссылки для подтверждения Email истек',
+        title: 'Срок действия ссылки для подтверждения Email истек',
+        description:
+          'Похоже, что срок действия ссылки для подтверждения истек. Не волнуйтесь, мы можем отправить ссылку повторно',
+        resendLink: 'Отправить ссылку повторно',
+      },
+    },
+    recovery: {
+      resendForm: {
+        headTitle: 'Отправка повторного подтверждения восстановления пароля',
+      },
+      headTitle: 'Восстановление пароля',
+      createNewPasswordPage: {
+        title: 'Создание нового пароля',
+        password: 'Новый пароль',
+        passwordConfirmation: 'Подтверждение пароля',
+        descriptionPassword: 'Ваш пароль должен содержать от 6 до 20 символов',
+        button: 'Создать новый пароль',
+        error: {
+          password: {
+            min: 'Минимальное количество символов - 6',
+            max: 'Пароль должен содержать не более 20 символов',
+          },
+          confirmPassword: {
+            min: 'Минимальное количество символов - 6',
+            max: 'Пароль должен содержать не более 20 символов',
+            password: 'Пароли не совпадают',
           },
         },
       },
