@@ -11,8 +11,9 @@ export const ResendRecoveryForm = () => {
   const { push } = useRouter()
   const [captcha, setCaptcha] = useState('')
 
-  const { handleSubmit, register, reset, errors, setCustomError } =
-    useGlobalForm(verificationSchema)
+  const { handleSubmit, register, reset, errors, setCustomError } = useGlobalForm(
+    verificationSchema()
+  )
 
   const onSuccess = () => {
     push(PATH_ROUTE.LOGIN)

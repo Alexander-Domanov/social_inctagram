@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { FieldValues, SubmitHandler } from 'react-hook-form'
 
-import { useGlobalForm } from '@/common'
+import { useChangingFormWhenChangingLanguage, useGlobalForm } from '@/common'
 import { Confirm } from '@/components/modals'
 import { useTranslation } from '@/components/translation'
 import { forgotPassSchema } from '@/modules/auth-modules/password-recovery-module'
@@ -11,7 +11,9 @@ import { useForgotPassword } from '@/modules/auth-modules/password-recovery-modu
 import { GlobalButton, GlobalInput, Preloader } from '@/ui'
 
 export const ForgotPasswordWithCaptcha = () => {
-  const { errors, register, reset, handleSubmit, setCustomError } = useGlobalForm(forgotPassSchema)
+  const { errors, register, trigger, reset, handleSubmit, setCustomError } = useGlobalForm(
+    forgotPassSchema()
+  )
   const [captcha, setCaptcha] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { t } = useTranslation()
@@ -21,6 +23,8 @@ export const ForgotPasswordWithCaptcha = () => {
   const onClose = () => {
     setIsModalOpen(false)
   }
+
+  useChangingFormWhenChangingLanguage({ trigger, errors })
 
   const onSuccess = () => {
     setIsModalOpen(true)

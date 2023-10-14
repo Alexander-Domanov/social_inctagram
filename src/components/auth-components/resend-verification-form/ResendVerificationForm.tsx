@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 
 import { FormLayout } from '@/components/FormLayout'
+import { useTranslation } from '@/components/translation'
 import { Captcha } from '@/modules/auth-modules/password-recovery-module/components/forgot-password/forgot-password-form/captcha/Captcha'
 import { GlobalButton, GlobalInput, NameTitle, Preloader } from '@/ui'
 
@@ -25,6 +26,7 @@ export const ResendVerificationForm: FC<PropsType> = ({
   isCaptcha = false,
   onRecaptchaChange,
 }) => {
+  const { t } = useTranslation()
   const onRecaptchaChangeHandler = (token: string) => {
     if (onRecaptchaChange) {
       onRecaptchaChange(token)
@@ -36,16 +38,21 @@ export const ResendVerificationForm: FC<PropsType> = ({
       <div className="w-full">
         {isLoading && <Preloader />}
         <NameTitle
-          nameTitle="Resend verification link"
+          nameTitle={t.auth.registration.resendForm.resendLink}
           className="text-[20px] leading-[36px] text-light-100 font-bold text-center"
         />
         <form
           className="flex flex-col grow gap-[40px] pt-[22px] w-full  "
           onSubmit={handleSubmit(submitData)}
         >
-          <GlobalInput type="email" label="Email" error={error} {...register('email')} />
+          <GlobalInput
+            type="email"
+            label={t.auth.registration.resendForm.email}
+            error={error}
+            {...register('email')}
+          />
           <GlobalButton type="submit" variant="default" disabled={disabled}>
-            Send
+            {t.auth.registration.resendForm.send}
           </GlobalButton>
           {isCaptcha && <Captcha onRecaptchaChangeHandler={onRecaptchaChangeHandler} />}
         </form>

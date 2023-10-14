@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 import BroSingUp from '@/assets/images/bro-sing-up.png'
 import { Confirm } from '@/components/modals'
+import { useTranslation } from '@/components/translation'
 import { useExternalAccount } from '@/modules/auth-modules/registraion-module'
 import { GlobalButton } from '@/ui'
 
@@ -14,14 +15,15 @@ type PropsType = {
 
 export const ExternalAccount: FC<PropsType> = ({ code, email }) => {
   const { confirmMerge, cancelMerge, closePopup, isLoading, popupContent } = useExternalAccount()
+  const { t } = useTranslation()
 
   return (
     <>
       <div className={'flex justify-center items-center flex-col text-light-100 gap-7'}>
-        <span className={'font-bold mt-9'}>Merger of Accounts</span>
+        <span className={'font-bold mt-9'}>{t.auth.registration.externalAccount.title}</span>
 
         <span className={'w-96 text-center text-base font-normal'}>
-          The user with email: {email} is already in the system. Could we merge this accounts?
+          {t.auth.registration.externalAccount.description(email)}
         </span>
         <GlobalButton
           type="button"
@@ -30,7 +32,7 @@ export const ExternalAccount: FC<PropsType> = ({ code, email }) => {
           callback={() => confirmMerge(code)}
           disabled={isLoading}
         >
-          Yes, merge
+          {t.auth.registration.externalAccount.buttonYes}
         </GlobalButton>
         <GlobalButton
           type="button"
@@ -39,7 +41,7 @@ export const ExternalAccount: FC<PropsType> = ({ code, email }) => {
           callback={() => cancelMerge(code)}
           disabled={isLoading}
         >
-          No
+          {t.auth.registration.externalAccount.buttonNo}
         </GlobalButton>
         <Image src={BroSingUp} alt={'broSingUp'} height={290} width={290} priority />
       </div>
@@ -47,9 +49,9 @@ export const ExternalAccount: FC<PropsType> = ({ code, email }) => {
         isOpen={popupContent.isOpen}
         onConfirm={closePopup}
         onClose={closePopup}
-        title="Merger of Accounts"
+        title={t.auth.registration.externalAccount.modalConfirm.title}
         text={popupContent.content}
-        confirmButtonText="OK"
+        confirmButtonText={t.auth.registration.externalAccount.modalConfirm.buttonOk}
       />
     </>
   )

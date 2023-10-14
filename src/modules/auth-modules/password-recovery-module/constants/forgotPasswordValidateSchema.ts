@@ -1,5 +1,15 @@
 import * as yup from 'yup'
 
-export const forgotPassSchema = yup.object({
-  email: yup.string().trim().required('Email is required field').email('Email is invalid'),
-})
+import { useTranslation } from '@/components/translation'
+
+export const forgotPassSchema = () => {
+  const { t } = useTranslation()
+
+  return yup.object({
+    email: yup
+      .string()
+      .trim()
+      .required(t.auth.forgotPassword.error.required)
+      .email(t.auth.forgotPassword.error.email),
+  })
+}

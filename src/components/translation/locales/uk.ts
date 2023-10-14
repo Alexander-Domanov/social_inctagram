@@ -246,6 +246,24 @@ export const uk: LocaleType = {
           password: 'Паролі не збігаються',
         },
       },
+      resendForm: {
+        title: 'Форма повторного надсилання',
+        resendLink: 'Надіслати повторно посилання для верифікації',
+        email: 'Електронна пошта',
+        send: 'Надіслати',
+        error: {
+          email: `Email є обов'язковим полем`,
+        },
+      },
+      externalAccount: {
+        titlePage: 'Зовнішній обліковий запис',
+        title: `Об'єднання облікових записів`,
+        description: (email: string): string =>
+          `Користувач з електронною поштою:${email} вже зареєстрований в системі. Чи можемо ми об'єднати ці облікові записи?`,
+        buttonYes: `Так, об'єднати`,
+        buttonNo: 'ні',
+        modalConfirm: { title: `Об'єднання облікових записів`, buttonOk: 'Ок' },
+      },
     },
     forgotPassword: {
       title: 'Забули пароль',
@@ -257,6 +275,43 @@ export const uk: LocaleType = {
         text: {
           getDescription(email: string | undefined) {
             return `Посилання було надіслано на вашу електронну пошту ${email}. Якщо ви не отримали листа, надішліть посилання ще раз.`
+          },
+        },
+      },
+      error: { required: `Поле Email є обов'язковим`, email: 'Недійсний формат Email' },
+    },
+    registrationConfirmation: {
+      emailSuccessMessage: {
+        headTitle: 'Підтвердження Email',
+        title: 'Вітаємо!',
+        description: 'Ваш email було підтверджено',
+        signIn: 'Увійти',
+      },
+      ResendingVerificationLink: {
+        headTitle: 'Термін дії посилання для підтвердження Email минув',
+        title: 'Термін дії посилання для підтвердження Email минув',
+        description:
+          'Здається, що термін дії посилання для підтвердження минув. Не хвилюйтесь, ми можемо відправити посилання ще раз',
+        resendLink: 'Відправити посилання ще раз',
+      },
+    },
+    recovery: {
+      headTitle: 'Відновлення пароля',
+      createNewPasswordPage: {
+        title: 'Створення нового пароля',
+        password: 'Новий пароль',
+        passwordConfirmation: 'Підтвердження пароля',
+        descriptionPassword: 'Ваш пароль повинен містити від 6 до 20 символів',
+        button: 'Створити новий пароль',
+        error: {
+          password: {
+            min: 'Мінімальна кількість символів - 6',
+            max: 'Пароль повинен містити не більше 20 символів',
+          },
+          confirmPassword: {
+            min: 'Мінімальна кількість символів - 6',
+            max: 'Пароль повинен містити не більше 20 символів',
+            password: 'Паролі не співпадають',
           },
         },
       },

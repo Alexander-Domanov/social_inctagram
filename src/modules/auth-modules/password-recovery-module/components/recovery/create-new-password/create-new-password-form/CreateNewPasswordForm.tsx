@@ -2,7 +2,8 @@ import React from 'react'
 
 import { FieldValues, SubmitHandler } from 'react-hook-form'
 
-import { useGlobalForm } from '@/common'
+import { useChangingFormWhenChangingLanguage, useGlobalForm } from '@/common'
+import { useTranslation } from '@/components/translation'
 import { createNewPasswordSchema } from '@/modules/auth-modules/password-recovery-module'
 import { GlobalButton, InputWithEye } from '@/ui'
 
@@ -11,7 +12,12 @@ type PropsType = {
 }
 
 export const CreateNewPasswordForm = ({ onSubmitHandler }: PropsType) => {
-  const { errors, register, reset, handleSubmit } = useGlobalForm(createNewPasswordSchema)
+  const { errors, trigger, register, reset, handleSubmit } = useGlobalForm(
+    createNewPasswordSchema()
+  )
+  const { t } = useTranslation()
+
+  useChangingFormWhenChangingLanguage({ trigger, errors })
 
   const onSubmit: SubmitHandler<FieldValues> = data => {
     const { password } = data
@@ -26,7 +32,7 @@ export const CreateNewPasswordForm = ({ onSubmitHandler }: PropsType) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <InputWithEye
-        label="New password"
+        label={t.auth.recovery.createNewPasswordPage.password}
         id="password"
         placeholder=""
         error={errors?.password?.message}
@@ -34,16 +40,16 @@ export const CreateNewPasswordForm = ({ onSubmitHandler }: PropsType) => {
       />
       <InputWithEye
         placeholder=""
-        label="Password confirmation"
+        label={t.auth.recovery.createNewPasswordPage.passwordConfirmation}
         id="confirmPassword"
         error={errors?.confirmPassword?.message}
         {...register('confirmPassword')}
       />
       <div className="leading-6 pb-5 text-sm font-normal text-light-900">
-        Your password must be between 6 and 20 characters
+        {t.auth.recovery.createNewPasswordPage.descriptionPassword}
       </div>
       <GlobalButton variant="default" type="submit">
-        Create new password
+        {t.auth.recovery.createNewPasswordPage.button}
       </GlobalButton>
     </form>
   )
