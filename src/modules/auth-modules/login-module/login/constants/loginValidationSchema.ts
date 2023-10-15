@@ -1,8 +1,12 @@
 import * as yup from 'yup'
 
-export type FormData = yup.InferType<typeof schemaLogin>
+import { useTranslation } from '@/components/translation'
 
-export const schemaLogin = yup.object({
-  email: yup.string().required('Email is required filed'),
-  password: yup.string().required('Password is required filed'),
-})
+export const schemaLogin = () => {
+  const { t } = useTranslation()
+
+  return yup.object({
+    email: yup.string().required(t.auth.login.errorsSchema.email),
+    password: yup.string().required(t.auth.login.errorsSchema.password),
+  })
+}
