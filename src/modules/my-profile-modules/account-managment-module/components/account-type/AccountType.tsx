@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useTranslation } from '@/components/translation'
 import { Radio } from '@/ui/radio/Radio'
