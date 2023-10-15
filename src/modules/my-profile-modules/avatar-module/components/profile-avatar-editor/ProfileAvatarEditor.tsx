@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import AvatarEditor from 'react-avatar-editor'
 
+import { useTranslation } from '@/components/translation'
 import { GlobalButton } from '@/ui'
 
 type PropsType = {
@@ -13,7 +14,7 @@ type PropsType = {
 export const ProfileAvatarEditor = ({ image, onSaveClick, disabled }: PropsType) => {
   const [editor, setEditor] = useState(null)
   const [scale, setScale] = useState(1)
-
+  const { t } = useTranslation()
   const onScaleChange = (event: any) => {
     const scale = parseFloat(event.target.value)
 
@@ -71,7 +72,7 @@ export const ProfileAvatarEditor = ({ image, onSaveClick, disabled }: PropsType)
           className={`mt-[20px]`}
           disabled={disabled}
         >
-          Save
+          {t.uploadPhoto.profileAvatarEditor.buttonSave}
         </GlobalButton>
       </div>
     </div>

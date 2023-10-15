@@ -96,28 +96,79 @@ export const en = {
       confirmDescriptionDeleteFollowing: 'Do you really want to delete a FollowingPage ',
     },
     settingsProfile: {
+      headTitle: 'Profile Settings',
       settingsProfileTabs: {
-        generalInformation: 'General information',
+        generalInformation: {
+          titleTab: 'General information',
+          userName: {
+            label: 'Username',
+            min: 'Minimum number of characters 6',
+            max: 'Maximum number of characters 30',
+            matches: 'Only allowed characters are 0-9, A-Z, a-z, _, -',
+            required: 'Username is required',
+          },
+          firstName: {
+            label: 'First Name',
+            min: 'Minimum number of characters 1',
+            max: 'Maximum number of characters 50',
+            matches: 'Only letters are allowed',
+          },
+          lastName: {
+            label: 'Last Name',
+            min: 'Minimum number of characters 1',
+            max: 'Maximum number of characters 50',
+            matches: 'Only letters are allowed',
+          },
+          dateOfBirthday: {
+            label: 'Date of birthday',
+            max: 'Date of birth cannot be in the future',
+            typeError: 'Date of birth has to be a valid date',
+          },
+          city: 'City',
+          aboutMe: {
+            label: 'About me',
+            max: 'Сan not be more than 200',
+          },
+          buttonSaveChanges: 'Save Changes',
+        },
         devices: 'Devices',
         accountManagement: 'Account management',
         myPayments: 'My payments',
       },
-      generalInformation: {
-        errors: {
-          userName: 'Username is required',
-          dateOfBirthMax: 'Date of birth cannot be in the future',
-          dateOfBirthTypeError: 'Date of birth has to be a valid date',
-          aboutMe: 'Сan not be more than 200',
+      devices: {
+        titleDevices: 'This devices',
+        online: 'Online',
+        buttonDevices: 'Terminate all other session',
+        activeSession: 'Active sessions',
+        confirm: {
+          title: 'Terminate all other session?',
+          text: 'Are you sure you want to terminate all other session?',
+          buttonDecline: 'No',
         },
-        userName: 'Username',
-        firstName: 'First Name',
-        lastName: 'Last Name',
-        dateOfBirthday: 'Date of birthday',
-        city: 'City',
-        aboutMe: 'About me',
-        buttonSaveChanges: 'Save Changes',
+        otherDevice: {
+          lastVisit: {
+            title: 'Last visit',
+          },
+          buttonLogout: 'Logout',
+          confirm: {
+            title: 'Terminate Session?',
+            text: 'Are you sure you want to terminate session?',
+            buttonDecline: 'No',
+          },
+        },
       },
-      devices: {},
+    },
+  },
+  uploadPhoto: {
+    buttonAddPhoto: 'Add a Profile Photo',
+    uploadAvatarBlock: {
+      title: 'Add a Profile Photo',
+    },
+    profileAvatarEditor: {
+      buttonSave: 'Save',
+    },
+    photoSelector: {
+      buttonSelectComputer: 'Select from computer',
     },
   },
   userProfile: {
@@ -222,7 +273,11 @@ export const en = {
       title: 'Login',
       forgotPassword: 'Forgot password?',
       haveAccount: `Don't have account?`,
-      errors: 'The password or the email or Username are incorrect. Try again, please',
+      errorsSchema: {
+        email: 'Email is required filed',
+        password: 'Password is required filed',
+      },
+      customErrors: 'The password or the email or Username are incorrect. Try again, please',
     },
     registration: {
       title: 'Sign Up',

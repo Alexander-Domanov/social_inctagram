@@ -89,29 +89,71 @@ export const uk: LocaleType = {
       confirmDescriptionDeleteFollowing: 'Ви дійсно бажаєте видалити підписку на ',
     },
     settingsProfile: {
+      headTitle: 'Налаштування профілю',
       settingsProfileTabs: {
-        generalInformation: 'Загальна інформація',
+        generalInformation: {
+          titleTab: 'Загальна інформація',
+          userName: {
+            label: `Ім'я користувача`,
+            min: 'Мінімальна кількість символів 6',
+            max: 'Максимальна кількість символів 30',
+            matches: 'Дозволені лише символи 0-9, A-Z, a-z, _, -',
+            required: `Ім'я користувача обов'язкове`,
+          },
+          firstName: {
+            label: `Ім'я`,
+            min: 'Мінімальна кількість символів 1',
+            max: 'Максимальна кількість символів 50',
+            matches: 'Дозволені лише букви',
+          },
+          lastName: {
+            label: 'Прізвище',
+            min: 'Мінімальна кількість символів 1',
+            max: 'Максимальна кількість символів 50',
+            matches: 'Дозволені лише букви',
+          },
+          dateOfBirthday: {
+            label: 'Дата народження',
+            max: 'Дата народження не може бути в майбутньому',
+            typeError: 'Дата народження повинна бути коректною',
+          },
+          city: 'Місто',
+          aboutMe: { label: 'Про мене', max: 'Не може бути більше 200 символів' },
+          buttonSaveChanges: 'Зберегти зміни',
+        },
         devices: 'Пристрої',
         accountManagement: 'Керування обліковим записом',
         myPayments: 'Мої платежі',
       },
-      generalInformation: {
-        errors: {
-          userName: "Ім'я користувача є обов'язковим",
-          dateOfBirthMax: 'Дата народження не може бути у майбутньому',
-          dateOfBirthTypeError: 'Дата народження повинна бути коректною датою',
-          aboutMe: 'Не може перевищувати 200 символів',
+      devices: {
+        titleDevices: 'Ці пристрої',
+        online: 'Онлайн',
+        buttonDevices: 'Завершити всі інші сесії',
+        activeSession: 'Активні сесії',
+        confirm: {
+          title: 'Завершити всі інші сесії?',
+          text: 'Ви впевнені, що хочете завершити всі інші сесії?',
+          buttonDecline: 'Ні',
         },
-        userName: "Ім'я користувача",
-        firstName: "Ім'я",
-        lastName: 'Прізвище',
-        dateOfBirthday: 'Дата народження',
-        city: 'Місто',
-        aboutMe: 'Про мене',
-        buttonSaveChanges: 'Зберегти зміни',
+        otherDevice: {
+          lastVisit: {
+            title: 'Останній візит',
+          },
+          buttonLogout: 'Вийти',
+          confirm: {
+            title: 'Завершити сесію?',
+            text: 'Ви впевнені, що хочете завершити сесію?',
+            buttonDecline: 'Ні',
+          },
+        },
       },
-      devices: {},
     },
+  },
+  uploadPhoto: {
+    buttonAddPhoto: 'Додати фото профілю',
+    uploadAvatarBlock: { title: 'Додати фото профілю' },
+    profileAvatarEditor: { buttonSave: 'Зберегти' },
+    photoSelector: { buttonSelectComputer: `Вибрати з комп'ютера` },
   },
   userProfile: {
     buttonMessage: 'Надіслати повідомлення',
@@ -215,7 +257,11 @@ export const uk: LocaleType = {
       title: 'Вхід',
       forgotPassword: 'Забули пароль?',
       haveAccount: 'Немає облікового запису?',
-      errors:
+      errorsSchema: {
+        email: `Поле Email обов'язкове для заповнення`,
+        password: `Поле Пароль обов'язкове для заповнення`,
+      },
+      customErrors:
         "Неправильний пароль, електронна пошта або ім'я користувача. Будь ласка, спробуйте знову.",
     },
     registration: {

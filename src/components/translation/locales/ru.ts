@@ -88,29 +88,71 @@ export const ru: LocaleType = {
       confirmDescriptionDeleteFollowing: 'Вы действительно хотите удалить подписку на ',
     },
     settingsProfile: {
+      headTitle: 'Настройки профиля',
       settingsProfileTabs: {
-        generalInformation: 'Общая информация',
+        generalInformation: {
+          titleTab: 'Общая информация',
+          userName: {
+            label: 'Имя пользователя',
+            min: 'Минимальное количество символов 6',
+            max: 'Максимальное количество символов 30',
+            matches: 'Разрешены только символы 0-9, A-Z, a-z, _, -',
+            required: 'Имя пользователя обязательно',
+          },
+          firstName: {
+            label: 'Имя',
+            min: 'Минимальное количество символов 1',
+            max: 'Максимальное количество символов 50',
+            matches: 'Разрешены только буквы',
+          },
+          lastName: {
+            label: 'Фамилия',
+            min: 'Минимальное количество символов 1',
+            max: 'Максимальное количество символов 50',
+            matches: 'Разрешены только буквы',
+          },
+          dateOfBirthday: {
+            label: 'Дата рождения',
+            max: 'Дата рождения не может быть в будущем',
+            typeError: 'Дата рождения должна быть валидной',
+          },
+          city: 'Город',
+          aboutMe: { label: 'О себе', max: 'Не может содержать более 200 символов' },
+          buttonSaveChanges: 'Сохранить изменения',
+        },
         devices: 'Устройства',
         accountManagement: 'Управление аккаунтом',
         myPayments: 'Мои платежи',
       },
-      generalInformation: {
-        errors: {
-          userName: 'Имя пользователя обязательно',
-          dateOfBirthMax: 'Дата рождения не может быть в будущем',
-          dateOfBirthTypeError: 'Дата рождения должна быть корректной датой',
-          aboutMe: 'Не может превышать 200 символов',
+      devices: {
+        buttonDevices: 'Завершить все другие сеансы',
+        titleDevices: 'Эти устройства',
+        online: 'Онлайн',
+        activeSession: 'Активные сеансы',
+        confirm: {
+          title: 'Завершить все другие сеансы?',
+          text: 'Вы уверены, что хотите завершить все другие сеансы?',
+          buttonDecline: 'Нет',
         },
-        userName: 'Имя пользователя',
-        firstName: 'Имя',
-        lastName: 'Фамилия',
-        dateOfBirthday: 'Дата рождения',
-        city: 'Город',
-        aboutMe: 'Обо мне',
-        buttonSaveChanges: 'Сохранить изменения',
+        otherDevice: {
+          lastVisit: {
+            title: 'Последнее посещение',
+          },
+          buttonLogout: 'Выйти',
+          confirm: {
+            title: 'Завершить сеанс?',
+            text: 'Вы уверены, что хотите завершить сеанс?',
+            buttonDecline: 'Нет',
+          },
+        },
       },
-      devices: {},
     },
+  },
+  uploadPhoto: {
+    buttonAddPhoto: 'Добавить фото профиля',
+    uploadAvatarBlock: { title: 'Добавить фото профиля' },
+    profileAvatarEditor: { buttonSave: 'Сохранить' },
+    photoSelector: { buttonSelectComputer: 'Выбрать с компьютера' },
   },
   userProfile: {
     buttonMessage: 'Отправить сообщение',
@@ -214,7 +256,11 @@ export const ru: LocaleType = {
       title: 'Вход',
       forgotPassword: 'Забыли пароль?',
       haveAccount: 'У вас нет аккаунта?',
-      errors:
+      errorsSchema: {
+        email: 'Поле Email обязательно для заполнения',
+        password: 'Поле Пароль обязательно для заполнения',
+      },
+      customErrors:
         'Неверный пароль, электронная почта или имя пользователя. Пожалуйста, попробуйте снова.',
     },
     registration: {

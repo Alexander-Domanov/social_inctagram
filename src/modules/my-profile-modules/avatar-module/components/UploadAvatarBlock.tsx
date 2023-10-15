@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { ModalWithContent } from '@/components/modals'
 import { useStoreAvatarBlockModal } from '@/components/modals/store'
+import { useTranslation } from '@/components/translation'
 import { PhotoSelector, ProfileAvatarEditor } from '@/modules/my-profile-modules/avatar-module'
 import { DeleteAvatarButton } from '@/modules/my-profile-modules/avatar-module/components/avatar-delete-button/DeleteButton'
 import { useDeleteAvatar } from '@/modules/my-profile-modules/avatar-module/hooks/useDeleteAvatar'
@@ -17,7 +18,7 @@ export const UploadAvatarBlock = ({ avatarUrl = '' }: PropsType) => {
   const UploadAvatarBlockModal = useStoreAvatarBlockModal()
   const [avatar, setAvatar] = useState(avatarUrl)
   const { imagesSelector, setImageSelector } = useImageSelector()
-
+  const { t } = useTranslation()
   const [selectedPhoto, setSelectedPhoto] = useState<string | File | null>('')
 
   const handleAddPhoto = (photos: IPhoto[]) => {
@@ -87,13 +88,13 @@ export const UploadAvatarBlock = ({ avatarUrl = '' }: PropsType) => {
         callback={onAddPhotoClick}
         disabled={isDisabled}
       >
-        Add a Profile Photo
+        {t.uploadPhoto.buttonAddPhoto}
       </GlobalButton>
 
       <ModalWithContent
         isOpen={UploadAvatarBlockModal.isModalOpen}
         onClose={onCloseClick}
-        title={'Add a Profile Photo'}
+        title={t.uploadPhoto.uploadAvatarBlock.title}
       >
         <>
           {selectedPhoto ? (
