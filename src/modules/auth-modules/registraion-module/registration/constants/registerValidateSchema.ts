@@ -15,7 +15,7 @@ export const registrationSchema = () => {
     email: yup
       .string()
       .required(t.auth.registration.errors.email.required)
-      .email('email must be a valid email\n')
+      .email('email must be a valid email')
       .trim(),
     password: yup
       .string()

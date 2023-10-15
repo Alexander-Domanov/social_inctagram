@@ -9,19 +9,21 @@ import { ArrowBack } from '@/modules/my-profile-modules/settings-edit-profile-mo
 import { routes } from '@/routing/router'
 
 export const SettingsProfile = () => {
-  const [storedTabsLabel, setStoredTabsLabel] = useLocalStorage(
-    'setting_tabs',
-    settings_profile_tabs[0].label
-  )
+  const tabs = settings_profile_tabs()
+  const [storedTabsLabel, setStoredTabsLabel] = useLocalStorage('setting_tabs', tabs[0].label)
   const [activeTab, setActiveTab] = useState('')
-  const { t } = useTranslation()
+  const { t, localeLanguage } = useTranslation()
   const onChangeTab = (tabLabel: string | undefined) => {
     setActiveTab(tabLabel ?? '')
 
     setStoredTabsLabel(tabLabel ?? '')
   }
 
-  const tabsLayout = settings_profile_tabs?.map(tab => {
+  useEffect(() => {
+    setActiveTab(tabs[0].label)
+  }, [localeLanguage])
+
+  const tabsLayout = tabs?.map(tab => {
     return <div key={tab.id}>{activeTab === tab.label && tab.content}</div>
   })
 
@@ -38,7 +40,7 @@ export const SettingsProfile = () => {
           {t.profile.profilePage.buttonProfileSettings}
         </span>
       </Link>
-      <TabsTitle tabs={settings_profile_tabs} setActiveTab={onChangeTab} activeTab={activeTab} />
+      <TabsTitle tabs={tabs} setActiveTab={onChangeTab} activeTab={activeTab} />
       {tabsLayout}
     </div>
   )

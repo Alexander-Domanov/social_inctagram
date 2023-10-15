@@ -3,11 +3,14 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { Confirm } from '@/components/modals'
+import { useTranslation } from '@/components/translation'
 
 export const PaymentConfirmationModals = () => {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(true)
   const [isErrorModalOpen, setIisErrorModalOpen] = useState(true)
-
+  const { t } = useTranslation()
+  const { textSuccess, textError, buttonTextSuccess, buttonTextError, titleSuccess, titleError } =
+    t.profile.settingsProfile.accountManagement.paymentsConfirmationModals.confirm
   const { query, replace, pathname } = useRouter()
 
   const onErrorClose = () => {
@@ -27,9 +30,9 @@ export const PaymentConfirmationModals = () => {
           isOpen={isSuccessModalOpen}
           onConfirm={onSuccessClose}
           onClose={onSuccessClose}
-          confirmButtonText={'Ok'}
-          title={'Success'}
-          text={'Payment was successful!'}
+          confirmButtonText={buttonTextSuccess}
+          title={titleSuccess}
+          text={textSuccess}
         />
       )}
       {query.success === 'false' && (
@@ -37,9 +40,9 @@ export const PaymentConfirmationModals = () => {
           isOpen={isErrorModalOpen}
           onConfirm={onErrorClose}
           onClose={onErrorClose}
-          confirmButtonText={'Back to payment'}
-          title={'Error'}
-          text={'Transaction failed, please try again'}
+          confirmButtonText={buttonTextError}
+          title={titleError}
+          text={textError}
         />
       )}
     </div>

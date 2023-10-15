@@ -11,8 +11,9 @@ import { routes } from '@/routing/router'
 import { GlobalButton, GlobalInput, InputWithEye, Preloader } from '@/ui'
 
 export const LoginForm = () => {
-  const { setCustomError, trigger, handleSubmit, register, errors, reset } =
-    useGlobalForm(schemaLogin)
+  const { setCustomError, trigger, handleSubmit, register, errors, reset } = useGlobalForm(
+    schemaLogin()
+  )
   const { t } = useTranslation()
   const { push } = useRouter()
 
@@ -20,7 +21,7 @@ export const LoginForm = () => {
     () => {
       push(routes.sideBar.profile)
     },
-    () => setCustomError('password', t.auth.login.errors),
+    () => setCustomError('password', t.auth.login.customErrors),
     () => reset()
   )
 

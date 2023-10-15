@@ -9,6 +9,7 @@ import { v1 } from 'uuid'
 
 import plusAdd from '@/assets/icons/plus-square.svg'
 import placeholder from '@/assets/images/img-placeholder.png'
+import { useTranslation } from '@/components/translation'
 import { ModalCreatePostType } from '@/modules/create-post-module'
 import { IPhoto, useImageSelector } from '@/store/storeSelectorPhoto'
 import { GlobalButton } from '@/ui'
@@ -30,7 +31,7 @@ export const PhotoSelector = ({
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [error, setError] = useState('')
   const { setImageSelector } = useImageSelector()
-
+  const { t } = useTranslation()
   // const checkImageSize = (file: File, maxImageSize: number, onSuccessSetFile: any, array: any) => {
   //   if (file.size <= maxImageSize * 1024 * 1024) {
   //     onSuccessSetFile(file, array)
@@ -107,7 +108,7 @@ export const PhotoSelector = ({
             className={`text-[16px] my-[60px] mx-[60px] font-semibold`}
             callback={onSelectClick}
           >
-            Select from computer
+            {t.uploadPhoto.photoSelector.buttonSelectComputer}
           </GlobalButton>
         </>
       ) : (
