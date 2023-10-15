@@ -121,6 +121,7 @@ export const ru: LocaleType = {
           aboutMe: { label: 'О себе', max: 'Не может содержать более 200 символов' },
           buttonSaveChanges: 'Сохранить изменения',
         },
+        generalInformationTab: 'Общая информация',
         devices: 'Устройства',
         accountManagement: 'Управление аккаунтом',
         myPayments: 'Мои платежи',

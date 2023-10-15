@@ -132,6 +132,7 @@ export const en = {
           },
           buttonSaveChanges: 'Save Changes',
         },
+        generalInformationTab: 'General information',
         devices: 'Devices',
         accountManagement: 'Account management',
         myPayments: 'My payments',

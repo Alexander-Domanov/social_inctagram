@@ -122,6 +122,7 @@ export const uk: LocaleType = {
           aboutMe: { label: 'Про мене', max: 'Не може бути більше 200 символів' },
           buttonSaveChanges: 'Зберегти зміни',
         },
+        generalInformationTab: 'Загальна інформація',
         devices: 'Пристрої',
         accountManagement: 'Керування обліковим записом',
         myPayments: 'Мої платежі',
