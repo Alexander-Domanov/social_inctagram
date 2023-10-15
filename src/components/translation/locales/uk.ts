@@ -17,6 +17,7 @@ export const uk: LocaleType = {
     buttonNo: 'Ні',
   },
   profile: {
+    headTitle: 'Профіль',
     profilePage: {
       buttonProfileSettings: 'Налаштування профілю',
       following: 'Підписки',
@@ -193,6 +194,7 @@ export const uk: LocaleType = {
     buttonUnfollow: 'Відписатися',
   },
   search: {
+    headTitle: 'Пошук',
     searchTitle: 'Пошук',
     searchInput: 'Пошук',
     recentRequests: 'Останні запити',
@@ -398,7 +400,11 @@ export const uk: LocaleType = {
       },
     },
   },
+  messenger: {
+    headTitle: 'Месенджер',
+  },
   statistics: {
+    headTitle: 'Статистика',
     tabsTitle: {
       week: 'Тиждень',
       month: 'Місяць',
@@ -453,5 +459,8 @@ export const uk: LocaleType = {
         }
       },
     },
+  },
+  favorites: {
+    headTitle: 'Вибране',
   },
 }

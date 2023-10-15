@@ -17,6 +17,7 @@ export const ru: LocaleType = {
     buttonNo: 'Нет',
   },
   profile: {
+    headTitle: 'Профиль',
     profilePage: {
       buttonProfileSettings: 'Настройки профиля',
       following: 'Подписки',
@@ -192,6 +193,7 @@ export const ru: LocaleType = {
     buttonUnfollow: 'Отписаться',
   },
   search: {
+    headTitle: 'Поиск',
     searchTitle: 'Поиск',
     searchInput: 'Поиск',
     recentRequests: 'Недавние запросы',
@@ -400,7 +402,11 @@ export const ru: LocaleType = {
       },
     },
   },
+  messenger: {
+    headTitle: 'Мессенджер',
+  },
   statistics: {
+    headTitle: 'Статистика',
     tabsTitle: { week: 'Неделя', month: 'Месяц' },
     pagesTitle: {
       title: 'Статистика',
@@ -452,5 +458,8 @@ export const ru: LocaleType = {
         }
       },
     },
+  },
+  favorites: {
+    headTitle: 'Избранное',
   },
 }

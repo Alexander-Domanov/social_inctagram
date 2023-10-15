@@ -16,6 +16,7 @@ export const en = {
     buttonNo: 'No',
   },
   profile: {
+    headTitle: 'Profile',
     profilePage: {
       buttonProfileSettings: 'Profile Settings',
       following: 'Following',
@@ -251,6 +252,7 @@ export const en = {
     report: 'Report',
   },
   search: {
+    headTitle: 'Search',
     searchTitle: 'Search',
     searchInput: 'Search',
     recentRequests: 'Recent requests',
@@ -420,7 +422,11 @@ export const en = {
       },
     },
   },
+  messenger: {
+    headTitle: 'Messenger',
+  },
   statistics: {
+    headTitle: 'Statistics',
     pagesTitle: {
       title: 'Statistics',
       likes: 'Likes',
@@ -475,6 +481,9 @@ export const en = {
         }
       },
     },
+  },
+  favorites: {
+    headTitle: 'Favorites',
   },
 }
 
