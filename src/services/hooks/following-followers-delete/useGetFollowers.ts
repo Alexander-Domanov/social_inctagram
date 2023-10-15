@@ -1,13 +1,13 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
-import { getFollowersData } from '@/services/api/following-followers-delete-api/getFollowers'
-import { FollowingFollowersPropsType } from '@/types'
+import { getFollowersData } from '@/services/api/following-followers-delete_api/getFollowers'
+import { FollowingFollowersLikesPropsType } from '@/types'
 
 export const useGetFollowers = ({
   userName,
   search,
-}: Omit<FollowingFollowersPropsType, 'pageParam'>) => {
+}: Omit<FollowingFollowersLikesPropsType, 'pageParam' | 'postId'>) => {
   const {
     data: dataFollowersItems,
     refetch: refetchFollowers,

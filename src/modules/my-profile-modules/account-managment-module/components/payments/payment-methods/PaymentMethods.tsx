@@ -6,11 +6,14 @@ import { useRouter } from 'next/router'
 import paypal from '@/assets/icons/paypal.png'
 import stripe from '@/assets/icons/stripe.png'
 import { Confirm } from '@/components/modals'
+import { useTranslation } from '@/components/translation'
 import { useSetSubscription } from '@/modules/my-profile-modules/account-managment-module/hooks/useSetSubscription'
 import { useSubscription } from '@/modules/my-profile-modules/account-managment-module/store/subscriptionStore'
 import { Preloader } from '@/ui'
 
 export const PaymentMethods = () => {
+  const { t } = useTranslation()
+  const { text, buttonOk } = t.profile.settingsProfile.accountManagement.paymentMethods.confirm
   const router = useRouter()
   const [iJokeModalOpen, setIsJokeModalOpen] = useState(false)
 
@@ -50,9 +53,9 @@ export const PaymentMethods = () => {
         isOpen={iJokeModalOpen}
         onConfirm={() => setIsJokeModalOpen(false)}
         onClose={() => setIsJokeModalOpen(false)}
-        confirmButtonText={'Ok'}
-        title={''}
-        text={'Oops sanctions! 🙈'}
+        confirmButtonText={buttonOk}
+        title={'Paypal'}
+        text={text}
       />
     </>
   )

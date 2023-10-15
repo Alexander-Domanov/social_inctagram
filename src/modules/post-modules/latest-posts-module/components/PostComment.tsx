@@ -1,30 +1,53 @@
 import { FC } from 'react'
 
 import dayjs from 'dayjs'
+import Link from 'next/link'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 
 import { getTimeFromNow } from '@/common/helpers/getTimeFromNow'
+import { useTranslation } from '@/components/translation'
 import {
   Comment,
   LikeStatus,
 } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
 import { PostCommentAnswers } from '@/modules/post-modules/latest-posts-module/components/PostCommentAnswers'
 import { useChangePostCommentLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostCommentLikeStatus'
+import { useLikesModalStore, useModalsStore, useUserStore } from '@/store'
 import { Avatar } from '@/ui'
 
 interface Props {
   comment: Comment
+  focusInput: () => void
 }
 
-export const PostComment: FC<Props> = ({ comment }) => {
+export const PostComment: FC<Props> = ({ comment, focusInput }) => {
   const { mutate } = useChangePostCommentLikeStatus(
     comment.postId,
     comment.id,
     comment.isLiked ? LikeStatus.NONE : LikeStatus.LIKE
   )
-
+  const { t } = useTranslation()
+  const { setCommentId, setLikesCount } = useUserStore()
+  const { postModal } = useModalsStore()
+  const { setLikesModal } = useLikesModalStore()
   const onLikeClick = () => {
     mutate()
+  }
+
+  const onAnswerClick = () => {
+    postModal.setReply('comment', comment.id)
+
+    focusInput()
+  }
+
+  const onOpenLikeCommentModal = () => {
+    setCommentId(comment.id)
+    setLikesCount(comment.likeCount)
+    setLikesModal('commentLikes')
+  }
+
+  const onLinkClick = () => {
+    postModal.closeModal()
   }
 
   return (
@@ -35,13 +58,16 @@ export const PostComment: FC<Props> = ({ comment }) => {
             src={comment.from.avatars?.thumbnail.url}
             width={36}
             height={36}
-            alt={comment.from.username}
+            alt={comment.from.userName}
           />
         </div>
 
         <div className="text-sm leading-6 text-white">
           <div>
-            <span className="font-semibold">{comment.from.username}</span> {comment.content}
+            <Link href={`/${comment.from.userName}`} onClick={onLinkClick}>
+              <span className="font-semibold">{comment.from.userName}</span>
+            </Link>{' '}
+            {comment.content}
           </div>
 
           <div className="mt-2 flex items-center gap-3 text-xs text-light-900 leading-none">
@@ -53,10 +79,14 @@ export const PostComment: FC<Props> = ({ comment }) => {
             </time>
 
             {comment.likeCount > 0 && (
-              <div className="font-semibold">Like: {comment.likeCount}</div>
+              <div className="font-semibold cursor-pointer" onClick={onOpenLikeCommentModal}>
+                {t.likes.getCountLikes(comment.likeCount)}: {comment.likeCount}
+              </div>
             )}
 
-            <button className="font-semibold">Answer</button>
+            <button className="font-semibold" onClick={onAnswerClick}>
+              {t.PostCommentAnswers.answer}
+            </button>
           </div>
         </div>
 
@@ -75,6 +105,7 @@ export const PostComment: FC<Props> = ({ comment }) => {
           answerCount={comment.answerCount}
           postId={comment.postId}
           commentId={comment.id}
+          focusInput={focusInput}
         />
       )}
     </div>

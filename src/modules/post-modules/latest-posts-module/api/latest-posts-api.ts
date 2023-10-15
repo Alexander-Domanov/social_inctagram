@@ -37,12 +37,15 @@ export interface Post {
   isLiked: boolean
   newLikes: {
     id: number
-    username: string
+    userName: string
     avatars: {
       thumbnail: Image
       medium: Image
     }
   }[]
+  isFavorite: boolean
+  isFollowing: true
+  isFollowedBy: true
 }
 
 interface GetPostsResponse {
@@ -69,13 +72,8 @@ export const getPosts = async ({ userName, page }: GetPostsParams) => {
   return res.data
 }
 
-interface GetPostResponse extends Post {
-  createdAt: string
-  updatedAt: string
-}
-
 export const getPost = async (postId: number | null) => {
-  const res = await authInstance.get<GetPostResponse>(`posts/p/${postId}`)
+  const res = await authInstance.get<Post>(`posts/p/${postId}`)
 
   return res.data
 }
@@ -89,7 +87,7 @@ export interface Comment {
   postId: number
   from: {
     id: number
-    username: string
+    userName: string
     avatars: {
       thumbnail: Image
       medium: Image
@@ -107,7 +105,7 @@ export interface Answer {
   commentId: number
   from: {
     id: number
-    username: string
+    userName: string
     avatars: {
       thumbnail: Image
       medium: Image
@@ -152,6 +150,16 @@ export const addPostComment = async (postId: number | null, comment: string) => 
   })
 }
 
+export const addPostCommentAnswer = async (
+  postId: number | null,
+  commentId: number | null,
+  comment: string
+) => {
+  return authInstance.post<Answer>(`posts/${postId}/comments/${commentId}/answers`, {
+    content: comment,
+  })
+}
+
 export enum LikeStatus {
   NONE = 'NONE',
   LIKE = 'LIKE',
@@ -189,4 +197,8 @@ export const changePostCommentAnswerLikeStatus = (
   return authInstance.put(`posts/${postId}/comments/${commentId}/answers/${answerId}/like-status`, {
     likeStatus,
   })
+}
+
+export const toggleFavoritePost = (postId: number | null) => {
+  return authInstance.post(`users/favorite/${postId}`)
 }

@@ -15,6 +15,7 @@ import trending from '@/assets/icons/sidebar/trending-up-outline.svg'
 import { useTranslation } from '@/components/translation'
 import { LogoutButton } from '@/modules/auth-modules/login-module/logout'
 import { routes } from '@/routing/router'
+import { useUserStore } from '@/store'
 
 interface MoreInfoInterface {
   router: string
@@ -25,15 +26,28 @@ interface MoreInfoInterface {
 export const MoreInfoMobile = () => {
   const { push } = useRouter()
   const { t } = useTranslation()
+  const { hasBusinessAccount } = useUserStore()
+
   const moreInfo: MoreInfoInterface[] = [
     {
       router: routes.myProfilePage.settings,
       name: t.profile.profilePage.buttonProfileSettings,
       image: settings,
     },
-    { router: routes.sideBar.statistics, name: t.navBar.statistics, image: trending },
-    { router: routes.sideBar.favorites, name: t.navBar.favorites, image: bookmark },
+    {
+      router: routes.sideBar.favorites,
+      name: t.navBar.favorites,
+      image: bookmark,
+    },
   ]
+
+  if (hasBusinessAccount) {
+    moreInfo.push({
+      router: routes.sideBar.statistics,
+      name: t.navBar.statistics,
+      image: trending,
+    })
+  }
   const [isOpen, setIsOpen] = useState(false)
 
   const onOpenChange = (open: boolean) => {

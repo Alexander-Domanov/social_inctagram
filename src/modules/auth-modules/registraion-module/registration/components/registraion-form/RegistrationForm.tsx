@@ -1,29 +1,27 @@
 import React, { useState } from 'react'
 
-import { useGlobalForm } from '@/common'
+import { useChangingFormWhenChangingLanguage, useGlobalForm } from '@/common'
 import { Confirm } from '@/components/modals/confirm/Confirm'
-import {
-  FormDataRegistered,
-  registrationSchema,
-  useRegister,
-} from '@/modules/auth-modules/registraion-module'
+import { useTranslation } from '@/components/translation'
+import { registrationSchema, useRegister } from '@/modules/auth-modules/registraion-module'
 import { GlobalButton, GlobalInput, InputWithEye, Preloader } from '@/ui'
 
-const titleForModal = 'Email sent'
-const messageModal = 'We have sent a link to confirm your email to'
-
 export const RegistrationForm = () => {
+  const { t } = useTranslation()
   const [toggleModal, setToggleModal] = useState(false)
 
-  const { errors, register, reset, handleSubmit, setCustomError } =
-    useGlobalForm(registrationSchema)
+  const { errors, trigger, register, reset, handleSubmit, setCustomError } = useGlobalForm(
+    registrationSchema()
+  )
   const { sendRegisteredData, isLoading, variables } = useRegister(
     () => setToggleModal(true),
     () => reset(),
     setCustomError
   )
 
-  const registeredDataSubmit = (data: FormDataRegistered | any) => {
+  useChangingFormWhenChangingLanguage({ trigger, errors })
+
+  const registeredDataSubmit = (data: any) => {
     sendRegisteredData(data)
   }
 
@@ -33,45 +31,45 @@ export const RegistrationForm = () => {
     <>
       {isLoading && <Preloader />}
       <form
-        className="flex flex-col grow gap-[22px] pt-[22px]  pb-[18px] w-full gap-[24px]"
+        className="flex flex-col grow gap-8 pt-[22px]  pb-[18px] w-full "
         onSubmit={handleSubmit(registeredDataSubmit)}
       >
         <GlobalInput
           type="text"
           id="Username"
-          label="Username"
+          label={t.auth.registration.userName}
           error={errors?.userName?.message}
           {...register('userName')}
         />
         <GlobalInput
           type="email"
           id="email"
-          label="Email"
+          label={t.auth.registration.email}
           error={errors?.email?.message}
           {...register('email')}
         />
         <InputWithEye
-          label="Password"
+          label={t.auth.registration.password}
           id="password"
           error={errors?.password?.message}
           {...register('password')}
         />
         <InputWithEye
-          label="Password Confirmation"
+          label={t.auth.registration.passwordConfirmation}
           id="confirmPassword"
           error={errors?.confirmPassword?.message}
           {...register('confirmPassword')}
         />
         <GlobalButton variant="default" type="submit">
-          Sign Up
+          {t.auth.signUp}
         </GlobalButton>
         <Confirm
           isOpen={toggleModal}
           onConfirm={modalToggle}
           onClose={modalToggle}
-          title={titleForModal}
-          text={`${messageModal} ${variables?.email || ''}`}
-          confirmButtonText="OK"
+          title={t.auth.confirm.titleEmail}
+          text={`${t.auth.confirm.text} ${variables?.email || ''}`}
+          confirmButtonText={t.auth.confirm.ok}
         />
       </form>
     </>

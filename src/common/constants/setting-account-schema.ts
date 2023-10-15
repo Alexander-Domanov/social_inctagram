@@ -1,18 +1,67 @@
 import * as yup from 'yup'
 
-export const settingsSchema = yup.object({
-  userName: yup.lazy(value =>
-    !value
-      ? yup.string().required('Username is required').min(6).max(30).trim()
-      : yup.string().min(6).max(30).trim()
-  ),
-  firstName: yup.string().max(30, 'maximum number of characters 30').trim(),
-  lastName: yup.string().max(30, 'maximum number of characters 30').trim(),
-  dateOfBirth: yup
-    .date()
-    .max(new Date(), 'Date of birth cannot be in the future')
-    .typeError('Date of birth has to be a valid date'),
-  city: yup.string().trim(),
-  aboutMe: yup.string().trim().max(200, 'Сan not be more than 200'),
-})
-export type SettingsSchemaType = yup.InferType<typeof settingsSchema>
+import { nameAndLastNameRegex, usernameRegex } from '@/common'
+import { useTranslation } from '@/components/translation'
+
+export const settingsSchema = () => {
+  const { t } = useTranslation()
+
+  return yup.object({
+    userName: yup.lazy(value =>
+      !value
+        ? yup
+            .string()
+            .matches(
+              usernameRegex,
+              t.profile.settingsProfile.settingsProfileTabs.generalInformation.userName.matches
+            )
+            .required(
+              t.profile.settingsProfile.settingsProfileTabs.generalInformation.userName.required
+            )
+            .min(6, t.profile.settingsProfile.settingsProfileTabs.generalInformation.userName.min)
+            .max(30, t.profile.settingsProfile.settingsProfileTabs.generalInformation.userName.max)
+            .trim()
+        : yup
+            .string()
+            .min(6, t.profile.settingsProfile.settingsProfileTabs.generalInformation.userName.min)
+            .max(30, t.profile.settingsProfile.settingsProfileTabs.generalInformation.userName.max)
+            .matches(
+              usernameRegex,
+              t.profile.settingsProfile.settingsProfileTabs.generalInformation.userName.matches
+            )
+            .trim()
+    ),
+    firstName: yup
+      .string()
+      .min(1, t.profile.settingsProfile.settingsProfileTabs.generalInformation.firstName.min)
+      .max(50, t.profile.settingsProfile.settingsProfileTabs.generalInformation.firstName.max)
+      .matches(
+        nameAndLastNameRegex,
+        t.profile.settingsProfile.settingsProfileTabs.generalInformation.firstName.matches
+      )
+      .trim(),
+    lastName: yup
+      .string()
+      .min(1, t.profile.settingsProfile.settingsProfileTabs.generalInformation.lastName.min)
+      .max(50, t.profile.settingsProfile.settingsProfileTabs.generalInformation.lastName.max)
+      .matches(
+        nameAndLastNameRegex,
+        t.profile.settingsProfile.settingsProfileTabs.generalInformation.lastName.matches
+      )
+      .trim(),
+    dateOfBirth: yup
+      .date()
+      .max(
+        new Date(),
+        t.profile.settingsProfile.settingsProfileTabs.generalInformation.dateOfBirthday.max
+      )
+      .typeError(
+        t.profile.settingsProfile.settingsProfileTabs.generalInformation.dateOfBirthday.typeError
+      ),
+    city: yup.string().trim(),
+    aboutMe: yup
+      .string()
+      .trim()
+      .max(200, t.profile.settingsProfile.settingsProfileTabs.generalInformation.aboutMe),
+  })
+}

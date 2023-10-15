@@ -3,26 +3,31 @@ import { toast } from 'react-toastify'
 
 import { noRefetch } from '@/common'
 import { postUserFollowingUnfollowing } from '@/modules/user-profile-module/api/postUserFollowingUnfollowing'
-import { userQueryType } from '@/types'
 
 export const useFollowingOrUnfollowingUser = ({
-  userIdQuery,
   refetch,
   userId,
 }: {
-  userIdQuery?: userQueryType
-  refetch: () => void
-  userId?: number | null
+  refetch?: () => void
+  userId: number | null
 }) => {
   const client = useQueryClient()
   const { mutate: useFollowUnfollowUser, isLoading } = useMutation(
     ['following'],
-    () => postUserFollowingUnfollowing(userIdQuery ? userIdQuery : userId),
+    () => postUserFollowingUnfollowing(userId),
     {
       onSuccess: () => {
-        refetch()
+        if (refetch) {
+          refetch()
+        }
         if (userId) {
           client.invalidateQueries({ queryKey: ['get-profile-page'] })
+          client.invalidateQueries({ queryKey: ['publications'] })
+          client.invalidateQueries({ queryKey: ['get-user-profile-page'] })
+          client.invalidateQueries({ queryKey: ['likes-comments-answers'] })
+          client.invalidateQueries({ queryKey: ['likes-comments'] })
+          client.invalidateQueries({ queryKey: ['post'] })
+          client.invalidateQueries({ queryKey: ['likes'] })
         }
       },
       onError: (err: Error) => toast.error(err.message),

@@ -2,24 +2,29 @@ import React, { useState } from 'react'
 
 import { FieldValues, SubmitHandler } from 'react-hook-form'
 
-import { useGlobalForm } from '@/common'
+import { useChangingFormWhenChangingLanguage, useGlobalForm } from '@/common'
 import { Confirm } from '@/components/modals'
+import { useTranslation } from '@/components/translation'
 import { forgotPassSchema } from '@/modules/auth-modules/password-recovery-module'
 import { Captcha } from '@/modules/auth-modules/password-recovery-module/components/forgot-password/forgot-password-form/captcha/Captcha'
 import { useForgotPassword } from '@/modules/auth-modules/password-recovery-module/hooks/useForgotPassword'
 import { GlobalButton, GlobalInput, Preloader } from '@/ui'
 
 export const ForgotPasswordWithCaptcha = () => {
-  const { errors, register, reset, handleSubmit, setCustomError } = useGlobalForm(forgotPassSchema)
+  const { errors, register, trigger, reset, handleSubmit, setCustomError } = useGlobalForm(
+    forgotPassSchema()
+  )
   const [captcha, setCaptcha] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
-
+  const { t } = useTranslation()
   const onConfirm = () => {
     setIsModalOpen(false)
   }
   const onClose = () => {
     setIsModalOpen(false)
   }
+
+  useChangingFormWhenChangingLanguage({ trigger, errors })
 
   const onSuccess = () => {
     setIsModalOpen(true)
@@ -61,17 +66,17 @@ export const ForgotPasswordWithCaptcha = () => {
           type="email"
           id="email"
           placeholder=""
-          label="Email"
+          label={t.auth.email}
           //@ts-ignore
           error={errors?.email?.message}
           {...register('email')}
         />
 
         <div className={'pt-11 pb-3 text-base leading-6 text-light-900 font-normal'}>
-          Enter your email address and we will send you further instructions
+          {t.auth.forgotPassword.description}
         </div>
         <GlobalButton variant="default" type="submit" disabled={!captcha}>
-          Send instructions
+          {t.auth.forgotPassword.buttonSend}
         </GlobalButton>
         <Captcha onRecaptchaChangeHandler={onRecaptchaChange} />
       </form>
@@ -80,9 +85,9 @@ export const ForgotPasswordWithCaptcha = () => {
         isOpen={isModalOpen}
         onConfirm={onConfirm}
         onClose={onClose}
-        title={'Email sent'}
-        text={`The link has been sent to your email ${variables?.email}. If you don’t receive an email send link again.`}
-        confirmButtonText={'Ok'}
+        title={t.auth.forgotPassword.modal.title}
+        text={t.auth.forgotPassword.modal.text.getDescription(variables?.email)}
+        confirmButtonText={t.confirm.buttonYes}
       />
     </div>
   )

@@ -10,7 +10,7 @@ export const useGetUserProfileData = (userNameQuery: userQueryType) => {
     refetch: refetchUserProfile,
     isRefetching: isRefetchingUserProfile,
   } = useQuery({
-    queryKey: ['get-user-profile-page-page', userNameQuery],
+    queryKey: ['get-user-profile-page', userNameQuery],
     queryFn: () => getUserProfile(userNameQuery),
     select: (data: any): userProfilePageData => data?.data,
     staleTime: 0,
@@ -31,9 +31,10 @@ export const useGetUserProfileData = (userNameQuery: userQueryType) => {
     publicationsCount: userProfileData?.publicationsCount || 0,
     isFollowing: userProfileData?.isFollowing || false,
     isFollowingBy: userProfileData?.isFollowedBy || false,
+    isBusinessAccount: userProfileData?.hasBusinessAccount || null,
   }
 
-  const userProfileAvatar = userProfileData?.avatars?.thumbnail?.url || ''
+  const userProfileAvatar = userProfileData?.avatars?.medium?.url || ''
 
   return {
     userProfileData: initialUserProfileData,

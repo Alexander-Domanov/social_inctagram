@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { NextPage } from 'next'
 
@@ -7,7 +7,11 @@ import { useTranslation } from '@/components/translation'
 import { useSearchStore } from '@/store'
 import { InputSearch } from '@/ui'
 
-export const SearchLayout: NextPage<PropsWithChildren> = ({ children }) => {
+type SearchLayoutProps = {
+  children?: React.ReactNode
+}
+
+export const SearchLayout: React.FC<SearchLayoutProps> = ({ children }) => {
   const { search, searchInput, setSearchInput } = useSearch()
   const { setSearch } = useSearchStore()
   const { t } = useTranslation()

@@ -3,7 +3,7 @@ import React from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
-import { ResponseError, SettingsSchemaType } from '@/common'
+import { ResponseError } from '@/common'
 import { SettingsAccountLayout } from '@/components/account'
 import { UploadAvatarBlock } from '@/modules/my-profile-modules/avatar-module'
 import {
@@ -39,7 +39,7 @@ export const EditSettingProfile = () => {
     },
   })
 
-  const editProfileData = (data: SettingsSchemaType) => editeProfile?.(data)
+  const editProfileData = (data: any) => editeProfile?.(data)
 
   return (
     <SettingsAccountLayout>

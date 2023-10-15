@@ -46,7 +46,7 @@ body {
   line-height: 1.2;
   letter-spacing: -0.02em;
 
-  background-color: $bgColor;
+  @apply bg-dark-700 text-light-100;
 }
 
 .container {

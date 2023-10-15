@@ -13,11 +13,14 @@ type AddPublicationType = {
 
 export const EditPublication: FC<AddPublicationType> = ({ imageUrl, callback, text, setText }) => {
   return (
-    <div className={'flex flex-wrap w-[972px] justify-between min-h-[500px]'}>
-      <div className={'w-[436px]'}>
-        <PostImagesSlider showIconDelete={true} />
+    <div className="flex flex-wrap w-[972px] justify-between min-h-[500px]">
+      <div className="grid grid-cols-2">
+        <div className="w-[436px]">
+          <PostImagesSlider showIconDelete={true} />
+        </div>
+
+        <RightDescription location={false} text={text} setText={setText} callback={callback} />
       </div>
-      <RightDescription location={false} text={text} setText={setText} callback={callback} />
     </div>
   )
 }

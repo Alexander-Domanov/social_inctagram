@@ -1,25 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { useRouter } from 'next/router'
 
 import { useInViewScrollEffect } from '@/common'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
 import { LatestPost } from '@/modules/post-modules/latest-posts-module/components/LatestPost'
-import { PostModal } from '@/modules/post-modules/latest-posts-module/components/PostModal'
 import { useGetLatestPosts } from '@/modules/post-modules/latest-posts-module/hooks/useGetLatestPosts'
-import { useUserStore } from '@/store'
+import { useModalsStore, useUserStore } from '@/store'
 import { SkeletonPost } from '@/ui'
 import { useStoreIsLoadingPublication } from 'src/modules/create-post-module'
 
 export const LatestPosts = () => {
-  const { setPostId } = useUserStore()
   const { query } = useRouter()
-  const userName = query.userName ? query.userName : null
+  const { userName: myUserName } = useUserStore()
+  const userName = query.userName ? query.userName : myUserName
   const { isLoading, isSuccess, data, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useGetLatestPosts({
       userName,
     })
-  const [isOpenPostModal, setIsOpenPostModal] = useState(false)
+  const { setPostIdAndOpenModal } = useModalsStore(state => state.postModal)
 
   const skeletonIsPublication = useStoreIsLoadingPublication(state => state.isLoadingPublication)
 
@@ -28,12 +27,9 @@ export const LatestPosts = () => {
       return <SkeletonPost key={i} />
     })
   }
-  const onClose = () => {
-    setIsOpenPostModal(false)
-  }
+
   const onPostClick = (id: number) => {
-    setPostId(id)
-    setIsOpenPostModal(true)
+    setPostIdAndOpenModal(id)
   }
 
   const { ref } = useInViewScrollEffect({ hasNextPage, fetchNextPage })
@@ -59,7 +55,6 @@ export const LatestPosts = () => {
         isFetchNextPage={isFetchingNextPage}
         customRef={ref}
       />
-      <PostModal isOpen={isOpenPostModal} onClose={onClose} />
     </div>
   )
 }

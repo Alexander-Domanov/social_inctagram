@@ -1,6 +1,11 @@
 import * as yup from 'yup'
 
-export const verificationSchema = yup.object({
-  email: yup.string().trim(),
-})
-export type FormDataVerification = yup.InferType<typeof verificationSchema>
+import { useTranslation } from '@/components/translation'
+
+export const verificationSchema = () => {
+  const { t } = useTranslation()
+
+  return yup.object({
+    email: yup.string().required(t.auth.registration.resendForm.error.email).trim(),
+  })
+}

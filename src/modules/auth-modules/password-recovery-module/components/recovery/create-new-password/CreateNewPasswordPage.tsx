@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 import { PATH_ROUTE } from '@/common'
 import { FormLayout } from '@/components/FormLayout'
+import { useTranslation } from '@/components/translation'
 import { CreateNewPasswordForm } from '@/modules/auth-modules/password-recovery-module'
 import { useCreateNewPassword } from '@/modules/auth-modules/password-recovery-module/hooks/useCreateNewPassword'
 import { NameTitle, Preloader } from '@/ui'
@@ -14,7 +15,7 @@ type PropsType = {
 
 export const CreateNewPasswordPage = ({ recoveryCode = '' }: PropsType) => {
   const router = useRouter()
-
+  const { t } = useTranslation()
   const { mutate: createNewPassword, isLoading } = useCreateNewPassword()
 
   const onSubmitHandler = async (newPassword: string) => {
@@ -27,7 +28,7 @@ export const CreateNewPasswordPage = ({ recoveryCode = '' }: PropsType) => {
   return (
     <FormLayout className="mt-[60px]">
       <NameTitle
-        nameTitle={'Create New Password'}
+        nameTitle={t.auth.recovery.createNewPasswordPage.title}
         className="font-bold text-light-100 text-[20px] leading-[36px]"
       />
       <CreateNewPasswordForm onSubmitHandler={onSubmitHandler} />

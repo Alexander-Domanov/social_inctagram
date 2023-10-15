@@ -14,6 +14,7 @@ export interface userProfilePageData {
   lastName: string | null
   publicationsCount: number
   userName: string
+  hasBusinessAccount: boolean
 }
 
 export type userQueryType = string | string[] | number | null

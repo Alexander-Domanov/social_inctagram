@@ -5,14 +5,15 @@ import { useRouter } from 'next/router'
 import { PATH_ROUTE, useGlobalForm } from '@/common'
 import { ResendVerificationForm } from '@/components/auth-components'
 import { useForgotPassword } from '@/modules/auth-modules/password-recovery-module/hooks/useForgotPassword'
-import { FormDataRegistered, verificationSchema } from '@/modules/auth-modules/registraion-module'
+import { verificationSchema } from '@/modules/auth-modules/registraion-module'
 
 export const ResendRecoveryForm = () => {
   const { push } = useRouter()
   const [captcha, setCaptcha] = useState('')
 
-  const { handleSubmit, register, reset, errors, setCustomError } =
-    useGlobalForm(verificationSchema)
+  const { handleSubmit, register, reset, errors, setCustomError } = useGlobalForm(
+    verificationSchema()
+  )
 
   const onSuccess = () => {
     push(PATH_ROUTE.LOGIN)
@@ -24,7 +25,7 @@ export const ResendRecoveryForm = () => {
     setCaptcha(token)
   }
 
-  const submitData = (data: FormDataRegistered) => {
+  const submitData = (data: any) => {
     const { email } = data
 
     sendLinkPasswordRecovery({ email, recaptcha: captcha })

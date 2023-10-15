@@ -1,8 +1,9 @@
 import { FC, useState } from 'react'
 
 import { FaPen, FaTrash } from 'react-icons/fa'
-import { FaEllipsis, FaEnvelope, FaUserMinus } from 'react-icons/fa6'
+import { FaEllipsis, FaEnvelope, FaUserMinus, FaUserPlus } from 'react-icons/fa6'
 
+import { useTranslation } from '@/components/translation'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +13,7 @@ import {
 import { DeletePost } from '@/modules/post-modules/edit-post-module/components/DeletePost'
 import { EditPost } from '@/modules/post-modules/edit-post-module/components/description-edit/AllEditPost'
 import { Post } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
+import { useFollowingOrUnfollowingUser } from '@/services'
 import { useMeQuery } from '@/services/hookMe'
 
 interface Props {
@@ -25,13 +27,21 @@ export const PostActions: FC<Props> = ({ post, isLoading }) => {
   const { data: me } = useMeQuery()
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isDeletePostOpen, setIsDeletePostOpen] = useState(false)
+  const userPostId = post?.ownerId || null
+  const { isLoading: isLoadingFollowUnfollow, useFollowUnfollowUser } =
+    useFollowingOrUnfollowingUser({ userId: userPostId })
 
+  const { t } = useTranslation()
   const onPostDelete = () => {
     setIsDeletePostOpen(true)
   }
 
   const onPostEdit = () => {
     setIsEditModalOpen(true)
+  }
+
+  const handleToggleSubscriptionsCallBack = () => {
+    useFollowUnfollowUser()
   }
 
   const isMyPost = me?.data.userName === post?.userName
@@ -49,23 +59,29 @@ export const PostActions: FC<Props> = ({ post, isLoading }) => {
           {isMyPost ? (
             <>
               <DropdownMenuItem onSelect={onPostEdit}>
-                <FaPen className={iconClassname} /> Edit Post
+                <FaPen className={iconClassname} /> {t.postActions.editPost}
               </DropdownMenuItem>
 
               <DropdownMenuItem onSelect={onPostDelete}>
-                <FaTrash className={iconClassname} /> Delete Post
+                <FaTrash className={iconClassname} /> {t.postActions.deletePost}
               </DropdownMenuItem>
             </>
           ) : (
-            <>
+            <div onClick={handleToggleSubscriptionsCallBack}>
               <DropdownMenuItem>
-                <FaEnvelope className={iconClassname} /> Report
+                <FaEnvelope className={iconClassname} /> {t.postActions.report}
               </DropdownMenuItem>
 
-              <DropdownMenuItem>
-                <FaUserMinus className={iconClassname} /> Unfollow
-              </DropdownMenuItem>
-            </>
+              {post?.isFollowing ? (
+                <DropdownMenuItem>
+                  <FaUserMinus className={iconClassname} /> {t.postActions.unFollow}
+                </DropdownMenuItem>
+              ) : (
+                <DropdownMenuItem>
+                  <FaUserPlus className={iconClassname} /> {t.postActions.follow}
+                </DropdownMenuItem>
+              )}
+            </div>
           )}
         </DropdownMenuContent>
       </DropdownMenu>

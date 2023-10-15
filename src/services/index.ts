@@ -7,9 +7,12 @@ export * from '@/services/hooks/following-followers-delete/useGetFollowers'
 export * from './hooks/following-followers-delete/useFollowingOrUnfollowingUser'
 export * from './hooks/following-followers-delete/useDeleteFollower'
 
-export * from './api/following-followers-delete-api/getFollowers'
-export * from './api/following-followers-delete-api/deleteFollowerUser'
-export * from './api/following-followers-delete-api/getFollowing'
+export * from '@/services/api/following-followers-delete_api/getFollowers'
+export * from '@/services/api/following-followers-delete_api/deleteFollowerUser'
+export * from '@/services/api/following-followers-delete_api/getFollowing'
 
 export * from './hooks/home/useGetPublication'
 export * from './api/home_api/home_api'
+
+export * from './hooks/likes/useGetLikes'
+export * from './api/likes_api/getLikes_api'

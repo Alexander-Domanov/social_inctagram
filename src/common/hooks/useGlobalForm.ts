@@ -7,11 +7,11 @@ export const useGlobalForm = (schema: any) => {
     reset,
     handleSubmit,
     setError,
+    trigger,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   })
-
   const setCustomError = (name: string, message: string) => {
     setError(name, {
       type: 'custom',
@@ -25,31 +25,6 @@ export const useGlobalForm = (schema: any) => {
     handleSubmit,
     errors,
     setCustomError,
+    trigger,
   }
 }
-
-// interface Props {
-//   accessToken: string | null
-//   redirectIfFound?: boolean
-//   redirectIfNotFound?: boolean
-// }
-//
-// const usePrivateRoute = ({
-//   accessToken,
-//   redirectIfFound = false,
-//   redirectIfNotFound = true,
-// }: Props) => {
-//   const router = useRouter()
-//
-//   useEffect(() => {
-//     if (accessToken) {
-//       if (redirectIfFound) {
-//         router.push('/profile-page')
-//       }
-//     } else if (redirectIfNotFound) {
-//       router.push('/auth/login')
-//     }
-//   }, [accessToken, redirectIfFound, redirectIfNotFound, router])
-// }
-//
-// export default usePrivateRoute

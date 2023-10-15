@@ -1,24 +1,36 @@
 import { FC } from 'react'
 
 import dayjs from 'dayjs'
-import { FaHeart, FaRegBookmark, FaRegHeart, FaRegPaperPlane } from 'react-icons/fa6'
+import { FaHeart, FaRegHeart, FaRegPaperPlane } from 'react-icons/fa6'
 
+import { useTranslation } from '@/components/translation'
 import { LikeStatus } from '@/modules/post-modules/latest-posts-module/api/latest-posts-api'
+import { PostFavorite } from '@/modules/post-modules/latest-posts-module/components/PostFavorite'
 import { useChangePostLikeStatus } from '@/modules/post-modules/latest-posts-module/hooks/useChangePostLikeStatus'
 import { useGetPost } from '@/modules/post-modules/latest-posts-module/hooks/useGetPost'
-import { useUserStore } from '@/store'
+import { useLikesModalStore, useModalsStore, useUserStore } from '@/store'
 import { Avatar } from '@/ui'
 
 export const PostModalFooter: FC = () => {
-  const { postId } = useUserStore()
+  const { t, localeLanguage } = useTranslation()
+  const { postId } = useModalsStore(state => state.postModal)
+  const { setLikesCount, setPostId } = useUserStore()
+
   const { post } = useGetPost(postId)
   const { mutate } = useChangePostLikeStatus(
     postId,
     post?.isLiked ? LikeStatus.NONE : LikeStatus.LIKE
   )
-
   const onLikeClick = () => {
     mutate()
+  }
+  const { setLikesModal } = useLikesModalStore()
+  const onOpenModalLikes = () => {
+    setPostId(postId)
+    setLikesModal('likes')
+    if (post?.likeCount !== undefined) {
+      setLikesCount(post.likeCount)
+    }
   }
 
   return (
@@ -32,9 +44,7 @@ export const PostModalFooter: FC = () => {
           <FaRegPaperPlane />
         </button>
 
-        <button className="w-6 h-6 ml-auto">
-          <FaRegBookmark />
-        </button>
+        <PostFavorite postId={postId} post={post} />
       </div>
 
       <div className="flex items-center mt-3 text-white text-sm leading-none h-6">
@@ -46,7 +56,7 @@ export const PostModalFooter: FC = () => {
                 style={{ marginLeft: idx === 0 ? 0 : '-12px', zIndex: array.length - idx }}
               >
                 <Avatar
-                  alt={like.username}
+                  alt={like.userName}
                   width={24}
                   height={24}
                   src={like?.avatars?.thumbnail.url}
@@ -57,14 +67,17 @@ export const PostModalFooter: FC = () => {
         )}
 
         {post && (
-          <div>
-            {post?.likeCount} <span className="font-bold">Like</span>
+          <div onClick={onOpenModalLikes}>
+            {post?.likeCount}{' '}
+            <span className="font-bold cursor-pointer">
+              {t.likes.getCountLikes(post.likeCount)}
+            </span>
           </div>
         )}
       </div>
 
-      <div className="mt-2 text-xs leading-none text-light-900">
-        {post?.createdAt && dayjs(post.createdAt).format('MMMM D, YYYY')}
+      <div className="mt-2 text-xs leading-none text-light-900 capitalize">
+        {post?.createdAt && dayjs(post.createdAt).locale(localeLanguage).format('MMMM D, YYYY')}
       </div>
     </div>
   )

@@ -1,12 +1,22 @@
-import { getGlobalLayout } from '@/components/layout'
+import Head from 'next/head'
 
-const Favorites = () => {
+import { getGlobalLayout } from '@/components/layout'
+import { useTranslation } from '@/components/translation'
+import { Favorites } from '@/modules/favorites-module'
+
+const FavoritesPage = () => {
+  const { t } = useTranslation()
+
   return (
-    <div className="text-light-100 w-full pt-3 font-normal leading-6 flex justify-center">
-      <span>There is a development on favorites</span>
-    </div>
+    <>
+      <Head>
+        <title>{t.favorites.headTitle}</title>
+      </Head>
+
+      <Favorites />
+    </>
   )
 }
 
-Favorites.getLayout = getGlobalLayout
-export default Favorites
+FavoritesPage.getLayout = getGlobalLayout
+export default FavoritesPage

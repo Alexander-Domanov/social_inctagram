@@ -4,27 +4,28 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FieldValues } from 'react-hook-form'
 
-import { useGlobalForm } from '@/common'
+import { useChangingFormWhenChangingLanguage, useGlobalForm } from '@/common'
+import { useTranslation } from '@/components/translation'
 import { schemaLogin, useLoginMutation } from '@/modules/auth-modules/login-module'
 import { routes } from '@/routing/router'
 import { GlobalButton, GlobalInput, InputWithEye, Preloader } from '@/ui'
 
 export const LoginForm = () => {
-  const { setCustomError, handleSubmit, register, errors, reset } = useGlobalForm(schemaLogin)
-
+  const { setCustomError, trigger, handleSubmit, register, errors, reset } = useGlobalForm(
+    schemaLogin()
+  )
+  const { t } = useTranslation()
   const { push } = useRouter()
 
   const { sendLoginData, isLoading } = useLoginMutation(
     () => {
       push(routes.sideBar.profile)
     },
-    () =>
-      setCustomError(
-        'password',
-        'The password or the email or Username are incorrect. Try again, please'
-      ),
+    () => setCustomError('password', t.auth.login.customErrors),
     () => reset()
   )
+
+  useChangingFormWhenChangingLanguage({ trigger, errors })
 
   const handleFormSubmit = async ({ email, password }: FieldValues) => {
     await sendLoginData({
@@ -43,26 +44,26 @@ export const LoginForm = () => {
         <GlobalInput
           type="email"
           id="email"
-          placeholder="Email"
-          label="Email"
+          placeholder={t.auth.email}
+          label={t.auth.email}
           error={errors?.email?.message}
           {...register('email')}
         />
         <InputWithEye
-          label="Password"
+          label={t.auth.password}
           id="password"
-          placeholder="Password"
+          placeholder={t.auth.password}
           error={errors?.password?.message}
           {...register('password')}
         />
         <Link
           href={'/auth/forgot-password'}
-          className={'flex justify-end text-light-900 text-xs mt-2'}
+          className={'flex justify-end text-light-900 text-xs mt-5'}
         >
-          Forgot password?
+          {t.auth.login.forgotPassword}
         </Link>
         <GlobalButton variant="default" type="submit">
-          Sign In
+          {t.auth.singIn}
         </GlobalButton>
       </form>
     </>

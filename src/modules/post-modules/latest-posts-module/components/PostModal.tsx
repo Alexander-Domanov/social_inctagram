@@ -1,10 +1,12 @@
-import { FC } from 'react'
+import React, { FC, useRef } from 'react'
 
 import dayjs from 'dayjs'
+import Link from 'next/link'
 import { FaTimes } from 'react-icons/fa'
 import Modal from 'react-modal'
 
 import { getTimeFromNow } from '@/common/helpers/getTimeFromNow'
+import { useTranslation } from '@/components/translation'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Skeleton } from '@/components/ui/skeleton'
 import { AddCommentForm } from '@/modules/post-modules/latest-posts-module/components/AddCommentForm'
@@ -13,26 +15,37 @@ import { PostImagesSlider } from '@/modules/post-modules/latest-posts-module/com
 import { PostModalFooter } from '@/modules/post-modules/latest-posts-module/components/PostModalFooter'
 import { PostModalHeader } from '@/modules/post-modules/latest-posts-module/components/PostModalHeader'
 import { useGetPost } from '@/modules/post-modules/latest-posts-module/hooks/useGetPost'
-import { useSaveDescription, useUserStore } from '@/store'
+import { useModalsStore, useSaveDescription, useUserStore } from '@/store'
 import { Avatar } from '@/ui'
 
-interface Props {
-  isOpen: boolean
-  onClose: () => void
-}
-
-export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
-  const { postId, setDescriptionLocal } = useUserStore()
+export const PostModal: FC = () => {
+  const { setDescriptionLocal } = useUserStore()
   const { setDescription } = useSaveDescription()
+  const { localeLanguage } = useTranslation()
+  const { postId, isOpen, closeModal } = useModalsStore(state => state.postModal)
 
   const { post, isLoading } = useGetPost(postId, description => {
     setDescription(description)
     setDescriptionLocal(description)
   })
 
-  const onRequestClose = () => {
-    onClose()
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const focusInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
   }
+
+  const onRequestClose = () => {
+    closeModal()
+  }
+
+  const onLinkClick = () => {
+    closeModal()
+  }
+
+  if (!isOpen) return null
 
   return (
     <Modal
@@ -44,7 +57,7 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
     >
       <button
         className="absolute -top-8 -right-8 text-base w-6 h-6 flex items-center justify-center text-white"
-        onClick={() => onClose()}
+        onClick={() => onRequestClose()}
       >
         <FaTimes size={'24px'} />
       </button>
@@ -83,13 +96,18 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
                   ) : (
                     <>
                       <div>
-                        <span className="font-semibold">{post?.userName}</span> {post?.description}
+                        <Link href={`/${post?.userName}`} onClick={onLinkClick}>
+                          <span className="font-semibold">{post?.userName}</span>
+                        </Link>{' '}
+                        {post?.description}
                       </div>
 
                       <div className="mt-2 text-xs leading-none text-light-900">
                         <time
                           dateTime={post?.createdAt}
-                          title={dayjs(post?.createdAt).format('DD.MM.YYYY HH:mm')}
+                          title={dayjs(post?.createdAt)
+                            .locale(localeLanguage)
+                            .format('DD.MM.YYYY HH:mm:ss')}
                           className="inline-flex"
                         >
                           {post?.createdAt && getTimeFromNow(post?.createdAt)}
@@ -101,12 +119,14 @@ export const PostModal: FC<Props> = ({ isOpen, onClose }) => {
               </div>
             </div>
 
-            <PostComments postId={postId} />
+            <PostComments postId={postId} focusInput={focusInput} />
           </ScrollArea>
 
           <PostModalFooter />
 
-          <AddCommentForm postId={postId} />
+          <div className="px-6">
+            <AddCommentForm postId={postId} ref={inputRef} />
+          </div>
         </div>
       </div>
     </Modal>

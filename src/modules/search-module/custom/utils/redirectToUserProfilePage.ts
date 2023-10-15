@@ -7,7 +7,7 @@ export const useRedirectToUserProfilePage = () => {
 
   return (userName: string | null) => {
     if (userName) {
-      router.replace({
+      router.push({
         pathname: `${routes.sideBar.userHomePage}${userName}`,
       })
     }
