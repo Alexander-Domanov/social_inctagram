@@ -147,6 +147,38 @@ export const uk: LocaleType = {
           },
         },
       },
+      accountManagement: {
+        currentSubscription: {
+          currentSubscription: 'Поточні підписки:',
+          datePayment: 'Дата платежу',
+          endDateSub: 'Дата закінчення підписки',
+          autoRenewal: 'Автоматичне продовження',
+        },
+        accountType: {
+          titleAccountType: 'Тип аккаунту:',
+          personal: 'Особистий',
+          business: 'Бізнес',
+        },
+        subscriptionType: {
+          titleSub: 'Оберіть підписку:',
+        },
+        paymentMethods: {
+          confirm: {
+            buttonOk: 'Ок',
+            text: 'Ой, санкції! 🙈',
+          },
+        },
+        paymentsConfirmationModals: {
+          confirm: {
+            titleSuccess: 'Успіх',
+            buttonTextSuccess: 'Ок',
+            textSuccess: 'Платіж пройшов успішно!',
+            titleError: 'Помилка',
+            buttonTextError: 'Повернутися до оплати',
+            textError: 'Транзакція не вдалася, будь ласка, спробуйте ще раз',
+          },
+        },
+      },
     },
   },
   uploadPhoto: {

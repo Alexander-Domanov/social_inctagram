@@ -157,6 +157,38 @@ export const en = {
           },
         },
       },
+      accountManagement: {
+        currentSubscription: {
+          currentSubscription: 'Current Subscriptions:',
+          datePayment: 'Date of payment',
+          endDateSub: 'End date of subscription',
+          autoRenewal: 'Auto-Renewal',
+        },
+        accountType: {
+          titleAccountType: 'Account type:',
+          personal: 'Personal',
+          business: 'Business',
+        },
+        subscriptionType: {
+          titleSub: 'Choose subscription:',
+        },
+        paymentMethods: {
+          confirm: {
+            buttonOk: 'Ok',
+            text: 'Oops sanctions! 🙈',
+          },
+        },
+        paymentsConfirmationModals: {
+          confirm: {
+            titleSuccess: 'Success',
+            buttonTextSuccess: 'Ok',
+            textSuccess: 'Payment was successful!',
+            titleError: 'Error',
+            buttonTextError: 'Back to payment',
+            textError: 'Transaction failed, please try again',
+          },
+        },
+      },
     },
   },
   uploadPhoto: {

@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 
+import { useTranslation } from '@/components/translation'
 import { Radio } from '@/ui/radio/Radio'
-
-const accountTypes = ['Personal', 'Business']
 
 type PropsType = {
   setIsSwitchedToBusiness: (isSwitchedToBusiness: boolean) => void
@@ -10,11 +9,15 @@ type PropsType = {
 }
 
 export const AccountType = ({ setIsSwitchedToBusiness, isSwitchedToBusiness }: PropsType) => {
-  const defaultAccountType = isSwitchedToBusiness ? 'Business' : accountTypes[0]
+  const { t, localeLanguage } = useTranslation()
+  const { titleAccountType, personal, business } =
+    t.profile.settingsProfile.accountManagement.accountType
+  const accountTypes = [personal, business]
+  const defaultAccountType = isSwitchedToBusiness ? business : accountTypes[0]
   const [accountTypeValue, setAccountTypeValue] = useState(defaultAccountType)
 
   const onAccountTypeChange = (option: any) => {
-    if (option === 'Business') {
+    if (option === business) {
       setIsSwitchedToBusiness(true)
     } else {
       setIsSwitchedToBusiness(false)
@@ -23,9 +26,13 @@ export const AccountType = ({ setIsSwitchedToBusiness, isSwitchedToBusiness }: P
     setAccountTypeValue(option)
   }
 
+  useEffect(() => {
+    setAccountTypeValue(personal)
+  }, [localeLanguage])
+
   return (
     <div className={'mb-[42px]'}>
-      <h3 className={'text-blue-50'}>Account type:</h3>
+      <h3 className={'text-blue-50'}>{titleAccountType}</h3>
       <div
         className={
           'bg-dark-300 border-1 border-dark-300 mt-[6px] py-[14px] px-[26px] rounded-[5px]'
@@ -40,7 +47,7 @@ export const AccountType = ({ setIsSwitchedToBusiness, isSwitchedToBusiness }: P
               value={value}
               checked={value === accountTypeValue}
               id={value}
-              disabled={value === 'Personal' && isSwitchedToBusiness}
+              disabled={value === personal && isSwitchedToBusiness}
             />
           )
         })}

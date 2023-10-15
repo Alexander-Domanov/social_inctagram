@@ -146,6 +146,38 @@ export const ru: LocaleType = {
           },
         },
       },
+      accountManagement: {
+        currentSubscription: {
+          currentSubscription: 'Текущие подписки:',
+          datePayment: 'Дата платежа',
+          endDateSub: 'Дата окончания подписки',
+          autoRenewal: 'Автоматическое продление',
+        },
+        accountType: {
+          titleAccountType: 'Тип аккаунта:',
+          personal: 'Личный',
+          business: 'Бизнес',
+        },
+        subscriptionType: {
+          titleSub: 'Выберите подписку:',
+        },
+        paymentMethods: {
+          confirm: {
+            buttonOk: 'Ок',
+            text: 'Ой, санкции! 🙈',
+          },
+        },
+        paymentsConfirmationModals: {
+          confirm: {
+            titleSuccess: 'Успех',
+            buttonTextSuccess: 'Ок',
+            textSuccess: 'Платеж прошел успешно!',
+            titleError: 'Ошибка',
+            buttonTextError: 'Вернуться к оплате',
+            textError: 'Транзакция не удалась, пожалуйста, попробуйте еще раз',
+          },
+        },
+      },
     },
   },
   uploadPhoto: {
