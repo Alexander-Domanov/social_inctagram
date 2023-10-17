@@ -202,3 +202,10 @@ export const changePostCommentAnswerLikeStatus = (
 export const toggleFavoritePost = (postId: number | null) => {
   return authInstance.post(`users/favorite/${postId}`)
 }
+
+export const updatePost = (postId: number | null, description: string) => {
+  return authInstance.put(`posts/${postId}`, {
+    description,
+    namePlace: '',
+  })
+}
