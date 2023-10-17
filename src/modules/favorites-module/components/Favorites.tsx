@@ -1,7 +1,4 @@
-import React, { FC, Fragment, useEffect, useState } from 'react'
-
-import Autocomplete from 'react-google-autocomplete'
-import usePlacesService from 'react-google-autocomplete/lib/usePlacesAutocompleteService'
+import React, { FC, Fragment } from 'react'
 
 import { useInViewScrollEffect } from '@/common'
 import { RenderLoadingIndicator } from '@/components/infinity-scroll'
@@ -31,62 +28,9 @@ export const Favorites: FC = () => {
     )
   }
 
-  const { placesService, placePredictions, getPlacePredictions, isPlacePredictionsLoading } =
-    usePlacesService({
-      apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-      debounce: 300,
-      options: {
-        fields: ['geometry'],
-      },
-    })
-
-  console.log('predictions', placePredictions)
-
-  const [search, setSearch] = useState('')
-
-  useEffect(() => {
-    // fetch place details for the first element in placePredictions array
-    if (placePredictions.length)
-      placesService?.getDetails(
-        {
-          placeId: placePredictions[0].place_id,
-        },
-        (placeDetails: any) => console.log('place details', placeDetails)
-      )
-  }, [placePredictions])
-
   return (
     <div className="text-xl font-bold">
       <div>Favorites</div>
-
-      {isPlacePredictionsLoading && <p>loading</p>}
-
-      <div>
-        <input
-          type="text"
-          className="text-black"
-          onChange={event => {
-            getPlacePredictions({ input: event.target.value })
-            setSearch(event.target.value)
-          }}
-        />
-      </div>
-
-      <div>
-        <Autocomplete
-          apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-          style={{ width: '90%' }}
-          onPlaceSelected={place => {
-            console.log(place)
-          }}
-          options={{
-            types: ['address'],
-          }}
-          defaultValue="Amsterdam"
-          className="text-black"
-        />
-        ;
-      </div>
 
       <div className="mt-4">
         <div className="grid grid-cols-4 gap-3">
