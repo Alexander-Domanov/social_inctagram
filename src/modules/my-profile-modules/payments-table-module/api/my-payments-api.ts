@@ -1,8 +1,8 @@
 import { authInstance } from '@/services'
 import { myPaymentsType } from 'src/modules/my-profile-modules/payments-table-module'
 
-export const getMyPayments = () => {
-  return authInstance
-    .get<{ data: myPaymentsType[] }>('subscriptions/my-payments')
-    .then(res => res.data)
+export const getMyPayments = async () => {
+  const res = await authInstance.get<myPaymentsType[]>('subscriptions/my-payments')
+
+  return res.data
 }

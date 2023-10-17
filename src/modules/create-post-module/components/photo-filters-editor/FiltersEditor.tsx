@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
+import { useTranslation } from '@/components/translation'
 import { ModalCreatePostType } from '@/modules/create-post-module'
 import { CreatePostModal } from '@/modules/create-post-module/components/create-post-modal/CreatePostModal'
 import getCroppedImg from '@/modules/create-post-module/components/photo-crop-editor/utils/canvasUtils'
@@ -12,6 +13,7 @@ import { usePostStore } from '@/store'
 import { useImageSelector } from '@/store/storeSelectorPhoto'
 
 export const FiltersEditor = ({ isModalOpen, setModalOpen }: ModalCreatePostType) => {
+  const { t } = useTranslation()
   const [activeSlideIndex, setActiveSlideIndex] = useState(0)
   const { isLoadedFromDB } = usePostStore()
   const { imagesSelector, setFilterStyleForImage, setImageSelector } = useImageSelector()
@@ -73,7 +75,7 @@ export const FiltersEditor = ({ isModalOpen, setModalOpen }: ModalCreatePostType
       variant={'Next'}
       isOpen={isModalOpen}
       onClose={onCloseClick}
-      title={'Filter'}
+      title={t.createPost.filtersEditor.modalTitle}
       onBtnClick={onNextClick}
     >
       <div className="relative h-full">

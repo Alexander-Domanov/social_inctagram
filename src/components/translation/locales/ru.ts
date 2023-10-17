@@ -180,7 +180,48 @@ export const ru: LocaleType = {
           },
         },
       },
+      myPayments: {
+        dataOfPayment: 'Дата платежа',
+        endDateOfSubscription: 'Дата окончания подписки',
+        price: 'Цена',
+        subscription: 'Тип подписки',
+        paymentType: 'Тип оплаты',
+      },
     },
+  },
+  createPost: {
+    photoUploader: {
+      modalTitle: 'Добавить фото',
+      openDraft: 'Открыть черновик',
+    },
+    cropEditor: {
+      modalTitle: 'Обрезка',
+    },
+    filtersEditor: {
+      modalTitle: 'Фильтр',
+    },
+    addFullPost: {
+      modalTitle: 'Публикация',
+      description: {
+        textareaLabel: 'Добавить описание публикации',
+        buttonSave: 'Сохранить изменения',
+        location: {
+          add: 'Добавить местоположение',
+        },
+      },
+    },
+    saveDraftPost: {
+      confirm: {
+        title: 'Черновик',
+        text: 'Хотите сохранить черновик?',
+        confirmButtonText: 'Сохранить',
+        declineButtonText: 'Отменить',
+      },
+    },
+  },
+  modal: {
+    buttonNext: 'Далее',
+    buttonPublish: 'Опубликовать',
   },
   uploadPhoto: {
     buttonAddPhoto: 'Добавить фото профиля',

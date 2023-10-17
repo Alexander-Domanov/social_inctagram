@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC } from 'react'
 
+import { useTranslation } from '@/components/translation'
 import { Location } from '@/modules/create-post-module/components/location/location'
 import { useGetProfile } from '@/modules/my-profile-modules/settings-edit-profile-module'
 import { Avatar, GlobalButton, Textarea } from '@/ui'
@@ -19,6 +20,8 @@ export const RightDescription: FC<RightDescriptionType> = ({
   text,
   setText,
 }) => {
+  const { t } = useTranslation()
+  const { textareaLabel, buttonSave } = t.createPost.addFullPost.description
   const { profileData, profileAvatar } = useGetProfile()
   const avatar = profileAvatar && profileAvatar
   const userName = profileData && profileData.userName
@@ -41,7 +44,7 @@ export const RightDescription: FC<RightDescriptionType> = ({
           maxLength={MAX_CHARACTERS}
           value={text}
           onChange={handleTextChange}
-          label={'Add publication description'}
+          label={textareaLabel}
         />
         <p className={'text-end text-light-900 text-xs'}>
           {text ? `${text.length} / ${MAX_CHARACTERS}` : '0 / 500'}
@@ -52,7 +55,7 @@ export const RightDescription: FC<RightDescriptionType> = ({
         <Location />
       ) : (
         <GlobalButton callback={callback} type={'submit'} className={'flex self-end mt-auto'}>
-          Save changes
+          {buttonSave}
         </GlobalButton>
       )}
     </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Confirm } from '@/components/modals'
+import { useTranslation } from '@/components/translation'
 import { ModalCreatePostType } from '@/modules/create-post-module'
 import { indexedDbPostDraft } from '@/modules/create-post-module/indexedDB/indexedDbPostDraft.repository'
 import { saveDraftPost } from '@/modules/create-post-module/indexedDB/saveDraftPost'
@@ -8,7 +9,8 @@ import { useImageSelector } from '@/store/storeSelectorPhoto'
 
 export const SaveDraftPost = ({ isModalOpen, onClose }: ModalCreatePostType) => {
   const { imagesSelector, description, setDescription } = useImageSelector()
-
+  const { t } = useTranslation()
+  const { title, text, declineButtonText, confirmButtonText } = t.createPost.saveDraftPost.confirm
   const onConfirmClick = async () => {
     await saveDraftPost(imagesSelector, description)
     onClose()
@@ -16,10 +18,6 @@ export const SaveDraftPost = ({ isModalOpen, onClose }: ModalCreatePostType) => 
   }
 
   const onDiscardClick = async () => {
-    // await postPhotos.forEach(photo => {
-    //   URL.revokeObjectURL(photo.croppedPhoto)
-    //   URL.revokeObjectURL(photo.filteredPhoto)
-    // })
     await indexedDbPostDraft.clearPreviousDraft()
     onClose()
   }
@@ -31,10 +29,10 @@ export const SaveDraftPost = ({ isModalOpen, onClose }: ModalCreatePostType) => 
         onConfirm={onConfirmClick}
         onClose={onDiscardClick}
         onDecline={onDiscardClick}
-        text={'Do you want to save draft?'}
-        title={'Draft post'}
-        confirmButtonText={'Save Draft'}
-        declineButtonText={'Discard'}
+        text={text}
+        title={title}
+        confirmButtonText={confirmButtonText}
+        declineButtonText={declineButtonText}
       />
     </div>
   )

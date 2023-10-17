@@ -1,19 +1,134 @@
 import { pluralizeEn } from '@/common'
 
 export const en = {
-  navBar: {
-    home: 'Home',
-    create: 'Create',
-    myProfile: 'My Profile',
-    messenger: 'Messenger',
-    search: 'Search',
-    statistics: 'Statistics',
-    favorites: 'Favorites',
-    logout: 'Logout',
-  },
-  confirm: {
-    buttonYes: 'Yes',
-    buttonNo: 'No',
+  auth: {
+    signUp: 'Sign Up',
+    singIn: 'Sing In',
+    email: 'Email',
+    password: 'Password',
+    confirm: {
+      ok: 'OK',
+      titleEmail: 'Email Sent',
+      text: 'We have sent a link to confirm your email to',
+    },
+    login: {
+      title: 'Login',
+      forgotPassword: 'Forgot password?',
+      haveAccount: `Don't have account?`,
+      errorsSchema: {
+        email: 'Email is required filed',
+        password: 'Password is required filed',
+      },
+      customErrors: 'The password or the email or Username are incorrect. Try again, please',
+    },
+    registration: {
+      title: 'Sign Up',
+      userName: 'UserName',
+      email: 'Email',
+      password: 'Password',
+      passwordConfirmation: 'Password Confirmation',
+      confirmationMessage: `
+          'Didn't receive a confirmation message?`,
+      haveAccount: 'Do you have an account',
+      errors: {
+        userName: {
+          required: 'User name is required filed',
+          min: 'Minimum number of characters 6',
+          max: 'Maximum number of characters 30',
+        },
+        email: {
+          required: 'Email is required filed',
+          email: 'Email must be a valid email',
+        },
+        password: {
+          min: 'Minimum number of characters 6',
+          max: 'Password must be at most 20 characters',
+        },
+        confirmPassword: {
+          min: 'Minimum number of characters 6',
+          max: 'Password must be at most 20 characters',
+          password: 'Passwords do not match',
+        },
+      },
+      resendForm: {
+        title: 'Resend-Form',
+        resendLink: 'Resend verification link',
+        email: 'Email',
+        send: 'Send',
+        error: {
+          email: 'Email is required filed',
+        },
+      },
+      externalAccount: {
+        titlePage: 'External-Account',
+        title: 'Merger of Accounts',
+        description: (email: string): string =>
+          `The user with email:${email} is already in the system. Could we merge this accounts?`,
+        buttonYes: 'Yes, merge',
+        buttonNo: 'no',
+        modalConfirm: {
+          title: 'Merger of Accounts',
+          buttonOk: 'Ok',
+        },
+      },
+    },
+    forgotPassword: {
+      title: 'Forgot Password',
+      backToSignIn: 'Back to Sign In',
+      description: ' Enter your email address and we will send you further instructions',
+      buttonSend: 'Send instructions',
+      modal: {
+        title: 'Email sent',
+        text: {
+          getDescription(email: string | undefined) {
+            return `The link has been sent to your email ${email}. If you don’t receive an email send link again.`
+          },
+        },
+      },
+      error: {
+        required: 'Email is required field',
+        email: 'Email is invalid',
+      },
+    },
+    registrationConfirmation: {
+      emailSuccessMessage: {
+        headTitle: 'Email Confirmation',
+        title: 'Congratulations!',
+        description: 'Your email has been confirmed',
+        signIn: 'Sign in',
+      },
+      ResendingVerificationLink: {
+        headTitle: 'Email Verification Link Expired',
+        title: 'Email verification link expired',
+        description:
+          ' Looks like the verification link has expired. Not to worry, we can send the link again',
+        resendLink: ' Resend verification link',
+      },
+    },
+    recovery: {
+      resendForm: {
+        headTitle: 'Resending Password Recovery Confirmation',
+      },
+      headTitle: 'Password recovery',
+      createNewPasswordPage: {
+        title: 'Create New Password',
+        password: '"New password"',
+        passwordConfirmation: 'Password confirmation',
+        descriptionPassword: 'Your password must be between 6 and 20 characters',
+        button: 'Create new password',
+        error: {
+          password: {
+            min: 'Minimum number of characters 6',
+            max: 'Password must be at most 20 characters',
+          },
+          confirmPassword: {
+            min: 'Minimum number of characters 6',
+            max: 'Password must be at most 20 characters',
+            password: 'Passwords do not match',
+          },
+        },
+      },
+    },
   },
   profile: {
     headTitle: 'Profile',
@@ -191,66 +306,51 @@ export const en = {
           },
         },
       },
+      myPayments: {
+        dataOfPayment: 'Date of Payment',
+        endDateOfSubscription: 'End date of subscription',
+        price: 'Price',
+        subscription: 'Subscription Type',
+        paymentType: 'Payment Type',
+      },
     },
   },
-  uploadPhoto: {
-    buttonAddPhoto: 'Add a Profile Photo',
-    uploadAvatarBlock: {
-      title: 'Add a Profile Photo',
+  createPost: {
+    photoUploader: {
+      modalTitle: 'Add photo',
+      openDraft: 'Open draft',
     },
-    profileAvatarEditor: {
-      buttonSave: 'Save',
+    cropEditor: {
+      modalTitle: 'Cropping',
     },
-    photoSelector: {
-      buttonSelectComputer: 'Select from computer',
+    filtersEditor: {
+      modalTitle: 'Filter',
     },
-  },
-  userProfile: {
-    buttonMessage: 'Send Message',
-    buttonFollow: 'Follow',
-    buttonUnfollow: 'Unfollow',
-  },
-  likes: {
-    getCountTitleLikes(count: number) {
-      const str = pluralizeEn(count)
-
-      switch (str) {
-        case 'other':
-          return `${count} Likes`
-        case 'one':
-          return `${count} Like`
-        case 'few':
-          return `${count} Likes`
-        case 'many':
-          return `${count} Likes`
-      }
+    addFullPost: {
+      modalTitle: 'Publication',
+      description: {
+        textareaLabel: 'Add publication description',
+        buttonSave: 'Save changes',
+        location: {
+          add: 'Add location',
+        },
+      },
     },
-    getCountLikes(count: number): string | undefined {
-      const str = pluralizeEn(count)
-
-      switch (str) {
-        case 'other':
-          return 'Likes'
-        case 'one':
-          return `Like`
-        case 'few':
-          return `Likes`
-        case 'many':
-          return `Likes`
-      }
+    saveDraftPost: {
+      confirm: {
+        title: 'Draft Post',
+        text: 'Do you want to save draft?',
+        confirmButtonText: 'Save Draft',
+        declineButtonText: 'Discard',
+      },
     },
   },
-  addCommentForm: {
-    addComment: 'Add a comment...',
-    addAnswer: 'Add a answer...',
-    publish: 'Publish',
+  modal: {
+    buttonNext: 'Next',
+    buttonPublish: 'Publish',
   },
-  postActions: {
-    follow: 'Follow',
-    unFollow: 'Unfollow',
-    deletePost: 'Delete Post',
-    editPost: 'Edit Post',
-    report: 'Report',
+  messenger: {
+    headTitle: 'Messenger',
   },
   search: {
     headTitle: 'Search',
@@ -259,172 +359,6 @@ export const en = {
     recentRequests: 'Recent requests',
     noRequests: 'No recent requests',
     placeEmpty: 'Oops! This place looks empty!',
-  },
-  homepage: {
-    viewComments: 'View All Comments',
-  },
-  PostCommentAnswers: {
-    answer: 'Answer',
-    getCountShowAnswers(count: number) {
-      const str = pluralizeEn(count)
-
-      switch (str) {
-        case 'other':
-          return `Show answers (${count})`
-        case 'one':
-          return `Show answer (${count})`
-        case 'few':
-          return `Show answers (${count})`
-        case 'many':
-          return `Show answers (${count})`
-      }
-    },
-    getCountHideAnswers(count: number): string | undefined {
-      const str = pluralizeEn(count)
-
-      switch (str) {
-        case 'other':
-          return `Hide answers (${count})`
-        case 'one':
-          return `Hide answer (${count})`
-        case 'few':
-          return `Hide answers (${count})`
-        case 'many':
-          return `Hide answers (${count})`
-      }
-    },
-  },
-  auth: {
-    signUp: 'Sign Up',
-    singIn: 'Sing In',
-    email: 'Email',
-    password: 'Password',
-    confirm: {
-      ok: 'OK',
-      titleEmail: 'Email Sent',
-      text: 'We have sent a link to confirm your email to',
-    },
-    login: {
-      title: 'Login',
-      forgotPassword: 'Forgot password?',
-      haveAccount: `Don't have account?`,
-      errorsSchema: {
-        email: 'Email is required filed',
-        password: 'Password is required filed',
-      },
-      customErrors: 'The password or the email or Username are incorrect. Try again, please',
-    },
-    registration: {
-      title: 'Sign Up',
-      userName: 'UserName',
-      email: 'Email',
-      password: 'Password',
-      passwordConfirmation: 'Password Confirmation',
-      confirmationMessage: `
-          'Didn't receive a confirmation message?`,
-      haveAccount: 'Do you have an account',
-      errors: {
-        userName: {
-          required: 'User name is required filed',
-          min: 'Minimum number of characters 6',
-          max: 'Maximum number of characters 30',
-        },
-        email: {
-          required: 'Email is required filed',
-          email: 'Email must be a valid email',
-        },
-        password: {
-          min: 'Minimum number of characters 6',
-          max: 'Password must be at most 20 characters',
-        },
-        confirmPassword: {
-          min: 'Minimum number of characters 6',
-          max: 'Password must be at most 20 characters',
-          password: 'Passwords do not match',
-        },
-      },
-      resendForm: {
-        title: 'Resend-Form',
-        resendLink: 'Resend verification link',
-        email: 'Email',
-        send: 'Send',
-        error: {
-          email: 'Email is required filed',
-        },
-      },
-      externalAccount: {
-        titlePage: 'External-Account',
-        title: 'Merger of Accounts',
-        description: (email: string): string =>
-          `The user with email:${email} is already in the system. Could we merge this accounts?`,
-        buttonYes: 'Yes, merge',
-        buttonNo: 'no',
-        modalConfirm: {
-          title: 'Merger of Accounts',
-          buttonOk: 'Ok',
-        },
-      },
-    },
-    forgotPassword: {
-      title: 'Forgot Password',
-      backToSignIn: 'Back to Sign In',
-      description: ' Enter your email address and we will send you further instructions',
-      buttonSend: 'Send instructions',
-      modal: {
-        title: 'Email sent',
-        text: {
-          getDescription(email: string | undefined) {
-            return `The link has been sent to your email ${email}. If you don’t receive an email send link again.`
-          },
-        },
-      },
-      error: {
-        required: 'Email is required field',
-        email: 'Email is invalid',
-      },
-    },
-    registrationConfirmation: {
-      emailSuccessMessage: {
-        headTitle: 'Email Confirmation',
-        title: 'Congratulations!',
-        description: 'Your email has been confirmed',
-        signIn: 'Sign in',
-      },
-      ResendingVerificationLink: {
-        headTitle: 'Email Verification Link Expired',
-        title: 'Email verification link expired',
-        description:
-          ' Looks like the verification link has expired. Not to worry, we can send the link again',
-        resendLink: ' Resend verification link',
-      },
-    },
-    recovery: {
-      resendForm: {
-        headTitle: 'Resending Password Recovery Confirmation',
-      },
-      headTitle: 'Password recovery',
-      createNewPasswordPage: {
-        title: 'Create New Password',
-        password: '"New password"',
-        passwordConfirmation: 'Password confirmation',
-        descriptionPassword: 'Your password must be between 6 and 20 characters',
-        button: 'Create new password',
-        error: {
-          password: {
-            min: 'Minimum number of characters 6',
-            max: 'Password must be at most 20 characters',
-          },
-          confirmPassword: {
-            min: 'Minimum number of characters 6',
-            max: 'Password must be at most 20 characters',
-            password: 'Passwords do not match',
-          },
-        },
-      },
-    },
-  },
-  messenger: {
-    headTitle: 'Messenger',
   },
   statistics: {
     headTitle: 'Statistics',
@@ -485,6 +419,113 @@ export const en = {
   },
   favorites: {
     headTitle: 'Favorites',
+  },
+  navBar: {
+    home: 'Home',
+    create: 'Create',
+    myProfile: 'My Profile',
+    messenger: 'Messenger',
+    search: 'Search',
+    statistics: 'Statistics',
+    favorites: 'Favorites',
+    logout: 'Logout',
+  },
+  confirm: {
+    buttonYes: 'Yes',
+    buttonNo: 'No',
+  },
+  uploadPhoto: {
+    buttonAddPhoto: 'Add a Profile Photo',
+    uploadAvatarBlock: {
+      title: 'Add a Profile Photo',
+    },
+    profileAvatarEditor: {
+      buttonSave: 'Save',
+    },
+    photoSelector: {
+      buttonSelectComputer: 'Select from computer',
+    },
+  },
+  userProfile: {
+    buttonMessage: 'Send Message',
+    buttonFollow: 'Follow',
+    buttonUnfollow: 'Unfollow',
+  },
+  likes: {
+    getCountTitleLikes(count: number) {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'other':
+          return `${count} Likes`
+        case 'one':
+          return `${count} Like`
+        case 'few':
+          return `${count} Likes`
+        case 'many':
+          return `${count} Likes`
+      }
+    },
+    getCountLikes(count: number): string | undefined {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'other':
+          return 'Likes'
+        case 'one':
+          return `Like`
+        case 'few':
+          return `Likes`
+        case 'many':
+          return `Likes`
+      }
+    },
+  },
+  addCommentForm: {
+    addComment: 'Add a comment...',
+    addAnswer: 'Add a answer...',
+    publish: 'Publish',
+  },
+  postActions: {
+    follow: 'Follow',
+    unFollow: 'Unfollow',
+    deletePost: 'Delete Post',
+    editPost: 'Edit Post',
+    report: 'Report',
+  },
+  homepage: {
+    viewComments: 'View All Comments',
+  },
+  PostCommentAnswers: {
+    answer: 'Answer',
+    getCountShowAnswers(count: number) {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'other':
+          return `Show answers (${count})`
+        case 'one':
+          return `Show answer (${count})`
+        case 'few':
+          return `Show answers (${count})`
+        case 'many':
+          return `Show answers (${count})`
+      }
+    },
+    getCountHideAnswers(count: number): string | undefined {
+      const str = pluralizeEn(count)
+
+      switch (str) {
+        case 'other':
+          return `Hide answers (${count})`
+        case 'one':
+          return `Hide answer (${count})`
+        case 'few':
+          return `Hide answers (${count})`
+        case 'many':
+          return `Hide answers (${count})`
+      }
+    },
   },
 }
 

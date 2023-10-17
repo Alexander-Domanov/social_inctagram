@@ -181,6 +181,13 @@ export const uk: LocaleType = {
           },
         },
       },
+      myPayments: {
+        dataOfPayment: 'Дата платежу',
+        endDateOfSubscription: 'Дата закінчення підписки',
+        price: 'Ціна',
+        subscription: 'Тип підписки',
+        paymentType: 'Тип оплати',
+      },
     },
   },
   uploadPhoto: {
@@ -400,6 +407,40 @@ export const uk: LocaleType = {
         },
       },
     },
+  },
+  createPost: {
+    photoUploader: {
+      modalTitle: 'Додати фото',
+      openDraft: 'Відкрити проект',
+    },
+    cropEditor: {
+      modalTitle: 'Обрізка',
+    },
+    filtersEditor: {
+      modalTitle: 'Фільтр',
+    },
+    addFullPost: {
+      modalTitle: 'Публікація',
+      description: {
+        textareaLabel: 'Додати опис публікації',
+        buttonSave: 'Зберегти зміни',
+        location: {
+          add: 'Додати місцезнаходження',
+        },
+      },
+    },
+    saveDraftPost: {
+      confirm: {
+        title: 'Чернетка',
+        text: 'Бажаєте зберегти чернетку?',
+        confirmButtonText: 'Зберегти',
+        declineButtonText: 'Скасувати',
+      },
+    },
+  },
+  modal: {
+    buttonNext: 'Далі',
+    buttonPublish: 'Опублікувати',
   },
   messenger: {
     headTitle: 'Месенджер',

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { ModalWithContent } from '@/components/modals'
+import { useTranslation } from '@/components/translation'
 import { ModalCreatePostType } from '@/modules/create-post-module'
 import { getDraftPost } from '@/modules/create-post-module/indexedDB/getDraftPost'
 import { indexedDbPostDraft } from '@/modules/create-post-module/indexedDB/indexedDbPostDraft.repository'
@@ -12,7 +13,7 @@ import { GlobalButton } from '@/ui'
 
 export const PhotoUploader = ({ isModalOpen, onClose, setModalOpen }: ModalCreatePostType) => {
   const [imageDbCount, setImageDbCount] = useState(0)
-
+  const { t } = useTranslation()
   const { replace, pathname } = useRouter()
 
   const { setImageSelector, setDescription } = useImageSelector()
@@ -43,12 +44,16 @@ export const PhotoUploader = ({ isModalOpen, onClose, setModalOpen }: ModalCreat
   }, [isModalOpen])
 
   return (
-    <ModalWithContent isOpen={isModalOpen} onClose={onCloseClick} title={'Add photo'}>
+    <ModalWithContent
+      isOpen={isModalOpen}
+      onClose={onCloseClick}
+      title={t.createPost.photoUploader.modalTitle}
+    >
       <>
         <PhotoSelector isModalOpen={isModalOpen} setModalOpen={setModalOpen} maxImageSize={5} />
         {imageDbCount > 0 && (
           <GlobalButton type={'button'} callback={onOpenDraftClick}>
-            Open draft
+            {t.createPost.photoUploader.openDraft}
           </GlobalButton>
         )}
       </>
