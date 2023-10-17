@@ -9,7 +9,7 @@ import { NextPageWithLayout } from '@/pages/_app'
 const TestPage: NextPageWithLayout = () => {
   const { placesService, placePredictions, getPlacePredictions, isPlacePredictionsLoading } =
     usePlacesService({
-      apiKey: 'AIzaSyDX9b3XiEm0xRsJD82zJY4D6BSWai8APKM',
+      apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
       debounce: 300,
       options: {
         fields: ['geometry'],
