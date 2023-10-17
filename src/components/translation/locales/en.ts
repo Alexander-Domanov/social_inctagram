@@ -16,6 +16,7 @@ export const en = {
     buttonNo: 'No',
   },
   profile: {
+    headTitle: 'Profile',
     profilePage: {
       buttonProfileSettings: 'Profile Settings',
       following: 'Following',
@@ -96,28 +97,112 @@ export const en = {
       confirmDescriptionDeleteFollowing: 'Do you really want to delete a FollowingPage ',
     },
     settingsProfile: {
+      headTitle: 'Profile Settings',
       settingsProfileTabs: {
-        generalInformation: 'General information',
+        generalInformation: {
+          titleTab: 'General information',
+          userName: {
+            label: 'Username',
+            min: 'Minimum number of characters 6',
+            max: 'Maximum number of characters 30',
+            matches: 'Only allowed characters are 0-9, A-Z, a-z, _, -',
+            required: 'Username is required',
+          },
+          firstName: {
+            label: 'First Name',
+            min: 'Minimum number of characters 1',
+            max: 'Maximum number of characters 50',
+            matches: 'Only letters are allowed',
+          },
+          lastName: {
+            label: 'Last Name',
+            min: 'Minimum number of characters 1',
+            max: 'Maximum number of characters 50',
+            matches: 'Only letters are allowed',
+          },
+          dateOfBirthday: {
+            label: 'Date of birthday',
+            max: 'Date of birth cannot be in the future',
+            typeError: 'Date of birth has to be a valid date',
+          },
+          city: 'City',
+          aboutMe: {
+            label: 'About me',
+            max: 'Сan not be more than 200',
+          },
+          buttonSaveChanges: 'Save Changes',
+        },
+        generalInformationTab: 'General information',
         devices: 'Devices',
         accountManagement: 'Account management',
         myPayments: 'My payments',
       },
-      generalInformation: {
-        errors: {
-          userName: 'Username is required',
-          dateOfBirthMax: 'Date of birth cannot be in the future',
-          dateOfBirthTypeError: 'Date of birth has to be a valid date',
-          aboutMe: 'Сan not be more than 200',
+      devices: {
+        titleDevices: 'This devices',
+        online: 'Online',
+        buttonDevices: 'Terminate all other session',
+        activeSession: 'Active sessions',
+        confirm: {
+          title: 'Terminate all other session?',
+          text: 'Are you sure you want to terminate all other session?',
+          buttonDecline: 'No',
         },
-        userName: 'Username',
-        firstName: 'First Name',
-        lastName: 'Last Name',
-        dateOfBirthday: 'Date of birthday',
-        city: 'City',
-        aboutMe: 'About me',
-        buttonSaveChanges: 'Save Changes',
+        otherDevice: {
+          lastVisit: {
+            title: 'Last visit',
+          },
+          buttonLogout: 'Logout',
+          confirm: {
+            title: 'Terminate Session?',
+            text: 'Are you sure you want to terminate session?',
+            buttonDecline: 'No',
+          },
+        },
       },
-      devices: {},
+      accountManagement: {
+        currentSubscription: {
+          currentSubscription: 'Current Subscriptions:',
+          datePayment: 'Date of payment',
+          endDateSub: 'End date of subscription',
+          autoRenewal: 'Auto-Renewal',
+        },
+        accountType: {
+          titleAccountType: 'Account type:',
+          personal: 'Personal',
+          business: 'Business',
+        },
+        subscriptionType: {
+          titleSub: 'Choose subscription:',
+        },
+        paymentMethods: {
+          confirm: {
+            buttonOk: 'Ok',
+            text: 'Oops sanctions! 🙈',
+          },
+        },
+        paymentsConfirmationModals: {
+          confirm: {
+            titleSuccess: 'Success',
+            buttonTextSuccess: 'Ok',
+            textSuccess: 'Payment was successful!',
+            titleError: 'Error',
+            buttonTextError: 'Back to payment',
+            textError: 'Transaction failed, please try again',
+          },
+        },
+      },
+    },
+  },
+  uploadPhoto: {
+    buttonAddPhoto: 'Add a Profile Photo',
+    uploadAvatarBlock: {
+      title: 'Add a Profile Photo',
+    },
+    profileAvatarEditor: {
+      buttonSave: 'Save',
+    },
+    photoSelector: {
+      buttonSelectComputer: 'Select from computer',
     },
   },
   userProfile: {
@@ -168,6 +253,7 @@ export const en = {
     report: 'Report',
   },
   search: {
+    headTitle: 'Search',
     searchTitle: 'Search',
     searchInput: 'Search',
     recentRequests: 'Recent requests',
@@ -207,6 +293,198 @@ export const en = {
           return `Hide answers (${count})`
       }
     },
+  },
+  auth: {
+    signUp: 'Sign Up',
+    singIn: 'Sing In',
+    email: 'Email',
+    password: 'Password',
+    confirm: {
+      ok: 'OK',
+      titleEmail: 'Email Sent',
+      text: 'We have sent a link to confirm your email to',
+    },
+    login: {
+      title: 'Login',
+      forgotPassword: 'Forgot password?',
+      haveAccount: `Don't have account?`,
+      errorsSchema: {
+        email: 'Email is required filed',
+        password: 'Password is required filed',
+      },
+      customErrors: 'The password or the email or Username are incorrect. Try again, please',
+    },
+    registration: {
+      title: 'Sign Up',
+      userName: 'UserName',
+      email: 'Email',
+      password: 'Password',
+      passwordConfirmation: 'Password Confirmation',
+      confirmationMessage: `
+          'Didn't receive a confirmation message?`,
+      haveAccount: 'Do you have an account',
+      errors: {
+        userName: {
+          required: 'User name is required filed',
+          min: 'Minimum number of characters 6',
+          max: 'Maximum number of characters 30',
+        },
+        email: {
+          required: 'Email is required filed',
+          email: 'Email must be a valid email',
+        },
+        password: {
+          min: 'Minimum number of characters 6',
+          max: 'Password must be at most 20 characters',
+        },
+        confirmPassword: {
+          min: 'Minimum number of characters 6',
+          max: 'Password must be at most 20 characters',
+          password: 'Passwords do not match',
+        },
+      },
+      resendForm: {
+        title: 'Resend-Form',
+        resendLink: 'Resend verification link',
+        email: 'Email',
+        send: 'Send',
+        error: {
+          email: 'Email is required filed',
+        },
+      },
+      externalAccount: {
+        titlePage: 'External-Account',
+        title: 'Merger of Accounts',
+        description: (email: string): string =>
+          `The user with email:${email} is already in the system. Could we merge this accounts?`,
+        buttonYes: 'Yes, merge',
+        buttonNo: 'no',
+        modalConfirm: {
+          title: 'Merger of Accounts',
+          buttonOk: 'Ok',
+        },
+      },
+    },
+    forgotPassword: {
+      title: 'Forgot Password',
+      backToSignIn: 'Back to Sign In',
+      description: ' Enter your email address and we will send you further instructions',
+      buttonSend: 'Send instructions',
+      modal: {
+        title: 'Email sent',
+        text: {
+          getDescription(email: string | undefined) {
+            return `The link has been sent to your email ${email}. If you don’t receive an email send link again.`
+          },
+        },
+      },
+      error: {
+        required: 'Email is required field',
+        email: 'Email is invalid',
+      },
+    },
+    registrationConfirmation: {
+      emailSuccessMessage: {
+        headTitle: 'Email Confirmation',
+        title: 'Congratulations!',
+        description: 'Your email has been confirmed',
+        signIn: 'Sign in',
+      },
+      ResendingVerificationLink: {
+        headTitle: 'Email Verification Link Expired',
+        title: 'Email verification link expired',
+        description:
+          ' Looks like the verification link has expired. Not to worry, we can send the link again',
+        resendLink: ' Resend verification link',
+      },
+    },
+    recovery: {
+      resendForm: {
+        headTitle: 'Resending Password Recovery Confirmation',
+      },
+      headTitle: 'Password recovery',
+      createNewPasswordPage: {
+        title: 'Create New Password',
+        password: '"New password"',
+        passwordConfirmation: 'Password confirmation',
+        descriptionPassword: 'Your password must be between 6 and 20 characters',
+        button: 'Create new password',
+        error: {
+          password: {
+            min: 'Minimum number of characters 6',
+            max: 'Password must be at most 20 characters',
+          },
+          confirmPassword: {
+            min: 'Minimum number of characters 6',
+            max: 'Password must be at most 20 characters',
+            password: 'Passwords do not match',
+          },
+        },
+      },
+    },
+  },
+  messenger: {
+    headTitle: 'Messenger',
+  },
+  statistics: {
+    headTitle: 'Statistics',
+    pagesTitle: {
+      title: 'Statistics',
+      likes: 'Likes',
+      comments: 'Comments',
+      publication: 'Publication views',
+    },
+    tabsTitle: {
+      week: 'Week',
+      month: 'Month',
+    },
+    popUp: {
+      getCountTitleLikes(count: number) {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'other':
+            return `${count} Likes`
+          case 'one':
+            return `${count} Like`
+          case 'few':
+            return `${count} Likes`
+          case 'many':
+            return `${count} Likes`
+        }
+      },
+      getCountTitleComments(count: number) {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'other':
+            return `${count} Comments`
+          case 'one':
+            return `${count} Comment`
+          case 'few':
+            return `${count} Comments`
+          case 'many':
+            return `${count} Comments`
+        }
+      },
+      getCountTitlePublication(count: number) {
+        const str = pluralizeEn(count)
+
+        switch (str) {
+          case 'other':
+            return `${count} Publication views`
+          case 'one':
+            return `${count} Publication view`
+          case 'few':
+            return `${count} Publication views`
+          case 'many':
+            return `${count} Publication views`
+        }
+      },
+    },
+  },
+  favorites: {
+    headTitle: 'Favorites',
   },
 }
 

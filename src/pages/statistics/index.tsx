@@ -1,10 +1,19 @@
+import Head from 'next/head'
+
 import { getGlobalLayout } from '@/components/layout'
+import { useTranslation } from '@/components/translation'
+import { StatisticsPage } from '@/modules/statistics-modules'
 
 const Statistics = () => {
+  const { t } = useTranslation()
+
   return (
-    <div className="text-light-100 w-full pt-3 font-normal leading-6 flex justify-center">
-      <span>There is a development on statistics</span>
-    </div>
+    <>
+      <Head>
+        <title>{t.statistics.headTitle}</title>
+      </Head>
+      <StatisticsPage />
+    </>
   )
 }
 

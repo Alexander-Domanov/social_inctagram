@@ -4,14 +4,19 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import EmailResendingImg from '@/assets/images/rafiki.svg'
+import { useTranslation } from '@/components/translation'
 
 export const ResendingVerificationLink: FC<{ path: string }> = ({ path }) => {
+  const { t } = useTranslation()
+
   return (
     <div className={'flex justify-center items-center flex-col text-light-100 h-screen'}>
-      <span className={'font-bold mt-6 mb-3'}>Email verification link expired</span>
+      <span className={'font-bold mt-6 mb-3'}>
+        {t.auth.registrationConfirmation.ResendingVerificationLink.title}
+      </span>
       <br />
       <span className={'mb-12 w-96 text-center'}>
-        Looks like the verification link has expired. Not to worry, we can send the link again
+        {t.auth.registrationConfirmation.ResendingVerificationLink.description}
       </span>
       <Link
         className={
@@ -19,10 +24,10 @@ export const ResendingVerificationLink: FC<{ path: string }> = ({ path }) => {
         }
         href={path}
       >
-        Resend verification link
+        {t.auth.registrationConfirmation.ResendingVerificationLink.resendLink}
       </Link>
       <Image className={'mt-20'} src={EmailResendingImg} alt={'bro'} height={473} width={353} />
-      Resend verification link
+      {t.auth.registrationConfirmation.ResendingVerificationLink.resendLink}
     </div>
   )
 }

@@ -1,6 +1,5 @@
-import { SettingsSchemaType } from '@/common'
 import { authInstance } from '@/services'
 
-export const editAccountData = (payloadEditProfile: SettingsSchemaType) => {
-  return authInstance.put<SettingsSchemaType>('users/profile', { ...payloadEditProfile })
+export const editAccountData = (payloadEditProfile: any) => {
+  return authInstance.put<any>('users/profile', { ...payloadEditProfile })
 }

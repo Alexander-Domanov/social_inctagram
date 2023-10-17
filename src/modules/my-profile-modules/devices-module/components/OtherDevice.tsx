@@ -8,6 +8,8 @@ import { BrowserIconSwitch } from '../components/BrowserIconSwitch'
 import { useDeleteSession } from '../hooks/useDeleteSession'
 
 import { Confirm } from '@/components/modals'
+import { useTranslation } from '@/components/translation'
+import { localTimeLastVisit } from '@/modules/my-profile-modules/devices-module'
 import { GlobalButton } from '@/ui'
 
 type Props = {
@@ -17,7 +19,8 @@ type Props = {
 export const OtherDevice: FC<Props> = ({ device }) => {
   const [isConfirmOpened, setIsConfirmOpened] = useState(false)
   const { mutate, isLoading } = useDeleteSession(device.deviceId)
-
+  const { t, localeLanguage } = useTranslation()
+  const localeTime: Locale | undefined = localTimeLastVisit[localeLanguage || 'en']
   const onConfirm = () => {
     setIsConfirmOpened(false)
     mutate()
@@ -42,7 +45,10 @@ export const OtherDevice: FC<Props> = ({ device }) => {
           <div className="mt-3 text-sm text-white">ip: {device.ip}</div>
 
           <div className="mt-2 text-sm text-white font-medium">
-            Last visit: {format(new Date(device.lastVisit), 'dd.MM.yyyy HH:mm:ss')}
+            {t.profile.settingsProfile.devices.otherDevice.lastVisit.title}:
+            {format(new Date(device.lastVisit), ' dd.MM.yyyy HH:mm:ss', {
+              locale: localeTime,
+            })}
           </div>
         </div>
 
@@ -53,16 +59,16 @@ export const OtherDevice: FC<Props> = ({ device }) => {
             variant={'transparent'}
             disabled={isLoading}
           >
-            Logout
+            {t.profile.settingsProfile.devices.otherDevice.buttonLogout}
           </GlobalButton>
 
           <Confirm
             isOpen={isConfirmOpened}
             onConfirm={onConfirm}
             onClose={onConfirmClose}
-            title="Terminate Session?"
-            text="Are you sure you want to terminate session?"
-            declineButtonText="No"
+            title={t.profile.settingsProfile.devices.otherDevice.confirm.title}
+            text={t.profile.settingsProfile.devices.otherDevice.confirm.text}
+            declineButtonText={t.profile.settingsProfile.devices.otherDevice.confirm.buttonDecline}
             onDecline={onConfirmClose}
           />
         </div>

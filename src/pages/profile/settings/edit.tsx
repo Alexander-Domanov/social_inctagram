@@ -6,11 +6,18 @@ import { useWindowSize } from '@/common'
 import { AccountLayout } from '@/components/account'
 import { NavigateToProfile } from '@/components/account/navigate-to-profile/NavigateToProfile'
 import { getGlobalLayout, getLayoutWithHeader } from '@/components/layout'
+import { useTranslation } from '@/components/translation'
 import { SettingsProfile } from '@/modules/my-profile-modules/settings-edit-profile-module'
 import { NextPageWithLayout } from '@/pages/_app'
 
 const editProfilePage: NextPageWithLayout = () => {
   const { width } = useWindowSize()
+  const { t } = useTranslation()
+  const headTile = (
+    <Head>
+      <title>{t.profile.settingsProfile.headTitle}</title>
+    </Head>
+  )
 
   return (
     <>
@@ -18,9 +25,7 @@ const editProfilePage: NextPageWithLayout = () => {
         width <= 360 &&
         getLayoutWithHeader(
           <>
-            <Head>
-              <title>Profile Settings</title>
-            </Head>
+            {headTile}
             <AccountLayout>
               <NavigateToProfile />
               <SettingsProfile />
@@ -31,9 +36,7 @@ const editProfilePage: NextPageWithLayout = () => {
         width > 360 &&
         getGlobalLayout(
           <>
-            <Head>
-              <title>Profile Settings</title>
-            </Head>
+            {headTile}
             <AccountLayout>
               <SettingsProfile />
             </AccountLayout>

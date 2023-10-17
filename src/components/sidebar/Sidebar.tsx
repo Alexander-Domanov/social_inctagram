@@ -21,10 +21,13 @@ import trending from '@/assets/icons/sidebar/trending-up.svg'
 import { useTranslation } from '@/components/translation'
 import { LogoutButton } from '@/modules/auth-modules/login-module/logout'
 import { routes } from '@/routing/router'
+import { useUserStore } from '@/store'
 import { CreatePost } from 'src/modules/create-post-module'
 
 export const Sidebar: FC = () => {
   const { pathname } = useRouter()
+  const { hasBusinessAccount } = useUserStore()
+
   const { t } = useTranslation()
   // CSS Styles
   const className = {
@@ -46,7 +49,7 @@ export const Sidebar: FC = () => {
     ),
     statistics: clsx(
       pathname === routes.sideBar.statistics ? 'text-accent-500' : '',
-      'flex gap-[15px] items-center mt-14'
+      'flex gap-[15px] items-center'
     ),
     favorites: clsx(
       pathname === routes.sideBar.favorites ? 'text-accent-500' : '',
@@ -113,17 +116,21 @@ export const Sidebar: FC = () => {
               <span className={className.hidden}>{t.navBar.search}</span>
             </Link>
           </li>
-          <li className="xsm:hidden">
-            <Link href={routes.sideBar.statistics} className={className.statistics}>
-              <Image
-                src={pathname === routes.sideBar.statistics ? trending : trendingOutline}
-                alt={t.navBar.statistics}
-                height={24}
-                width={24}
-              />
-              <span className={className.hidden}>{t.navBar.statistics}</span>
-            </Link>
+
+          <li className="xsm:hidden mt-14">
+            {hasBusinessAccount && (
+              <Link href={routes.sideBar.statistics} className={className.statistics}>
+                <Image
+                  src={pathname === routes.sideBar.statistics ? trending : trendingOutline}
+                  alt={t.navBar.statistics}
+                  height={24}
+                  width={24}
+                />
+                <span className={className.hidden}>{t.navBar.statistics}</span>
+              </Link>
+            )}
           </li>
+
           <li className="xsm:hidden">
             <Link href={routes.sideBar.favorites} className={className.favorites}>
               <Image
