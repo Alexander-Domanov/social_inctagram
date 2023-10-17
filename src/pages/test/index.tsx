@@ -16,8 +16,6 @@ const TestPage: NextPageWithLayout = () => {
       },
     })
 
-  console.log('predictions', placePredictions)
-
   const [search, setSearch] = useState('')
 
   useEffect(() => {
