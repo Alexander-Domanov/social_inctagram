@@ -4,8 +4,8 @@ import Link from 'next/link'
 
 import { settings_profile_tabs } from '@/common'
 import { TabsTitle } from '@/components/account'
+import { ArrowBack } from '@/components/arrowBack/ArrowBack'
 import { useTranslation } from '@/components/translation'
-import { ArrowBack } from '@/modules/my-profile-modules/settings-edit-profile-module/utils/ArrowBack'
 import { routes } from '@/routing/router'
 
 export const SettingsProfile = () => {

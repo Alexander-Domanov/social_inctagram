@@ -23,12 +23,16 @@ const AuthProtection: FC<PropsWithChildren> = memo(({ children }) => {
     }
   )
 
+  const { privacyPolicy, termsService } = routes.policy
+
   useEffect(() => {
     if (isSuccess && routes.auth.unProtectedPaths.includes(pathname)) {
       replace(routes.sideBar.profile, undefined, { shallow: true })
     }
     if (isError && !routes.auth.unProtectedPaths.includes(pathname)) {
-      replace(routes.auth.login, undefined, { shallow: true })
+      if (pathname !== privacyPolicy && pathname !== termsService) {
+        replace(routes.auth.login, undefined, { shallow: true })
+      }
     }
   }, [isSuccess, isError])
 

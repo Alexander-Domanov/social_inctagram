@@ -4,7 +4,9 @@ import { useChangingFormWhenChangingLanguage, useGlobalForm } from '@/common'
 import { Confirm } from '@/components/modals/confirm/Confirm'
 import { useTranslation } from '@/components/translation'
 import { registrationSchema, useRegister } from '@/modules/auth-modules/registraion-module'
-import { GlobalButton, GlobalInput, InputWithEye, Preloader } from '@/ui'
+import { routes } from '@/routing/router'
+import { Checkbox, GlobalButton, GlobalInput, InputWithEye, Preloader } from '@/ui'
+import Link from '@/ui/link/Link'
 
 export const RegistrationForm = () => {
   const { t } = useTranslation()
@@ -60,6 +62,22 @@ export const RegistrationForm = () => {
           error={errors?.confirmPassword?.message}
           {...register('confirmPassword')}
         />
+        <div className="flex items-center justify-center text-xs gap-2">
+          <Checkbox id={'consentGiven'} />
+          <span> I agree</span>
+          <Link
+            className={'underline text-accent-300'}
+            href={routes.policy.termsService}
+            title={'Terms of Service'}
+          />
+          <span> and</span>
+          <Link
+            className={'underline text-accent-300'}
+            href={routes.policy.privacyPolicy}
+            title={'Privacy Policy'}
+          />
+        </div>
+
         <GlobalButton variant="default" type="submit">
           {t.auth.signUp}
         </GlobalButton>

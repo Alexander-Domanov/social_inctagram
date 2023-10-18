@@ -1,17 +1,20 @@
 import React from 'react'
 
 import Link from 'next/link'
+import { twMerge } from 'tailwind-merge'
 
-type PropsType = {
+interface ILink {
   title: string
   href: string
   className?: string
+  children?: React.ReactNode
 }
 
-export default function ({ title, href, className }: PropsType) {
+export default function ({ title, href, className, children }: ILink) {
   return (
-    <Link href={href} className={className ? className : ''}>
-      {title}
+    <Link href={href} className={twMerge('flex flex-row-reverse justify-end gap-3', className)}>
+      <span className="xsm:hidden">{title}</span>
+      {children}
     </Link>
   )
 }
