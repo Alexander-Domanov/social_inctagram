@@ -14,7 +14,8 @@ export const ArrowBackButton = ({ title, href }: IArrowBackButton) => {
       <Link
         href={href}
         title={title}
-        className="xsm:pt-[18px] font-normal text-sm leading-6 absolute pt-6 pl-[64px]"
+        styleText="xsm:hidden"
+        className="xsm:pt-[18px] xsm: font-normal text-sm leading-6 absolute pt-6 pl-[64px]"
       >
         <ArrowBack />
       </Link>

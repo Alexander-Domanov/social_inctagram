@@ -11,7 +11,7 @@ import Link from '@/ui/link/Link'
 export const RegistrationForm = () => {
   const { t } = useTranslation()
   const [toggleModal, setToggleModal] = useState(false)
-
+  const [servicesChecked, setServicesChecked] = useState<boolean>(false)
   const { errors, trigger, register, reset, handleSubmit, setCustomError } = useGlobalForm(
     registrationSchema()
   )
@@ -62,8 +62,14 @@ export const RegistrationForm = () => {
           error={errors?.confirmPassword?.message}
           {...register('confirmPassword')}
         />
-        <div className="flex items-center justify-center text-xs gap-2">
-          <Checkbox id={'consentGiven'} />
+        <div className="flex items-center justify-start text-xs gap-2">
+          <Checkbox
+            checked={servicesChecked}
+            id="consentGiven"
+            error={errors?.consentGiven?.message}
+            {...register('consentGiven')}
+            onChangeChecked={setServicesChecked}
+          />
           <span> I agree</span>
           <Link
             className={'underline text-accent-300'}

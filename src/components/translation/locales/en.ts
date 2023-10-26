@@ -43,11 +43,16 @@ export const en = {
         password: {
           min: 'Minimum number of characters 6',
           max: 'Password must be at most 20 characters',
+          matches:
+            'The password must contain at least one digit, one uppercase letter, one lowercase letter, and one special character.',
         },
         confirmPassword: {
           min: 'Minimum number of characters 6',
           max: 'Password must be at most 20 characters',
           password: 'Passwords do not match',
+        },
+        consentGiven: {
+          errors: 'You must give consent',
         },
       },
       resendForm: {
