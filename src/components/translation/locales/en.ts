@@ -244,6 +244,7 @@ export const en = {
             label: 'Date of birthday',
             max: 'Date of birth cannot be in the future',
             typeError: 'Date of birth has to be a valid date',
+            test: 'A user under 13 cannot create a profile. Privacy Policy',
           },
           city: 'City',
           aboutMe: {
