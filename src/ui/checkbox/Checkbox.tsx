@@ -8,8 +8,6 @@ import React, {
 
 import { FieldValues } from 'react-hook-form'
 
-import style from '@/ui/inputs/input/Input.module.scss'
-
 type DefaultInputPropsType = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
