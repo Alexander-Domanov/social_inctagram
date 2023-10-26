@@ -117,6 +117,7 @@ export const uk: LocaleType = {
             label: 'Дата народження',
             max: 'Дата народження не може бути в майбутньому',
             typeError: 'Дата народження повинна бути коректною',
+            test: `Користувач молодше 13 років не може створити профіль. Політика конфіденційності`,
           },
           city: 'Місто',
           aboutMe: { label: 'Про мене', max: 'Не може бути більше 200 символів' },
@@ -180,6 +181,13 @@ export const uk: LocaleType = {
             textError: 'Транзакція не вдалася, будь ласка, спробуйте ще раз',
           },
         },
+      },
+      myPayments: {
+        dataOfPayment: 'Дата платежу',
+        endDateOfSubscription: 'Дата закінчення підписки',
+        price: 'Ціна',
+        subscription: 'Тип підписки',
+        paymentType: 'Тип оплати',
       },
     },
   },
@@ -320,11 +328,16 @@ export const uk: LocaleType = {
         password: {
           min: 'Мінімальна кількість символів - 6',
           max: 'Пароль повинен містити не більше 20 символів',
+          matches:
+            'Пароль повинен містити принаймні одну цифру, одну велику літеру, одну малу літеру та один спеціальний символ.',
         },
         confirmPassword: {
           min: 'Мінімальна кількість символів - 6',
           max: 'Пароль повинен містити не більше 20 символів',
           password: 'Паролі не збігаються',
+        },
+        consentGiven: {
+          errors: 'Ви повинні надати згоду',
         },
       },
       resendForm: {
@@ -400,6 +413,40 @@ export const uk: LocaleType = {
         },
       },
     },
+  },
+  createPost: {
+    photoUploader: {
+      modalTitle: 'Додати фото',
+      openDraft: 'Відкрити проект',
+    },
+    cropEditor: {
+      modalTitle: 'Обрізка',
+    },
+    filtersEditor: {
+      modalTitle: 'Фільтр',
+    },
+    addFullPost: {
+      modalTitle: 'Публікація',
+      description: {
+        textareaLabel: 'Додати опис публікації',
+        buttonSave: 'Зберегти зміни',
+        location: {
+          add: 'Додати місцезнаходження',
+        },
+      },
+    },
+    saveDraftPost: {
+      confirm: {
+        title: 'Чернетка',
+        text: 'Бажаєте зберегти чернетку?',
+        confirmButtonText: 'Зберегти',
+        declineButtonText: 'Скасувати',
+      },
+    },
+  },
+  modal: {
+    buttonNext: 'Далі',
+    buttonPublish: 'Опублікувати',
   },
   messenger: {
     headTitle: 'Месенджер',

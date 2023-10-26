@@ -29,3 +29,5 @@ export * from './placeholder/Placeholder'
 
 //spinner
 export * from './spinner/Spinner'
+
+export { Select } from './select/Select'

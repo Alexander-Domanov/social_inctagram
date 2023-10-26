@@ -1,8 +1,11 @@
 import React from 'react'
 
 import { IconWrapper } from '@/components/icon-wrapper'
+import { useTranslation } from '@/components/translation'
 
 export const Location = () => {
+  const { t } = useTranslation()
+
   return (
     <div
       className={
@@ -16,7 +19,9 @@ export const Location = () => {
           }
         >
           <div className={'flex-col'}>
-            <div className={'text-light-100 font-normal text-sm '}>Add location</div>
+            <div className={'text-light-100 font-normal text-sm '}>
+              {t.createPost.addFullPost.description.location.add}
+            </div>
             <div className={'text-light-900 font-normal text-base '}>New York</div>
           </div>
           <div>

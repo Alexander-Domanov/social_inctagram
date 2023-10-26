@@ -9,8 +9,9 @@ import { Point } from 'react-easy-crop'
 import Slider from 'react-slick'
 
 import placeholder from '@/assets/images/img-placeholder.png'
+import { useTranslation } from '@/components/translation'
 import { CreatePostModal, ModalCreatePostType } from '@/modules/create-post-module'
-import { Crop } from '@/modules/create-post-module/components/crop'
+import { Crop } from '@/modules/create-post-module/components/Crop'
 import { CropPopup } from '@/modules/create-post-module/components/photo-crop-editor/crop-popup'
 import getCroppedImg from '@/modules/create-post-module/components/photo-crop-editor/utils/canvasUtils'
 import { ZoomPopup } from '@/modules/create-post-module/components/photo-crop-editor/zoom-popup'
@@ -18,6 +19,8 @@ import { PhotoSelector } from '@/modules/my-profile-modules/avatar-module'
 import { IPhoto, useImageSelector } from '@/store/storeSelectorPhoto'
 
 export const CropEditor = ({ setModalOpen, isModalOpen, onClose }: ModalCreatePostType) => {
+  const { t } = useTranslation()
+
   const settings = {
     customPaging: function (index: number) {
       const photo = imagesSelector[index]
@@ -123,7 +126,7 @@ export const CropEditor = ({ setModalOpen, isModalOpen, onClose }: ModalCreatePo
       showBackArrow={true}
       variant={imagesSelector.length === 0 ? undefined : 'Next'}
       isOpen={isModalOpen}
-      title={'Cropping'}
+      title={t.createPost.cropEditor.modalTitle}
       onClose={onCloseClick}
       onBackClick={onBackClick}
       onBtnClick={onNextClick}

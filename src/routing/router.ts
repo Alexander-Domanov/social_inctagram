@@ -10,6 +10,8 @@ export const routes = {
       '/auth/registration/external-account',
       '/auth/registration/resend-form',
       '/auth/registration-confirmation',
+      '/privacy-policy',
+      '/terms-of-service',
     ],
   },
   sideBar: {
@@ -23,5 +25,9 @@ export const routes = {
   },
   myProfilePage: {
     settings: '/profile/settings/edit',
+  },
+  policy: {
+    termsService: '/terms-of-service',
+    privacyPolicy: '/privacy-policy',
   },
 }

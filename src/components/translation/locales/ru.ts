@@ -116,6 +116,7 @@ export const ru: LocaleType = {
             label: 'Дата рождения',
             max: 'Дата рождения не может быть в будущем',
             typeError: 'Дата рождения должна быть валидной',
+            test: `Пользователь младше 13 лет не может создать профиль. Политика конфиденциальности`,
           },
           city: 'Город',
           aboutMe: { label: 'О себе', max: 'Не может содержать более 200 символов' },
@@ -180,7 +181,48 @@ export const ru: LocaleType = {
           },
         },
       },
+      myPayments: {
+        dataOfPayment: 'Дата платежа',
+        endDateOfSubscription: 'Дата окончания подписки',
+        price: 'Цена',
+        subscription: 'Тип подписки',
+        paymentType: 'Тип оплаты',
+      },
     },
+  },
+  createPost: {
+    photoUploader: {
+      modalTitle: 'Добавить фото',
+      openDraft: 'Открыть черновик',
+    },
+    cropEditor: {
+      modalTitle: 'Обрезка',
+    },
+    filtersEditor: {
+      modalTitle: 'Фильтр',
+    },
+    addFullPost: {
+      modalTitle: 'Публикация',
+      description: {
+        textareaLabel: 'Добавить описание публикации',
+        buttonSave: 'Сохранить изменения',
+        location: {
+          add: 'Добавить местоположение',
+        },
+      },
+    },
+    saveDraftPost: {
+      confirm: {
+        title: 'Черновик',
+        text: 'Хотите сохранить черновик?',
+        confirmButtonText: 'Сохранить',
+        declineButtonText: 'Отменить',
+      },
+    },
+  },
+  modal: {
+    buttonNext: 'Далее',
+    buttonPublish: 'Опубликовать',
   },
   uploadPhoto: {
     buttonAddPhoto: 'Добавить фото профиля',
@@ -319,11 +361,16 @@ export const ru: LocaleType = {
         password: {
           min: 'Минимальное количество символов - 6',
           max: 'Пароль должен содержать не более 20 символов',
+          matches:
+            'Пароль должен содержать как минимум одну цифру, одну заглавную букву, одну строчную букву и один специальный символ.',
         },
         confirmPassword: {
           min: 'Минимальное количество символов - 6',
           max: 'Пароль должен содержать не более 20 символов',
           password: 'Пароли не совпадают',
+        },
+        consentGiven: {
+          errors: 'Вы должны дать согласие',
         },
       },
       resendForm: {

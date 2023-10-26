@@ -5,6 +5,7 @@ import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { PATH_ROUTE } from '@/common'
+import { useTranslation } from '@/components/translation'
 import { ModalCreatePostType, useStoreIsLoadingPublication } from '@/modules/create-post-module'
 import { CreatePostModal } from '@/modules/create-post-module/components/create-post-modal/CreatePostModal'
 import { AddPublication } from '@/modules/create-post-module/components/description-add/add-publication'
@@ -22,6 +23,7 @@ export const AddFullPost: FC<IAddFullPost & ModalCreatePostType> = ({
   setModalOpen,
   onClose,
 }) => {
+  const { t } = useTranslation()
   const { userId } = useUserStore()
   const { imagesSelector, setDescription, description } = useImageSelector()
   const { push } = useRouter()
@@ -76,16 +78,13 @@ export const AddFullPost: FC<IAddFullPost & ModalCreatePostType> = ({
       isOpen={isModalOpen}
       onBackClick={onBackClick}
       onClose={onCloseClick}
-      title={'Publication'}
+      title={t.createPost.addFullPost.modalTitle}
       onBtnClick={addAllPost}
       showBackArrow={true}
       variant={'Publish'}
     >
       <div className={'flex flex-row'}>
-        <div
-          // className="grid grid-cols-2 h-full"
-          className="max-w-[485px]"
-        >
+        <div className="max-w-[485px]">
           <div>
             <Swiper
               className="h-full"

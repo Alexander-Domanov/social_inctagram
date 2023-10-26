@@ -55,6 +55,20 @@ export const settingsSchema = () => {
         new Date(),
         t.profile.settingsProfile.settingsProfileTabs.generalInformation.dateOfBirthday.max
       )
+      .test(
+        'age',
+        t.profile.settingsProfile.settingsProfileTabs.generalInformation.dateOfBirthday.test,
+        function (value) {
+          if (value) {
+            const currentDate = new Date()
+            const minDate = new Date()
+
+            minDate.setFullYear(currentDate.getFullYear() - 13)
+
+            return value <= minDate
+          }
+        }
+      )
       .typeError(
         t.profile.settingsProfile.settingsProfileTabs.generalInformation.dateOfBirthday.typeError
       ),

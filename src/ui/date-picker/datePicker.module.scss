@@ -88,7 +88,7 @@
 }
 
 .errorText {
-  @apply text-danger-500;
+  @apply text-danger-500 text-xs font-normal;
 }
 
 .disabledText {

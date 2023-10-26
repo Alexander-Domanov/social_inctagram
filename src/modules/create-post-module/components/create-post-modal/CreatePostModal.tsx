@@ -7,6 +7,7 @@ import Modal from 'react-modal'
 import styles from './CreatePostModal.module.scss'
 
 import ArrowBackIcon from '@/assets/icons/arrow-ios-back.svg'
+import { useTranslation } from '@/components/translation'
 
 interface Props {
   isOpen: boolean
@@ -29,6 +30,8 @@ export const CreatePostModal: FC<Props> = ({
   variant,
   showBackArrow,
 }) => {
+  const { t } = useTranslation()
+
   return (
     <Modal
       isOpen={isOpen}
@@ -54,7 +57,12 @@ export const CreatePostModal: FC<Props> = ({
 
         {variant ? (
           <button className={styles.modalBtn} type={'submit'} onClick={() => onBtnClick()}>
-            {variant}
+            {/* eslint-disable-next-line no-nested-ternary */}
+            {variant === 'Next'
+              ? t.modal.buttonNext
+              : variant === 'Publish'
+              ? t.modal.buttonPublish
+              : variant}
           </button>
         ) : (
           <FaTimes className={styles.modalCloseBtn} onClick={onClose} size={'24px'} />

@@ -2,21 +2,18 @@ import React, { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
-import { settings_profile_tabs, useLocalStorage } from '@/common'
+import { settings_profile_tabs } from '@/common'
 import { TabsTitle } from '@/components/account'
+import { ArrowBack } from '@/components/arrowBack/ArrowBack'
 import { useTranslation } from '@/components/translation'
-import { ArrowBack } from '@/modules/my-profile-modules/settings-edit-profile-module/utils/ArrowBack'
 import { routes } from '@/routing/router'
 
 export const SettingsProfile = () => {
   const tabs = settings_profile_tabs()
-  const [storedTabsLabel, setStoredTabsLabel] = useLocalStorage('setting_tabs', tabs[0].label)
   const [activeTab, setActiveTab] = useState('')
   const { t, localeLanguage } = useTranslation()
   const onChangeTab = (tabLabel: string | undefined) => {
     setActiveTab(tabLabel ?? '')
-
-    setStoredTabsLabel(tabLabel ?? '')
   }
 
   useEffect(() => {
@@ -26,11 +23,6 @@ export const SettingsProfile = () => {
   const tabsLayout = tabs?.map(tab => {
     return <div key={tab.id}>{activeTab === tab.label && tab.content}</div>
   })
-
-  useEffect(() => {
-    setStoredTabsLabel(storedTabsLabel)
-    setActiveTab(storedTabsLabel)
-  }, [])
 
   return (
     <div className="relative w-full">
